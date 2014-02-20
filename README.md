@@ -6,5 +6,4 @@ Java Coursework
 * Demonstrations: In practical classes March 18th – March 21st
 * Worth: 15% of unit marks
 
-
-[Wiki for scenario ideas](https://github.com/liammann/JavaCoursework/wiki/Initial-Ideas.com/).
+* [Wiki for scenario ideas](https://github.com/liammann/JavaCoursework/wiki/Initial).
