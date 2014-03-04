@@ -35,6 +35,7 @@ public class Game
     private void createRooms()
     {
         Room outside, theater, pub, lab, office;
+        Item chair, bottle;
       
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -56,6 +57,15 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
+        
+        // create new room items 
+        bottle = new Item("A bottle of beer", "movable");
+        chair = new Item("A chair", "static");
+        
+        // Set Room Items
+        outside.setItems(bottle);        
+        outside.setItems(chair);
+        
 
         currentRoom = outside;  // start game outside
     }
@@ -89,6 +99,7 @@ public class Game
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
+        System.out.println(currentRoom.getRoomItems());
     }
 
     /**

@@ -20,7 +20,8 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-    private ArrayList<String> items; 
+
+    private ArrayList<Item> roomItems = new ArrayList<Item>();
     
 
     /**
@@ -32,7 +33,10 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
-        exits = new HashMap<String, Room>();
+        exits = new HashMap<String, Room>();        
+        ArrayList<Item> roomItems = new ArrayList<Item>();
+
+
     }
 
     /**
@@ -45,9 +49,9 @@ public class Room
         exits.put(direction, neighbor);
     }
 
-    public void setItems(String room, String itemName)
+    public void setItems(Item item)
     {
-        items.add(room);
+        roomItems.add(item);
         
     }
     
@@ -70,7 +74,15 @@ public class Room
     {
         return "You are " + description + ".\n" + getExitString();
     }
-
+    public String getRoomItems()
+    {
+        String returntxt = "This room has the following items .\n";
+        for (Item item : roomItems)
+        {
+            returntxt += "  - " + item.getDescription() + ".\n";
+        }
+        return returntxt;
+    }
     /**
      * Return a string describing the room's exits, for example
      * "Exits: north west".
