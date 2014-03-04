@@ -56,6 +56,12 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
+        
+        // lock the rooms
+        theater.setLock();
+        pub.setLock();
+        lab.setLock();
+        office.setLock();
 
         currentRoom = outside;  // start game outside
     }
