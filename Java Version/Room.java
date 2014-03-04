@@ -19,6 +19,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
+    private boolean locked;
 
     /**
      * Create a room described "description". Initially, it has
@@ -86,6 +87,15 @@ public class Room
     public Room getExit(String direction) 
     {
         return exits.get(direction);
+    }
+    public void setLock() {
+        locked = true;
+    }
+    public boolean isLocked() {
+        return locked;
+    }
+    public void unlock() {
+        locked = false;
     }
 }
 
