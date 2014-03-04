@@ -160,6 +160,7 @@ public class Game
         
         // test for key.
         //if (nextRoom.isLocked()) {
+        //    System.out.println("That room is locked");
         //    return;
         //}
 
