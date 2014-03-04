@@ -13,17 +13,12 @@ public class Inventory
 {
     // instance variables - replace the example below with your own
     private ArrayList<Item> playerInventory = new ArrayList<Item>();
-    private Item glass; 
     /**
      * Constructor for objects of class inventory
      */
     public Inventory()
     {
-        glass = new Item("A bottle of beer", "movable");
-
-        
-        playerInventory.add(glass);        
-        playerInventory.add(glass);
+      
     }
     
     public void addItemToInventory(Item item)

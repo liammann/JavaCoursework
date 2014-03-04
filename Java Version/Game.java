@@ -20,15 +20,17 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Inventory inventory;
-        
+    private Character player;
+    
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        
         createRooms();
         parser = new Parser();
-        inventory = new Inventory();
+        player = new Character("Player1", 100, 100);
     }
 
     /**
@@ -97,7 +99,6 @@ public class Game
      */
     private void printWelcome()
     {
-        System.out.println("--------------------------------------------");
         System.out.println("--------------------------------------------");
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
@@ -179,6 +180,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
+            player.setLocation(nextRoom);
             System.out.println(currentRoom.getLongDescription());
             System.out.println(currentRoom.getRoomItems());
         }
@@ -206,7 +208,6 @@ public class Game
             return;
         }
 
-        String direction = command.getSecondWord();
     }
 
     /** 
