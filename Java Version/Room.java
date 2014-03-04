@@ -76,12 +76,15 @@ public class Room
     }
     public String getRoomItems()
     {
-        String returntxt = "This room has the following items .\n";
-        for (Item item : roomItems)
-        {
-            returntxt += "  - " + item.getDescription() + ".\n";
+        if(roomItems.size() != 0 ){
+            String returntxt = "\n This room has the following items \n";
+            for (Item item : roomItems)
+            {
+                returntxt += "  - " + item.getDescription() + ".\n";
+            }
+            return returntxt;
         }
-        return returntxt;
+        return "There are no items in this room";
     }
     /**
      * Return a string describing the room's exits, for example
@@ -108,10 +111,5 @@ public class Room
     {
         return exits.get(direction);
     }
-    
-
-    
-    
-    
 }
 

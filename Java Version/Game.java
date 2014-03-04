@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Inventory inventory;
         
     /**
      * Create the game and initialise its internal map.
@@ -36,7 +37,9 @@ public class Game
     {
         Room outside, theater, pub, lab, office;
         Item chair, bottle;
-      
+        Inventory inventory;
+        
+        inventory = new Inventory();
         // create the rooms
         outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
@@ -63,7 +66,8 @@ public class Game
         chair = new Item("A chair", "static");
         
         // Set Room Items
-        outside.setItems(bottle);        
+        outside.setItems(bottle);                
+        theater.setItems(bottle);        
         outside.setItems(chair);
         
 
@@ -93,7 +97,8 @@ public class Game
      */
     private void printWelcome()
     {
-        System.out.println();
+        System.out.println("--------------------------------------------");
+        System.out.println("--------------------------------------------");
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
@@ -122,6 +127,12 @@ public class Game
         }
         else if (commandWord.equals("go")) {
             goRoom(command);
+        }
+        else if (commandWord.equals("inventory")) {
+            getInventory(command);
+        }
+        else if (commandWord.equals("pickup")) {
+            pickUp(command);
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
@@ -169,7 +180,33 @@ public class Game
         else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
+            System.out.println(currentRoom.getRoomItems());
         }
+    }
+    private void getInventory(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            System.out.println("please put list to list all current items in your inventory");
+        }
+        System.out.println(command.getSecondWord());
+        System.out.println(inventory.currentInventory());            
+        if(command.getSecondWord() == "list"){
+            System.out.println(inventory.currentInventory());            
+            System.out.println(command.getSecondWord());
+            
+        }
+        
+   
+    }
+    private void pickUp(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Pick up what?");
+            return;
+        }
+
+        String direction = command.getSecondWord();
     }
 
     /** 
