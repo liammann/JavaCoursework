@@ -28,6 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        inventory = new Inventory();
     }
 
     /**
@@ -37,9 +38,7 @@ public class Game
     {
         Room outside, theater, pub, lab, office;
         Item chair, bottle;
-        Inventory inventory;
-        
-        inventory = new Inventory();
+    
         // create the rooms
         outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
@@ -78,7 +77,8 @@ public class Game
      *  Main play routine.  Loops until end of play.
      */
     public void play() 
-    {            
+    {         
+
         printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and
@@ -186,9 +186,10 @@ public class Game
     private void getInventory(Command command)
     {
         if(!command.hasSecondWord()) {
-            System.out.println("please put list to list all current items in your inventory");
+            System.out.println("please put 'list' to list all current items in your inventory");
         }
         System.out.println(command.getSecondWord());
+       
         System.out.println(inventory.currentInventory());            
         if(command.getSecondWord() == "list"){
             System.out.println(inventory.currentInventory());            

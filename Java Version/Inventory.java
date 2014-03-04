@@ -21,7 +21,9 @@ public class Inventory
     {
         ArrayList<Item> playerInventory = new ArrayList<Item>();
         glass = new Item("A bottle of beer", "movable");
+
         
+        playerInventory.add(glass);        
         playerInventory.add(glass);
     }
     
