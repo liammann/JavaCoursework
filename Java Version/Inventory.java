@@ -19,7 +19,6 @@ public class Inventory
      */
     public Inventory()
     {
-        ArrayList<Item> playerInventory = new ArrayList<Item>();
         glass = new Item("A bottle of beer", "movable");
 
         
@@ -34,10 +33,10 @@ public class Inventory
     }
     public String currentInventory(){
 
-        String returntxt = "Your are currently have .\n";
+        String returntxt = "You currently have: \n";
         for (Item item : playerInventory)
         {
-            returntxt += "  - " + item.getDescription() + ".\n";
+            returntxt += "  - " + item.getDescription() + "\n";
         }
         return returntxt;
     }

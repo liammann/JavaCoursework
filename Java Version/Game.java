@@ -185,15 +185,14 @@ public class Game
     }
     private void getInventory(Command command)
     {
+        String second = command.getSecondWord();
+        
         if(!command.hasSecondWord()) {
             System.out.println("please put 'list' to list all current items in your inventory");
         }
-        System.out.println(command.getSecondWord());
-       
-        System.out.println(inventory.currentInventory());            
-        if(command.getSecondWord() == "list"){
-            System.out.println(inventory.currentInventory());            
-            System.out.println(command.getSecondWord());
+        
+        if(second.equals("list")){
+            System.out.println(inventory.currentInventory());
             
         }
         
