@@ -148,9 +148,14 @@ public class Game
         }
 
         String direction = command.getSecondWord();
-
+        
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
+        
+        // test for key.
+        //if (nextRoom.isLocked()) {
+        //    return;
+        //}
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
