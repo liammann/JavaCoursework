@@ -88,12 +88,15 @@ public class Room
     {
         return exits.get(direction);
     }
+    // disallows the user from entering the room
     public void setLock() {
         locked = true;
     }
+    // return the lock-state of the room
     public boolean isLocked() {
         return locked;
     }
+    // allows the user to enter the room
     public void unlock() {
         locked = false;
     }
