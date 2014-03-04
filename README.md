@@ -7,3 +7,6 @@ Java Coursework
 * Worth: 15% of unit marks
 
 [Wiki for scenario ideas](https://github.com/liammann/JavaCoursework/wiki/Initial).
+
+
+http://polyglot.us/diagram.svg
