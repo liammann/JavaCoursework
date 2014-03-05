@@ -115,7 +115,7 @@ public class CommandActions
 			return "Invalid exit!";
 		}
 
-		if(gameData.getCurrentLocation().getExit().isLocked()) {
+		if(gameData.getCurrentLocation().getExit(direction).isLocked()) {
 			return "That room is locked!";
 		}
 
