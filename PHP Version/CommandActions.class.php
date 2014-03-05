@@ -11,7 +11,7 @@ class CommandActions
 		$this->gameData = new GameData();
 	}
 
-	public function invokeAction($keyWord, $parameters)
+	public function invokeAction($keyWord, array $parameters = array())
 	{
 		$parameterCount = count($parameters);
 
@@ -71,7 +71,7 @@ class CommandActions
 
 	private function back($retraceSteps = 1)
 	{
-		return "Going back {$retraceSteps} location(s)...".$this->gameData->setNewLocation(null, $retraceSteps); // can get rid of the (s) in Java version
+		return "Going back {$retraceSteps} location(s): ".$this->gameData->setNewLocation(null, $retraceSteps); // can get rid of the (s) in Java version
 	}
 
 	private function pickup($object)
@@ -79,13 +79,6 @@ class CommandActions
 		// put object in inventory and remove object from location
 		return "Item '{$object}' has been picked up!";
 	}
-
-/*
-we can either set a new location from either:
-a direction (i.e. from the "go" command),
-or by directly passing a location object,
-or by passing the number of steps to backtrace to
-*/
 
 	private function jump($parameters)
 	{

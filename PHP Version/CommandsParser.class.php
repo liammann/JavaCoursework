@@ -31,11 +31,9 @@ class CommandsParser
 
 		if(isset($commands[1])) {
 			array_shift($commands);
-			$parameters = $commands;
-		}else{
-			$parameters = array();
+			return $this->commandActions->invokeAction($keyWord, $commands);
 		}
 
-		return $this->commandActions->invokeAction($keyWord, $parameters);
+		return $this->commandActions->invokeAction($keyWord);
 	}
 }
