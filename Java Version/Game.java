@@ -19,14 +19,18 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private Inventory inventory;
+    private Character player;
+    
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        
         createRooms();
         parser = new Parser();
+        player = new Character("Player1", 100, 100);
     }
 
     /**
@@ -35,7 +39,8 @@ public class Game
     private void createRooms()
     {
         Room outside, theater, pub, lab, office;
-      
+        Item chair, bottle;
+    
         // create the rooms
         outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
@@ -63,6 +68,16 @@ public class Game
         lab.setLock();
         office.setLock();
 
+        // create new room items 
+        bottle = new Item("A bottle of beer", "movable");
+        chair = new Item("A chair", "static");
+        
+        // Set Room Items
+        outside.setItems(bottle);                
+        theater.setItems(bottle);        
+        outside.setItems(chair);
+       
+
         currentRoom = outside;  // start game outside
     }
 
@@ -70,7 +85,8 @@ public class Game
      *  Main play routine.  Loops until end of play.
      */
     public void play() 
-    {            
+    {         
+
         printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and
@@ -89,12 +105,13 @@ public class Game
      */
     private void printWelcome()
     {
-        System.out.println();
+        System.out.println("--------------------------------------------");
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
+        System.out.println(currentRoom.getRoomItems());
     }
 
     /**
@@ -117,6 +134,12 @@ public class Game
         }
         else if (commandWord.equals("go")) {
             goRoom(command);
+        }
+        else if (commandWord.equals("inventory")) {
+            getInventory(command);
+        }
+        else if (commandWord.equals("pickup")) {
+            pickUp(command);
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
@@ -169,8 +192,34 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
+            player.setLocation(nextRoom);
             System.out.println(currentRoom.getLongDescription());
+            System.out.println(currentRoom.getRoomItems());
         }
+    }
+    private void getInventory(Command command)
+    {
+        String second = command.getSecondWord();
+        
+        if(!command.hasSecondWord()) {
+            System.out.println("please put 'list' to list all current items in your inventory");
+        }
+        
+        if(second.equals("list")){
+            System.out.println(inventory.currentInventory());
+            
+        }
+        
+   
+    }
+    private void pickUp(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Pick up what?");
+            return;
+        }
+
     }
 
     /** 
