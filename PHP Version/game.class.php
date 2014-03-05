@@ -7,8 +7,8 @@ class Game
 
 	public function __construct()
 	{
-		$this->commandsParser = new CommandsParser();
-		$this->gameData = new gameData();
+		$this->commandsParser = new CommandsParser;
+		$this->gameData = new GameData;
 	}
 
 	public function newGame()
