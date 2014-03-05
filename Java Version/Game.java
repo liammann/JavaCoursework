@@ -19,7 +19,6 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Inventory inventory;
     private Character player;
     
     /**
@@ -64,9 +63,6 @@ public class Game
         
         // lock the rooms
         theater.setLock();
-        pub.setLock();
-        lab.setLock();
-        office.setLock();
 
         // create new room items 
         bottle = new Item("A bottle of beer", "movable");
@@ -181,11 +177,11 @@ public class Game
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
         
-        // test for key.
-        //if (nextRoom.isLocked()) {
-        //    System.out.println("That room is locked");
-        //    return;
-        //}
+       // test for key.
+        if (nextRoom.isLocked()) {
+           System.out.println("That room is locked");
+           return;
+        }
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -206,7 +202,8 @@ public class Game
         }
         
         if(second.equals("list")){
-            System.out.println(inventory.currentInventory());
+            // needs to come from charactor class
+            //System.out.println(inventory.currentInventory());
             
         }
         

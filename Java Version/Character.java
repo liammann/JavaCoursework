@@ -35,6 +35,14 @@ public class Character
     {
          this.health = health;
     }
+    private void subtractHealth(int subNum)
+    {
+        health = health - subNum;
+    }
+    private void plusHealth(int plusNum)
+    {
+        health = health + plusNum;
+    }
     private void setStrength(int strength)
     {
          this.strength = strength;
@@ -42,6 +50,11 @@ public class Character
     public void setLocation(Room current)
     {
         currentLocation = current;
+    }
+    public Room getLocation()
+    {
+        return currentLocation;
+        
     }
 
 }
