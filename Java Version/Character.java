@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class character here.
  * 
@@ -31,22 +30,12 @@ public class Character
         return health;
         
     }
-    private void setHealth(int health)
+    
+    private void updateHealth(int add)
     {
-         this.health = health;
+        health = health + add;
     }
-    private void subtractHealth(int subNum)
-    {
-        health = health - subNum;
-    }
-    private void plusHealth(int plusNum)
-    {
-        health = health + plusNum;
-    }
-    private void setStrength(int strength)
-    {
-         this.strength = strength;
-    }
+    
     public void setLocation(Room current)
     {
         currentLocation = current;
