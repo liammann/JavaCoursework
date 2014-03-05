@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.params=description\ type
-comment0.target=Item(java.lang.String,\ java.lang.String)
-comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Items\n
-comment1.params=
-comment1.target=java.lang.String\ getDescription()
-numComments=2
