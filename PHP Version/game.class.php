@@ -1,122 +1,97 @@
 <?php
 
-require 'Parser.class.php';
-require 'Room.class.php';
-
 class Game
 {
-	private $parser;
-	private $currentRoom;
+	private $currentLocation;
+	private $commandsParser;
+	private $gameData;
 
 	public function __construct()
 	{
-		$this->createRooms();
-		$this->parser = new Parser();
+		$this->commandsParser = new CommandsParser();
+		$this->gameData = new gameData();
 	}
 
-	private function createRooms()
+	public function newGame()
 	{
-		$outside = new Room('outside the main entrance of the university');
-		$theater = new Room('in a lecture theater');
-		$pub = new Room('in a campus pub');
-		$lab = new Room('in a computing lab');
-		$office = new Room('in the computing admin office');
+		$this->buildLocations();
+		$this->createCharacters();
+		$this->play();
+	}
+
+	public function loadGame()
+	{
+		// load game save
+	}
+
+	private function buildLocations()
+	{
+		$outside = new Location('outside the main entrance of the university');
+		$theater = new Location('in a lecture theater');
+		$pub = new Location('in a campus pub');
+		$lab = new Location('in a computing lab');
+		$office = new Location('in the computing admin office');
 
 		$outside->setExit('east', $theater);
 		$outside->setExit('south', $lab);
 		$outside->setExit('west', $pub);
-
 		$theater->setExit('west', $outside);
-
 		$pub->setExit('east', $outside);
-
 		$lab->setExit('north', $outside);
 		$lab->setExit('east', $office);
-
 		$office->setExit('west', $lab);
 
-		$this->currentRoom = $outside;
+		$theater->setLock();
+		$pub->setLock();
+		$lab->setLock();
+		$office->setLock();
+
+		$cider = new MovableObject('Bottle of cider', 'Half a bottle of Strongbow cider');
+		$chair = new FixedObject('Chair', 'An old wooden chair');
+
+		$outside->setItem($cider);
+		$outside->setItem($chair);
+		$theater->setItem($cider);
+
+		$this->gameData->setNewLocation($outside);
+	}
+
+	private function createCharacters()
+	{
+		$player1 = new Character('Player1', 100, 100);
 	}
 
 	public function play()
 	{
-		$this->printWelcome();
+		echo $this->welcome(); // may need moving depending on new game or loaded game...
 
 		$finished = false;
 
 		while(!$finished) {
-			$command = $this->parser->getCommand();
-			$finished = $this->processCommand($command);
+			echo "\r\n> ";
+
+			$command = $this->commandsParser->getCommand();
+
+			if(!empty($command)) {
+				$output = $this->commandsParser->parseCommand($command);
+
+				if($output === 'quit') {
+					$finished = true;
+				}else{
+					echo $output;
+				}
+			}else{
+				echo 'No command entered!';
+			}
 		}
 
-		echo 'Thank you for playing. Good bye.', PHP_EOL;
+		echo "Thank you for playing. Good bye.\r\n";
 	}
 
-	public function printWelcome()
+	private function welcome()
 	{
-		echo PHP_EOL, 'Welcome to the World of Zuul!', PHP_EOL, 
-				'World of Zuul is a new, incredibly boring adventure game',
-				PHP_EOL, 'Type "help" if you need help.', PHP_EOL, PHP_EOL,
-				$this->currentRoom->getLongDescription();
-	}
-
-	private function processCommand($command)
-	{
-		$wantToQuit = false;
-
-		if($command->isUnknown()) {
-			echo 'I don\'t know what you mean...', PHP_EOL;
-			return false;
-		}
-
-		$commandWord = $command->getCommandWord();
-
-		if($commandWord === 'help') {
-			$this->printHelp();
-		}elseif($commandWord === 'go') {
-			$this->goRoom($command);
-		}elseif($commandWord === 'quit') {
-			$wantToQuit = $this->quit($command);
-		}
-
-		return $wantToQuit;
-	}
-
-	private function printHelp()
-	{
-		echo PHP_EOL, 'You are lost. You are alone. You wander',
-				PHP_EOL, 'around at the university', PHP_EOL,
-				PHP_EOL, 'Your command words are:', PHP_EOL;
-
-		$this->parser->showCommands();
-	}
-
-	private function goRoom($command)
-	{
-		if(!$command->hasSecondWord()) {
-			echo 'Go where?';
-			return;
-		}
-
-		$direction = $command->getSecondWord();
-
-		$nextRoom = $this->currentRoom->getExit($direction);
-
-		if($nextRoom === null) {
-			echo 'There is no door!';
-		}else{
-			$this->currentRoom = $nextRoom;
-			echo $this->currentRoom->getLongDescription();
-		}
-	}
-
-	private function quit($command)
-	{
-		if($command->hasSecondWord()) {
-			echo 'Quit what?';
-			return false;
-		}else{
-			return true;
-		}
+		return "Welcome to the Pub Crawl Game!\r\n"
+				."Type 'help' if you are not sure what to do.\r\n"
+				."\r\n{$this->gameData->getCurrentLocation()->getLongDescription()}";
 	}
 }
