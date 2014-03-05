@@ -1,51 +1,92 @@
-/**
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.
- * 
- * This class holds an enumeration of all command words known to the game.
- * It is used to recognise commands as they are typed in.
- *
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.08.08
- */
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashMap;
 
 public class CommandWords
 {
-    // a constant array that holds all valid command words
-    private static final String[] validCommands = {
-        "go", "quit", "help", "pickup", "inventory","defend","attack",
-    };
+	private ArrayList<ArrayList<String>> validCommands;
+	private HashMap<String, String> commandWordsDocumentation;
 
-    /**
-     * Constructor - initialise the command words.
-     */
-    public CommandWords()
-    {
-        // nothing to do at the moment...
-    }
+	public CommandWords()
+	{
+		validCommands = new ArrayList<ArrayList<String>>();
+		commandWordsDocumentation = new HashMap<String, String>();
 
-    /**
-     * Check whether a given String is a valid command word. 
-     * @return true if it is, false if it isn't.
-     */
-    public boolean isCommand(String aString)
-    {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
-                return true;
-        }
-        // if we get here, the string was not found in the commands
-        return false;
-    }
+		validCommands.add(new ArrayList<String>());
+		validCommands.get(0).add("help");
+		validCommands.get(0).add("quit");
+		validCommands.get(0).add("back");
+		validCommands.get(0).add("manual");
+		validCommands.get(0).add("inventory");
+		// validCommands.get(0).add("defend");
+		// validCommands.get(0).add("attack");
 
-    /**
-     * Print all valid commands to System.out.
-     */
-    public void showAll() 
-    {
-        for(String command: validCommands) {
-            System.out.print(command + "  ");
-        }
-        System.out.println();
-    }
+		validCommands.add(new ArrayList<String>());
+		validCommands.get(1).add("go");
+		validCommands.get(1).add("back");
+		validCommands.get(1).add("pickup");
+		validCommands.get(1).add("manual");
+
+		validCommands.add(new ArrayList<String>());
+		validCommands.get(2).add("jump");
+
+		commandWordsDocumentation.put("help", "Ask for help (no parameters)'");
+		commandWordsDocumentation.put("quit", "Quit the game (no parameters)");
+		commandWordsDocumentation.put("inventory", "See your inventory (no parameters)");
+		commandWordsDocumentation.put("back", "Back track your location. Usage: 'back {n}', where 'n' is optional (defaults to 1)");
+		commandWordsDocumentation.put("manual", "View all commands or a specific command. Usage: 'manual {command}', where 'command' is optional (defaults to view all)");
+		commandWordsDocumentation.put("go", "Go to another location by passing the exit direction as a paramter. Usage: 'go {direction}'");
+		commandWordsDocumentation.put("pickup", "Pickup an object by passing the object name as a parameter. Usage: 'pickup {object}'");
+		commandWordsDocumentation.put("jump", "Testing tripple command word... Not functional yet.");
+	}
+
+	public boolean commandExists(String command)
+	{
+		for(ArrayList<String> commands : validCommands) {
+			if(commands.contains(command)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean isValidCommand(ArrayList commands)
+	{
+		int commandsCount = commands.size();
+
+		if(!validCommands.get(commandsCount-1).isEmpty() && validCommands.get(commandsCount-1).contains(commands.get(0))) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public String manual()
+	{
+		int commandLength = validCommands.size();
+		String commands = "";
+		int wordCount;
+
+		for(int i = 0;i < commandLength;++i) {
+			wordCount = i + 1;
+			commands += wordCount + " word commands:\n";
+
+			for(String command : validCommands.get(i)) {
+				commands += " | " + command;
+			}
+			commands += " |" + (!(i < commandLength - 1) ? "" : "\n");
+		}
+
+		return commands;
+	}
+
+	public String manual(String command)
+	{
+		if(commandWordsDocumentation.containsKey(command)) {
+			return (String) commandWordsDocumentation.get(command);
+		}
+			
+		return "Specified command word is invalid";
+	}
 }
