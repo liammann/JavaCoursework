@@ -16,6 +16,7 @@ class Inventory
 
 	public function removeObject($index)
 	{
-		$ths->objects[$index];
+		$this->objects[$index] = null;
+		array_filter($this->objects);
 	}
 }

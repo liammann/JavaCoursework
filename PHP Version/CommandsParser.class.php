@@ -16,12 +16,12 @@ class CommandsParser
 		return $inputLine = trim(fgets(STDIN));
 	}
 
-	public function parseCommand($commands)
+	public function parseCommand($inputCommand)
 	{
-		$commands = explode(' ', $commands);
-		$keyWord = $commands[0];
+		$commands = explode(' ', $inputCommands);
+		$keyword = $commands[0];
 
-		if(!$this->commandWords->commandExists($keyWord)) {
+		if(!$this->commandWords->commandExists($keyword)) {
 			return 'The command entered does not exist!';
 		}
 
@@ -31,9 +31,9 @@ class CommandsParser
 
 		if(isset($commands[1])) {
 			array_shift($commands);
-			return $this->commandActions->invokeAction($keyWord, $commands);
+			return $this->commandActions->invokeAction($keyword, $commands);
 		}
 
-		return $this->commandActions->invokeAction($keyWord);
+		return $this->commandActions->invokeAction($keyword);
 	}
 }

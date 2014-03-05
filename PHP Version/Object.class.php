@@ -6,11 +6,9 @@ abstract class Object
 	protected $description;
 	protected $state;
 
-	public function __construct($name, $description, $state)
+	public function __construct()
 	{
-		$this->name = $name;
-		$this->description = $description;
-		$this->state = $state;
+		// meh
 	}
 
 	public function getObjectName()

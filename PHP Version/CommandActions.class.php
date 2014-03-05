@@ -11,12 +11,12 @@ class CommandActions
 		$this->gameData = new GameData();
 	}
 
-	public function invokeAction($keyWord, array $parameters = array())
+	public function invokeAction($keyword, array $parameters = array())
 	{
 		$parameterCount = count($parameters);
 
 		if($parameterCount === 0) {
-			switch($keyWord) {
+			switch($keyword) {
 				case 'quit':
 					$answer = $this->quit();
 					break;
@@ -34,7 +34,7 @@ class CommandActions
 					break;
 			}
 		}elseif($parameterCount === 1) {
-			switch($keyWord) {
+			switch($keyword) {
 				case 'go':
 					$answer = $this->go($parameters[0]);
 					break;
@@ -49,7 +49,7 @@ class CommandActions
 					break;
 			}
 		}else{
-			switch($keyWord) {
+			switch($keyword) {
 				case 'jump':
 					$answer = $this->jump($parameters);
 					break;
@@ -66,7 +66,7 @@ class CommandActions
 
 	private function help()
 	{
-		return $this->getTask()."\r\nType 'manual' to view your list of commands, or manual {command} to learn about a specific command.";
+		return $this->getTask()."\r\nType 'manual' to view your list of commands, or 'manual {command}' to learn about a specific command.";
 	}
 
 	private function back($retraceSteps = 1)
@@ -77,7 +77,7 @@ class CommandActions
 	private function pickup($object)
 	{
 		// put object in inventory and remove object from location
-		return "Item '{$object}' has been picked up!";
+		return "Item '{$object->getObjectName()}' has been picked up!";
 	}
 
 	private function jump($parameters)

@@ -5,7 +5,7 @@ class Location
 	private $description = '';
 	private $exits = array();
 	private $locked;
-	private $items = array();
+	private $items = array(); // rename to objects?
 
 	public function __construct($description)
 	{
@@ -14,9 +14,7 @@ class Location
 
 	public function setExit($direction, Location $neighbour)
 	{
-		if(!isset($this->exits[$direction])) {
-			$this->exits[$direction] = $neighbour;
-		}
+		$this->exits[$direction] = $neighbour;
 	}
 
 	public function setItem($item)
@@ -37,16 +35,16 @@ class Location
 	public function getItems()
 	{
 		if(count($this->items) !== 0) {
-			$answer = "This room has the folloring items:\r\n";
+			$answer = "This room has the following object:\r\n";
 
 			foreach($this->items as $item) {
-				$answer .= ' - '.$item.getDescription()."\r\n";
+				$answer .= " - {$item.getObjectDescription()}\r\n";
 			}
 
 			return $answer;
 		}
 
-		return 'There are no items in this room.';
+		return 'There are no items in this room';
 	}
 
 	public function showExits()
@@ -78,7 +76,7 @@ class Location
 
 	public function isLocked()
 	{
-			return $this->locked();
+		return $this->locked;
 	}
 
 	public function unlock()

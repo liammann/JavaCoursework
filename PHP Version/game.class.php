@@ -60,7 +60,7 @@ class Game
 		$player1 = new Character('Player1', 100, 100);
 	}
 
-	public function play()
+	private function play()
 	{
 		echo $this->welcome(); // may need moving depending on new game or loaded game...
 
@@ -84,7 +84,7 @@ class Game
 			}
 		}
 
-		echo "Thank you for playing. Good bye.\r\n";
+		echo "Thanks for playing!\r\n";
 	}
 
 	private function welcome()

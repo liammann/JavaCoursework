@@ -48,9 +48,9 @@ class CommandWords
 		if($command !== 'all') {
 			if(isset($this->commandWordsDocumentation[$command])) {
 				return $this->commandWordsDocumentation[$command];
-			}else{
-				return 'Specified command word is invalid';
 			}
+
+			return 'Specified command word is invalid';
 		}
 
 		$commandLength = count($this->validCommands);
