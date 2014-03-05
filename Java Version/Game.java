@@ -19,7 +19,9 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Character player;
+    private Character player;    
+    private Character enemy;    
+    private Combat fight;
     
     /**
      * Create the game and initialise its internal map.
@@ -131,6 +133,9 @@ public class Game
         else if (commandWord.equals("go")) {
             goRoom(command);
         }
+        else if (commandWord.equals("defend")) {
+            combatDefend(command);
+        }
         else if (commandWord.equals("inventory")) {
             getInventory(command);
         }
@@ -183,6 +188,9 @@ public class Game
            return;
         }
 
+        
+       
+
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
@@ -191,6 +199,9 @@ public class Game
             player.setLocation(nextRoom);
             System.out.println(currentRoom.getLongDescription());
             System.out.println(currentRoom.getRoomItems());
+            
+            enemy = new Character("knight", 150, 150); 
+            fight = new Combat(player, enemy);
         }
     }
     private void getInventory(Command command)
@@ -217,6 +228,12 @@ public class Game
             return;
         }
 
+    }
+    private void combatDefend(Command command){
+        
+        //fight.defend();
+     
+        
     }
 
     /** 

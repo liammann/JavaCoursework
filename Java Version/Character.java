@@ -8,7 +8,7 @@ public class Character
 {
     // instance variables - replace the example below with your own
     private String name;
-    private int health;
+    public int health;
     private Room currentLocation;
     private int strength;
     
@@ -25,15 +25,20 @@ public class Character
 
 
     }
-    private int getHealth()
+    public int getHealth()
     {
         return health;
         
     }
-    
-    private void updateHealth(int add)
+    public int getStrength()
     {
-        health = health + add;
+        return strength;
+        
+    }
+    
+    public void updateHealth(int newHealth)
+    {
+        health = newHealth;
     }
     
     public void setLocation(Room current)
@@ -45,5 +50,7 @@ public class Character
         return currentLocation;
         
     }
+    
+   
 
 }
