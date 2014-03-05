@@ -2,7 +2,6 @@
 
 class Game
 {
-	private $currentLocation;
 	private $commandsParser;
 	private $gameData;
 
