@@ -8,12 +8,14 @@ public class Location
 	private HashMap<String, Location> exits;
 	private boolean isLocked;
 	private ArrayList<Object> items;
+	private ArrayList<Character> characters;
 
 	public Location(String description)
 	{
 		this.description = description;
 		exits = new HashMap<String, Location>();
 		items = new ArrayList<Object>();
+		characters = new ArrayList<Characters>();
 	}
 
 	public void setExit(String direction, Location neighbour)
