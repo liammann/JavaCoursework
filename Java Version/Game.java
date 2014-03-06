@@ -1,5 +1,5 @@
-
-
+import java.util.ArrayList;
+import java.lang.Math;
 public class Game
 {
     private CommandsParser commandsParser;
@@ -61,11 +61,32 @@ public class Game
         outside.setItem(chair);
         theater.setItem(cider);
         
-        jozef = new Character("Jozef", 100, 100);
+        jozef = new Character("AssHole", 100, 100);
         liam = new Character("Melman", 10, 20);
         tom = new Character("The Tank Engine", 20, 30);
         zain = new Character("Zain", 20, 20);
-
+        
+        ArrayList<Character> bots;
+        bots = new ArrayList<Character>();
+        bots.add(jozef);
+        bots.add(liam);
+        bots.add(tom);
+        bots.add(zain);
+        
+        ArrayList<Location> places;
+        places = new ArrayList<Location>();
+        places.add(theater);
+        places.add(pub);
+        places.add(lab);
+        places.add(office);
+        
+        ArrayList<Location> randomBots;
+        randomBots = new ArrayList<Location>();
+        for (int i=0; i<3; i++)
+        {
+            places.get(i).addCharacter(bots.get((int)Math.floor(Math.random() * 4)));
+        }
+        
         gameData.setNewLocation(outside);
     }
 
