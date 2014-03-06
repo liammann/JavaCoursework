@@ -61,10 +61,10 @@ public class Game
         outside.setItem(chair);
         theater.setItem(cider);
         
-        jozef = new Character("AssHole", 100, 100);
-        liam = new Character("Melman", 10, 20);
-        tom = new Character("The Tank Engine", 20, 30);
-        zain = new Character("Zain", 20, 20);
+        jozef = new Character("Jozef", 100, 100);
+        liam = new Character("Liam", 10, 20);
+        tom = new Character("Tom", 20, 30);
+        zain = new Character("Zane", 20, 20);
         
         ArrayList<Character> bots;
         bots = new ArrayList<Character>();
