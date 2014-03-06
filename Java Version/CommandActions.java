@@ -100,7 +100,7 @@ public class CommandActions
 
     private String back(int retraceSteps)
     {
-        return "Going back " + retraceSteps + " location(s): " + gameData.setNew        Location(retraceSteps);
+        return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
 
     private String pickup(String objectName)
@@ -124,9 +124,8 @@ public class CommandActions
 
     private String updateLocation(String direction)
     {
-        gameData.getCurrentLocation().removeCharacter();
+        gameData.getCurrentLocation().removeCharacters();
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
-        gameData.getCurrentLocation().addCharacter();
         return gameData.getCurrentLocation().getLongDescription();
     }
 
