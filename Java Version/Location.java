@@ -6,7 +6,7 @@ public class Location
 {
 	private String description;
 	private HashMap<String, Location> exits;
-	private boolean locked;
+	private boolean isLocked;
 	private ArrayList<Object> items;
 
 	public Location(String description)
@@ -74,16 +74,16 @@ public class Location
 
 	public void setLock()
 	{
-		locked = true;
+		isLocked = true;
 	}
 
 	public boolean isLocked()
 	{
-		return locked;
+		return isLocked;
 	}
 
 	public void unlock()
 	{
-		locked = false;
+		isLocked = false;
 	}
 }
