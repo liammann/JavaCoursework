@@ -30,7 +30,7 @@ public class CommandWords
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(2).add("jump");
 
-		commandWordsDocumentation.put("help", "Ask for help (no parameters)'");
+		commandWordsDocumentation.put("help", "Ask for help (no parameters)");
 		commandWordsDocumentation.put("quit", "Quit the game (no parameters)");
 		commandWordsDocumentation.put("inventory", "See your inventory (no parameters)");
 		commandWordsDocumentation.put("back", "Back track your location. Usage: 'back {n}', where 'n' is optional (defaults to 1)");
