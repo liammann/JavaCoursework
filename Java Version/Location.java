@@ -15,7 +15,7 @@ public class Location
 		this.description = description;
 		exits = new HashMap<String, Location>();
 		items = new ArrayList<Object>();
-		characters = new ArrayList<Characters>();
+		characters = new ArrayList<Character>();
 	}
 
 	public void setExit(String direction, Location neighbour)

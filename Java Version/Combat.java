@@ -31,7 +31,7 @@ public class Combat
      * get to choose what weapon to attack with.... 
      * 
      */
-    public int sampleMethod(int y)
+    public void sampleMethod(int y)
     {
         // put your code here
 
