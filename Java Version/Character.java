@@ -3,7 +3,7 @@
 public class Character
 {
 	private String name;
-	public int health; // change scope?
+	private int health; 
 	private Location currentLocation;
 	private int strength;
 
