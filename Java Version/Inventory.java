@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Inventory
 {
     // instance variables - replace the example below with your own
-    private ArrayList<Item> playerInventory;
+    private ArrayList<MovableObject> playerInventory;
     private int inventoryWeight = 0;
     private int inventoryWeightCapacity = 10;
     
@@ -21,10 +21,10 @@ public class Inventory
      */
     public Inventory()
     {
-        playerInventory = new ArrayList<Item>();
+        playerInventory = new ArrayList<MovableObject>();
     }
     
-    public void addItemToInventory(Item item)
+    public void addItemToInventory(MovableObject item)
     {
         if (inventoryWeight() <= inventoryWeightCapacity)
         {
@@ -43,9 +43,9 @@ public class Inventory
     public String currentInventory(){
 
         String returntxt = "You currently have: \n";
-        for (Item item : playerInventory)
+        for (MovableObject item : playerInventory)
         {
-            returntxt += "  - " + item.getDescription() + "\n";
+            returntxt += "  - " + item.getObjectDescription() + "\n";
         }
         return returntxt;
     }
@@ -57,7 +57,7 @@ public class Inventory
     
     public int inventoryWeight()
     {
-        for (Item item: playerInventory)
+        for (MovableObject item: playerInventory)
         {
             inventoryWeight += item.getWeight();
         }

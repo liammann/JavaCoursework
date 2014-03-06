@@ -53,7 +53,7 @@ public class Game
 		lab.setLock();
 		office.setLock();
 
-		cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider");
+		cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);
 		chair = new FixedObject("Chair", "An old wooden chair");
 
 		outside.setItem(cider);
