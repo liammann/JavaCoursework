@@ -1,3 +1,13 @@
+/*
+ * Shift constructor stuff elsewhere and make fields static
+ * because CommandWords class is being instantiated in multiple
+ * places, causing the class to create 2 versions of the same
+ * command words and documentation.
+ *
+ * Maybe also extend the CommandWords class with a Documentation
+ * class?
+ */
+
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
