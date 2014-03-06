@@ -18,6 +18,16 @@ public class Location
 		characters = new ArrayList<Character>();
 	}
 
+	public void addCharacter(Character character)
+	{
+	   characters.add(character);
+	}
+	
+	public void removeCharacters()
+	{
+	    characters.clear();
+	}
+	
 	public void setExit(String direction, Location neighbour)
 	{
 		exits.put(direction, neighbour);
