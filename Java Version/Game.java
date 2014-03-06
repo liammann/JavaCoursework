@@ -49,9 +49,6 @@ public class Game
         lab.setExit("east", office);
         office.setExit("west", lab);
 
-        theater.setLock();
-        pub.setLock();
-        lab.setLock();
         office.setLock();
 
         cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);
