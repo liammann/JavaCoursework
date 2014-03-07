@@ -4,98 +4,111 @@ import java.util.Set;
 
 public class Location
 {
-	private String description;
-	private HashMap<String, Location> exits;
-	private boolean isLocked;
-	private ArrayList<Object> items;
-	private ArrayList<Character> characters;
+    private String description;
+    private HashMap<String, Location> exits;
+    private boolean isLocked = false;
+    private ArrayList<Object> items;
+    private ArrayList<Character> characters;
 
-	public Location(String description)
-	{
-		this.description = description;
-		exits = new HashMap<String, Location>();
-		items = new ArrayList<Object>();
-		characters = new ArrayList<Character>();
-	}
+    public static Location create()
+    {
+        return new Location();
+    }
+    
+    public Location()
+    {
+        exits = new HashMap<String, Location>();
+        items = new ArrayList<Object>();
+        characters = new ArrayList<Character>();
+    }
 
-	public void addCharacter(Character character)
-	{
-	   characters.add(character);
-	}
-	
-	public void removeCharacters()
-	{
-	    characters.clear();
-	}
-	
-	public void setExit(String direction, Location neighbour)
-	{
-		exits.put(direction, neighbour);
-	}
+    public Location addDescription(String description)
+    {
+        this.description = description;
+        return this;
+    }
+    
+    public void addCharacter(Character character)
+    {
+       characters.add(character);
+    }
+    
+    public void removeCharacters()
+    {
+        characters.clear();
+    }
+    
+    public Location withExit(String direction, Location neighbour)
+    {
+        exits.put(direction, neighbour);
+        return this;
+    }
 
-	public void setItem(Object item)
-	{
-		items.add(item);
-	}
+    public Location andItem(Object item) // implement a second parameter for quantity?
+    {
+        items.add(item);
+        return this;
+    }
 
-	public String getShortDescription()
-	{
-		return description;
-	}
+    public String getShortDescription()
+    {
+        return description;
+    }
 
-	public String getLongDescription()
-	{
-		return "You are " + description + "\n" + showExits();
-	}
+    public String getLongDescription()
+    {
+        return "You are " + description + "\n" + showExits();
+    }
 
-	public String getItems()
-	{
-		if(items.size() != 0) {
-			String answer = "This room has the following objects:\n";
+    public String getItems()
+    {
+        if(items.size() != 0) {
+            String answer = "This room has the following objects:\n";
 
-			for(Object item : items) {
-				answer += " - " + item.getObjectDescription() + "\n";
-			}
+            for(Object item : items) {
+                answer += " - " + item.getObjectDescription() + "\n";
+            }
 
-			return answer;
-		}
+            return answer;
+        }
 
-		return "There are no items in this room";
-	}
+        return "There are no items in this room";
+    }
 
-	public String showExits()
-	{
-		String exitPoints = "Exits:";
+    public String showExits()
+    {
+        String exitPoints = "Exits:";
 
-		for(String exit : exits.keySet()) {
-			exitPoints += " " + exit;
-		}
+        for(String exit : exits.keySet()) {
+            exitPoints += " " + exit;
+        }
 
-		return exitPoints;
-	}
+        return exitPoints;
+    }
 
-	public boolean isValidExit(String direction)
-	{
-		return exits.containsKey(direction);
-	}
+    public boolean isValidExit(String direction)
+    {
+        return exits.containsKey(direction);
+    }
 
-	public Location getExit(String direction)
-	{
-		return exits.get(direction);
-	}
+    public Location getExit(String direction)
+    {
+        return exits.get(direction);
+    }
 
-	public void setLock()
-	{
-		isLocked = true;
-	}
+    public Location andIsLocked()
+    {
+        isLocked = true;
+        return this;
+    }
 
-	public boolean isLocked()
-	{
-		return isLocked;
-	}
+    public boolean isLocked()
+    {
+        return isLocked;
+    }
 
-	public void unlock()
-	{
-		isLocked = false;
-	}
+    public void unlock()
+    {
+        isLocked = false;
+    }
 }

@@ -30,33 +30,43 @@ public class Game
     private void buildLocations()
     {
         Location outside, theater, pub, lab, office;
-        // Object cider, chair;
         MovableObject cider;
         FixedObject chair;
 
-        outside = new Location("outside the main entrance of the university");
-        theater = new Location("in a lecture theater");
-        pub = new Location("in a campus pub");
-        lab = new Location("in a computing lab");
-        office = new Location("in the computing admin office");
-
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
-        theater.setExit("west", outside);
-        pub.setExit("east", outside);
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-        office.setExit("west", lab);
-
-        office.setLock();
+        /* Pass location name as a argument to the Location constructor
+         * if we are going to store each location in a hash map
+         */
+        outside = Location.create();
+        theater = Location.create();
+        lab = Location.create();
+        pub = Location.create();
+        office = Location.create();
 
         cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);
         chair = new FixedObject("Chair", "An old wooden chair");
 
-        outside.setItem(cider);
-        outside.setItem(chair);
-        theater.setItem(cider);
+        outside.addDescription("Outside the university entrance")
+               .withExit("east", theater)
+               .withExit("south", lab)
+               .withExit("west", pub)
+               .andItem(cider)
+               .andItem(chair);
+
+        pub.addDescription("In a campus pub")
+           .withExit("east", outside)
+           .andItem(cider);
+
+        theater.addDescription("Inside of a lecture theater")
+               .withExit("west", outside)
+               .andItem(chair)
+               .andIsLocked();
+
+        lab.addDescription("In a computing lab")
+           .withExit("north", outside)
+           .withExit("east", office);
+
+        office.addDescription("In a computing Admin office")
+              .withExit("west", lab);
         
         jozef = new Character("Jozef", 100, 100);
         liam = new Character("Liam", 10, 20);
