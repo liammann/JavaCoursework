@@ -116,7 +116,7 @@ public class Game
             }
         }
 
-        System.out.println("Thanks for playing test!");
+        System.out.println("Thanks for playing!");
     }
 
     private String welcome()
