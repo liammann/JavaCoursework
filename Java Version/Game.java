@@ -14,16 +14,19 @@ public class Game
         commandsParser = new CommandsParser();
         gameData = new GameData();
         
+        preGame();
+    }
+    
+    public void preGame()
+    {
         System.out.println("No game loaded yet!");
         System.out.println("Either load a saved game state with 'load game {game_save}'");
         System.out.print("or load a new game with 'new game'");
         
         while(true) {
-            System.out.print("\n> ");
-
             String command = commandsParser.getCommand();
             
-            if(!command.equals("")) { // get rid of it?
+            if(!command.equals("")) {
                 String output = commandsParser.parseCommand(command);
 
                 if(output.equals("quit")) {
@@ -48,12 +51,12 @@ public class Game
         }
     }
     
-    public void newGame()
+    private void newGame()
     {
         buildGame();
     }
 
-    public void loadGame()
+    private void loadGame()
     {
         // load game save
         buildGame();
@@ -150,7 +153,7 @@ public class Game
 
             String command = commandsParser.getCommand();
 
-            if(!command.equals("")) { //get rid of it?
+            if(!command.equals("")) {
                 String output = commandsParser.parseCommand(command);
 
                 if(output.equals("quit")) {
