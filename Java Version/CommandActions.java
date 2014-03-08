@@ -60,6 +60,9 @@ public class CommandActions
             case "pickup":
                 answer = pickup(parameter);
                 break;
+            case "new":
+                answer = newGame(parameter);
+                break;
         }
 
         return answer;
@@ -70,8 +73,11 @@ public class CommandActions
         String answer = "";
 
         switch(keyword) {
-            case "jump":
-                answer = jump(parameters);
+            case "load":
+                answer = loadGame(parameters);
+                break;
+            case "save":
+                answer = saveGame(parameters);
                 break;
         }
 
@@ -128,10 +134,33 @@ public class CommandActions
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
         return gameData.getCurrentLocation().getLongDescription();
     }
-
-    private String jump(ArrayList parameters)
+    
+    private String newGame(String parameter)
     {
-        return "jumped";
-        // jump is a dud method, so I won't bother to fill it in...
+        if(!parameter.equals("game")) {
+            return "Invalid syntax used...2";
+        }
+        
+        return "new";
+    }
+    
+    private String loadGame(ArrayList parameters)
+    {
+        if(!parameters.get(0).equals("game")) {
+            return "Invalid syntax used...";
+        }
+        
+        // gameData.loadGame();
+        return "Game '" + gameData.getGameName() + "' has successfully been loaded.";
+    }
+    
+    private String saveGame(ArrayList parameters)
+    {
+        if(!parameters.get(0).equals("game") || !parameters.get(1).equals("as")) {
+            return "Invalid syntax used...";
+        }
+        
+        // gameData.saveGame();
+        return "The game has successfully been saved as " + parameters.get(2);
     }
 }

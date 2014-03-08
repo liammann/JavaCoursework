@@ -13,18 +13,57 @@ public class Game
     {
         commandsParser = new CommandsParser();
         gameData = new GameData();
-    }
+        
+        System.out.println("No game loaded yet!");
+        System.out.println("Either load a saved game state with 'load game {game_save}'");
+        System.out.print("or load a new game with 'new game'");
+        
+        while(true) {
+            System.out.print("\n> ");
 
+            String command = commandsParser.getCommand();
+            
+            if(!command.equals("")) { // get rid of it?
+                String output = commandsParser.parseCommand(command);
+
+                if(output.equals("quit")) {
+                    break;
+                }
+                
+                if(output.equals("new")) {
+                    buildGame();
+                    break;
+                }
+                
+                if(output.equals("load")) {
+                    // load game save
+                    buildGame();
+                    break;
+                }
+                
+                System.out.print(output);
+            }else{
+                System.out.print("No command entered!");
+            }
+        }
+    }
+    
     public void newGame()
     {
-        buildLocations();
-        createCharacters();
-        play();
+        buildGame();
     }
 
     public void loadGame()
     {
         // load game save
+        buildGame();
+    }
+    
+    private void buildGame()
+    {
+        buildLocations();
+        createCharacters();
+        play();
     }
 
     private void buildLocations()
@@ -106,21 +145,24 @@ public class Game
     {
         System.out.print(welcome());
 
-        boolean finished = false;
-
-        while(!finished) {
+        while(true) {
             System.out.print("\n> ");
 
             String command = commandsParser.getCommand();
 
-            if(!command.equals("")) {
+            if(!command.equals("")) { //get rid of it?
                 String output = commandsParser.parseCommand(command);
 
                 if(output.equals("quit")) {
-                    finished = true;
-                }else{
-                    System.out.print(output);
+                    break;
                 }
+                
+                if(output.equals("finished")) {
+                    System.out.println("Congratulations on completing the game!");
+                    break;
+                }
+                
+                System.out.print(output);
             }else{
                 System.out.print("No command entered!");
             }

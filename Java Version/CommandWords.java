@@ -15,12 +15,14 @@ import java.util.HashMap;
 public class CommandWords
 {
 	private ArrayList<ArrayList<String>> validCommands;
+	private ArrayList<String> preGameCommands;
 	private HashMap<String, String> commandWordsDocumentation;
 
 	public CommandWords()
 	{
 		validCommands = new ArrayList<ArrayList<String>>();
 		commandWordsDocumentation = new HashMap<String, String>();
+		preGameCommands = new ArrayList<String>();
 
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(0).add("help");
@@ -28,17 +30,23 @@ public class CommandWords
 		validCommands.get(0).add("back");
 		validCommands.get(0).add("manual");
 		validCommands.get(0).add("inventory");
-		// validCommands.get(0).add("defend");
-		// validCommands.get(0).add("attack");
 
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(1).add("go");
 		validCommands.get(1).add("back");
 		validCommands.get(1).add("pickup");
 		validCommands.get(1).add("manual");
+		validCommands.get(1).add("new");
 
 		validCommands.add(new ArrayList<String>());
-		validCommands.get(2).add("jump");
+		validCommands.get(2).add("load");
+		
+		validCommands.add(new ArrayList<String>());
+		validCommands.get(3).add("save");
+		
+		preGameCommands.add("load");
+		preGameCommands.add("new");
+		preGameCommands.add("quit");
 
 		commandWordsDocumentation.put("help", "Ask for help (no parameters)");
 		commandWordsDocumentation.put("quit", "Quit the game (no parameters)");
@@ -47,7 +55,9 @@ public class CommandWords
 		commandWordsDocumentation.put("manual", "View all commands or a specific command. Usage: 'manual {command}', where 'command' is optional (defaults to view all)");
 		commandWordsDocumentation.put("go", "Go to another location by passing the exit direction as a paramter. Usage: 'go {direction}'");
 		commandWordsDocumentation.put("pickup", "Pickup an object by passing the object name as a parameter. Usage: 'pickup {object}'");
-		commandWordsDocumentation.put("jump", "Testing tripple command word... Not functional yet.");
+		commandWordsDocumentation.put("new", "Start a new game. Usage: 'new game'");
+		commandWordsDocumentation.put("load", "Load a saved game. Usage: 'load game {game_save}'");
+		commandWordsDocumentation.put("save", "Save the current state of the game. Usage: 'save game as {game_name}'");
 	}
 
 	public boolean commandExists(String command)
@@ -70,6 +80,15 @@ public class CommandWords
 		}
 
 		return false;
+	}
+	
+	public boolean isPreGameCommand(String command)
+	{
+	    if(preGameCommands.contains(command)) {
+	        return true;
+	    }
+	    
+	    return false;
 	}
 
 	public String manual()
