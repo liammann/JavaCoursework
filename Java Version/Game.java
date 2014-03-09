@@ -110,6 +110,19 @@ public class Game
         office.addDescription("In a computing Admin office")
               .withExit("west", lab);
         
+        // The following could be added as a field in the GameData class
+        ArrayList<Location> places;
+        
+        // Also remember it is good practice to initialise variables
+        // AT THE TOP of a method! It enables better clarity of variables being used
+        places = new ArrayList<Location>();
+        
+        places.add(theater);
+        places.add(pub);
+        places.add(lab);
+        places.add(office);
+
+        // The following needs to be shifted to the createCharacters() method
         jozef = new Character("Jozef", 100, 100);
         liam = new Character("Liam", 10, 20);
         tom = new Character("Tom", 20, 30);
@@ -122,19 +135,13 @@ public class Game
         bots.add(tom);
         bots.add(zain);
         
-        ArrayList<Location> places;
-        places = new ArrayList<Location>();
-        places.add(theater);
-        places.add(pub);
-        places.add(lab);
-        places.add(office);
-        
         ArrayList<Location> randomBots;
         randomBots = new ArrayList<Location>();
         for (int i=0; i<3; i++)
         {
             places.get(i).addCharacter(bots.get((int)Math.floor(Math.random() * 4)));
         }
+        // END of shift
         
         gameData.setNewLocation(outside);
     }
