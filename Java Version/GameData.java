@@ -5,6 +5,7 @@ public class GameData
     private static ArrayList<Location> locationHistory;
     private static boolean gameStarted = false;
     private static String gameName;
+    private static ArrayList<Location> locations;
 
     public GameData()
     {
