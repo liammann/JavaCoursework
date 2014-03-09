@@ -2,16 +2,15 @@ import java.util.ArrayList;
 import java.lang.Math;
 public class Game
 {
-    private CommandsParser commandsParser;
+    public static CommandsParser commandsParser; // Used in Combat class
+    public static Character player1; // Used in Combat class
     private GameData gameData;
-    // private Character player;
-    // private Character enemy;
-    // private Combat fight;
-    Character jozef, liam, tom, zain;
+
+    private Character jozef, liam, tom, zain;
 
     public Game()
     {
-        commandsParser = new CommandsParser();
+        commandsParser = new CommandsParser(); 
         gameData = new GameData();
         
         preGame();
@@ -35,7 +34,7 @@ public class Game
                 
                 if(output.equals("new")) {
                     gameData.startGame();
-
+ 
                     buildGame();
                     break;
                 }
@@ -143,7 +142,7 @@ public class Game
 
     private void createCharacters()
     {
-        Character player1 = new Character("Player1", 100, 100);
+       player1 = new Character("Player1", 100, 100);
     }
 
     private void play()
@@ -158,7 +157,7 @@ public class Game
             if(!command.equals("")) {
                 String output = commandsParser.parseCommand(command);
 
-                if(output.equals("quit")) {
+                if(output.equals("quit")) { 
                     break;
                 }
                 

@@ -35,6 +35,8 @@ public class CommandWords
 		validCommands.get(1).add("go");
 		validCommands.get(1).add("back");
 		validCommands.get(1).add("pickup");
+		validCommands.get(1).add("fight");		
+		validCommands.get(1).add("attack");
 		validCommands.get(1).add("manual");
 		validCommands.get(1).add("new");
 

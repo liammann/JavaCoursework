@@ -60,6 +60,9 @@ public class CommandActions
             case "pickup":
                 answer = pickup(parameter);
                 break;
+            case "fight":
+                answer = fight(parameter);
+                break;
             case "new":
                 answer = newGame(parameter);
                 break;
@@ -113,6 +116,18 @@ public class CommandActions
     {
         // put object in inventory and remove object from location
         return "Item " + objectName + " has been picked up!";
+    }
+     private String fight(String who) 
+    {
+        for(Character character : gameData.getCurrentLocation().getArraryLocationCharacters()) {
+            if(character.getName().equals(who)){
+                Combat fight = new Combat(character);
+                boolean playerWins = fight.startFight();
+                return "You have Defeated "+who;
+            }
+
+        }
+        return "Fight Who?";
     }
 
     private String go(String direction)

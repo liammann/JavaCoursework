@@ -40,7 +40,7 @@ public class Location
     public String getLocationCharacters ()
     {
         if(characters.size() != 0) {
-            String answer = "This room has the following characters:\n";
+            String answer = "This room has the following characters ('fight'/'talk'):\n";
 
             for(Character character : characters) {
                 answer += " - " + character.getName() + "\n";
@@ -50,6 +50,14 @@ public class Location
         }
 
         return "There are no characters in this room \n";
+
+    }
+    public ArrayList<Character> getArraryLocationCharacters ()
+    {
+        if(characters.size() != 0) {
+            return characters;
+        }
+        return null;
 
     }
     public Location withExit(String direction, Location neighbour)
