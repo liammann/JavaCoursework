@@ -124,7 +124,6 @@ public class CommandActions
         if(gameData.getCurrentLocation().getExit(direction).isLocked()) {
             return "That room is locked!";
         }
-        
         return updateLocation(direction);
     }
 
@@ -132,7 +131,9 @@ public class CommandActions
     {
         gameData.getCurrentLocation().removeCharacters();
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
-        return gameData.getCurrentLocation().getLongDescription();
+        return gameData.getCurrentLocation().getLongDescription()+                
+                gameData.getCurrentLocation().getLocationCharacters()+
+                gameData.getCurrentLocation().getLocationItems();
     }
     
     private String newGame(String parameter)

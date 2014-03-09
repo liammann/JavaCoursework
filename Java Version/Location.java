@@ -37,7 +37,21 @@ public class Location
     {
         characters.clear();
     }
-    
+    public String getLocationCharacters ()
+    {
+        if(characters.size() != 0) {
+            String answer = "This room has the following characters:\n";
+
+            for(Character character : characters) {
+                answer += " - " + character.getName() + "\n";
+            }
+
+            return answer;
+        }
+
+        return "There are no characters in this room \n";
+
+    }
     public Location withExit(String direction, Location neighbour)
     {
         exits.put(direction, neighbour);
@@ -57,10 +71,10 @@ public class Location
 
     public String getLongDescription()
     {
-        return "You are " + description + "\n" + showExits();
+        return "You are " + description + "\n" + showExits()+"\n";
     }
 
-    public String getItems()
+    public String getLocationItems()
     {
         if(items.size() != 0) {
             String answer = "This room has the following objects:\n";
@@ -68,11 +82,10 @@ public class Location
             for(Object item : items) {
                 answer += " - " + item.getObjectDescription() + "\n";
             }
-
             return answer;
         }
 
-        return "There are no items in this room";
+        return "There are no items in this room \n";
     }
 
     public String showExits()
