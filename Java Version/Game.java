@@ -18,36 +18,34 @@ public class Game
     
     public void preGame()
     {
+        System.out.println("=============================");
         System.out.println("No game loaded yet!");
         System.out.println("Either load a saved game state with 'load game {game_save}'");
-        System.out.print("or load a new game with 'new game'");
+        System.out.println("or load a new game with 'new game'");
+        System.out.println("=============================");
         
-        while(true) {
+        quitGame: while(true) {
             String command = commandsParser.getCommand();
             
             if(!command.equals("")) {
                 String output = commandsParser.parseCommand(command);
 
-                if(output.equals("quit")) {
-                    break;
+                switch(output) {
+                    case "quit":
+                        break quitGame;
+                    case "new":
+                        gameData.startGame();
+                        buildGame();
+                        break;
+                    case "load":
+                        // load game save
+                        buildGame();
+                        break;
+                    default:
+                        System.out.println(output);                
                 }
-                
-                if(output.equals("new")) {
-                    gameData.startGame();
- 
-                    buildGame();
-                    break;
-                }
-                
-                if(output.equals("load")) {
-                    // load game save
-                    buildGame();
-                    break;
-                }
-                
-                System.out.print(output);
             }else{
-                System.out.print("No command entered!");
+                System.out.println("No command entered!");
             }
         }
     }
@@ -66,7 +64,7 @@ public class Game
     private void buildGame()
     {
         buildLocations();
-        createCharacters();
+        createCharacters(); // load chararacters here
         play();
     }
 
@@ -111,6 +109,19 @@ public class Game
         office.addDescription("In a computing Admin office")
               .withExit("west", lab);
         
+        // The following could be added as a field in the GameData class
+        ArrayList<Location> places;
+        
+        // Also remember it is good practice to initialise variables
+        // AT THE TOP of a method! It enables better clarity of variables being used
+        places = new ArrayList<Location>();
+        
+        places.add(theater);
+        places.add(pub);
+        places.add(lab);
+        places.add(office);
+
+        // The following needs to be shifted to the createCharacters() method
         jozef = new Character("Jozef", 100, 100);
         liam = new Character("Liam", 10, 20);
         tom = new Character("Tom", 20, 30);
@@ -123,19 +134,13 @@ public class Game
         bots.add(tom);
         bots.add(zain);
         
-        ArrayList<Location> places;
-        places = new ArrayList<Location>();
-        places.add(theater);
-        places.add(pub);
-        places.add(lab);
-        places.add(office);
-        
         ArrayList<Location> randomBots;
         randomBots = new ArrayList<Location>();
         for (int i=0; i<3; i++)
         {
             places.get(i).addCharacter(bots.get((int)Math.floor(Math.random() * 4)));
         }
+        // END of shift
         
         gameData.setNewLocation(outside);
     }
@@ -177,7 +182,7 @@ public class Game
 
     private String welcome()
     {
-        return "Welcome to the Pub Crawl Game!\n"
+        return "\nWelcome to the Pub Crawl Game!\n"
                 +"Type 'help' if you are not sure what to do.\n\n"
                 +gameData.getCurrentLocation().getLongDescription();
     }
