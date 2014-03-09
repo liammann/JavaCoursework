@@ -42,7 +42,7 @@ public class Game
                         buildGame();
                         break;
                     default:
-                        System.out.println(output);                
+                        System.out.println(output);
                 }
             }else{
                 System.out.println("No command entered!");
@@ -141,6 +141,10 @@ public class Game
             places.get(i).addCharacter(bots.get((int)Math.floor(Math.random() * 4)));
         }
         // END of shift
+        
+        /* This is a note for myself (Tom) so that I don't forget
+         * Character objects could be placed in an ArrayList field apart of the Location class
+         */
         
         gameData.setNewLocation(outside);
     }
