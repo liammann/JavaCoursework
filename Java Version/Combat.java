@@ -21,9 +21,10 @@ public class Combat
      */
     public Combat(){}
      
-    public Combat(Character player, Character enemy)
+ 
+    public Combat(Character enemy)
     { 
-        this.player = player;
+        this.player = Game.player1;
         this.enemy = enemy;  
     }
 
@@ -40,7 +41,7 @@ public class Combat
 
     public boolean startFight()
     {
-        System.out.println("\n NOW ENTERED COMBAT MODE!!\n");
+        System.out.println("\n NOW ENTERED COMBAT MODE!!\n You can ethier 'Attack {Weapon}' or 'Defend'\n");
         boolean playerWin = false;
         playerDefending = false;
         enemyDefending = false;
@@ -64,7 +65,7 @@ public class Combat
     public void playerTurn(boolean enemyDefending)
     {
         System.out.print("> ");
-        CommandsParser commandsParser = new CommandsParser();;
+        CommandsParser commandsParser = Game.commandsParser;
         String command = commandsParser.getCommand();
 
         if(!command.equals("")) { 
