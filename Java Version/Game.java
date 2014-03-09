@@ -34,6 +34,8 @@ public class Game
                 }
                 
                 if(output.equals("new")) {
+                    gameData.startGame();
+
                     buildGame();
                     break;
                 }
