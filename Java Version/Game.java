@@ -7,6 +7,8 @@ public class Game
     private GameData gameData;
     private MovableObject sword; // testing
     private Character jozef, liam, tom, zain;
+    ArrayList<Character> bots;
+    ArrayList<Location> places;
 
     public Game()
     {
@@ -110,24 +112,13 @@ public class Game
 
         office.addDescription("In a computing Admin office")
               .withExit("west", lab);
-
-        // The following needs to be shifted to the createCharacters() method
-        jozef = new Character("Jozef", 7, 100);
-        liam = new Character("Liam", 80, 20);
-        tom = new Character("Tom", 70, 30);
-        zain = new Character("Zain", 60, 20);
         
-         // The following could be added as a field in the GameData class
-        // Also remember it is good practice to initialise variables
-        // AT THE TOP of a method! It enables better clarity of variables being used
-        ArrayList<Location> places;
         places = new ArrayList<Location>();
         places.add(theater);
         places.add(pub);
         places.add(lab);
         places.add(office);
         
-        ArrayList<Character> bots;
         bots = new ArrayList<Character>();
         bots.add(jozef);
         bots.add(liam);
@@ -151,6 +142,11 @@ public class Game
     {
        player1 = new Player("Player1", 100, 100);
        player1.getInventory().addItemToInventory(sword);
+       
+       jozef = new Character("Jozef", 7, 100);
+       liam = new Character("Liam", 80, 20);
+       tom = new Character("Tom", 70, 30);
+       zain = new Character("Zain", 60, 20);
     }
 
     private void play()
