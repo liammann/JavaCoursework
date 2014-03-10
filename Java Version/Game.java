@@ -2,6 +2,8 @@
  * IMPORTANT NOTE:
  * 
  * Should we make our system case-insensitive?
+ * 
+ * Also, no classes should be "using" the Game class...
  */
 
 import java.util.ArrayList;
@@ -13,11 +15,7 @@ public class Game
     public static CommandsParser commandsParser; // Used in Combat class
     public static Player player1; // Used in Combat class
     private GameData gameData;
-<<<<<<< HEAD
-    private ArrayList<String> savedGames;
-=======
     private MovableObject sword; // testing
->>>>>>> FETCH_HEAD
     private Character jozef, liam, tom, zain;
     ArrayList<Character> bots;
     ArrayList<Location> places;
@@ -26,7 +24,6 @@ public class Game
     {
         commandsParser = new CommandsParser();
         gameData = new GameData();
-        savedGames = new ArrayList<String>();
         
         preGame();
     }
