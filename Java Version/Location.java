@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class Location
+public class Location implements java.io.Serializable
 {
     private String description;
     private HashMap<String, Location> exits;

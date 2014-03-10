@@ -1,15 +1,17 @@
 import java.util.ArrayList;
 
-public class GameData
+public class GameData implements java.io.Serializable
 {
     private static ArrayList<Location> locationHistory;
-    private static boolean gameStarted = false;
-    private static String gameName;
+    private static transient boolean gameStarted = false;
+    public static transient ArrayList<String> savedGames;
+    // private static String gameName;
     private static ArrayList<Location> locations;
 
     public GameData()
     {
         locationHistory = new ArrayList<Location>();
+        savedGames = new ArrayList<String>();
     }
 
     public Location getCurrentLocation()
@@ -47,18 +49,18 @@ public class GameData
         return gameStarted;
     }
     
-    public String getGameName()
+    public void addGameSave(String gameSave)
+    {
+        savedGames.add(gameSave);
+    }
+    
+    public boolean isValidGameSave(String gameSave)
+    {
+        return savedGames.contains(gameSave);
+    }
+    
+    /*public String getGameName()
     {
         return gameName;
-    }
-    
-    public void loadGame()
-    {
-        //
-    }
-    
-    public void saveGame()
-    {
-        //
-    }
+    }*/
 }

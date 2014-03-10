@@ -1,9 +1,5 @@
-
-/**
- * Write a description of class Combat here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+/* I don't really think this class should be using the Game class...
+ * Isn't there any other way to do it?
  */
 import java.lang.Math;
 

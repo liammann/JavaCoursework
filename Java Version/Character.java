@@ -1,3 +1,6 @@
+/*
+ * Why's this not an abstract class?
+ */
 
 public class Character
 {
