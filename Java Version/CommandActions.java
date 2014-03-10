@@ -31,11 +31,11 @@ public class CommandActions
             case "inventory":
                 // answer = inventory(); ???
                 break;
-            case "attack":
-                // answer = attack(); ???
-                break;
+//             case "atta77ck":
+//                 // answer = attack(); ???
+//                 break;
             case "defend":
-                // answer = defend(); ???
+                 //answer = defend(); //???
                 break;
         }
 
@@ -59,6 +59,9 @@ public class CommandActions
                 break;
             case "pickup":
                 answer = pickup(parameter);
+                break;
+            case "attack":
+                answer = attack(parameter);
                 break;
             case "fight":
                 answer = fight(parameter);
@@ -174,6 +177,7 @@ public class CommandActions
         
     }
     
+    
     private String saveGame(ArrayList parameters)
     {
         if(!parameters.get(0).equals("game") || !parameters.get(1).equals("as")) {
@@ -182,5 +186,13 @@ public class CommandActions
         
         // gameData.saveGame();
         return "The game has successfully been saved as " + parameters.get(2);
+    }
+    private String attack(String weapon)
+    {
+        if(weapon.equals("")) {
+            return null;
+        }
+        
+        return weapon;
     }
 }

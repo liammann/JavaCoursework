@@ -11,10 +11,16 @@ import java.io.*;
 public class Game
 {
     public static CommandsParser commandsParser; // Used in Combat class
-    public static Character player1; // Used in Combat class
+    public static Player player1; // Used in Combat class
     private GameData gameData;
+<<<<<<< HEAD
     private ArrayList<String> savedGames;
+=======
+    private MovableObject sword; // testing
+>>>>>>> FETCH_HEAD
     private Character jozef, liam, tom, zain;
+    ArrayList<Character> bots;
+    ArrayList<Location> places;
 
     public Game()
     {
@@ -124,7 +130,8 @@ public class Game
     private void buildLocations()
     {
         Location outside, theater, pub, lab, office;
-        MovableObject cider;
+        MovableObject cider;        
+
         FixedObject chair;
 
         /* Pass location name as a argument to the Location constructor
@@ -136,14 +143,15 @@ public class Game
         pub = Location.create();
         office = Location.create();
 
-        cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);
+        cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
+        sword = new MovableObject("Sword", "A very strong sword", 2, 2.4);
         chair = new FixedObject("Chair", "An old wooden chair");
 
         outside.addDescription("Outside the university entrance")
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
-               .andItem(cider)
+               .andItem(sword)
                .andItem(chair);
 
         pub.addDescription("In a campus pub")
@@ -162,36 +170,21 @@ public class Game
         office.addDescription("In a computing Admin office")
               .withExit("west", lab);
         
-        // The following could be added as a field in the GameData class
-        ArrayList<Location> places;
-        
-        // Also remember it is good practice to initialise variables
-        // AT THE TOP of a method! It enables better clarity of variables being used
         places = new ArrayList<Location>();
-        
         places.add(theater);
         places.add(pub);
         places.add(lab);
         places.add(office);
-
-        // The following needs to be shifted to the createCharacters() method
-        jozef = new Character("Jozef", 100, 100);
-        liam = new Character("Liam", 10, 20);
-        tom = new Character("Tom", 20, 30);
-        zain = new Character("Zane", 20, 20);
         
-        ArrayList<Character> bots;
         bots = new ArrayList<Character>();
         bots.add(jozef);
         bots.add(liam);
         bots.add(tom);
         bots.add(zain);
         
-        ArrayList<Location> randomBots;
-        randomBots = new ArrayList<Location>();
-        for (int i=0; i<3; i++)
+        for (Character bot: bots)
         {
-            places.get(i).addCharacter(bots.get((int)Math.floor(Math.random() * 4)));
+            places.get((int)Math.floor(Math.random() * bots.size())).addCharacter(bot);
         }
         // END of shift
         
@@ -204,7 +197,13 @@ public class Game
 
     private void createCharacters()
     {
-       player1 = new Character("Player1", 100, 100);
+       player1 = new Player("Player1", 100, 100);
+       player1.getInventory().addItemToInventory(sword);
+       
+       jozef = new Character("Jozef", 7, 100);
+       liam = new Character("Liam", 80, 20);
+       tom = new Character("Tom", 70, 30);
+       zain = new Character("Zain", 60, 20);
     }
 
     private void play()

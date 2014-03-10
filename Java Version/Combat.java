@@ -5,19 +5,11 @@ import java.lang.Math;
 
 public class Combat
 {
-    // instance variables - replace the example below with your own
-    public Character player; 
+    private Player player; 
     private Character enemy;
     public boolean playerDefending; // if true the player choose defending last turn
     public boolean enemyDefending;
-    private String output;
-
-    /**
-     * Constructor for objects of class Combat
-     */
-    public Combat(){}
-     
- 
+      
     public Combat(Character enemy)
     { 
         this.player = Game.player1;
@@ -42,7 +34,6 @@ public class Combat
         playerDefending = false;
         enemyDefending = false;
 
-
         while(!playerWin){
             playerTurn(enemyDefending);            
             enemyTurn(playerDefending);
@@ -63,21 +54,31 @@ public class Combat
         System.out.print("> ");
         CommandsParser commandsParser = Game.commandsParser;
         String command = commandsParser.getCommand();
-
-        if(!command.equals("")) { 
+        
+        if(!command.equals("")){ 
             int hpDealt = 0;
-            output = commandsParser.parseCommand(command);
-            if(output.equals("attack")){
-                hpDealt = attack(enemyDefending);
-                playerDefending = false;
-            }else{
+            String output = commandsParser.parseCommand(command);
+
+            if(command.contains("attack")){
+                for (MovableObject weapon : player.getInventory().playerWeapons()){
+                    if(command.equals("attack "+weapon.getObjectName().toLowerCase())){
+                        hpDealt = attack(enemyDefending, weapon);
+                        playerDefending = false;
+                    }else{
+                        hpDealt = attack(enemyDefending);
+                        playerDefending = false;
+                    }
+                }
+            }else if(command.equals("defend")){
                 hpDealt = defend(enemyDefending);
                 playerDefending = true;
+            }else{
+                System.out.print("You stand there and get attacked.  Attack {Weapon} or Defend \n   ");
             }
-           enemy.updateHealth(enemy.getHealth()-hpDealt);
-           System.out.print("Player Dealt: "+hpDealt+"\n");
+            enemy.updateHealth(enemy.getHealth()-hpDealt);
+            System.out.print("Player Dealt: "+hpDealt+"\n");
         }else{
-            System.out.print("No command entered! \n");
+            System.out.print("No command entered! \n > ");
         }
  
         
@@ -108,6 +109,18 @@ public class Combat
         int x = 1 + (int)(Math.random() * ((5 - 1) + 1));
         int y = 1 + (int)(Math.random() * ((3 - 1) + 1));
         int damage = 25;
+
+        if (currentStatus){
+            return damage-(12+x);
+        }
+        return damage+(x*y);
+        
+    }
+    public int attack(boolean currentStatus, MovableObject weapon)
+    {
+        int x = 1 + (int)(Math.random() * ((5 - 1) + 1));
+        int y = 1 + (int)(Math.random() * ((3 - 1) + 1));
+        int damage = (int) Math.floor(25*weapon.getWeaponModifier());
 
         if (currentStatus){
             return damage-(12+x);

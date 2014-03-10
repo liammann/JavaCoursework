@@ -29,7 +29,7 @@ public class Inventory
         if (inventoryWeight() <= inventoryWeightCapacity)
         {
             playerInventory.add(item);
-            System.out.println(item + " has been put in your bag.");
+            System.out.println(item.getObjectName() + " has been put in your bag.");
         } else {
             System.out.println("Your bag's too heavy already. Try dropping something before picking this up.");
         }
@@ -48,6 +48,17 @@ public class Inventory
             returntxt += "  - " + item.getObjectDescription() + "\n";
         }
         return returntxt;
+    }
+    public ArrayList<MovableObject> playerWeapons(){
+        ArrayList<MovableObject> playerWeapons = new ArrayList<MovableObject>(); 
+        
+        for (MovableObject item : playerInventory)
+        {
+            if(item.checkWeapon()){
+                playerWeapons.add(item);
+            }
+        }
+        return playerWeapons;
     }
     
     public int inventorySize()
