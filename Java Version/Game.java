@@ -148,8 +148,8 @@ public class Game
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
-               .addItem(sword)
-               .addItem(chair);
+               .andItem(sword)
+               .andItem(chair);
 
         pub.addDescription("In a campus pub")
            .withExit("east", outside)
