@@ -66,10 +66,14 @@ public class Location
         return this;
     }
 
-    public Location andItem(Object item) // implement a second parameter for quantity?
+    public void addItem(Object item) // implement a second parameter for quantity?
     {
         items.add(item);
-        return this;
+    }
+    
+    public void removeItem(Object item)
+    {
+        items.remove(item);
     }
 
     public String getShortDescription()
