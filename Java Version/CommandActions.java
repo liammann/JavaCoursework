@@ -166,8 +166,12 @@ public class CommandActions
             return "Invalid syntax used...";
         }
         
-        // gameData.loadGame();
-        return "Game '" + gameData.getGameName() + "' has successfully been loaded.";
+        if(!gameData.isValidGameSave((String) parameters.get(1))) {
+            return "Invalid game save!";
+        }
+        
+        return "load";
+        
     }
     
     private String saveGame(ArrayList parameters)

@@ -1,17 +1,26 @@
+/* 
+ * IMPORTANT NOTE:
+ * 
+ * Should we make our system case-insensitive?
+ */
+
 import java.util.ArrayList;
 import java.lang.Math;
+import java.io.*;
+
 public class Game
 {
     public static CommandsParser commandsParser; // Used in Combat class
     public static Character player1; // Used in Combat class
     private GameData gameData;
-
+    private ArrayList<String> savedGames;
     private Character jozef, liam, tom, zain;
 
     public Game()
     {
-        commandsParser = new CommandsParser(); 
+        commandsParser = new CommandsParser();
         gameData = new GameData();
+        savedGames = new ArrayList<String>();
         
         preGame();
     }
@@ -21,6 +30,7 @@ public class Game
         System.out.println("=============================");
         System.out.println("No game loaded yet!");
         System.out.println("Either load a saved game state with 'load game {game_save}'");
+        System.out.println("Current game saves: " + getSavedGameNames());
         System.out.println("or load a new game with 'new game'");
         System.out.println("=============================");
         
@@ -35,11 +45,10 @@ public class Game
                         break quitGame;
                     case "new":
                         gameData.startGame();
-                        buildGame();
+                        newGame();
                         break;
                     case "load":
-                        // load game save
-                        buildGame();
+                        loadGame();
                         break;
                     default:
                         System.out.println(output);
@@ -50,22 +59,66 @@ public class Game
         }
     }
     
+    private String getSavedGameNames()
+    {
+        File files = new File("gamesaves/");
+	    File[] contents = files.listFiles();
+	    String gameSaveNames = "";
+	   
+	    if(contents == null) {
+	        gameSaveNames = "none";
+	        return gameSaveNames;
+	    }
+	   
+	    for(File name : contents) {
+	        if(name.isFile()) {
+	            String[] fileName = name.getName().split("\\.");
+	            gameSaveNames += fileName[0] + " ";
+	            gameData.addGameSave(fileName[0]);
+	        }
+	    }
+	   
+ 	    return gameSaveNames;
+    }
+    
     private void newGame()
     {
         buildGame();
+        play();
     }
 
     private void loadGame()
     {
-        // load game save
-        buildGame();
+        /* 
+         * The following is still a work in progress...
+         */
+        /*
+        GameData gameData = null;
+        
+        try {
+            FileInputStream gameSaveFile = new FileInputStream("/gamesaves/" + . + ".ser");
+            ObjectInputStream gameSaveData = new ObjectInputStream(gameSaveFile);
+
+            gameData = (GameData) gameSaveData.readObject();
+
+            gameSaveData.close();
+            gameSaveFile.close();
+        }catch(IOException ioe) {
+            ioe.printStackTrace();
+            return;
+        }catch(ClassNotFoundException classe) {
+            System.out.println("Class not found");
+            classe.printStackTrace();
+            return;
+        }*/
+        
+        play();
     }
     
     private void buildGame()
     {
         buildLocations();
         createCharacters(); // load chararacters here
-        play();
     }
 
     private void buildLocations()
