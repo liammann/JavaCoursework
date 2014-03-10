@@ -85,7 +85,7 @@ public class Game
         office = Location.create();
 
         cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
-        sword = new MovableObject("Sword", "A very strong sword", 2, true, 2.4);
+        sword = new MovableObject("Sword", "A very strong sword", 2, 2.4);
         chair = new FixedObject("Chair", "An old wooden chair");
 
         outside.addDescription("Outside the university entrance")
@@ -124,11 +124,11 @@ public class Game
         places.add(office);
 
         // The following needs to be shifted to the createCharacters() method
-        jozef = new Character("Jozef", 100, 100);
-        liam = new Character("Liam", 10, 20);
-        tom = new Character("Tom", 20, 30);
-        zain = new Character("Zane", 20, 20);
-        
+        jozef = new Character("Jozef", 7, 100);
+        liam = new Character("Liam", 80, 20);
+        tom = new Character("Tom", 70, 30);
+        zain = new Character("Zain", 60, 20);
+         
         ArrayList<Character> bots;
         bots = new ArrayList<Character>();
         bots.add(jozef);
