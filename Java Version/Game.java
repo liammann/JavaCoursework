@@ -3,9 +3,9 @@ import java.lang.Math;
 public class Game
 {
     public static CommandsParser commandsParser; // Used in Combat class
-    public static Character player1; // Used in Combat class
+    public static Player player1; // Used in Combat class
     private GameData gameData;
-
+    private MovableObject sword; // testing
     private Character jozef, liam, tom, zain;
 
     public Game()
@@ -71,7 +71,8 @@ public class Game
     private void buildLocations()
     {
         Location outside, theater, pub, lab, office;
-        MovableObject cider;
+        MovableObject cider;        
+
         FixedObject chair;
 
         /* Pass location name as a argument to the Location constructor
@@ -83,14 +84,15 @@ public class Game
         pub = Location.create();
         office = Location.create();
 
-        cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);
+        cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
+        sword = new MovableObject("Sword", "A very strong sword", 2, true, 2.4);
         chair = new FixedObject("Chair", "An old wooden chair");
 
         outside.addDescription("Outside the university entrance")
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
-               .andItem(cider)
+               .andItem(sword)
                .andItem(chair);
 
         pub.addDescription("In a campus pub")
@@ -151,7 +153,8 @@ public class Game
 
     private void createCharacters()
     {
-       player1 = new Character("Player1", 100, 100);
+       player1 = new Player("Player1", 100, 100);
+       player1.getInventory().addItemToInventory(sword);
     }
 
     private void play()
