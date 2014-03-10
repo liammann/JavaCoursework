@@ -49,6 +49,17 @@ public class Inventory
         }
         return returntxt;
     }
+    public ArrayList<MovableObject> playerWeapons(){
+        ArrayList<MovableObject> playerWeapons = new ArrayList<MovableObject>(); 
+        
+        for (MovableObject item : playerInventory)
+        {
+            if(item.checkWeapon()){
+                playerWeapons.add(item);
+            }
+        }
+        return playerWeapons;
+    }
     
     public int inventorySize()
     {
