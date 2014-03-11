@@ -124,7 +124,8 @@ public class CommandActions
     /*
     private String drop(String item)
     {
-        //
+        gameData.getCurrentLocation().andItem(gameData.getObjectFromName(item));
+        gameData.player1.inventory.dropFromInventory(gameData.getObjectFromName(item));
     }
     */
     private String fight(String who) 
