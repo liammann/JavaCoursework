@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class CommandsParser
 {
-    private CommandWords commandWords;
-    private CommandActions commandActions;
-    private Scanner reader;
+    private static CommandWords commandWords;
+    private static CommandActions commandActions;
+    private static Scanner reader;
     private GameData gameData;
 
     public CommandsParser()

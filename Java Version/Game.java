@@ -12,14 +12,12 @@ import java.io.*;
 
 public class Game
 {
-    private static CommandsParser commandsParser; // Used in Combat class
     private GameData gameData;
     
     public Game()
     {
-        commandsParser = new CommandsParser();
         gameData = new GameData();
-        
+        gameData.commandsParser = new CommandsParser();
         preGame();
     }
     
@@ -33,10 +31,10 @@ public class Game
         System.out.println("=============================");
         
         quitGame: while(true) {
-            String command = commandsParser.getCommand();
+            String command = gameData.commandsParser.getCommand();
             
             if(!command.equals("")) {
-                String output = commandsParser.parseCommand(command);
+                String output = gameData.commandsParser.parseCommand(command);
 
                 switch(output) {
                     case "quit":
@@ -64,10 +62,10 @@ public class Game
         while(true) {
             System.out.print("\n> ");
 
-            String command = commandsParser.getCommand();
+            String command = gameData.commandsParser.getCommand();
 
             if(!command.equals("")) {
-                String output = commandsParser.parseCommand(command);
+                String output = gameData.commandsParser.parseCommand(command);
 
                 if(output.equals("save")) {
                     saveGame();
@@ -219,21 +217,21 @@ public class Game
 
     private void createCharacters()
     {
-       gameData.player1 = new Player("Player1", 100, 100);
-       //       GameData.player1.getInventory().addItemToInventory(GameData.sword);
+        gameData.player1 = new Player("Player1", 100, 100);
+        //       GameData.player1.getInventory().addItemToInventory(GameData.sword);
        
-       Character jozef = new Character("Jozef", 100, 100);
-       Character liam = new Character("Liam", 40, 15);
-       Character tom = new Character("Tom", 70, 30);
-       Character zain = new Character("Zain", 60, 20);
-       
-        gameData.bots = new ArrayList<Character>();
+        Enemy jozef = new Enemy("Jozef", 100, 100);
+        Enemy liam = new Enemy("Liam", 40, 15);
+        Enemy tom = new Enemy("Tom", 70, 30);
+        Enemy zain = new Enemy("Zain", 60, 20);
+        
+        gameData.bots = new ArrayList<Enemy>();
         gameData.bots.add(jozef);
         gameData.bots.add(liam);
         gameData.bots.add(tom);
         gameData.bots.add(zain);
         
-        for (Character bot: gameData.bots)
+        for (Enemy bot: gameData.bots)
         {
             gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addCharacter(bot);
         }
@@ -248,7 +246,7 @@ public class Game
         gameData.friends.add(Jeremy);
         gameData.friends.add(John);
         
-        for (Character friend: gameData.friends) {
+        for (Friend friend: gameData.friends) {
             gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addCharacter(friend);
         }
         
