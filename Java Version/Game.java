@@ -3,7 +3,9 @@
  * 
  * Should we make our system case-insensitive?
  * 
- * Also, no classes should be "using" the Game class...
+ * Also, no classes should be "using" the Game class (namely the combat class)...
+ * There should not be a "sword" object randomly in the Game glass
+ * No classes should be using System.out.print, other than this class (only preGame() & Game())
  */
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class Game
     private static CommandsParser commandsParser; // Used in Combat class
     private static Player player1; // Used in Combat class
     private GameData gameData;
-    private MovableObject sword; // testing
+    private MovableObject sword; // testing // This should not be there.
     private Character jozef, liam, tom, zain;
     private ArrayList<Character> bots;
     private ArrayList<Location> places;
@@ -192,13 +194,13 @@ public class Game
 
     private void createCharacters()
     {
-       player1 = new Player("Player1", 100, 100);
-       player1.getInventory().addItemToInventory(sword);
+        player1 = new Player("Player1", 100, 100);
+        player1.getInventory().addItemToInventory(sword);
        
-       jozef = new Character("Jozef", 7, 100);
-       liam = new Character("Liam", 80, 20);
-       tom = new Character("Tom", 70, 30);
-       zain = new Character("Zain", 60, 20);
+        jozef = new Character("Jozef", 7, 100);
+        liam = new Character("Liam", 80, 20);
+        tom = new Character("Tom", 70, 30);
+        zain = new Character("Zain", 60, 20);
         
         bots = new ArrayList<Character>();
         bots.add(jozef);
@@ -206,8 +208,7 @@ public class Game
         bots.add(tom);
         bots.add(zain);
         
-        for (Character bot: bots)
-        {
+        for (Character bot: bots) {
             places.get((int)Math.floor(Math.random() * bots.size())).addCharacter(bot);
         }
     }

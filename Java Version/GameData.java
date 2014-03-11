@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class GameData implements java.io.Serializable
 {
     private static ArrayList<Location> locationHistory;
-    private static transient boolean gameStarted = false;
+    private static boolean gameStarted = false;
     public static transient ArrayList<String> savedGames;
     // private static String gameName;
     private static ArrayList<Location> locations;
