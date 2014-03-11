@@ -3,17 +3,17 @@ import java.lang.Math;
 public class Combat
 {
     private Player player; 
-    private Character enemy;
+    private Enemy enemy;
     private GameData gameData;
     private boolean playerDefending; // if true the player choose defending last turn
     private boolean enemyDefending;
 
       
-    public Combat(Character enemy,  GameData gameData)
+    public Combat(Enemy enemy,  GameData gameData)
     { 
        this.gameData = gameData;
        this.player = gameData.getPlayer1Object();
-        this.enemy = enemy;  
+       this.enemy = enemy;  
 
     }
 

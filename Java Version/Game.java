@@ -236,8 +236,10 @@ public class Game
         
         for (Enemy bot: gameData.bots)
         {
-            gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addCharacter(bot);
+            gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addEnemy(bot);
         }
+        
+        // Set up friendly characters
         Friend Jordan = new Friend("Jordan", 100, 100, "The Key is behind the library");
         Friend James = new Friend("James", 80, 20, "The Sword is very useful which you already have");
         Friend Jeremy = new Friend("Jeremy", 70, 30, "Try to pickup useful tools");
@@ -250,7 +252,7 @@ public class Game
         gameData.friends.add(John);
         
         for (Friend friend: gameData.friends) {
-            gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addCharacter(friend);
+            gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addFriend(friend);
         }
         
     }
