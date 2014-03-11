@@ -235,7 +235,7 @@ public class Game
        //       GameData.player1.getInventory().addItemToInventory(GameData.sword);
        
        Character jozef = new Character("Jozef", 100, 100);
-       Character liam = new Character("Liam", 80, 20);
+       Character liam = new Character("Liam", 40, 15);
        Character tom = new Character("Tom", 70, 30);
        Character zain = new Character("Zain", 60, 20);
        
