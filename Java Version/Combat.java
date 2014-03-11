@@ -7,12 +7,12 @@ public class Combat
 {
     private Player player; 
     private Character enemy;
-    public boolean playerDefending; // if true the player choose defending last turn
-    public boolean enemyDefending;
+    private boolean playerDefending; // if true the player choose defending last turn
+    private boolean enemyDefending;
       
     public Combat(Character enemy)
     { 
-        this.player = Game.player1;
+        this.player = Game.getPlayer1Object();
         this.enemy = enemy;  
     }
 
@@ -52,7 +52,7 @@ public class Combat
     public void playerTurn(boolean enemyDefending)
     {
         System.out.print("> ");
-        CommandsParser commandsParser = Game.commandsParser;
+        CommandsParser commandsParser = Game.getCommandsParserObject();
         String command = commandsParser.getCommand();
         
         if(!command.equals("")){ 

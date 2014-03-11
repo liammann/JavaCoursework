@@ -12,14 +12,22 @@ import java.io.*;
 
 public class Game
 {
-    public static CommandsParser commandsParser; // Used in Combat class
-    public static Player player1; // Used in Combat class
+    private static CommandsParser commandsParser; // Used in Combat class
+    private static Player player1; // Used in Combat class
     private GameData gameData;
     private MovableObject sword; // testing
     private Character jozef, liam, tom, zain;
-    ArrayList<Character> bots;
-    ArrayList<Location> places;
-
+    private ArrayList<Character> bots;
+    private ArrayList<Location> places;
+    
+    // I dont know how to get the objects into combat without doing it this way
+    public static Player getPlayer1Object(){
+        return player1;
+    }
+    public static CommandsParser getCommandsParserObject(){
+        return commandsParser;
+    }
+    
     public Game()
     {
         commandsParser = new CommandsParser();
@@ -65,23 +73,23 @@ public class Game
     private String getSavedGameNames()
     {
         File files = new File("gamesaves/");
-	    File[] contents = files.listFiles();
-	    String gameSaveNames = "";
-	   
-	    if(contents == null) {
-	        gameSaveNames = "none";
-	        return gameSaveNames;
-	    }
-	   
-	    for(File name : contents) {
-	        if(name.isFile()) {
-	            String[] fileName = name.getName().split("\\.");
-	            gameSaveNames += fileName[0] + " ";
-	            gameData.addGameSave(fileName[0]);
-	        }
-	    }
-	   
- 	    return gameSaveNames;
+        File[] contents = files.listFiles();
+        String gameSaveNames = "";
+       
+        if(contents == null) {
+            gameSaveNames = "none";
+            return gameSaveNames;
+        }
+       
+        for(File name : contents) {
+            if(name.isFile()) {
+                String[] fileName = name.getName().split("\\.");
+                gameSaveNames += fileName[0] + " ";
+                gameData.addGameSave(fileName[0]);
+            }
+        }
+       
+        return gameSaveNames;
     }
     
     private void newGame()
@@ -172,17 +180,7 @@ public class Game
         places.add(pub);
         places.add(lab);
         places.add(office);
-        
-        bots = new ArrayList<Character>();
-        bots.add(jozef);
-        bots.add(liam);
-        bots.add(tom);
-        bots.add(zain);
-        
-        for (Character bot: bots)
-        {
-            places.get((int)Math.floor(Math.random() * bots.size())).addCharacter(bot);
-        }
+
         // END of shift
         
         /* This is a note for myself (Tom) so that I don't forget
@@ -201,7 +199,19 @@ public class Game
        liam = new Character("Liam", 80, 20);
        tom = new Character("Tom", 70, 30);
        zain = new Character("Zain", 60, 20);
+        
+        bots = new ArrayList<Character>();
+        bots.add(jozef);
+        bots.add(liam);
+        bots.add(tom);
+        bots.add(zain);
+        
+        for (Character bot: bots)
+        {
+            places.get((int)Math.floor(Math.random() * bots.size())).addCharacter(bot);
+        }
     }
+
 
     private void play()
     {
