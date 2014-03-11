@@ -13,19 +13,7 @@ import java.io.*;
 public class Game
 {
     private static CommandsParser commandsParser; // Used in Combat class
-//     private static Player player1; // Used in Combat class
     private GameData gameData;
-    
-//     private MovableObject sword;
-//     private Character jozef, liam, tom, zain;
-//     private ArrayList<Character> bots;
-//     private ArrayList<Location> places;
-    
-    // I dont know how to get the objects into combat without doing it this way
-
-    public static CommandsParser getCommandsParserObject(){
-        return commandsParser;
-    }
     
     public Game()
     {
