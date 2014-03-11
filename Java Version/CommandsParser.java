@@ -23,6 +23,10 @@ public class CommandsParser
 
     public String parseCommand(String inputCommand)
     {
+        if(inputCommand.equals("")) {
+            return "No command entered!";
+        }
+        
         ArrayList<String> commands = new ArrayList<String>();
 
         for(String command : inputCommand.split(" ")) {

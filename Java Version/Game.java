@@ -13,6 +13,7 @@ import java.io.*;
 public class Game
 {
     private GameData gameData;
+    private String gameSaveLocation = "gamesaves/";
     
     public Game()
     {
@@ -32,25 +33,20 @@ public class Game
         
         quitGame: while(true) {
             String command = gameData.commandsParser.getCommand();
-            
-            if(!command.equals("")) {
-                String output = gameData.commandsParser.parseCommand(command);
+            String output = gameData.commandsParser.parseCommand(command);
 
-                switch(output) {
-                    case "quit":
-                        break quitGame;
-                    case "new":
-                        gameData.startGame();
-                        newGame();
-                        break;
-                    case "load":
-                        loadGame();
-                        break;
-                    default:
-                        System.out.println(output);
-                }
-            }else{
-                System.out.println("No command entered!");
+            switch(output) {
+                case "quit":
+                    break quitGame;
+                case "new":
+                    gameData.startGame();
+                    newGame();
+                    break;
+                case "load":
+                    loadGame();
+                    break;
+                default:
+                    System.out.println(output);
             }
         }
     }
@@ -63,27 +59,22 @@ public class Game
             System.out.print("\n> ");
 
             String command = gameData.commandsParser.getCommand();
-
-            if(!command.equals("")) {
-                String output = gameData.commandsParser.parseCommand(command);
-
-                if(output.equals("save")) {
-                    saveGame();
-                    System.out.print("The game has successfully been saved as " + gameData.getName());
-                }
+            String output = gameData.commandsParser.parseCommand(command);
                 
-                if(output.equals("quit")) { 
-                    break;
-                }
+            if(output.equals("quit")) {
+                break;
+            }
                 
-                if(output.equals("finished")) {
-                    System.out.println("Congratulations on completing the game!");
-                    break;
-                }
+            if(output.equals("finished")) {
+                System.out.println("Congratulations on completing the game!");
+                break;
+            }
                 
-                System.out.print(output);
+            if(output.equals("save")) {
+                saveGame();
+                System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
             }else{
-                System.out.print("No command entered!");
+                System.out.print(output);
             }
         }
 
@@ -93,20 +84,23 @@ public class Game
     private String getSavedGameNames()
     {
         File files = new File("gamesaves/");
-        File[] contents = files.listFiles();
+        File[] contents = files.listFiles(new FilenameFilter() {
+            public boolean accept(File directory, String file) {
+                String fileName = file.split("\\.")[0];
+                return fileName.matches("[a-zA-Z]+");
+            }
+        });
+        
         String gameSaveNames = "";
        
-        if(contents == null) {
-            gameSaveNames = "none";
-            return gameSaveNames;
+        if(contents == null || contents.length == 0) {
+            return "none";
         }
-       
+
         for(File name : contents) {
-            if(name.isFile()) {
-                String[] fileName = name.getName().split("\\.");
-                gameSaveNames += fileName[0] + " ";
-                gameData.addGameSave(fileName[0]);
-            }
+            String[] fileName = name.getName().split("\\.");
+            gameSaveNames += "'" + fileName[0] + "' ";
+            gameData.addGameSave(fileName[0]);
         }
        
         return gameSaveNames;
@@ -120,7 +114,15 @@ public class Game
     
     private void saveGame()
     {
-        //
+        try {
+            FileOutputStream gameSave = new FileOutputStream(gameSaveLocation + gameData.getName() + ".ser");
+            ObjectOutputStream dataToSave = new ObjectOutputStream(gameSave);
+            dataToSave.writeObject(gameData);
+            dataToSave.close();
+            gameSave.close();
+        }catch(IOException ioe) {
+          ioe.printStackTrace();
+        }
     }
 
     private void loadGame()

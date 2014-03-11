@@ -59,6 +59,7 @@ public class CommandActions
                 break;
             case "drop":
                 answer = drop(parameter);
+                break;
             case "attack":
                 answer = attack(parameter);
                 break;
@@ -194,6 +195,14 @@ public class CommandActions
         if(!parameters.get(0).equals("game") || !parameters.get(1).equals("as")) {
             return "Invalid syntax used for the 'save' command.";
         }
+        
+        String gameSaveName = (String) parameters.get(2);
+        
+        if(!gameSaveName.matches("[a-zA-Z]+")) {
+            return "Only alphanumerical characters are allowed in the game save name.";
+        }
+        
+        gameData.setName(gameSaveName);
 
         return "save";
     }
