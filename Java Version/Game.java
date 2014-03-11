@@ -161,9 +161,7 @@ public class Game
     {
         Location outside, theater, pub, lab, office;
 
-
         MovableObject cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
-        MovableObject sword = new MovableObject("Sword", "A very strong sword", 2, 2.4);
         FixedObject chair = new FixedObject("Chair", "An old wooden chair");
         
         /* Pass location name as a argument to the Location constructor
@@ -181,7 +179,6 @@ public class Game
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
-               .andItem(sword)
                .andItem(chair);
 
         pub.addDescription("In a campus pub")
@@ -217,13 +214,19 @@ public class Game
 
     private void createCharacters()
     {
-        gameData.player1 = new Player("Player1", 100, 100);
-        //       GameData.player1.getInventory().addItemToInventory(GameData.sword);
+        MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 3.1);
+        gameData.player1 = new Player("Player1", 100, 100, sword);
+        
+        // Enemies Weapons 
+        MovableObject axe = new MovableObject("Axe", "Brutal axe", 2, 2.4);        
+        MovableObject mace = new MovableObject("Mace", "Brutal mace", 2, 1.8);
+        MovableObject dagger = new MovableObject("Dagger", "Very pointy stick", 1, 1.3);
        
-        Enemy jozef = new Enemy("Jozef", 100, 100);
-        Enemy liam = new Enemy("Liam", 40, 15);
-        Enemy tom = new Enemy("Tom", 70, 30);
-        Enemy zain = new Enemy("Zain", 60, 20);
+        
+        Enemy jozef = new Enemy("Jozef", 100, 100, dagger);
+        Enemy liam = new Enemy("Liam", 40, 15, axe);
+        Enemy tom = new Enemy("Tom", 70, 30, mace);
+        Enemy zain = new Enemy("Zain", 60, 20, dagger);
         
         gameData.bots = new ArrayList<Enemy>();
         gameData.bots.add(jozef);
