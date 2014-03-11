@@ -8,7 +8,7 @@ public class GameData implements java.io.Serializable
     public static transient ArrayList<String> savedGames;
     private static String gameName;
     private static ArrayList<Location> locations;
-    private HashMap<String, MovableObject> movableObjectNames;
+    private static HashMap<String, MovableObject> movableObjectNames;
  
     private static MovableObject sword;
     
