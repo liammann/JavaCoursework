@@ -113,21 +113,20 @@ public class CommandActions
     {
         return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
-    /*
+    
     private String pickup(String item)
     {
-        gameData.getPlayer1().getInventory().addItemToInventory(gameData.getObjectFromName(item));
+        gameData.getPlayer1Object().getInventory().addItemToInventory(gameData.getObjectFromName(item));
         gameData.getCurrentLocation().removeItem(gameData.getObjectFromName(item));
         return "You Picked up" + item;
     }
-    */
-    /*
+    
     private String drop(String item)
     {
         gameData.getCurrentLocation().andItem(gameData.getObjectFromName(item));
-        gameData.getPlayer1().getInventory().dropFromInventory(gameData.getObjectFromName(item));
+        gameData.getPlayer1Object().getInventory().dropFromInventory(gameData.getObjectFromName(item));
     }
-    */
+    
     private String fight(String who) 
     {
         for(Character character : gameData.getCurrentLocation().getArraryLocationCharacters()) {
