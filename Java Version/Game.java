@@ -195,7 +195,7 @@ public class Game
        player1 = new Player("Player1", 100, 100);
        player1.getInventory().addItemToInventory(sword);
        
-       jozef = new Character("Jozef", 7, 100);
+       jozef = new Character("Jozef", 100, 100);
        liam = new Character("Liam", 80, 20);
        tom = new Character("Tom", 70, 30);
        zain = new Character("Zain", 60, 20);
