@@ -8,25 +8,14 @@ public class GameData implements java.io.Serializable
     public static transient ArrayList<String> savedGames;
     private static String gameName;
     private static ArrayList<Location> locations;
-    
     private HashMap<String, MovableObject> movableObjectNames;
 
-    private static MovableObject sword;
-    
-    protected static ArrayList<Character> bots;
-    protected static ArrayList<Location> places;    
-    protected static ArrayList<Friend> friends;
-    protected static Player player1; // Used in Combat class
-
-    
     public GameData()
     {
         locationHistory = new ArrayList<Location>();
         savedGames = new ArrayList<String>();
     }
-    public static Player getPlayer1Object(){
-        return player1;
-    }
+
     public Location getCurrentLocation()
     {
         return locationHistory.get(locationHistory.size()-1);
