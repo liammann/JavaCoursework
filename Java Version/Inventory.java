@@ -35,7 +35,7 @@ public class Inventory
         }
     }
     
-    public void dropFromInventory(int index)
+    public void dropFromInventory(MovableObject index)
     {
         playerInventory.remove(index);
     }

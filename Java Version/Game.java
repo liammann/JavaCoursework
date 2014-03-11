@@ -261,7 +261,7 @@ public class Game
         gameData.friends.add(John);
         
         for (Character friend: gameData.friends) {
-            places.get((int)Math.floor(Math.random() * gameData.friends.size())).addCharacter(friend);
+            gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addCharacter(friend);
         }
         
     }
