@@ -53,20 +53,6 @@ dependency24.type=UsesDependency
 dependency25.from=Combat
 dependency25.to=Game
 dependency25.type=UsesDependency
-<<<<<<< HEAD
-dependency26.from=Player
-dependency26.to=Inventory
-dependency26.type=UsesDependency
-dependency27.from=Combat
-dependency27.to=Player
-dependency27.type=UsesDependency
-dependency28.from=Combat
-dependency28.to=MovableObject
-dependency28.type=UsesDependency
-dependency29.from=Game
-dependency29.to=Player
-dependency29.type=UsesDependency
-=======
 dependency26.from=Game
 dependency26.to=Player
 dependency26.type=UsesDependency
@@ -76,10 +62,15 @@ dependency27.type=UsesDependency
 dependency28.from=CommandActions
 dependency28.to=Inventory
 dependency28.type=UsesDependency
->>>>>>> FETCH_HEAD
+dependency29.from=Combat
+dependency29.to=Player
+dependency29.type=UsesDependency
 dependency3.from=CommandActions
 dependency3.to=CommandWords
 dependency3.type=UsesDependency
+dependency30.from=Combat
+dependency30.to=MovableObject
+dependency30.type=UsesDependency
 dependency4.from=CommandActions
 dependency4.to=GameData
 dependency4.type=UsesDependency
@@ -102,11 +93,7 @@ package.editor.height=578
 package.editor.width=1158
 package.editor.x=0
 package.editor.y=22
-<<<<<<< HEAD
-package.numDependencies=29
-=======
-package.numDependencies=28
->>>>>>> FETCH_HEAD
+package.numDependencies=30
 package.numTargets=15
 package.showExtends=true
 package.showUses=true
@@ -219,13 +206,8 @@ target3.x=540
 target3.y=350
 target4.editor.height=700
 target4.editor.width=900
-<<<<<<< HEAD
-target4.editor.x=0
-target4.editor.y=1
-=======
 target4.editor.x=40
-target4.editor.y=42
->>>>>>> FETCH_HEAD
+target4.editor.y=40
 target4.height=50
 target4.name=Player
 target4.naviview.expanded=false
@@ -258,7 +240,7 @@ target6.type=ClassTarget
 target6.width=80
 target6.x=670
 target6.y=270
-target7.editor.height=770
+target7.editor.height=719
 target7.editor.width=785
 target7.editor.x=0
 target7.editor.y=22
