@@ -47,4 +47,8 @@ public class Character
     {
         return currentLocation;
     }
+    public Inventory getInventory()
+    {
+        return inventory;
+    }
 }

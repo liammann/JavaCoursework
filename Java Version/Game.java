@@ -15,6 +15,7 @@ public class Game
     private static CommandsParser commandsParser; // Used in Combat class
     private static Player player1; // Used in Combat class
     private GameData gameData;
+    
     private MovableObject sword; // testing
     private Character jozef, liam, tom, zain;
     private ArrayList<Character> bots;

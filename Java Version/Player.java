@@ -24,10 +24,7 @@ public class Player extends Character
         return health;
     }
     
-    public Inventory getInventory()
-    {
-        return inventory;
-    }
+
     
 
 }
