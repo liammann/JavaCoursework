@@ -133,9 +133,9 @@ public class CommandActions
     
     private String fight(String who) 
     {
-        for(Character character : gameData.getCurrentLocation().getArraryLocationCharacters()) {
-            if(character.getName().equals(who)){
-                Combat fight = new Combat(character, gameData);
+        for(Enemy enemy : gameData.getCurrentLocation().getArraryLocationEnemy()) {
+            if(enemy.getName().equals(who)){
+                Combat fight = new Combat(enemy, gameData);
                 boolean playerWins = fight.startFight();
                 return "You have Defeated "+who;
             }

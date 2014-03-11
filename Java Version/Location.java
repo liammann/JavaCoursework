@@ -8,8 +8,8 @@ public class Location implements java.io.Serializable
     private HashMap<String, Location> exits;
     private boolean isLocked = false;
     private ArrayList<Object> items;
-    private ArrayList<Character> characters;
-
+    private ArrayList<Enemy> enemies;
+    private ArrayList<Friend> friends;
     public static Location create()
     {
         return new Location();
@@ -19,7 +19,8 @@ public class Location implements java.io.Serializable
     {
         exits = new HashMap<String, Location>();
         items = new ArrayList<Object>();
-        characters = new ArrayList<Character>();
+        enemies = new ArrayList<Enemy>();
+        friends = new ArrayList<Friend>();
     }
 
     public Location addDescription(String description)
@@ -28,22 +29,29 @@ public class Location implements java.io.Serializable
         return this;
     }
     
-    public void addCharacter(Character character)
+    public void addEnemy(Enemy enemy)
     {
-       characters.add(character);
+       enemies.add(enemy);
+    }
+    public void addFriend(Friend friend)
+    {
+       friends.add(friend);
     }
     
-    public void removeCharacters()
+    public void removeCharacters(){
+        removeEnemies();
+    }
+    public void removeEnemies()
     {
-        characters.clear();
+        enemies.clear();
     }
     public String getLocationCharacters ()
     {
-        if(characters.size() != 0) {
+        if(enemies.size() != 0) {
             String answer = "This room has the following characters ('fight'/'talk'):\n";
 
-            for(Character character : characters) {
-                answer += " - " + character.getName() + "\n";
+            for(Enemy enemy : enemies) {
+                answer += " - " + enemy.getName() + "\n";
             }
 
             return answer;
@@ -52,10 +60,10 @@ public class Location implements java.io.Serializable
         return "There are no characters in this room \n";
 
     }
-    public ArrayList<Character> getArraryLocationCharacters ()
+    public ArrayList<Enemy> getArraryLocationEnemy ()
     {
-        if(characters.size() != 0) {
-            return characters;
+        if(enemies.size() != 0) {
+            return enemies;
         }
         return null;
 
