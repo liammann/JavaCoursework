@@ -114,18 +114,17 @@ public class CommandActions
         return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
 
-    /*private String pickup(String item)
+    private String pickup(String item)
     {
         // put object in inventory and remove object from location
-        gameData.addItemToInventory(item);
-        gameData.getCurrentLocation().removeItem(item);
-        //return "Item " + item.getObjectName() + " has been picked up!";
+        MovableObject object = getObjectFromName(item);
+        return "Item " + GameData.getObjectFromName(item) + " has been picked up!";
     }
     
     private String drop(String item)
     {
         //
-    }*/
+    }
     
     private String fight(String who) 
     {
