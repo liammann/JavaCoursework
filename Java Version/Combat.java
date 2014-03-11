@@ -36,13 +36,15 @@ public class Combat
         enemyDefending = false;
 
         while(!playerWin){
-            playerTurn(enemyDefending);            
-            enemyTurn(playerDefending);
-            
+            playerTurn(enemyDefending);
             if(enemy.getHealth() <= 0){
                 playerWin = true;
                 break;
-            }else if(player.getHealth() <= 0){
+            }
+            
+            enemyTurn(playerDefending);
+            
+            if(player.getHealth() <= 0){
                 playerWin = false;
                 break;
             }
@@ -64,9 +66,11 @@ public class Combat
                 for (MovableObject weapon : player.getInventory().playerWeapons()){
                     if(command.equals("attack "+weapon.getObjectName().toLowerCase())){
                         hpDealt = attack(enemyDefending, weapon);
+                        System.out.print("You attack the evil "+enemy.getName()+" with your mighty "+weapon.getObjectName().toLowerCase()+" and deal "+hpDealt+" health points. \n");
                         playerDefending = false;
                     }else{
                         hpDealt = attack(enemyDefending);
+                        System.out.print("You attack the evil "+enemy.getName()+" and deal "+hpDealt+" health points. \n");
                         playerDefending = false;
                     }
                 }
@@ -77,9 +81,8 @@ public class Combat
                 System.out.print("You stand there and get attacked.  Attack {Weapon} or Defend \n   ");
             }
             enemy.updateHealth(enemy.getHealth()-hpDealt);
-            System.out.print("Player Dealt: "+hpDealt+"\n");
         }else{
-            System.out.print("No command entered! \n > ");
+            System.out.print("No command entered! \n ");
         }
  
         
@@ -98,7 +101,7 @@ public class Combat
                 enemyDefending = true;
             }
            player.updateHealth(player.getHealth()-hpDealt);
-           System.out.print("Enemy Dealt: "+hpDealt+"\n");
+           System.out.print(enemy.getName()+" Dealt "+hpDealt+" "+enemy.getWeapon().getObjectName()+" \n");
 
     }
     
@@ -112,7 +115,7 @@ public class Combat
         int damage = 25;
 
         if (currentStatus){
-            return damage-(12+x);
+            return damage -= damage - x;
         }
         return damage+(x*y);
         
@@ -124,21 +127,20 @@ public class Combat
         int damage = (int) Math.floor(25*weapon.getWeaponModifier());
 
         if (currentStatus){
-            return damage-(12+x);
+            return damage -= damage - x;
         }
         return damage+(x*y);
         
     }
     public int defend(boolean currentStatus)
     {
-        int x = 1 + (int)(Math.random() * ((5 - 1) + 1));
-        int y = 1 + (int)(Math.random() * ((5 - 1) + 1));
+        int x = 1 + (int)(Math.random() * ((3 - 1) + 1));
         int damage = 2;
         
         if (currentStatus){
-            return x;
+            return damage;
         }
-        return damage+(x);
+        return damage*(x);
         
     
     }
