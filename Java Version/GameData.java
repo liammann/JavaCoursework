@@ -5,7 +5,7 @@ public class GameData implements java.io.Serializable
     private static ArrayList<Location> locationHistory;
     private static transient boolean gameStarted = false;
     public static transient ArrayList<String> savedGames;
-    // private static String gameName;
+    private static String gameName;
     private static ArrayList<Location> locations;
 
     public GameData()
@@ -59,8 +59,13 @@ public class GameData implements java.io.Serializable
         return savedGames.contains(gameSave);
     }
     
-    /*public String getGameName()
+    public void setName(String gameName)
+    {
+        this.gameName = gameName;
+    }
+    
+    public String getName()
     {
         return gameName;
-    }*/
+    }
 }

@@ -70,6 +70,41 @@ public class Game
         }
     }
     
+    private void play()
+    {
+        System.out.print(welcome());
+
+        while(true) {
+            System.out.print("\n> ");
+
+            String command = commandsParser.getCommand();
+
+            if(!command.equals("")) {
+                String output = commandsParser.parseCommand(command);
+
+                if(output.equals("save")) {
+                    saveGame();
+                    System.out.print("The game has successfully been saved as " + gameData.getName());
+                }
+                
+                if(output.equals("quit")) { 
+                    break;
+                }
+                
+                if(output.equals("finished")) {
+                    System.out.println("Congratulations on completing the game!");
+                    break;
+                }
+                
+                System.out.print(output);
+            }else{
+                System.out.print("No command entered!");
+            }
+        }
+
+        System.out.println("Thanks for playing!");
+    }
+    
     private String getSavedGameNames()
     {
         File files = new File("gamesaves/");
@@ -96,6 +131,11 @@ public class Game
     {
         buildGame();
         play();
+    }
+    
+    private void saveGame()
+    {
+        //
     }
 
     private void loadGame()
@@ -210,37 +250,6 @@ public class Game
         {
             places.get((int)Math.floor(Math.random() * bots.size())).addCharacter(bot);
         }
-    }
-
-
-    private void play()
-    {
-        System.out.print(welcome());
-
-        while(true) {
-            System.out.print("\n> ");
-
-            String command = commandsParser.getCommand();
-
-            if(!command.equals("")) {
-                String output = commandsParser.parseCommand(command);
-
-                if(output.equals("quit")) { 
-                    break;
-                }
-                
-                if(output.equals("finished")) {
-                    System.out.println("Congratulations on completing the game!");
-                    break;
-                }
-                
-                System.out.print(output);
-            }else{
-                System.out.print("No command entered!");
-            }
-        }
-
-        System.out.println("Thanks for playing!");
     }
 
     private String welcome()
