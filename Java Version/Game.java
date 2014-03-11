@@ -214,7 +214,7 @@ public class Game
 
     private void createCharacters()
     {
-        MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 3.1);
+        MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 0.1);
         gameData.player1 = new Player("Player1", 100, 100, sword);
         
         // Enemies Weapons 
