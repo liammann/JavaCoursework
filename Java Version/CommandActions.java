@@ -131,8 +131,8 @@ public class CommandActions
     {
         for(Character character : gameData.getCurrentLocation().getArraryLocationCharacters()) {
             if(character.getName().equals(who)){
-                Combat fight = new Combat(character);
-                boolean playerWins = fight.startFight();
+                //Combat fight = new Combat(character);
+                //boolean playerWins = fight.startFight();
                 return "You have Defeated "+who;
             }
 

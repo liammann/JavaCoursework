@@ -7,25 +7,22 @@
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.lang.Math;
 import java.io.*;
 
 public class Game
 {
     private static CommandsParser commandsParser; // Used in Combat class
-    private static Player player1; // Used in Combat class
+//     private static Player player1; // Used in Combat class
     private GameData gameData;
     
-    private MovableObject sword; // testing
-    private Character jozef, liam, tom, zain;
-    private ArrayList<Character> bots;
-    private ArrayList<Location> places;
+//     private MovableObject sword;
+//     private Character jozef, liam, tom, zain;
+//     private ArrayList<Character> bots;
+//     private ArrayList<Location> places;
     
     // I dont know how to get the objects into combat without doing it this way
-    public static Player getPlayer1Object(){
-        return player1;
-    }
+
     public static CommandsParser getCommandsParserObject(){
         return commandsParser;
     }
@@ -177,11 +174,12 @@ public class Game
     private void buildLocations()
     {
         Location outside, theater, pub, lab, office;
+
+
+        MovableObject cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
+        MovableObject sword = new MovableObject("Sword", "A very strong sword", 2, 2.4);
+        FixedObject chair = new FixedObject("Chair", "An old wooden chair");
         
-        MovableObject cider;        
-
-        FixedObject chair;
-
         /* Pass location name as a argument to the Location constructor
          * if we are going to store each location in a hash map
          */
@@ -191,13 +189,8 @@ public class Game
         pub = Location.create();
         office = Location.create();
 
-        cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
-        sword = new MovableObject("Sword", "A very strong sword", 2, 2.4);
-        chair = new FixedObject("Chair", "An old wooden chair");
-        
-        gameData.setObjectName("cider", cider);
-        gameData.setObjectName("sword", sword);
-        
+
+
         outside.addDescription("Outside the university entrance")
                .withExit("east", theater)
                .withExit("south", lab)
@@ -221,11 +214,11 @@ public class Game
         office.addDescription("In a computing Admin office")
               .withExit("west", lab);
         
-        places = new ArrayList<Location>();
-        places.add(theater);
-        places.add(pub);
-        places.add(lab);
-        places.add(office);
+        gameData.places = new ArrayList<Location>();
+        gameData.places.add(theater);
+        gameData.places.add(pub);
+        gameData.places.add(lab);
+        gameData.places.add(office);
 
         // END of shift
         
@@ -235,32 +228,28 @@ public class Game
         
         gameData.setNewLocation(outside);
     }
-    /*
-    public HashMap movableObjectNames()
-    {
-        return movableObjectNames;
-    }
-    */
+
     private void createCharacters()
     {
-       player1 = new Player("Player1", 100, 100);
-       player1.getInventory().addItemToInventory(sword);
+       gameData.player1 = new Player("Player1", 100, 100);
+//       GameData.player1.getInventory().addItemToInventory(GameData.sword);
        
-       jozef = new Character("Jozef", 100, 100);
-       liam = new Character("Liam", 80, 20);
-       tom = new Character("Tom", 70, 30);
-       zain = new Character("Zain", 60, 20);
+       Character jozef = new Character("Jozef", 100, 100);
+       Character liam = new Character("Liam", 80, 20);
+       Character tom = new Character("Tom", 70, 30);
+       Character zain = new Character("Zain", 60, 20);
+       
+        gameData.bots = new ArrayList<Character>();
+        gameData.bots.add(jozef);
+        gameData.bots.add(liam);
+        gameData.bots.add(tom);
+        gameData.bots.add(zain);
         
-        bots = new ArrayList<Character>();
-        bots.add(jozef);
-        bots.add(liam);
-        bots.add(tom);
-        bots.add(zain);
-        
-        for (Character bot: bots)
+        for (Character bot: gameData.bots)
         {
-            places.get((int)Math.floor(Math.random() * bots.size())).addCharacter(bot);
+            gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addCharacter(bot);
         }
+        
     }
 
     private String welcome()
