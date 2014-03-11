@@ -31,9 +31,7 @@ public class CommandActions
             case "inventory":
                 // answer = inventory(); ???
                 break;
-                //case "atta77ck":
-                //answer = attack(); ???
-                //break;
+               
             case "defend":
                  //answer = defend(); //???
                 break;
@@ -60,8 +58,11 @@ public class CommandActions
             case "pickup":
                 // answer = pickup(parameter); TO DO
                 break;
+<<<<<<< HEAD
             case "drop":
                 //answer = drop(parameter);  TO DO
+=======
+>>>>>>> FETCH_HEAD
             case "attack":
                 answer = attack(parameter);
                 break;
@@ -117,6 +118,7 @@ public class CommandActions
         return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
 
+<<<<<<< HEAD
     /*private String pickup(String item)
     {
         // put object in inventory and remove object from location
@@ -131,6 +133,20 @@ public class CommandActions
     }*/
     
     private String fight(String who) 
+=======
+    private String pickup(String item)
+    {
+        // put object in inventory and remove object from location
+        //if (GameData.getCurrentLocation().contains(item))
+        //{
+        //    playerInventory.addItemToInventory(item);
+        //    Inventory.removeItem(item);
+        //    return "Item " + objectName + " has been picked up!";
+        //}
+        return "mummy";
+    }
+     private String fight(String who) 
+>>>>>>> FETCH_HEAD
     {
         for(Character character : gameData.getCurrentLocation().getArraryLocationCharacters()) {
             if(character.getName().equals(who)){
@@ -167,7 +183,7 @@ public class CommandActions
     private String newGame(String parameter)
     {
         if(!parameter.equals("game")) {
-            return "Invalid syntax used for the 'new' command.";
+            return "Invalid syntax used...2";
         }
         
         return "new";
@@ -176,11 +192,11 @@ public class CommandActions
     private String loadGame(ArrayList parameters)
     {
         if(!parameters.get(0).equals("game")) {
-            return "Invalid syntax used for the 'load' command.";
+            return "Invalid syntax used...";
         }
         
         if(!gameData.isValidGameSave((String) parameters.get(1))) {
-            return "Invalid game save selected.";
+            return "Invalid game save!";
         }
         
         return "load";
@@ -191,15 +207,16 @@ public class CommandActions
     private String saveGame(ArrayList parameters)
     {
         if(!parameters.get(0).equals("game") || !parameters.get(1).equals("as")) {
-            return "Invalid syntax used for the 'save' command.";
+            return "Invalid syntax used...";
         }
-
-        return "save";
+        
+        // gameData.saveGame();
+        return "The game has successfully been saved as " + parameters.get(2);
     }
     private String attack(String weapon)
     {
         if(weapon.equals("")) {
-            return null; // maybe redundant?
+            return "";
         }
         
         return weapon;
