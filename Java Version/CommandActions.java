@@ -60,6 +60,8 @@ public class CommandActions
             case "pickup":
                 answer = pickup(parameter);
                 break;
+            case "drop":
+                answer = drop(parameter);
             case "attack":
                 answer = attack(parameter);
                 break;
@@ -115,16 +117,13 @@ public class CommandActions
         return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
 
-    private String pickup(String item)
+    private MovableObject pickup(MovableObject item)
     {
         // put object in inventory and remove object from location
-        //if (GameData.getCurrentLocation().contains(item))
-        //{
-        //    playerInventory.addItemToInventory(item);
-        //    Inventory.removeItem(item);
-        //    return "Item " + objectName + " has been picked up!";
-        //}
-        return "mummy";
+        playerInventory.addItemToInventory(item);
+        GameData.getCurrentLocation().removeItem(item);
+        return "Item " + item.getObjectName + " has been picked up!";
+        }
     }
      private String fight(String who) 
     {
