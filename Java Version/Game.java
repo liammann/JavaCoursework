@@ -3,9 +3,7 @@
  * 
  * Should we make our system case-insensitive?
  * 
- * Also, no classes should be "using" the Game class (namely the combat class)...
- * There should not be a "sword" object randomly in the Game glass
- * No classes should be using System.out.print, other than this class (only preGame() & Game())
+ * Also, no classes should be "using" the Game class...
  */
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ public class Game
     private static CommandsParser commandsParser; // Used in Combat class
     private static Player player1; // Used in Combat class
     private GameData gameData;
-    private MovableObject sword; // testing // This should not be there.
+    private MovableObject sword; // testing
     private Character jozef, liam, tom, zain;
     private ArrayList<Character> bots;
     private ArrayList<Location> places;
@@ -72,6 +70,41 @@ public class Game
         }
     }
     
+    private void play()
+    {
+        System.out.print(welcome());
+
+        while(true) {
+            System.out.print("\n> ");
+
+            String command = commandsParser.getCommand();
+
+            if(!command.equals("")) {
+                String output = commandsParser.parseCommand(command);
+
+                if(output.equals("save")) {
+                    saveGame();
+                    System.out.print("The game has successfully been saved as " + gameData.getName());
+                }
+                
+                if(output.equals("quit")) { 
+                    break;
+                }
+                
+                if(output.equals("finished")) {
+                    System.out.println("Congratulations on completing the game!");
+                    break;
+                }
+                
+                System.out.print(output);
+            }else{
+                System.out.print("No command entered!");
+            }
+        }
+
+        System.out.println("Thanks for playing!");
+    }
+    
     private String getSavedGameNames()
     {
         File files = new File("gamesaves/");
@@ -98,6 +131,11 @@ public class Game
     {
         buildGame();
         play();
+    }
+    
+    private void saveGame()
+    {
+        //
     }
 
     private void loadGame()
@@ -194,13 +232,13 @@ public class Game
 
     private void createCharacters()
     {
-        player1 = new Player("Player1", 100, 100);
-        player1.getInventory().addItemToInventory(sword);
+       player1 = new Player("Player1", 100, 100);
+       player1.getInventory().addItemToInventory(sword);
        
-        jozef = new Character("Jozef", 7, 100);
-        liam = new Character("Liam", 80, 20);
-        tom = new Character("Tom", 70, 30);
-        zain = new Character("Zain", 60, 20);
+       jozef = new Character("Jozef", 100, 100);
+       liam = new Character("Liam", 80, 20);
+       tom = new Character("Tom", 70, 30);
+       zain = new Character("Zain", 60, 20);
         
         bots = new ArrayList<Character>();
         bots.add(jozef);
@@ -208,40 +246,10 @@ public class Game
         bots.add(tom);
         bots.add(zain);
         
-        for (Character bot: bots) {
+        for (Character bot: bots)
+        {
             places.get((int)Math.floor(Math.random() * bots.size())).addCharacter(bot);
         }
-    }
-
-
-    private void play()
-    {
-        System.out.print(welcome());
-
-        while(true) {
-            System.out.print("\n> ");
-
-            String command = commandsParser.getCommand();
-
-            if(!command.equals("")) {
-                String output = commandsParser.parseCommand(command);
-
-                if(output.equals("quit")) { 
-                    break;
-                }
-                
-                if(output.equals("finished")) {
-                    System.out.println("Congratulations on completing the game!");
-                    break;
-                }
-                
-                System.out.print(output);
-            }else{
-                System.out.print("No command entered!");
-            }
-        }
-
-        System.out.println("Thanks for playing!");
     }
 
     private String welcome()
