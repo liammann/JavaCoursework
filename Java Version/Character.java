@@ -8,12 +8,14 @@ public class Character
     protected int health; 
     protected Location currentLocation;
     protected int strength;
+    protected Inventory inventory;
 
     public Character(String name, int strength, int health)
     {
         this.name = name;
         this.strength = strength;
         this.health = health;
+        this.inventory = new Inventory();
     }
     
     public String getName()
