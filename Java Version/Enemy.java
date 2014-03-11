@@ -1,10 +1,8 @@
 
 
 public class Enemy extends Character
-{
+{   
     private MovableObject weapon;
-    
-    
     public Enemy(String name, int strength, int health)
     {
         super(name, strength, health);
@@ -19,10 +17,4 @@ public class Enemy extends Character
     public MovableObject getWeapon(){
         return weapon;
     }
-    public MovableObject setWeapon(){
-        return weapon;
-    }
-    
-    
-
 }
