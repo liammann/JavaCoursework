@@ -12,7 +12,7 @@ public class MovableObject extends Object
 		this.description = description;
 		state = "movable";
 		this.weight = weight;
-		//gameData.setObjectName(name, this); // What for?
+		//gameData.setObjectName(name, this); // What for? - A: look at CommandActions class
 	}	
 	public MovableObject(String name, String description, int weight, double weaponModifier)
 	{
