@@ -55,10 +55,10 @@ public class CommandActions
                 answer = commandWords.manual(parameter);
                 break;
             case "pickup":
-                // answer = pickup(parameter);
+                answer = pickup(parameter);
                 break;
             case "drop":
-                //answer = drop(parameter);  TO DO
+                answer = drop(parameter);
             case "attack":
                 answer = attack(parameter);
                 break;
