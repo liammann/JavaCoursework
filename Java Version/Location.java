@@ -39,26 +39,33 @@ public class Location implements java.io.Serializable
     }
     
     public void removeCharacters(){
-        removeEnemies();
-    }
-    public void removeEnemies()
-    {
         enemies.clear();
+        friends.clear();
     }
+
     public String getLocationCharacters ()
     {
+        boolean friendsB = false;
+        boolean enemiesB = false;
+        String answer = "This room has the following characters ('fight'/'talk'):\n";
         if(enemies.size() != 0) {
-            String answer = "This room has the following characters ('fight'/'talk'):\n";
-
+            enemiesB = true;
             for(Enemy enemy : enemies) {
                 answer += " - " + enemy.getName() + "\n";
             }
-
-            return answer;
+        }
+        if(friends.size() != 0) {
+            friendsB = true;
+            for(Friend friend : friends) {
+                answer += " - " + friend.getName() + "\n";
+            }
         }
 
-        return "There are no characters in this room \n";
-
+        if(enemiesB || friendsB){
+            return answer;
+        }else{
+            return "There are no characters in this room \n";
+        }
     }
     public ArrayList<Enemy> getArraryLocationEnemy ()
     {
