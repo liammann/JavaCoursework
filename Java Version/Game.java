@@ -232,7 +232,7 @@ public class Game
     private void createCharacters()
     {
        gameData.player1 = new Player("Player1", 100, 100);
-//       GameData.player1.getInventory().addItemToInventory(GameData.sword);
+       //       GameData.player1.getInventory().addItemToInventory(GameData.sword);
        
        Character jozef = new Character("Jozef", 100, 100);
        Character liam = new Character("Liam", 80, 20);
@@ -248,6 +248,20 @@ public class Game
         for (Character bot: gameData.bots)
         {
             gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addCharacter(bot);
+        }
+        Friend Jordan = new Friend("Jordan", 100, 100, "The Key is behind the library");
+        Friend James = new Friend("James", 80, 20, "The Sword is very useful which you already have");
+        Friend Jeremy = new Friend("Jeremy", 70, 30, "Try to pickup useful tools");
+        Friend John = new Friend("John", 60, 20, "haha");
+        
+        gameData.friends = new ArrayList<Friend>();
+        gameData.friends.add(Jordan);
+        gameData.friends.add(James);
+        gameData.friends.add(Jeremy);
+        gameData.friends.add(John);
+        
+        for (Character friend: gameData.friends) {
+            places.get((int)Math.floor(Math.random() * gameData.friends.size())).addCharacter(friend);
         }
         
     }

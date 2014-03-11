@@ -68,6 +68,9 @@ public class CommandActions
             case "new":
                 answer = newGame(parameter);
                 break;
+            case "talk":
+                answer = talk(parameter);
+                break;
         }
 
         return answer;
@@ -200,5 +203,10 @@ public class CommandActions
         }
         
         return weapon;
+    }
+    
+    private String talk(String nameOfPerson)
+    {
+        return "talk";
     }
 }
