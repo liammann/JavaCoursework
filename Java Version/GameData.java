@@ -15,7 +15,12 @@ public class GameData implements java.io.Serializable
         locationHistory = new ArrayList<Location>();
         savedGames = new ArrayList<String>();
     }
-
+    /*
+    public Player getPlayer1()
+    {
+        return player1
+    }
+    */
     public Location getCurrentLocation()
     {
         return locationHistory.get(locationHistory.size()-1);

@@ -116,7 +116,7 @@ public class CommandActions
     /*
     private String pickup(String item)
     {
-        gameData.player1.inventory.addItemToInventory(gameData.getObjectFromName(item));
+        gameData.getPlayer1().getInventory().addItemToInventory(gameData.getObjectFromName(item));
         gameData.getCurrentLocation().removeItem(gameData.getObjectFromName(item));
         return "You Picked up" + item;
     }
@@ -125,7 +125,7 @@ public class CommandActions
     private String drop(String item)
     {
         gameData.getCurrentLocation().andItem(gameData.getObjectFromName(item));
-        gameData.player1.inventory.dropFromInventory(gameData.getObjectFromName(item));
+        gameData.getPlayer1().getInventory().dropFromInventory(gameData.getObjectFromName(item));
     }
     */
     private String fight(String who) 
