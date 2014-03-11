@@ -80,9 +80,4 @@ public class GameData implements java.io.Serializable
     {
         return movableObjectNames.get(object);
     }
-    
-    public void addItemToInventory(String itemName)
-    {
-        //
-    }
 }

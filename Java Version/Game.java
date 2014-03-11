@@ -194,10 +194,10 @@ public class Game
         cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
         sword = new MovableObject("Sword", "A very strong sword", 2, 2.4);
         chair = new FixedObject("Chair", "An old wooden chair");
-        /*
-        setObjectName("cider", cider);
-        setObjectName("sword", sword);
-        */
+        
+        gameData.setObjectName("cider", cider);
+        gameData.setObjectName("sword", sword);
+        
         outside.addDescription("Outside the university entrance")
                .withExit("east", theater)
                .withExit("south", lab)

@@ -55,7 +55,7 @@ public class CommandActions
                 answer = commandWords.manual(parameter);
                 break;
             case "pickup":
-                // answer = pickup(parameter); TO DO
+                // answer = pickup(parameter);
                 break;
             case "drop":
                 //answer = drop(parameter);  TO DO
@@ -116,11 +116,12 @@ public class CommandActions
     /*
     private String pickup(String item)
     {
-        // put object in inventory and remove object from location
-        MovableObject object = getObjectFromName(item);
-        return "Item " + GameData.getObjectFromName(item) + " has been picked up!";
+        gameData.player1.inventory.addItemToInventory(gameData.getObjectFromName(item));
+        gameData.getCurrentLocation().removeItem(gameData.getObjectFromName(item));
+        return "You Picked up" + item;
     }
-    
+    */
+    /*
     private String drop(String item)
     {
         //

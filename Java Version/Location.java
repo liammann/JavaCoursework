@@ -8,7 +8,6 @@ public class Location implements java.io.Serializable
     private HashMap<String, Location> exits;
     private boolean isLocked = false;
     private ArrayList<Object> items;
-    private HashMap<String, MovableObject> itemstuff;
     private ArrayList<Character> characters;
 
     public static Location create()
@@ -73,7 +72,7 @@ public class Location implements java.io.Serializable
         return this;
     }
     
-    public void removeItem(String item)
+    public void removeItem(MovableObject item)
     {
         items.remove(item);
     }
