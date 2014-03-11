@@ -31,9 +31,7 @@ public class CommandActions
             case "inventory":
                 // answer = inventory(); ???
                 break;
-                //case "atta77ck":
-                //answer = attack(); ???
-                //break;
+               
             case "defend":
                  //answer = defend(); //???
                 break;
@@ -196,7 +194,7 @@ public class CommandActions
     private String attack(String weapon)
     {
         if(weapon.equals("")) {
-            return null;
+            return "";
         }
         
         return weapon;
