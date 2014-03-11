@@ -10,13 +10,13 @@ public class GameData implements java.io.Serializable
     private static ArrayList<Location> locations;
     private static HashMap<String, MovableObject> movableObjectNames;
  
-    private static MovableObject sword;
+
     
-    protected static ArrayList<Character> bots;
+    protected static ArrayList<Enemy> bots;
     protected static ArrayList<Location> places;    
     protected static ArrayList<Friend> friends;
-    protected static Player player1; // Used in Combat class
-
+    protected static Player player1; 
+    protected static CommandsParser commandsParser;
 
     public GameData()
     {

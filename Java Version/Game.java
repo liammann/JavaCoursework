@@ -12,14 +12,12 @@ import java.io.*;
 
 public class Game
 {
-    private static CommandsParser commandsParser; // Used in Combat class
     private GameData gameData;
     
     public Game()
     {
-        commandsParser = new CommandsParser();
         gameData = new GameData();
-        
+        gameData.commandsParser = new CommandsParser();
         preGame();
     }
     
@@ -33,10 +31,10 @@ public class Game
         System.out.println("=============================");
         
         quitGame: while(true) {
-            String command = commandsParser.getCommand();
+            String command = gameData.commandsParser.getCommand();
             
             if(!command.equals("")) {
-                String output = commandsParser.parseCommand(command);
+                String output = gameData.commandsParser.parseCommand(command);
 
                 switch(output) {
                     case "quit":
@@ -64,10 +62,10 @@ public class Game
         while(true) {
             System.out.print("\n> ");
 
-            String command = commandsParser.getCommand();
+            String command = gameData.commandsParser.getCommand();
 
             if(!command.equals("")) {
-                String output = commandsParser.parseCommand(command);
+                String output = gameData.commandsParser.parseCommand(command);
 
                 if(output.equals("save")) {
                     saveGame();
@@ -163,9 +161,7 @@ public class Game
     {
         Location outside, theater, pub, lab, office;
 
-
         MovableObject cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
-        MovableObject sword = new MovableObject("Sword", "A very strong sword", 2, 2.4);
         FixedObject chair = new FixedObject("Chair", "An old wooden chair");
         
         /* Pass location name as a argument to the Location constructor
@@ -183,7 +179,6 @@ public class Game
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
-               .andItem(sword)
                .andItem(chair);
 
         pub.addDescription("In a campus pub")
@@ -219,24 +214,32 @@ public class Game
 
     private void createCharacters()
     {
-       gameData.player1 = new Player("Player1", 100, 100);
-       //       GameData.player1.getInventory().addItemToInventory(GameData.sword);
+        MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 0.1);
+        gameData.player1 = new Player("Player1", 100, 100, sword);
+        
+        // Enemies Weapons 
+        MovableObject axe = new MovableObject("Axe", "Brutal axe", 2, 2.4);        
+        MovableObject mace = new MovableObject("Mace", "Brutal mace", 2, 1.8);
+        MovableObject dagger = new MovableObject("Dagger", "Very pointy stick", 1, 1.3);
        
-       Character jozef = new Character("Jozef", 100, 100);
-       Character liam = new Character("Liam", 40, 15);
-       Character tom = new Character("Tom", 70, 30);
-       Character zain = new Character("Zain", 60, 20);
-       
-        gameData.bots = new ArrayList<Character>();
+        
+        Enemy jozef = new Enemy("Jozef", 100, 100, dagger);
+        Enemy liam = new Enemy("Liam", 40, 15, axe);
+        Enemy tom = new Enemy("Tom", 70, 30, mace);
+        Enemy zain = new Enemy("Zain", 60, 20, dagger);
+        
+        gameData.bots = new ArrayList<Enemy>();
         gameData.bots.add(jozef);
         gameData.bots.add(liam);
         gameData.bots.add(tom);
         gameData.bots.add(zain);
         
-        for (Character bot: gameData.bots)
+        for (Enemy bot: gameData.bots)
         {
-            gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addCharacter(bot);
+            gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addEnemy(bot);
         }
+        
+        // Set up friendly characters
         Friend Jordan = new Friend("Jordan", 100, 100, "The Key is behind the library");
         Friend James = new Friend("James", 80, 20, "The Sword is very useful which you already have");
         Friend Jeremy = new Friend("Jeremy", 70, 30, "Try to pickup useful tools");
@@ -248,8 +251,8 @@ public class Game
         gameData.friends.add(Jeremy);
         gameData.friends.add(John);
         
-        for (Character friend: gameData.friends) {
-            gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addCharacter(friend);
+        for (Friend friend: gameData.friends) {
+            gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addFriend(friend);
         }
         
     }

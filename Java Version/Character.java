@@ -2,7 +2,7 @@
  * Why's this not an abstract class?
  */
 
-public class Character
+public abstract class Character
 {
     protected String name;
     protected int health; 
