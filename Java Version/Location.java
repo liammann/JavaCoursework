@@ -72,7 +72,7 @@ public class Location implements java.io.Serializable
         return this;
     }
     
-    public void removeItem(Object item)
+    public void removeItem(String item)
     {
         items.remove(item);
     }

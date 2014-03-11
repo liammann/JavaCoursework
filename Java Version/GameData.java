@@ -68,4 +68,9 @@ public class GameData implements java.io.Serializable
     {
         return gameName;
     }
+    
+    public void addItemToInventory(String itemName)
+    {
+        //
+    }
 }
