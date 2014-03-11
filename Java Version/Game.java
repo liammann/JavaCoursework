@@ -178,8 +178,6 @@ public class Game
     {
         Location outside, theater, pub, lab, office;
         
-        movableObjectNames = new HashMap<String, MovableObject>();
-        
         MovableObject cider;        
 
         FixedObject chair;
@@ -196,10 +194,10 @@ public class Game
         cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
         sword = new MovableObject("Sword", "A very strong sword", 2, 2.4);
         chair = new FixedObject("Chair", "An old wooden chair");
-
+        /*
         setObjectName("cider", cider);
         setObjectName("sword", sword);
-                
+        */
         outside.addDescription("Outside the university entrance")
                .withExit("east", theater)
                .withExit("south", lab)
@@ -237,12 +235,12 @@ public class Game
         
         gameData.setNewLocation(outside);
     }
-
+    /*
     public HashMap movableObjectNames()
     {
         return movableObjectNames;
     }
-    
+    */
     private void createCharacters()
     {
        player1 = new Player("Player1", 100, 100);

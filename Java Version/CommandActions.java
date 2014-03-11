@@ -113,7 +113,7 @@ public class CommandActions
     {
         return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
-
+    /*
     private String pickup(String item)
     {
         // put object in inventory and remove object from location
@@ -125,7 +125,7 @@ public class CommandActions
     {
         //
     }
-    
+    */
     private String fight(String who) 
     {
         for(Character character : gameData.getCurrentLocation().getArraryLocationCharacters()) {
