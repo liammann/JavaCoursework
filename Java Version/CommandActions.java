@@ -187,15 +187,22 @@ public class CommandActions
         
     }
     
-    
     private String saveGame(ArrayList parameters)
     {
         if(!parameters.get(0).equals("game") || !parameters.get(1).equals("as")) {
             return "Invalid syntax used for the 'save' command.";
         }
 
+        String gameName = (String) parameters.get(2);
+        
+        if(!gameName.matches("[a-zA-Z]+")) {
+            return "Game save name is not valid. Only alphabetical characters are allowed.";
+        }
+        
+        gameData.setName(gameName);
         return "save";
     }
+
     private String attack(String weapon)
     {
         if(weapon.equals("")) {
