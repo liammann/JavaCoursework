@@ -128,7 +128,7 @@ public class CommandActions
     {
         gameData.getCurrentLocation().andItem(gameData.getObjectFromName(item));
         gameData.getPlayer1Object().getInventory().dropFromInventory(gameData.getObjectFromName(item));
-        return "Fuck off jozef";
+        return "You dropped" + item + "you whore!";
     }
     
     private String fight(String who) 
