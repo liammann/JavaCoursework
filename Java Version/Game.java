@@ -2,6 +2,9 @@
  * IMPORTANT NOTE:
  * 
  * Should we make our system case-insensitive?
+ * 
+ * NOTE TO SELF: I DON'T LIKE THE EXTRA LINE GIVEN WHEN OUTPUTTING THE STUFF IN A ROOM!
+ * 
  */
 
 import java.util.ArrayList;
