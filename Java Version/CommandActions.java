@@ -129,7 +129,7 @@ public class CommandActions
     {
         Game.getGameDataObject().getCurrentLocation().andItem(Game.getGameDataObject().getPlayer1Object().getInventory().getObjectByName(item));
         Game.getGameDataObject().getPlayer1Object().getInventory().dropFromInventory(Game.getGameDataObject().getPlayer1Object().getInventory().getObjectByName(item));
-        return "You dropped" + item + "you whore!";
+        return "You dropped" + item;
     }
     */
     private String fight(String who)
