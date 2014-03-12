@@ -1,5 +1,5 @@
 
-public class Player extends Character
+public class Player extends Character implements java.io.Serializable
 {
 
 

@@ -2,7 +2,7 @@
  * Why's this not an abstract class?
  */
 
-public abstract class Character
+public abstract class Character implements java.io.Serializable
 {
     protected String name;
     protected int health; 

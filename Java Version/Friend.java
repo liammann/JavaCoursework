@@ -1,5 +1,5 @@
 
- public class Friend extends Character
+ public class Friend extends Character implements java.io.Serializable
  {
      private String hint;
           
