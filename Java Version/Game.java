@@ -249,8 +249,16 @@ public class Game
 
     private String welcome()
     {
-        return "\nWelcome to the Pub Crawl Game!\n"
-                +"Type 'help' if you are not sure what to do.\n\n"
-                +gameData.getCurrentLocation().getLongDescription();
+        return "\nWelcome to the Pub Crawl Game!\n "
+              +"You wake up at Porsmouth Museum in 2014 not knwing how you got there.\n"
+               +"but there is something quite different about the world you have woken up in.\n"
+               +"You hear people in distance shouting ‘vikings are here, get to gunwharf for rescue.\n"
+               +"Type 'help' if you are not sure what to do.\n\n"
+               +"You look for weapon to protect yourself. You wonder around in museum for quite sometime\n"
+               +"before finding sword and shield and start your journey to gunwharf thinking what is going on here\n"
+               +"You find a letter at the front of the museum which gives you hint how to get there\n"
+               +"and what object you need to pick up.\n"
+               +gameData.getCurrentLocation().getLongDescription();
     }
+    
 }
