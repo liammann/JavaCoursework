@@ -9,10 +9,10 @@ public class GameData implements java.io.Serializable
     private static String gameName;
     private static ArrayList<Location> locations;
 
-    protected static ArrayList<Enemy> bots;
-    protected static ArrayList<Location> places;    
-    protected static HashMap<String, Friend> friends;
-    protected static Player player1; 
+    protected static ArrayList<Enemy> bots; // rename to enemy and move to location
+    protected static ArrayList<Location> places; //rename to location
+    protected static HashMap<String, Friend> friends; // don't need
+    protected static Player player1;
     protected static CommandsParser commandsParser;
 
     public GameData()
@@ -85,15 +85,6 @@ public class GameData implements java.io.Serializable
     public void addFriend(String name, Friend friend)
     {
         friends.put(name, friend);
-    }
-    
-    public boolean isValidFriend(String name)
-    {
-        if(!friends.containsKey(name)) {
-            return false;
-        }
-        
-        return true;
     }
     
     public Friend getFriend(String name)

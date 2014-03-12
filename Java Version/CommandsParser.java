@@ -18,7 +18,7 @@ public class CommandsParser
 
     public String getCommand()
     {
-        return reader.nextLine();
+        return reader.nextLine().toLowerCase();
     }
 
     public String parseCommand(String inputCommand)

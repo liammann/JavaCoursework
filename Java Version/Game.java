@@ -51,7 +51,7 @@ public class Game
             }
         }
     }
-    
+
     private void play()
     {
         System.out.print(welcome());
@@ -81,7 +81,7 @@ public class Game
 
         System.out.println("Thanks for playing!");
     }
-    
+
     private String getSavedGameNames()
     {
         File files = new File("gamesaves/");
@@ -226,7 +226,7 @@ public class Game
         gameData.bots.add(zain);
         
         for(Enemy bot : gameData.bots) {
-            gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addEnemy(bot);
+            gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addEnemy(bot.getName(), bot);
         }
         
         // Set up friendly characters
@@ -242,7 +242,7 @@ public class Game
         gameData.addFriend(John.getName(), John);
         
         for(Friend friend : gameData.getAllFriends()) {
-            gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addFriend(friend);
+            gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addFriend(friend.getName(), friend);
         }
         
     }

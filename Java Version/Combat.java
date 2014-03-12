@@ -77,9 +77,9 @@ public class Combat
             }else if(command.equals("defend")){
                 hpDealt = defend(enemyDefending);
                 playerDefending = true;
-                System.out.print("    "+"you ready your shield \n");
+                System.out.print("\t"+"you ready your shield \n");
             }else{
-                System.out.print("    "+"You stand there and get attacked.  Attack {Weapon} or Defend \n   ");
+                System.out.print("\t"+"You stand there and get attacked.  Attack {Weapon} or Defend \n   ");
             }
             enemy.updateHealth(enemy.getHealth()-hpDealt);
         }else{

@@ -139,14 +139,14 @@ public class CommandActions
 
     private String fight(String who)
     {
-        for(Enemy enemy : gameData.getCurrentLocation().getArraryLocationEnemy()) {
+        /*for(Enemy enemy : gameData.getCurrentLocation()) {
             if(enemy.getName().equals(who)) {
                 Combat fight = new Combat(enemy, gameData);
                 boolean playerWins = fight.startFight();
                 return "You have Defeated " + who;
             }
 
-        }
+        }*/
 
         return "Fight Who?";
     }
@@ -232,7 +232,7 @@ public class CommandActions
         
         String nameOfPerson = (String) parameters.get(1);
         
-        if(!gameData.isValidFriend(nameOfPerson)) {
+        if(!gameData.getCurrentLocation().isValidFriend(nameOfPerson)) {
             return "The friend specified is invalid!";
         }
         

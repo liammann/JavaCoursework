@@ -8,8 +8,8 @@ public class Location implements java.io.Serializable
     private HashMap<String, Location> exits;
     private boolean isLocked = false;
     private HashMap<String, Object> items;
-    private ArrayList<Enemy> enemies;
-    private ArrayList<Friend> friends;
+    private HashMap<String, Enemy> enemies;
+    private HashMap<String, Friend> friends;
 
     public static Location create()
     {
@@ -20,8 +20,8 @@ public class Location implements java.io.Serializable
     {
         exits = new HashMap<String, Location>();
         items = new HashMap<String, Object>();
-        enemies = new ArrayList<Enemy>();
-        friends = new ArrayList<Friend>();
+        enemies = new HashMap<String, Enemy>();
+        friends = new HashMap<String, Friend>();
     }
 
     public Location addDescription(String description)
@@ -31,14 +31,14 @@ public class Location implements java.io.Serializable
         return this;
     }
 
-    public void addEnemy(Enemy enemy)
+    public void addEnemy(String enemyName, Enemy enemy)
     {
-       enemies.add(enemy);
+       enemies.put(enemyName, enemy);
     }
 
-    public void addFriend(Friend friend)
+    public void addFriend(String friendName, Friend friend)
     {
-       friends.add(friend);
+       friends.put(friendName, friend);
     }
 
     public void removeCharacters()
@@ -56,16 +56,16 @@ public class Location implements java.io.Serializable
         if(enemies.size() != 0) {
             enemiesB = true;
 
-            for(Enemy enemy : enemies) {
-                answer += " - " + enemy.getName() + "\n";
+            for(String enemyName : enemies.keySet()) {
+                answer += " - " + enemyName + "\n";
             }
         }
 
         if(friends.size() != 0) {
             friendsB = true;
 
-            for(Friend friend : friends) {
-                answer += " - " + friend.getName() + "\n";
+            for(String friendName : friends.keySet()) {
+                answer += " - " + friendName + "\n";
             }
         }
 
@@ -74,15 +74,6 @@ public class Location implements java.io.Serializable
         }else{
             return "There are no characters in this room \n";
         }
-    }
-
-    public ArrayList<Enemy> getArraryLocationEnemy ()
-    {
-        if(enemies.size() != 0) {
-            return enemies;
-        }
-
-        return null;
     }
 
     public Location withExit(String direction, Location neighbour)
@@ -99,9 +90,9 @@ public class Location implements java.io.Serializable
         return this;
     }
     
-    public void removeItem(MovableObject item)
+    public void removeItem(MovableObject item) // item name or by object?
     {
-        items.remove(item);
+        //items.remove(item);
     }
 
     public String getShortDescription()
@@ -111,7 +102,7 @@ public class Location implements java.io.Serializable
 
     public String getLongDescription()
     {
-        return "You are " + description + "\n" + showExits()+"\n";
+        return "You are " + description + "\n" + showExits() + "\n";
     }
 
     public String getLocationItems()
@@ -165,4 +156,18 @@ public class Location implements java.io.Serializable
     {
         isLocked = false;
     }
+    
+    public boolean isValidFriend(String name)
+    {
+        if(!friends.containsKey(name)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    /*public Object getObject(String objectName)
+    {
+        //
+    }*/
 }
