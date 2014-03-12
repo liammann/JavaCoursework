@@ -17,7 +17,8 @@ public class CommandWords
 	private ArrayList<ArrayList<String>> validCommands;
 	private ArrayList<String> preGameCommands;
 	private HashMap<String, String> commandWordsDocumentation;
-
+	private static CommandWords instance = null;
+	
 	public CommandWords()
 	{
 		validCommands = new ArrayList<ArrayList<String>>();
@@ -39,6 +40,7 @@ public class CommandWords
 		validCommands.get(1).add("attack");
 		validCommands.get(1).add("manual");
 		validCommands.get(1).add("new");
+		validCommands.get(1).add("inspect");
 
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(2).add("load");
@@ -58,10 +60,20 @@ public class CommandWords
 		commandWordsDocumentation.put("manual", "View all commands or a specific command. Usage: 'manual {command}', where 'command' is optional (defaults to view all)");
 		commandWordsDocumentation.put("go", "Go to another location by passing the exit direction as a paramter. Usage: 'go {direction}'");
 		commandWordsDocumentation.put("pickup", "Pickup an object by passing the object name as a parameter. Usage: 'pickup {object}'");
+		commandWordsDocumentation.put("inspect", "Insepct an object by passing the object name as a parameter. Usage: 'inspect {object_name}'");
 		commandWordsDocumentation.put("new", "Start a new game. Usage: 'new game'");
 		commandWordsDocumentation.put("talk", "Talk to a player in the game. Usage: 'talk to {player_name}'");
 		commandWordsDocumentation.put("load", "Load a saved game. Usage: 'load game {game_save}'");
 		commandWordsDocumentation.put("save", "Save the current state of the game. Usage: 'save game as {game_name}'");
+	}
+	
+	public static CommandWords getInstance()
+	{
+	    if(instance == null) {
+	        instance = new CommandWords();
+	    }
+	    
+	    return instance;
 	}
 
 	public boolean commandExists(String command)

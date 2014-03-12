@@ -10,7 +10,7 @@ public class CommandsParser
 
     public CommandsParser()
     {
-        commandWords = new CommandWords();
+        commandWords = CommandWords.getInstance();
         commandActions = new CommandActions();
         reader = new Scanner(System.in);
         gameData = new GameData();

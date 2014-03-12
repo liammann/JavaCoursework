@@ -20,4 +20,9 @@ public abstract class Object implements java.io.Serializable
 	{
 		return description;
 	}
+	
+	public String getName()
+	{
+	    return name;
+	}
 }

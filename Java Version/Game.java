@@ -88,7 +88,7 @@ public class Game
         File[] contents = files.listFiles(new FilenameFilter() {
             public boolean accept(File directory, String file) {
                 String fileName = file.split("\\.")[0];
-                return fileName.matches("[a-zA-Z]+");
+                return fileName.matches("[a-zA-Z]+"); // match [a-zA-Z]+\.ser ??
             }
         });
         
@@ -172,15 +172,15 @@ public class Game
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
-               .andItem(chair);
+               .andItem(chair.getName(), chair);
 
         pub.addDescription("In a campus pub")
            .withExit("east", outside)
-           .andItem(cider);
+           .andItem(cider.getName(), cider);
 
         theater.addDescription("Inside of a lecture theater")
                .withExit("west", outside)
-               .andItem(chair)
+               .andItem(chair.getName(), chair)
                .andIsLocked();
 
         lab.addDescription("In a computing lab")

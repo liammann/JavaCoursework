@@ -7,7 +7,7 @@ public class CommandActions
 
     public CommandActions()
     {
-        commandWords = new CommandWords();
+        commandWords = CommandWords.getInstance();
         gameData = new GameData();
     }
 
@@ -65,6 +65,9 @@ public class CommandActions
                 break;
             case "fight":
                 answer = fight(parameter);
+                break;
+            case "inspect":
+                answer = inspect(parameter);
                 break;
             case "new":
                 answer = newGame(parameter);
@@ -234,5 +237,11 @@ public class CommandActions
         }
         
         return gameData.getFriend(nameOfPerson).response();
+    }
+    
+    private String inspect(String parameter)
+    {
+        // return gameData.getCurrentLocation().
+        return "";
     }
 }
