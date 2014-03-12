@@ -1,6 +1,4 @@
-
-
-public class MovableObject extends Object
+public class MovableObject extends Object implements java.io.Serializable
 {
     protected int weight;    
     protected boolean weapon;    

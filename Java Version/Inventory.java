@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 
-public class Inventory
+public class Inventory implements java.io.Serializable
 {
     // instance variables - replace the example below with your own
     private ArrayList<MovableObject> playerInventory;

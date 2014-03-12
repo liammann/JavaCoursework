@@ -1,6 +1,6 @@
 
 
-public class FixedObject extends Object
+public class FixedObject extends Object implements java.io.Serializable
 {
 	public FixedObject(String name, String description)
 	{

@@ -1,6 +1,6 @@
 
 
-public abstract class Object
+public abstract class Object implements java.io.Serializable
 {
 	protected String name;
 	protected String description;

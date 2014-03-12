@@ -9,9 +9,7 @@ public class GameData implements java.io.Serializable
     private static String gameName;
     private static ArrayList<Location> locations;
     private static HashMap<String, MovableObject> movableObjectNames;
- 
 
-    
     protected static ArrayList<Enemy> bots;
     protected static ArrayList<Location> places;    
     protected static ArrayList<Friend> friends;

@@ -127,14 +127,9 @@ public class Game
 
     private void loadGame()
     {
-        /* 
-         * The following is still a work in progress...
-         */
-        /*
-        GameData gameData = null;
         
         try {
-            FileInputStream gameSaveFile = new FileInputStream("/gamesaves/" + . + ".ser");
+            FileInputStream gameSaveFile = new FileInputStream("/gamesaves/" + gameData.getName() + ".ser");
             ObjectInputStream gameSaveData = new ObjectInputStream(gameSaveFile);
 
             gameData = (GameData) gameSaveData.readObject();
@@ -148,7 +143,7 @@ public class Game
             System.out.println("Class not found");
             classe.printStackTrace();
             return;
-        }*/
+        }
         
         play();
     }
@@ -156,7 +151,7 @@ public class Game
     private void buildGame()
     {
         buildLocations();
-        createCharacters(); // load chararacters here
+        createCharacters();
     }
 
     private void buildLocations()
@@ -165,17 +160,12 @@ public class Game
 
         MovableObject cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
         FixedObject chair = new FixedObject("Chair", "An old wooden chair");
-        
-        /* Pass location name as a argument to the Location constructor
-         * if we are going to store each location in a hash map
-         */
+
         outside = Location.create();
         theater = Location.create();
         lab = Location.create();
         pub = Location.create();
         office = Location.create();
-
-
 
         outside.addDescription("Outside the university entrance")
                .withExit("east", theater)
@@ -205,8 +195,6 @@ public class Game
         gameData.places.add(lab);
         gameData.places.add(office);
 
-        // END of shift
-        
         /* This is a note for myself (Tom) so that I don't forget
          * Character objects could be placed in an ArrayList field apart of the Location class
          */
@@ -236,8 +224,7 @@ public class Game
         gameData.bots.add(tom);
         gameData.bots.add(zain);
         
-        for (Enemy bot: gameData.bots)
-        {
+        for(Enemy bot : gameData.bots) {
             gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addEnemy(bot);
         }
         
@@ -253,7 +240,7 @@ public class Game
         gameData.friends.add(Jeremy);
         gameData.friends.add(John);
         
-        for (Friend friend: gameData.friends) {
+        for(Friend friend : gameData.friends) {
             gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addFriend(friend);
         }
         
