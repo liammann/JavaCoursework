@@ -83,9 +83,9 @@ public class Location implements java.io.Serializable
         return this;
     }
 
-    public Location andItem(String itemName, Object item) // implement a second parameter for quantity?
+    public Location andItem(Object item) // implement a second parameter for quantity?
     {
-        items.put(itemName, item);
+        items.put(item.getName(), item);
 
         return this;
     }

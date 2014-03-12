@@ -1,4 +1,4 @@
-import java.util.Set;
+import java.util.Set; // what does this do?
 import java.util.HashMap;
 import java.util.ArrayList;
 /**
@@ -26,12 +26,13 @@ public class Inventory implements java.io.Serializable
         movableObjectNames = new HashMap<String, MovableObject>();
     }
     
+    // We should not be outputting to the console from this class! Return a String instead.
     public void addItemToInventory(MovableObject item)
     {
         if (inventoryWeight() <= inventoryWeightCapacity)
         {
             playerInventory.add(item);
-            System.out.println(item.getObjectName() + " has been put in your bag.");
+            //System.out.println(item.getObjectName() + " has been put in your bag.");
         } else {
             System.out.println("Your bag's too heavy already. Try dropping something before picking this up.");
         }

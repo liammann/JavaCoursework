@@ -1,20 +1,37 @@
-
-
 public class Enemy extends Character implements java.io.Serializable
-{   
+{
     private MovableObject weapon;
-    public Enemy(String name, int strength, int health)
+
+    public Enemy(String name)
     {
-        super(name, strength, health);
-        
+        super(name);
     }
-    public Enemy(String name, int strength, int health, MovableObject weapon)
+    
+    @Override
+    public Enemy hasStrength(int strength)
     {
-        super(name, strength, health);
+        this.strength = strength;
+
+        return this;
+    }
+    
+    @Override
+    public Enemy withHealth(int health)
+    {
+        this.health = health;
+        
+        return this;
+    }
+    
+    public Enemy andHasWeapon(MovableObject weapon)
+    {
         this.weapon = weapon;
-        
+
+        return this;
     }
-    public MovableObject getWeapon(){
+
+    public MovableObject getWeapon()
+    {
         return weapon;
     }
 }

@@ -6,7 +6,6 @@
  * NOTE TO SELF: I DON'T LIKE THE EXTRA LINE GIVEN WHEN OUTPUTTING THE STUFF IN A ROOM!
  * 
  */
-
 import java.util.ArrayList;
 import java.lang.Math;
 import java.io.*;
@@ -172,15 +171,15 @@ public class Game
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
-               .andItem(chair.getName(), chair);
+               .andItem(chair);
 
         pub.addDescription("In a campus pub")
            .withExit("east", outside)
-           .andItem(cider.getName(), cider);
+           .andItem(cider);
 
         theater.addDescription("Inside of a lecture theater")
                .withExit("west", outside)
-               .andItem(chair.getName(), chair)
+               .andItem(chair)
                .andIsLocked();
 
         lab.addDescription("In a computing lab")
@@ -206,44 +205,88 @@ public class Game
     private void createCharacters()
     {
         MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 0.1);
-        gameData.player1 = new Player("Player1", 100, 100, sword);
+        //gameData.player1 = new Player("Player1", 100, 100, sword);
+        
+        Player player1;
+        
+        player1 = new Player("Player 1");
+        
+        player1.hasStrength(100)
+             .withHealth(100)
+             .andHasWeapon(sword);
         
         // Enemies Weapons 
         MovableObject axe = new MovableObject("Axe", "Brutal axe", 2, 2.4);        
         MovableObject mace = new MovableObject("Mace", "Brutal mace", 2, 1.8);
         MovableObject dagger = new MovableObject("Dagger", "Very pointy stick", 1, 1.3);
-       
         
-        Enemy jozef = new Enemy("Jozef", 100, 100, dagger);
-        Enemy liam = new Enemy("Liam", 40, 15, axe);
-        Enemy tom = new Enemy("Tom", 70, 30, mace);
-        Enemy zain = new Enemy("Zain", 60, 20, dagger);
+        // upon enemy death, drop weapon in current room?
         
-        gameData.bots = new ArrayList<Enemy>();
-        gameData.bots.add(jozef);
-        gameData.bots.add(liam);
-        gameData.bots.add(tom);
-        gameData.bots.add(zain);
+        Enemy jozef, liam, tom, zain;
         
-        for(Enemy bot : gameData.bots) {
-            gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addEnemy(bot.getName(), bot);
-        }
+        jozef = new Enemy("Jozef");
+        liam = new Enemy("Liam");
+        tom = new Enemy("Tom");
+        zain = new Enemy("Zain");
+        
+        jozef.hasStrength(100)
+             .withHealth(100)
+             .andHasWeapon(dagger);
+
+        liam.hasStrength(40)
+            .withHealth(15)
+            .andHasWeapon(axe);
+
+        tom.hasStrength(70)
+           .withHealth(30)
+           .andHasWeapon(mace);
+
+        zain.hasStrength(60)
+            .withHealth(20)
+            .andHasWeapon(dagger);
+        
+        //gameData.bots = new ArrayList<Enemy>();
+        //gameData.bots.add(jozef);
+        //gameData.bots.add(liam);
+        //gameData.bots.add(tom);
+        //gameData.bots.add(zain);
+        
+        //for(Enemy bot : gameData.bots) {
+        //    gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addEnemy(bot.getName(), bot);
+        //}
         
         // Set up friendly characters
-        Friend Jordan = new Friend("Jordan", 100, 100, "The Key is behind the library");
-        Friend James = new Friend("James", 80, 20, "The Sword is very useful which you already have");
-        Friend Jeremy = new Friend("Jeremy", 70, 30, "Try to pickup useful tools");
-        Friend John = new Friend("John", 60, 20, "haha");
+        Friend jordan, james, jeremy, john; // do friends need health? Given that they are not fighting anyone?
+        
+        jordan = new Friend("Jordan");
+        james = new Friend("James");
+        jeremy = new Friend("Jeremy");
+        john = new Friend("John");
+        
+        jordan.hasStrength(100)
+              .withHealth(100)
+              .andHasHint("The Key is behind the library");
+
+        james.hasStrength(80)
+             .withHealth(20)
+             .andHasHint("The Sword is very useful which you already have");
+
+        jeremy.hasStrength(70)
+              .withHealth(30)
+              .andHasHint("Try to pickup useful tools");
+
+        john.hasStrength(60)
+              .withHealth(20);
         
     
-        gameData.addFriend(Jordan.getName(), Jordan);
-        gameData.addFriend(James.getName(), James);
-        gameData.addFriend(Jeremy.getName(), Jeremy);
-        gameData.addFriend(John.getName(), John);
+        //gameData.addFriend(Jordan.getName(), Jordan);
+        //gameData.addFriend(James.getName(), James);
+        //gameData.addFriend(Jeremy.getName(), Jeremy);
+        //gameData.addFriend(John.getName(), John);
         
-        for(Friend friend : gameData.getAllFriends()) {
-            gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addFriend(friend.getName(), friend);
-        }
+        //for(Friend friend : gameData.getAllFriends()) {
+        //    gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addFriend(friend.getName(), friend);
+        //}
         
     }
 

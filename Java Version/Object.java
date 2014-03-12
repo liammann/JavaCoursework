@@ -2,27 +2,27 @@
 
 public abstract class Object implements java.io.Serializable
 {
-	protected String name;
-	protected String description;
-	protected String state;
+    protected String name;
+    protected String description;
+    protected String state;
 
-	public Object()
-	{
-		// meh
-	}
+    public Object()
+    {
+        // meh
+    }
 
-	public String getObjectName()
-	{
-		return name;
-	}
+    public String getObjectDescription()
+    {
+        return description;
+    }
 
-	public String getObjectDescription()
-	{
-		return description;
-	}
-	
-	public String getName()
-	{
-	    return name;
-	}
+    public String getObjectName() //slight redundancy?
+    {
+        return name;
+    }
+    
+    public String getName()
+    {
+        return name;
+    }
 }
