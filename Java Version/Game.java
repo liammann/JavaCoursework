@@ -253,9 +253,4 @@ public class Game
                 +"Type 'help' if you are not sure what to do.\n\n"
                 +gameData.getCurrentLocation().getLongDescription();
     }
-    
-    public static GameData getGameDataObject()
-    {
-        return gameData;
-    }
 }

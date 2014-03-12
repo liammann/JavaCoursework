@@ -117,21 +117,23 @@ public class CommandActions
     {
         return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
-    /*
+
     private String pickup(String item)
     {
-        Game.getGameDataObject().getPlayer1Object().getInventory().addItemToInventory(Game.getGameDataObject().getPlayer1Object().getInventory().getObjectByName(item));
-        Game.getGameDataObject().getCurrentLocation().removeItem(Game.getGameDataObject().getPlayer1Object().getInventory().getObjectByName(item));
-        return "You Picked up" + item;
+        // gameData.getPlayer1Object().getInventory().addItemToInventory(gameData.getPlayer1Object().getInventory().getObjectByName(item));
+        // gameData.getCurrentLocation().removeItem(gameData.getPlayer1Object().getInventory().getObjectByName(item));
+        // return "You Picked up" + item;
+        return "Not implemented yet?";
     }
-    
+
     private String drop(String item)
     {
-        Game.getGameDataObject().getCurrentLocation().andItem(Game.getGameDataObject().getPlayer1Object().getInventory().getObjectByName(item));
-        Game.getGameDataObject().getPlayer1Object().getInventory().dropFromInventory(Game.getGameDataObject().getPlayer1Object().getInventory().getObjectByName(item));
-        return "You dropped" + item;
+        // gameData.getCurrentLocation().andItem(gameData.getPlayer1Object().getInventory().getObjectByName(item));
+        // gameData.getPlayer1Object().getInventory().dropFromInventory(gameData.getPlayer1Object().getInventory().getObjectByName(item));
+        // return "You dropped" + item;
+        return "Not implemented yet?";
     }
-    */
+
     private String fight(String who)
     {
         for(Enemy enemy : gameData.getCurrentLocation().getArraryLocationEnemy()) {
