@@ -13,7 +13,7 @@ public class CommandsParser
         commandWords = CommandWords.getInstance();
         commandActions = new CommandActions();
         reader = new Scanner(System.in);
-        gameData = new GameData();
+        gameData = GameData.getInstance();
     }
 
     public String getCommand()

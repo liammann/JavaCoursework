@@ -8,7 +8,7 @@ public class CommandActions
     public CommandActions()
     {
         commandWords = CommandWords.getInstance();
-        gameData = new GameData();
+        gameData = GameData.getInstance();
     }
 
     public String invokeAction(String keyword)

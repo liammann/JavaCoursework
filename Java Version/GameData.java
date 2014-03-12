@@ -8,18 +8,29 @@ public class GameData implements java.io.Serializable
     private static transient ArrayList<String> savedGames;
     private static String gameName;
     private static ArrayList<Location> locations;
+    private static GameData instance = null;
 
-    protected static ArrayList<Enemy> bots; // rename to enemy and move to location
+    protected static ArrayList<Enemy> bots; // don't need
     protected static ArrayList<Location> places; //rename to location
     protected static HashMap<String, Friend> friends; // don't need
-    protected static Player player1;
-    protected static CommandsParser commandsParser;
-
+    protected static Player player1; // this could perhaps be moved to the Location class
+    protected static CommandsParser commandsParser; // this should not be here
+    
     public GameData()
     {
         locationHistory = new ArrayList<Location>();
         savedGames = new ArrayList<String>();
         friends = new HashMap<String, Friend>();
+    }
+
+    public static GameData getInstance()
+    {
+        if(instance == null)
+        {
+            instance = new GameData();
+        }
+        
+        return instance;
     }
 
     public Player getPlayer1Object()
@@ -32,12 +43,10 @@ public class GameData implements java.io.Serializable
         return locationHistory.get(locationHistory.size()-1);
     }
 
-    public String setNewLocation(Location location)
+    public void setNewLocation(Location location)
     {
         locationHistory.add(location);
-        // output what the new location has been set to?
-        // It means changing game class (welcome() method)        
-        return "";
+        //return a description maybe?
     }
 
     public String setNewLocation(int backtrack)

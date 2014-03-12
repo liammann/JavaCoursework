@@ -18,7 +18,7 @@ public class Game
     
     public Game()
     {
-        gameData = new GameData();
+        gameData = GameData.getInstance();
         gameData.commandsParser = new CommandsParser();
         preGame();
     }
