@@ -2,8 +2,6 @@
  * IMPORTANT NOTE:
  * 
  * Should we make our system case-insensitive?
- * 
- * Also, no classes should be "using" the Game class...
  */
 
 import java.util.ArrayList;
@@ -234,13 +232,13 @@ public class Game
         Friend Jeremy = new Friend("Jeremy", 70, 30, "Try to pickup useful tools");
         Friend John = new Friend("John", 60, 20, "haha");
         
-        gameData.friends = new ArrayList<Friend>();
-        gameData.friends.add(Jordan);
-        gameData.friends.add(James);
-        gameData.friends.add(Jeremy);
-        gameData.friends.add(John);
+    
+        gameData.addFriend(Jordan.getName(), Jordan);
+        gameData.addFriend(James.getName(), James);
+        gameData.addFriend(Jeremy.getName(), Jeremy);
+        gameData.addFriend(John.getName(), John);
         
-        for(Friend friend : gameData.friends) {
+        for(Friend friend : gameData.getAllFriends()) {
             gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addFriend(friend);
         }
         

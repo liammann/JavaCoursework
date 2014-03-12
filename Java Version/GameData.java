@@ -5,14 +5,14 @@ public class GameData implements java.io.Serializable
 {
     private static ArrayList<Location> locationHistory;
     private static transient boolean gameStarted = false;
-    public static transient ArrayList<String> savedGames;
+    private static transient ArrayList<String> savedGames;
     private static String gameName;
     private static ArrayList<Location> locations;
     private static HashMap<String, MovableObject> movableObjectNames;
 
     protected static ArrayList<Enemy> bots;
     protected static ArrayList<Location> places;    
-    protected static ArrayList<Friend> friends;
+    protected static HashMap<String, Friend> friends;
     protected static Player player1; 
     protected static CommandsParser commandsParser;
 
@@ -20,10 +20,14 @@ public class GameData implements java.io.Serializable
     {
         locationHistory = new ArrayList<Location>();
         savedGames = new ArrayList<String>();
+        friends = new HashMap<String, Friend>();
     }
-    public Player getPlayer1Object(){
+
+    public Player getPlayer1Object()
+    {
         return player1;
     }
+    
     public Location getCurrentLocation()
     {
         return locationHistory.get(locationHistory.size()-1);
@@ -87,5 +91,29 @@ public class GameData implements java.io.Serializable
     public MovableObject getObjectFromName(String object)
     {
         return movableObjectNames.get(object);
+    }
+    
+    public void addFriend(String name, Friend friend)
+    {
+        friends.put(name, friend);
+    }
+    
+    public boolean isValidFriend(String name)
+    {
+        if(!friends.containsKey(name)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public Friend getFriend(String name)
+    {
+        return friends.get(name);
+    }
+    
+    public ArrayList<Friend> getAllFriends()
+    {
+        return new ArrayList<Friend>(friends.values());
     }
 }

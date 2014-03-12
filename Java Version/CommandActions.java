@@ -69,9 +69,6 @@ public class CommandActions
             case "new":
                 answer = newGame(parameter);
                 break;
-            case "talk":
-                answer = talk(parameter);
-                break;
         }
 
         return answer;
@@ -82,6 +79,9 @@ public class CommandActions
         String answer = "";
 
         switch(keyword) {
+            case "talk":
+                answer = talk(parameters);
+                break;
             case "load":
                 answer = loadGame(parameters);
                 break;
@@ -219,8 +219,18 @@ public class CommandActions
         return weapon;
     }
     
-    private String talk(String nameOfPerson)
+    private String talk(ArrayList parameters)
     {
-        return "talk";
+        if(!parameters.get(0).equals("to")) {
+            return "Invalid syntax used for the 'talk' command.";
+        }
+        
+        String nameOfPerson = (String) parameters.get(1);
+        
+        if(!gameData.isValidFriend(nameOfPerson)) {
+            return "The friend specified is invalid!";
+        }
+        
+        return gameData.getFriend(nameOfPerson).response();
     }
 }

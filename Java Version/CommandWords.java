@@ -42,6 +42,7 @@ public class CommandWords
 
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(2).add("load");
+		validCommands.get(2).add("talk");
 		
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(3).add("save");
@@ -58,6 +59,7 @@ public class CommandWords
 		commandWordsDocumentation.put("go", "Go to another location by passing the exit direction as a paramter. Usage: 'go {direction}'");
 		commandWordsDocumentation.put("pickup", "Pickup an object by passing the object name as a parameter. Usage: 'pickup {object}'");
 		commandWordsDocumentation.put("new", "Start a new game. Usage: 'new game'");
+		commandWordsDocumentation.put("talk", "Talk to a player in the game. Usage: 'talk to {player_name}'");
 		commandWordsDocumentation.put("load", "Load a saved game. Usage: 'load game {game_save}'");
 		commandWordsDocumentation.put("save", "Save the current state of the game. Usage: 'save game as {game_name}'");
 	}
@@ -114,10 +116,10 @@ public class CommandWords
 
 	public String manual(String command)
 	{
-		if(commandWordsDocumentation.containsKey(command)) {
-			return (String) commandWordsDocumentation.get(command);
+		if(!commandWordsDocumentation.containsKey(command)) {
+			return "Specified command word is invalid";
 		}
-			
-		return "Specified command word is invalid";
+		
+		return (String) commandWordsDocumentation.get(command);
 	}
 }
