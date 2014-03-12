@@ -15,6 +15,7 @@ public class Inventory implements java.io.Serializable
     private ArrayList<MovableObject> playerInventory;
     private int inventoryWeight = 0;
     private int inventoryWeightCapacity = 10;
+    private static HashMap<String, MovableObject> movableObjectNames;
     
     /**
      * Constructor for objects of class inventory
@@ -22,6 +23,7 @@ public class Inventory implements java.io.Serializable
     public Inventory()
     {
         playerInventory = new ArrayList<MovableObject>();
+        movableObjectNames = new HashMap<String, MovableObject>();
     }
     
     public void addItemToInventory(MovableObject item)
@@ -74,4 +76,15 @@ public class Inventory implements java.io.Serializable
         }
         return inventoryWeight;
     }
+    /*
+    public void setObjectName(String name, MovableObject object)
+    {
+        movableObjectNames.put(name, object);
+    }
+    
+    public MovableObject getObjectByName(String object)
+    {
+        return movableObjectNames.get(object);
+    }
+    */
 }

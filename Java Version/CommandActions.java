@@ -117,21 +117,21 @@ public class CommandActions
     {
         return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
-    
+    /*
     private String pickup(String item)
     {
-        gameData.getPlayer1Object().getInventory().addItemToInventory(gameData.getObjectFromName(item));
-        gameData.getCurrentLocation().removeItem(gameData.getObjectFromName(item));
+        Game.getGameDataObject().getPlayer1Object().getInventory().addItemToInventory(Game.getGameDataObject().getPlayer1Object().getInventory().getObjectByName(item));
+        Game.getGameDataObject().getCurrentLocation().removeItem(Game.getGameDataObject().getPlayer1Object().getInventory().getObjectByName(item));
         return "You Picked up" + item;
     }
     
     private String drop(String item)
     {
-        gameData.getCurrentLocation().andItem(gameData.getObjectFromName(item));
-        gameData.getPlayer1Object().getInventory().dropFromInventory(gameData.getObjectFromName(item));
+        Game.getGameDataObject().getCurrentLocation().andItem(Game.getGameDataObject().getPlayer1Object().getInventory().getObjectByName(item));
+        Game.getGameDataObject().getPlayer1Object().getInventory().dropFromInventory(Game.getGameDataObject().getPlayer1Object().getInventory().getObjectByName(item));
         return "You dropped" + item + "you whore!";
     }
-    
+    */
     private String fight(String who)
     {
         for(Enemy enemy : gameData.getCurrentLocation().getArraryLocationEnemy()) {

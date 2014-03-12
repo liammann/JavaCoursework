@@ -8,7 +8,6 @@ public class GameData implements java.io.Serializable
     private static transient ArrayList<String> savedGames;
     private static String gameName;
     private static ArrayList<Location> locations;
-    private static HashMap<String, MovableObject> movableObjectNames;
 
     protected static ArrayList<Enemy> bots;
     protected static ArrayList<Location> places;    
@@ -81,16 +80,6 @@ public class GameData implements java.io.Serializable
     public String getName()
     {
         return gameName;
-    }
-    
-    public void setObjectName(String name, MovableObject object)
-    {
-        movableObjectNames.put(name, object);
-    }
-    
-    public MovableObject getObjectFromName(String object)
-    {
-        return movableObjectNames.get(object);
     }
     
     public void addFriend(String name, Friend friend)
