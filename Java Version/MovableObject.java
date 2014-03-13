@@ -39,4 +39,5 @@ public class MovableObject extends Object implements java.io.Serializable
     {
         return this.name;
     }
+
 }

@@ -7,20 +7,17 @@ public class GameData implements java.io.Serializable
     private static transient boolean gameStarted = false;
     private static transient ArrayList<String> savedGames;
     private static String gameName;
-    private static ArrayList<Location> locations;
+    protected static ArrayList<Location> locations;
     private static GameData instance = null;
 
-    protected static ArrayList<Enemy> bots; // don't need
-    protected static ArrayList<Location> places; //rename to location
-    protected static HashMap<String, Friend> friends; // don't need
     protected static Player player1; // this could perhaps be moved to the Location class
-    protected static CommandsParser commandsParser; // this should not be here
+
     
     public GameData()
     {
         locationHistory = new ArrayList<Location>();
         savedGames = new ArrayList<String>();
-        friends = new HashMap<String, Friend>();
+
     }
 
     public static GameData getInstance()
@@ -91,18 +88,18 @@ public class GameData implements java.io.Serializable
         return gameName;
     }
     
-    public void addFriend(String name, Friend friend)
-    {
-        friends.put(name, friend);
-    }
+//     public void addFriend(String name, Friend friend)
+//     {
+//         friends.put(name, friend);
+//     }
+//     
+//     public Friend getFriend(String name)
+//     {
+//         return friends.get(name);
+//     }
     
-    public Friend getFriend(String name)
-    {
-        return friends.get(name);
-    }
-    
-    public ArrayList<Friend> getAllFriends()
-    {
-        return new ArrayList<Friend>(friends.values());
-    }
+//     public ArrayList<Friend> getAllFriends()
+//     {
+//         return new ArrayList<Friend>(friends.values());
+//     }
 }
