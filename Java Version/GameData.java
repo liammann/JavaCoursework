@@ -3,14 +3,14 @@ import java.util.HashMap;
 
 public class GameData implements java.io.Serializable
 {
-    private static ArrayList<Location> locationHistory;
-    private static transient boolean gameStarted = false;
-    private static transient ArrayList<String> savedGames;
-    private static String gameName;
-    protected static ArrayList<Location> locations;
+    private ArrayList<Location> locationHistory;
+    private transient boolean gameStarted = false;
+    private transient ArrayList<String> savedGames;
+    private String gameName;
+    protected  ArrayList<Location> locations;
     private static GameData instance = null;
-
-    protected static Player player1; // this could perhaps be moved to the Location class
+    
+    private Player player1; // this could perhaps be moved to the Location class
 
     
     public GameData()

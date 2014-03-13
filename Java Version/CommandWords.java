@@ -45,10 +45,11 @@ public class CommandWords
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(2).add("load");
 		validCommands.get(2).add("talk");		
-		validCommands.get(2).add("fight");
+
 		
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(3).add("save");
+		validCommands.get(3).add("fight");
 		
 		preGameCommands.add("load");
 		preGameCommands.add("new");

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.Map;
 
 public class Location implements java.io.Serializable
 {
@@ -37,7 +38,6 @@ public class Location implements java.io.Serializable
        return enemy;
     }
     public Enemy getEnemy(String enemyName){
-        
         return enemies.get(enemyName);
     }
 
@@ -60,9 +60,9 @@ public class Location implements java.io.Serializable
 
         if(enemies.size() != 0) {
             enemiesB = true;
-
-            for(String enemyName : enemies.keySet()) {
-                answer += " - " + enemyName + "\n";
+            
+            for(Map.Entry<String, Enemy> enemy: enemies.entrySet()) {
+                answer += " - " + enemy.getValue().getName() + "\n";
             }
         }
 

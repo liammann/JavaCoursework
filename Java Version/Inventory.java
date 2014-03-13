@@ -1,5 +1,5 @@
 import java.util.Set; // what does this do?
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -16,14 +16,14 @@ public class Inventory implements java.io.Serializable
     // instance variables - replace the example below with your own
     private int inventoryWeight = 0;
     private int inventoryWeightCapacity = 10;
-    private HashMap<String, MovableObject> playerInventory;
+    private LinkedHashMap<String, MovableObject> playerInventory;
     
     /**
      * Constructor for objects of class inventory
      */
     public Inventory()
     {
-        playerInventory = new HashMap<String, MovableObject>();
+        playerInventory = new LinkedHashMap<String, MovableObject>();
     }
     
     // We should not be outputting to the console from this class! Return a String instead.
@@ -73,6 +73,9 @@ public class Inventory implements java.io.Serializable
     }
     public MovableObject getWeapon(String weaponName){
         return playerInventory.get(weaponName);
+    }
+    public MovableObject getWeapon(){
+        return playerInventory.get(1);
     }
     /*
     public void setObjectName(String name, MovableObject object)
