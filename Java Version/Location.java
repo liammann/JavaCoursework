@@ -31,9 +31,14 @@ public class Location implements java.io.Serializable
         return this;
     }
 
-    public void addEnemy(String enemyName, Enemy enemy)
+    public Enemy addEnemy(String enemyName, Enemy enemy)
     {
        enemies.put(enemyName, enemy);
+       return enemy;
+    }
+    public Enemy getEnemy(String enemyName){
+        
+        return enemies.get(enemyName);
     }
 
     public void addFriend(String friendName, Friend friend)
@@ -164,6 +169,10 @@ public class Location implements java.io.Serializable
         }
         
         return true;
+    }
+    public Friend getFriend(String name)
+    {
+        return friends.get(name);
     }
     
     /*public Object getObject(String objectName)

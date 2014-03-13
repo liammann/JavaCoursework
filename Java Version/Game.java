@@ -6,6 +6,7 @@
  * NOTE TO SELF: I DON'T LIKE THE EXTRA LINE GIVEN WHEN OUTPUTTING THE STUFF IN A ROOM!
  * 
  */
+
 import java.util.ArrayList;
 import java.lang.Math;
 import java.io.*;
@@ -13,7 +14,12 @@ import java.io.*;
 public class Game
 {
     private GameData gameData;
+    private CommandsParser commandsParser;
     private String gameSaveLocation = "gamesaves/";
+        private  Enemy jozef, liam, tom, zain;
+    private boolean playerDefending = false; // used for combat
+    private boolean enemyDefending = false; // combat
+    private Player player;//combat
     
     public Game()
     {
@@ -68,6 +74,19 @@ public class Game
             if(output.equals("finished")) {
                 System.out.println("Congratulations on completing the game!");
                 break;
+            }
+            if(output.equals("fight")){
+                ArrayList<String> fightCommands = new ArrayList<String>();
+                
+                for(String fightCommand : command.split(" ")) {
+                    fightCommands.add(fightCommand);
+
+                }
+               System.out.println(player.getInventory().getWeapon(fightCommands.get(2)));               
+               System.out.println(fightCommands.get(2));
+               System.out.println(player.getInventory().getWeapon("sword"));               
+                boolean playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player.getInventory().getWeapon(fightCommands.get(2)));
+                
             }
                 
             if(output.equals("save")) {
@@ -175,13 +194,14 @@ public class Game
 
         pub.addDescription("In a campus pub")
            .withExit("east", outside)
-           .andItem(cider);
+           .andItem(cider)
+           .addEnemy("Liam",liam);
 
         theater.addDescription("Inside of a lecture theater")
                .withExit("west", outside)
                .andItem(chair)
                .andIsLocked();
-
+        
         lab.addDescription("In a computing lab")
            .withExit("north", outside)
            .withExit("east", office);
@@ -213,7 +233,7 @@ public class Game
         
         player.hasStrength(100)
              .withHealth(100)
-             .andHasWeapon(sword);
+             .andHasWeapon("sword", sword);
         
         // Enemies Weapons 
         MovableObject axe = new MovableObject("Axe", "Brutal axe", 2, 2.4);        
@@ -222,7 +242,7 @@ public class Game
         
         // upon enemy death, drop weapon in current room?
         
-        Enemy jozef, liam, tom, zain;
+
         
         jozef = new Enemy("Jozef");
         liam = new Enemy("Liam");
@@ -278,6 +298,7 @@ public class Game
         john.hasStrength(60)
               .withHealth(20);
         
+              
     
         //gameData.addFriend(Jordan.getName(), Jordan);
         //gameData.addFriend(James.getName(), James);
@@ -289,7 +310,60 @@ public class Game
         //}
         
     }
+    public boolean combatStartFight(Enemy enemy, String command, MovableObject weapon)
+    {
 
+        boolean playerWin = false;
+
+
+        while(!playerWin){
+            ArrayList<String> playerResult = playerTurn(enemyDefending, command, enemy, weapon);
+            ArrayList<String> enemyResult = enemyTurn(playerDefending, enemy);
+           
+            
+            
+            
+            if(player.getHealth() <= 0){
+                playerWin = false;
+                break;
+            }
+
+        }
+        return playerWin;
+    }   
+    public ArrayList<String> playerTurn(boolean enemyDefending, String command, Enemy enemy, MovableObject weapon)
+    {
+        ArrayList<String> answer = new ArrayList<String>();
+   
+        int hpDealt = 0;
+        if(weapon.getName().equals("sheild")){
+            answer.add("False");
+        }else {
+            hpDealt = (int) Math.floor(15*weapon.getWeaponModifier());
+            answer.add("True");
+        }
+        answer.add("'"+hpDealt+"'");
+        return answer;
+    }
+    
+    public ArrayList<String>  enemyTurn(boolean playerDefending, Enemy enemy)
+    {
+        ArrayList<String> answer = new ArrayList<String>();
+        
+         int x = 1 + (int)(Math.random() * ((3 - 1) + 1));
+         int hpDealt = 0;
+
+        if(x >= 2 ){
+            hpDealt = (int) Math.floor(15*enemy.getWeapon().getWeaponModifier());
+            answer.add("True");
+        }else{
+              answer.add("False");
+        }
+
+        return answer;
+
+
+    }
     private String welcome()
     {
         return "\nWelcome to the Pub Crawl Game!\n "
