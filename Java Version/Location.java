@@ -11,6 +11,7 @@ public class Location implements java.io.Serializable
     private HashMap<String, Object> items;
     private HashMap<String, Enemy> enemies;
     private HashMap<String, Friend> friends;
+    rivate HashMap<String, MovableObject> movableItems;
 
     public static Location create()
     {
@@ -95,9 +96,19 @@ public class Location implements java.io.Serializable
         return this;
     }
     
-    public void removeItem(MovableObject item) // item name or by object?
+    public void addMovableObject(String name, MovableObject object)
     {
-        //items.remove(item);
+        movableItems.add(name, object);
+    }
+    
+    public void removeItem(String item)
+    {
+        items.remove(item);
+    }
+    
+    public movableObject getObjectByName(String item)
+    {
+        return items.get(item);
     }
 
     public String getShortDescription()

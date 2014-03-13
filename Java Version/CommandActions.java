@@ -126,14 +126,18 @@ public class CommandActions
 
     private String pickup(String item)
     {
-        
-        return "Not implemented yet?";
+        MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(item);
+        gameData.getPlayer1Object().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
+        gameData.getCurrentLocation().removeItem(item);
+        return "You picked up " + item.getObjectName();
     }
 
     private String drop(String item)
     {
-        
-        return "Not implemented yet?";
+        MovableObject thisObject = gameData.getPlayer1Object().getInventory().getObjectByName(item);
+        gameData.getCurrentLocation().addMovableObject(item.getObjectName, item);
+        gameData.getPlayer1Object().getInventory().dropFromInventory(item);
+        return "you dropped " + item.getObjectName();
     }
 
     private String fight(String who)
