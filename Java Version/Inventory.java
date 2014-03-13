@@ -38,9 +38,14 @@ public class Inventory implements java.io.Serializable
         }
     }
     
-    public void dropFromInventory(String index)
+    public void dropFromInventory(String item)
     {
-        playerInventory.remove(index);
+        playerInventory.remove(item);
+    }
+    
+    public MovableObject getFromInventoryByName(String item)
+    {
+        return playerInventory.get(item);
     }
     
     public String currentInventory(){

@@ -126,17 +126,13 @@ public class CommandActions
 
     private String pickup(String item)
     {
-        // gameData.getPlayer1Object().getInventory().addItemToInventory(gameData.getPlayer1Object().getInventory().getObjectByName(item));
-        // gameData.getCurrentLocation().removeItem(gameData.getPlayer1Object().getInventory().getObjectByName(item));
-        // return "You Picked up" + item;
+        
         return "Not implemented yet?";
     }
 
     private String drop(String item)
     {
-        // gameData.getCurrentLocation().andItem(gameData.getPlayer1Object().getInventory().getObjectByName(item));
-        // gameData.getPlayer1Object().getInventory().dropFromInventory(gameData.getPlayer1Object().getInventory().getObjectByName(item));
-        // return "You dropped" + item;
+        
         return "Not implemented yet?";
     }
 
