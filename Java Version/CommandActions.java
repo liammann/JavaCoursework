@@ -85,6 +85,9 @@ public class CommandActions
             case "talk":
                 answer = talk(parameters);
                 break;
+            case "fight":
+                answer = fight(parameters);
+                break;
             case "load":
                 answer = loadGame(parameters);
                 break;
@@ -139,18 +142,12 @@ public class CommandActions
 
     private String fight(String who)
     {
-        /*for(Enemy enemy : gameData.getCurrentLocation()) {
-            if(enemy.getName().equals(who)) {
-                Combat fight = new Combat(enemy, gameData);
-                boolean playerWins = fight.startFight();
-                return "You have Defeated " + who;
-            }
-
-        }*/
-
-        return "Fight Who?";
+        return "fight";
     }
-
+    private String fight(ArrayList parameters)
+    {
+        return "fight";
+    }
     private String go(String direction)
     {
         if(!gameData.getCurrentLocation().isValidExit(direction)) {
@@ -236,7 +233,7 @@ public class CommandActions
             return "The friend specified is invalid!";
         }
         
-        return gameData.getFriend(nameOfPerson).response();
+        return gameData.getCurrentLocation().getFriend(nameOfPerson).response();
     }
     
     private String inspect(String parameter)

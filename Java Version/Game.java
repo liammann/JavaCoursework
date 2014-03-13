@@ -18,7 +18,7 @@ public class Game
     public Game()
     {
         gameData = GameData.getInstance();
-        gameData.commandsParser = new CommandsParser();
+        commandsParser = new CommandsParser();
         preGame();
     }
     
@@ -32,8 +32,8 @@ public class Game
         System.out.println("=============================");
         
         quitGame: while(true) {
-            String command = gameData.commandsParser.getCommand();
-            String output = gameData.commandsParser.parseCommand(command);
+            String command = commandsParser.getCommand();
+            String output = commandsParser.parseCommand(command);
 
             switch(output) {
                 case "quit":
@@ -58,8 +58,8 @@ public class Game
         while(true) {
             System.out.print("\n> ");
 
-            String command = gameData.commandsParser.getCommand();
-            String output = gameData.commandsParser.parseCommand(command);
+            String command = commandsParser.getCommand();
+            String output = commandsParser.parseCommand(command);
                 
             if(output.equals("quit")) {
                 break;
@@ -189,11 +189,11 @@ public class Game
         office.addDescription("In a computing Admin office")
               .withExit("west", lab);
         
-        gameData.places = new ArrayList<Location>();
-        gameData.places.add(theater);
-        gameData.places.add(pub);
-        gameData.places.add(lab);
-        gameData.places.add(office);
+        gameData.locations = new ArrayList<Location>();
+        gameData.locations.add(theater);
+        gameData.locations.add(pub);
+        gameData.locations.add(lab);
+        gameData.locations.add(office);
 
         /* This is a note for myself (Tom) so that I don't forget
          * Character objects could be placed in an ArrayList field apart of the Location class
@@ -207,11 +207,11 @@ public class Game
         MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 0.1);
         //gameData.player1 = new Player("Player1", 100, 100, sword);
         
-        Player player1;
+
         
-        player1 = new Player("Player 1");
+        player = new Player("Player 1");
         
-        player1.hasStrength(100)
+        player.hasStrength(100)
              .withHealth(100)
              .andHasWeapon(sword);
         

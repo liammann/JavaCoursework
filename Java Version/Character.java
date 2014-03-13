@@ -6,7 +6,6 @@ public abstract class Character implements java.io.Serializable
 {
     protected String name;
     protected int health; 
-    protected Location currentLocation;
     protected int strength;
     protected Inventory inventory;
 
@@ -39,15 +38,8 @@ public abstract class Character implements java.io.Serializable
         health = newHealth;
     }
 
-    public void setLocation(Location current)
-    {
-        currentLocation = current;
-    }
 
-    public Location getLocation()
-    {
-        return currentLocation;
-    }
+
     
     public Inventory getInventory()
     {
