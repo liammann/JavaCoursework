@@ -188,8 +188,8 @@ public class Game
     {
         Location outside, theater, pub, lab, office;
 
-        MovableObject cider = new MovableObject("Bottle of cider", "Half a bottle of Strongbow cider", 2);        
-        FixedObject chair = new FixedObject("Chair", "An old wooden chair");
+        MovableObject cider = new MovableObject("cider", "Half a bottle of Strongbow cider", 2);        
+        FixedObject chair = new FixedObject("chair", "An old wooden chair");
 
         outside = Location.create();
         theater = Location.create();

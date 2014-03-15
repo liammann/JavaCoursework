@@ -29,7 +29,7 @@ public class Inventory implements java.io.Serializable
     // We should not be outputting to the console from this class! Return a String instead.
     public void addItemToInventory(String itemName, MovableObject item)
     {
-        if (inventoryWeight() <= inventoryWeightCapacity)
+        if (inventoryWeight() + item.getWeight() <= inventoryWeightCapacity)
         {
             playerInventory.put(itemName, item);
             //System.out.println(item.getObjectName() + " has been put in your bag.");
