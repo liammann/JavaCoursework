@@ -236,7 +236,7 @@ public class Game
         pub.addDescription("In a campus pub")
            .withExit("east", outside)
            .andEnemy("liam",liam)
-           .andHasObject(cider);
+           .andHasObject(key);
 
         theater.addDescription("Inside of a lecture theater")
                .withExit("west", outside)

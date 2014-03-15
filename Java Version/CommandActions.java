@@ -186,9 +186,19 @@ public class CommandActions
         if(!gameData.getCurrentLocation().isValidExit(direction)) {
             return "Invalid exit!";
         }
-        System.out.println(gameData.getPlayerObject().getName());
-            
-        
+
+        if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key") != null){
+            if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode() == gameData.getCurrentLocation().getPasscode()){
+                System.out.println("pass- "+gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode()+" "+gameData.getCurrentLocation().getPasscode());                
+
+            }else {
+                System.out.println("fail2");                
+            }
+        }else{
+            System.out.println("You havent got the key");                
+        }
+
+                
         if(gameData.getCurrentLocation().getExit(direction).isLocked()) {
             return "That room is locked!";
         }
