@@ -211,15 +211,18 @@ public class Location implements java.io.Serializable
         locationPasscode = passcode;
         return this;
     }
-
     public boolean isLocked()
     {
         return isLocked;
     }
-
     public void unlock()
     {
         isLocked = false;
+    }
+    
+    public int getPasscode(){
+        return locationPasscode;
+        
     }
     
     public boolean isValidFriend(String name)
