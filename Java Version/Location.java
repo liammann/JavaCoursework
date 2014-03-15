@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+//import java.util.Set;
 import java.util.Map;
 
 public class Location implements java.io.Serializable
@@ -8,20 +8,21 @@ public class Location implements java.io.Serializable
     private String description;
     private HashMap<String, Location> exits;
     private boolean isLocked = false;
-    private HashMap<String, Object> items;
+    private HashMap<String, FixedObject> fixedObjects;
+    private HashMap<String, MovableObject> movableObjects;
     private HashMap<String, Enemy> enemies;
     private HashMap<String, Friend> friends;
-    private HashMap<String, MovableObject> movableItems;
 
     public static Location create()
     {
-        return new Location();
+        return new Location(); // do I need? Keep consistent with creating new characters
     }
 
     public Location()
     {
         exits = new HashMap<String, Location>();
-        items = new HashMap<String, Object>();
+        fixedObjects = new HashMap<String, FixedObject>();
+        movableObjects = new HashMap<String, MovableObject>();
         enemies = new HashMap<String, Enemy>();
         friends = new HashMap<String, Friend>();
     }
@@ -32,13 +33,9 @@ public class Location implements java.io.Serializable
 
         return this;
     }
-
-    public Enemy addEnemy(String enemyName, Enemy enemy)
+    
+    public Enemy getEnemy(String enemyName)
     {
-       enemies.put(enemyName, enemy);
-       return enemy;
-    }
-    public Enemy getEnemy(String enemyName){
         return enemies.get(enemyName);
     }    
     
@@ -46,11 +43,22 @@ public class Location implements java.io.Serializable
         return enemies.remove(enemyName);
     }
 
-    public void addFriend(String friendName, Friend friend)
+    public Location andEnemy(String enemyName, Enemy enemy)
+    {
+       enemies.put(enemyName, enemy);
+
+       return this;
+    }
+
+<<<<<<< HEAD
+=======
+    public void andFriend(String friendName, Friend friend)
     {
        friends.put(friendName, friend);
     }
 
+    // Maybe segregate the friends from the enemies?
+>>>>>>> FETCH_HEAD
     public String getLocationCharacters()
     {
         boolean friendsB = false;
@@ -87,26 +95,28 @@ public class Location implements java.io.Serializable
         return this;
     }
 
-    public Location andItem(Object item) // implement a second parameter for quantity?
+    public Location andHasObject(FixedObject object) // implement a second parameter for quantity?
     {
-        items.put(item.getName(), item);
+        fixedObjects.put(object.getName(), object);
 
         return this;
     }
     
-    public void addMovableObject(String name, MovableObject object)
+    public Location andHasObject(MovableObject object) // implement a second parameter for quantity?
     {
-        movableItems.put(name, object);
+        movableObjects.put(object.getName(), object);
+
+        return this;
+    }
+
+    public void removeObject(String objectName)
+    {
+        movableObjects.remove(objectName);
     }
     
-    public void removeItem(String item)
+    public MovableObject getObjectByName(String objectName)
     {
-        items.remove(item);
-    }
-    
-    public MovableObject getObjectByName(String itemName)
-    {
-        return movableItems.get(itemName);
+        return movableObjects.get(objectName);
     }
 
     public String getShortDescription()
@@ -121,17 +131,27 @@ public class Location implements java.io.Serializable
 
     public String getLocationItems()
     {
-        if(items.size() != 0) {
-            String answer = "This room has the following objects:\n";
-
-            for(String itemName : items.keySet()) {
-                answer += " - " + itemName + "\n";
+        String answer = "This room has the following objects:\n";
+        
+        answer += "Fixed objects:\n";
+        if(fixedObjects.size() != 0) {
+            for(String fObjectName : fixedObjects.keySet()) {
+                answer += " - " + fObjectName + "\n";
             }
-
-            return answer;
+        }else{
+            answer += "none";
         }
-
-        return "There are no items in this room \n";
+        
+        answer += "\n\nMovable objects:\n";
+        if(movableObjects.size() != 0) {
+            for(String mObjectName : movableObjects.keySet()) {
+                answer += " - " + mObjectName + "\n";
+            }
+        }else{
+            answer += "none";
+        }
+        
+        return answer;
     }
 
     public String showExits()
@@ -179,6 +199,7 @@ public class Location implements java.io.Serializable
         
         return true;
     }
+    
     public Friend getFriend(String name)
     {
         return friends.get(name);

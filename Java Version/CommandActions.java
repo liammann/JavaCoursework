@@ -124,18 +124,20 @@ public class CommandActions
         return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
 
-    private String pickup(String item)
+    private String pickup(String objectName)
     {
-        MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(item);
+        // validate object exists in location
+        MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(objectName);
         gameData.getPlayer1Object().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
-        gameData.getCurrentLocation().removeItem(item);
-        return "You picked up " + item;
+        gameData.getCurrentLocation().removeObject(objectName);
+        return "You picked up " + objectName;
     }
 
     private String drop(String item)
     {
-        MovableObject thisObject = gameData.getPlayer1Object().getInventory().getFromInventoryByName(item);
-        gameData.getCurrentLocation().addMovableObject(item, thisObject);
+        // validate object exists in inventory
+        MovableObject object = gameData.getPlayer1Object().getInventory().getFromInventoryByName(item);
+        gameData.getCurrentLocation().andHasObject(object);
         gameData.getPlayer1Object().getInventory().dropFromInventory(item);
         return "you dropped " + item;
     }
@@ -144,10 +146,12 @@ public class CommandActions
     {
         return "fight";
     }
+    
     private String fight(ArrayList parameters)
     {
         return "fight";
     }
+    
     private String go(String direction)
     {
         if(!gameData.getCurrentLocation().isValidExit(direction)) {
@@ -163,10 +167,13 @@ public class CommandActions
 
     private String updateLocation(String direction)
     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> FETCH_HEAD
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
 
-        return gameData.getCurrentLocation().getLongDescription()+                
+        return gameData.getCurrentLocation().getLongDescription()+
                 gameData.getCurrentLocation().getLocationCharacters()+
                 gameData.getCurrentLocation().getLocationItems();
     }
