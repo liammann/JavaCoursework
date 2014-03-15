@@ -106,6 +106,7 @@ public class Game
                 
             if(output.equals("save")) {
                 //if(saveGame()) {
+                    saveGame();
                     System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
                 //}else{
                 //    System.out.print("There is already a game save with that name!");
@@ -147,12 +148,12 @@ public class Game
         ArrayList<String> savedGames = gameData.getSavedGames();
         String gameSaveNames = "";
         
-        if(savedGames.size() != 0){
-            for(String gameName : savedGames) {
-                gameSaveNames += "'" + gameName + "' ";
-            }
-        }else{
+        if(savedGames.size() == 0) {
             return "none";
+        }       
+        
+        for(String gameName : savedGames) {
+            gameSaveNames += "'" + gameName + "' ";
         }
 
         return gameSaveNames;
