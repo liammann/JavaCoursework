@@ -28,9 +28,18 @@ public class Location implements java.io.Serializable
         friends = new HashMap<String, Friend>();
     }
     
-    public boolean containsObject(String name)
+    public boolean containsMovableObject(String name)
     {
-        if(movableObjects.containsKey(name) || fixedObjects.containsKey(name)) {
+        if(movableObjects.containsKey(name)) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean containsFixedObject(String name)
+    {
+        if(fixedObjects.containsKey(name)) {
             return true;
         }
         
@@ -43,10 +52,12 @@ public class Location implements java.io.Serializable
 
         return this;
     }
+    
     public HashMap<String, Enemy> getEnemies()
     {
         return enemies;
-    }    
+    }
+    
     public Enemy getEnemy(String enemyName)
     {
         return enemies.get(enemyName);
@@ -62,7 +73,6 @@ public class Location implements java.io.Serializable
 
        return this;
     }
-
 
     public void andFriend(String friendName, Friend friend)
     {

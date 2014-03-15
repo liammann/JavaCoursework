@@ -126,26 +126,34 @@ public class CommandActions
     {
         return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
+    
+    /*
+     * pickup {objectName}
+     * Ensure that it is an object in the room (if not, then return that)
+     * Ensure that it is not a fixed object (if it is, then return that)
+     * Ensure it is a movable object in the room
+     * 
+     */
 
     private String pickup(String objectName)
     {
-        if (gameData.getCurrentLocation().containsObject(objectName)) {
-            Object object = gameData.getCurrentLocation().getObjectByName(objectName);
-            
-            if(object instanceof FixedObject) {
-                return "You cannot pick up fixed objects!";
-            }
-
-            if(gameData.getPlayerObject().getInventory().addItemToInventory((MovableObject) object)) {
-                gameData.getCurrentLocation().removeObject(objectName);
-
-                return "You picked up " + objectName;
-            }else{
-                return "You don't have enough strength to carry that either!";
-            }
+        if (gameData.getCurrentLocation().containsFixedObject(objectName)) {
+            return "You cannot pick up fixed objects!";
         }
-        
-        return "No such object exists in this room.";
+
+        if(!gameData.getCurrentLocation().containsMovableObject(objectName)) {
+            return "No such object exists in this room.";
+        }
+
+        MovableObject object = gameData.getCurrentLocation().getObjectByName(objectName);
+
+        if(gameData.getPlayerObject().getInventory().addItemToInventory((MovableObject) object)) {
+            gameData.getCurrentLocation().removeObject(objectName);
+
+            return "You picked up " + objectName;
+        }
+
+        return "You don't have enough strength to carry that either!";
     }
 
     private String drop(String objectName)
