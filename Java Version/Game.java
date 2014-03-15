@@ -92,6 +92,8 @@ public class Game
                        System.out.println("You have successfully beaten "+fightCommands.get(1)+"!");
                        System.out.println(gameData.getCurrentLocation().getLongDescription());
                     }
+                }else {
+                    System.out.print("Please put what weapon you would like to (fight NAME with WEAPON)");
                 }
 
 
