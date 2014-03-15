@@ -90,10 +90,11 @@ public class Game
                        break; // GAME OVER
                    }else{
                        System.out.println("You have successfully beaten "+fightCommands.get(1)+"!");
+                       System.out.println("You currently have: \n \t - "+player.getHealth()+ "health points \n \t - "+player.getStrength()+" strength points");                       
                        System.out.println(gameData.getCurrentLocation().getLongDescription());
                     }
                 }else {
-                    System.out.print("Please put what weapon you would like to (fight NAME with WEAPON)");
+                    System.out.print("Please put what weapon you would like to use (fight NAME with WEAPON)");
                 }
 
 
@@ -242,9 +243,6 @@ public class Game
     private void createCharacters()
     {
         MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 3.1);
-        //gameData.player1 = new Player("Player1", 100, 100, sword);
-        
-
         
         player = new Player("Player 1");
         
@@ -261,8 +259,6 @@ public class Game
         // upon enemy death, drop weapon in current room?
         
         // Dont use capitals for names 
-        
-        
         jozef.hasStrength(100)
              .withHealth(100)
              .andHasWeapon("dagger", dagger);
@@ -279,17 +275,6 @@ public class Game
             .withHealth(20)
             .andHasWeapon("dagger", dagger);
             
-     
-        
-        //gameData.bots = new ArrayList<Enemy>();
-        //gameData.bots.add(jozef);
-        //gameData.bots.add(liam);
-        //gameData.bots.add(tom);
-        //gameData.bots.add(zain);
-        
-        //for(Enemy bot : gameData.bots) {
-        //    gameData.places.get((int)Math.floor(Math.random() * gameData.bots.size())).addEnemy(bot.getName(), bot);
-        //}
         
         // Set up friendly characters
         Friend jordan, james, jeremy, john; // do friends need health? Given that they are not fighting anyone?
@@ -314,16 +299,6 @@ public class Game
         john.hasStrength(60)
               .withHealth(20);
         
-              
-    
-        //gameData.addFriend(Jordan.getName(), Jordan);
-        //gameData.addFriend(James.getName(), James);
-        //gameData.addFriend(Jeremy.getName(), Jeremy);
-        //gameData.addFriend(John.getName(), John);
-        
-        //for(Friend friend : gameData.getAllFriends()) {
-        //    gameData.places.get((int)Math.floor(Math.random() * gameData.friends.size())).addFriend(friend.getName(), friend);
-        //}
         
     }
     public boolean combatStartFight(Enemy enemy, String command, MovableObject weapon, Player player)
@@ -355,12 +330,12 @@ public class Game
                 
             if(player.getHealth() <= 0){
                 playerWin = false;
-                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", unfortunately it was your death. \n GAME OVER");
+                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+" \n, \t unfortunately it was your death. \n GAME OVER");
 
                 break;
             } else if(enemy.getHealth() <= 0){
                 playerWin = true;
-                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n");
+                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", \n and kill him only taking "+totalEnemyDealt+" health points.\n");
                 gameData.getCurrentLocation().removeEnemy(enemy.getName());
                 break;
             }
@@ -370,16 +345,17 @@ public class Game
     
     private String welcome()
     {
-        return "\nWelcome to the Pub Crawl Game!\n "
-              +"You wake up at Porsmouth Museum in 2014 not knwing how you got there.\n"
+        return "You wake up at Porsmouth Museum in 2014 not knwing how you got there.\n"
                +"but there is something quite different about the world you have woken up in.\n"
-               +"You hear people in distance shouting ‘vikings are here, get to gunwharf for rescue.\n"
+               +"You hear people in distance shouting ‘vikings are here, get to gunwharf for rescue.'\n"
 
                +"You look for weapon to protect yourself. You wonder around in museum for quite sometime\n"
                +"before finding sword and shield and start your journey to gunwharf thinking what is going on here\n"
                +"You find a letter at the front of the museum which gives you hint how to get there\n"
-               +"and what object you need to pick up.\n"
-               +gameData.getCurrentLocation().getLongDescription();
+               +"and what object you need to pick up.\n\n"
+               +gameData.getCurrentLocation().getLongDescription()+
+                gameData.getCurrentLocation().getLocationCharacters()+
+                gameData.getCurrentLocation().getLocationItems();
     }
     
 }

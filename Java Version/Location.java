@@ -51,12 +51,6 @@ public class Location implements java.io.Serializable
        friends.put(friendName, friend);
     }
 
-    public void removeCharacters()
-    {
-        enemies.clear();
-        friends.clear();
-    }
-
     public String getLocationCharacters()
     {
         boolean friendsB = false;

@@ -163,7 +163,7 @@ public class CommandActions
 
     private String updateLocation(String direction)
     {
-        gameData.getCurrentLocation().removeCharacters();
+
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
 
         return gameData.getCurrentLocation().getLongDescription()+                
