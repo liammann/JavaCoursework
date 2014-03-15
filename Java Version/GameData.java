@@ -5,7 +5,7 @@ public class GameData implements java.io.Serializable
 {
     private ArrayList<Location> locationHistory;
     private boolean gameStarted = false;
-    private transient ArrayList<String> savedGames;
+    private ArrayList<String> savedGames;
     private String gameName;
     protected  ArrayList<Location> locations;
     private static GameData instance = null;

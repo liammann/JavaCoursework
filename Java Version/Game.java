@@ -8,7 +8,7 @@
  */
 
 import java.util.ArrayList;
-import java.lang.Math;
+import java.lang.Math; // do we still need this?
 import java.io.*;
 
 public class Game
@@ -74,40 +74,47 @@ public class Game
                 break;
             }
                 
-            else if(output.equals("finished")) {
+            if(output.equals("finished")) {
                 System.out.println("Congratulations on completing the game!");
                 break;
             }
-            else if(output.equals("fight")){
+            
+            if(output.equals("fight")) {
                 ArrayList<String> fightCommands = new ArrayList<String>();
                 
                 for(String fightCommand : command.split(" ")) {
                     fightCommands.add(fightCommand);
-                }   
-                if(gameData.getCurrentLocation().getEnemies().containsKey(fightCommands.get(1))){
+                }
+
+                if(gameData.getCurrentLocation().getEnemies().containsKey(fightCommands.get(1))) {
                    // Check to see if the command was entered correctly eg. fight NAME with WEAPON
-                   if(fightCommands.size() > 3){ 
+                   if(fightCommands.size() > 3) { 
                        playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player.getInventory().getWeapon(fightCommands.get(3)), player);
-                       if(playerWin == false){
+                       
+                       if(playerWin == false) {
                            break; // GAME OVER
-                       }else{
-                           System.out.println("You have successfully beaten "+fightCommands.get(1)+"!");
-                           System.out.println("You currently have: \n \t - "+player.getHealth()+ " health points \n \t - "+player.getStrength()+" strength points");                       
-                           System.out.println(gameData.getCurrentLocation().getLongDescription());
-                        }
-                    }else {
+                       }
+                       
+                       System.out.println("You have successfully beaten "+fightCommands.get(1)+"!");
+                       System.out.println("You currently have: \n \t - "+player.getHealth()+ " health points \n \t - "+player.getStrength()+" strength points");                       
+                       System.out.println(gameData.getCurrentLocation().getLongDescription());
+                    }else{
                         System.out.print("Please put what weapon you would like to use (fight NAME with WEAPON)");
                     }
-
                 }
             }
                 
-            else if(output.equals("save")) {
-                saveGame();
-                System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
+            if(output.equals("save")) {
+                //if(saveGame()) {
+                    System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
+                //}else{
+                //    System.out.print("There is already a game save with that name!");
+                //}
             }else{
                 System.out.print(output);
             }
+            
+            // put in a load game method?
         }
 
         System.out.println("Thanks for playing!");
@@ -118,8 +125,12 @@ public class Game
         File files = new File("gamesaves/");
         File[] contents = files.listFiles(new FilenameFilter() {
             public boolean accept(File directory, String file) {
-                String fileName = file.split("\\.")[0];
-                return fileName.matches("[a-zA-Z]+"); // match [a-zA-Z]+\.ser ??
+                if(file.matches("[a-zA-Z]+\\.ser")) {
+                    String fileName = file.split("\\.")[0];
+                    return fileName.matches("[a-zA-Z]+");
+                }
+
+                return false;
             }
         });
        
@@ -153,22 +164,28 @@ public class Game
         play();
     }
     
-    private void saveGame() // don't overwrite a game save!
+    private void saveGame()
     {
+        //if(gameData.getGameSaves().contains()) PREVENTS OVERWRITING PREVIOUS GAME SAVES
         try {
+            gameData.addGameSave(gameData.getName());
+
             FileOutputStream gameSave = new FileOutputStream(gameSaveLocation + gameData.getName() + ".ser");
             ObjectOutputStream dataToSave = new ObjectOutputStream(gameSave);
+
             dataToSave.writeObject(gameData);
+
             dataToSave.close();
             gameSave.close();
         }catch(IOException ioe) {
             ioe.printStackTrace();
+        }catch(Exception e) {
+            e.printStackTrace();
         }
     }
 
     private void loadGame() //return a string for confirmation for overwrite?
     {
-        //        if(gameData.isGameSave(
         try {
             FileInputStream gameSaveFile = new FileInputStream("gamesaves/" + gameData.getName() + ".ser");
             ObjectInputStream gameSaveData = new ObjectInputStream(gameSaveFile);
