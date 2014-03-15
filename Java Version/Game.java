@@ -83,12 +83,17 @@ public class Game
                     fightCommands.add(fightCommand);
                 
                 }           
-
+               // Check to see if the command was entered correctly eg. fight NAME with WEAPON
                if(fightCommands.size() > 3){ 
                    playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player.getInventory().getWeapon(fightCommands.get(3)), player);
                    if(playerWin == false){
-                       break;
-                   }
+                       break; // GAME OVER
+                   }else{
+                       System.out.println("You have successfully beaten "+fightCommands.get(1)+"!");
+                       System.out.println(gameData.getCurrentLocation().getLongDescription());
+                    }
+                }else {
+                    System.out.print("Please put what weapon you would like to (fight NAME with WEAPON)");
                 }
 
 
@@ -354,7 +359,12 @@ public class Game
                 break;
             }else if(enemy.getHealth() <= 0) {
                 playerWin = true;
+<<<<<<< HEAD
                 System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n"+gameData.getCurrentLocation().getLongDescription());
+=======
+                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n");
+                gameData.getCurrentLocation().removeEnemy(enemy.getName());
+>>>>>>> FETCH_HEAD
                 break;
             }
         }
