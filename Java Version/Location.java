@@ -74,8 +74,8 @@ public class Location implements java.io.Serializable
         if(enemies.size() != 0) {
             enemiesB = true;
             
-            for(Map.Entry<String, Enemy> enemy: enemies.entrySet()) {
-                answer += " - " + enemy.getValue().getName() + "\n";
+            for(String enemyName : enemies.keySet()) {
+                answer += " - " + enemyName + "\n";
             }
         }
 
@@ -83,7 +83,7 @@ public class Location implements java.io.Serializable
             friendsB = true;
 
             for(String friendName : friends.keySet()) {
-                answer += " - " + friendName + "\n";
+               // answer += " - " + friendName + "\n";
             }
         }
 
