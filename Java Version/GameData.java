@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class GameData implements java.io.Serializable
 {
     private ArrayList<Location> locationHistory;
-    private transient boolean gameStarted = false;
+    private boolean gameStarted = false;
     private transient ArrayList<String> savedGames;
     private String gameName;
     protected  ArrayList<Location> locations;

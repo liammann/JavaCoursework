@@ -136,6 +136,7 @@ public class CommandActions
         } else {
             return "No such object exists in this room.";
         }
+        // return cannot pickup fixed objects...
     }
 
     private String drop(String objectName)
