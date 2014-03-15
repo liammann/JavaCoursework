@@ -138,17 +138,21 @@ public class CommandActions
         }
     }
 
-    private String drop(String item)
+    private String drop(String objectName)
     {
         // validate object exists in inventory
+<<<<<<< HEAD
+        if (gameData.getCurrentLocation().containsObject(objectName))
+=======
         if (gameData.getPlayer1Object().getInventory().containsObject(item))
+>>>>>>> FETCH_HEAD
         {
-            MovableObject object = gameData.getPlayer1Object().getInventory().getFromInventoryByName(item);
-            gameData.getCurrentLocation().andHasObject(object);
-            gameData.getPlayer1Object().getInventory().dropFromInventory(item);
-            return "you dropped " + item;
+            MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(objectName);
+            gameData.getPlayer1Object().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
+            gameData.getCurrentLocation().removeObject(objectName);
+            return "You picked up " + objectName;
         } else {
-            return "You don't have one to drop.";
+            return "No such object exists in this room.";
         }
     }
 
@@ -180,9 +184,10 @@ public class CommandActions
 
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
 
-        return gameData.getCurrentLocation().getLongDescription()+
+        return  gameData.getCurrentLocation().getLongDescription()+
                 gameData.getCurrentLocation().getLocationCharacters()+
-                gameData.getCurrentLocation().getLocationItems();
+                gameData.getCurrentLocation().getLocationItems()+
+                gameData.getCurrentLocation().getExits();
     }
     
     private String newGame(String parameter)
