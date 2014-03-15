@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-//import java.util.Set;
-import java.util.Map;
+import java.util.Map; // is this needed still?
 
 public class Location implements java.io.Serializable
 {
@@ -28,9 +27,22 @@ public class Location implements java.io.Serializable
         friends = new HashMap<String, Friend>();
     }
     
-    public boolean containsObject(String name)
+    public boolean containsMovableObject(String name)
     {
-        return movableObjects.containsKey(name);
+        if(movableObjects.containsKey(name)) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean containsFixedObject(String name)
+    {
+        if(fixedObjects.containsKey(name)) {
+            return true;
+        }
+        
+        return false;
     }
 
     public Location addDescription(String description)
@@ -39,16 +51,19 @@ public class Location implements java.io.Serializable
 
         return this;
     }
+    
     public HashMap<String, Enemy> getEnemies()
     {
         return enemies;
-    }    
+    }
+    
     public Enemy getEnemy(String enemyName)
     {
         return enemies.get(enemyName);
     }    
     
-    public Enemy removeEnemy(String enemyName){
+    public Enemy removeEnemy(String enemyName)
+    {
         return enemies.remove(enemyName);
     }
 
@@ -58,7 +73,6 @@ public class Location implements java.io.Serializable
 
        return this;
     }
-
 
     public void andFriend(String friendName, Friend friend)
     {
@@ -219,9 +233,4 @@ public class Location implements java.io.Serializable
     {
         return friends.get(name);
     }
-    
-    /*public Object getObject(String objectName)
-    {
-        //
-    }*/
 }

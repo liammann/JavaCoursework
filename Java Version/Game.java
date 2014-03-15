@@ -8,7 +8,7 @@
  */
 
 import java.util.ArrayList;
-import java.lang.Math; // do we still need this?
+import java.lang.Math;
 import java.io.*;
 
 public class Game
@@ -95,8 +95,8 @@ public class Game
                            break; // GAME OVER
                        }
                        
-                       System.out.println("You have successfully beaten "+fightCommands.get(1)+"!");
-                       System.out.println("You currently have: \n \t - "+player1.getHealth()+ " health points \n \t - "+player1.getStrength()+" strength points");                       
+                       System.out.println("You have successfully beaten " + fightCommands.get(1) + "!");
+                       System.out.println("You currently have: \n \t - " + player1.getHealth() + " health points \n \t - " + player1.getStrength() + " strength points");                       
                        System.out.println(gameData.getCurrentLocation().getLongDescription());
                     }else{
                         System.out.print("Please put what weapon you would like to use (fight NAME with WEAPON)");
@@ -268,7 +268,7 @@ public class Game
         
         player1.hasStrength(100)
              .withHealth(100)
-             .andHasWeapon("sword", sword);
+             .andHasWeapon(sword);
         
         gameData.addPlayer(player1);
 
@@ -287,19 +287,19 @@ public class Game
         // Dont use capitals for names 
         jozef.hasStrength(100)
              .withHealth(100)
-             .andHasWeapon("dagger", dagger);
+             .andHasWeapon(dagger);
 
         liam.hasStrength(40)
             .withHealth(5)
-            .andHasWeapon("axe", axe);
+            .andHasWeapon(axe);
 
         tom.hasStrength(70)
            .withHealth(30)
-           .andHasWeapon("mace", mace);
+           .andHasWeapon(mace);
 
         zain.hasStrength(60)
             .withHealth(20)
-            .andHasWeapon("dagger", dagger);
+            .andHasWeapon(dagger);
             
         
         // Set up friendly characters
@@ -341,12 +341,12 @@ public class Game
 
         while(!playerWin){
             
-            if(weapon.getName().equals("sheild")) {
+            /*if(weapon.getName().equals("sheild")) {
                 playerDealt = (int) Math.floor(10);
             }else{
                 playerDealt = (int) Math.floor(15*weapon.getWeaponModifier());                
-                enemyDealt = (int) Math.floor(14*enemy.getWeapon().getWeaponModifier());
-            }
+                enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier());//getWeapon().getWeaponModifier());
+            }*/
             
             totalEnemyDealt += enemyDealt;
             totalPlayerDealt += playerDealt;
@@ -388,5 +388,4 @@ public class Game
                 gameData.getCurrentLocation().getLocationItems()+
                 gameData.getCurrentLocation().getExits();
     }
-    
 }

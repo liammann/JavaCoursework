@@ -1,4 +1,3 @@
-import java.util.Set; // what does this do?
 import java.util.LinkedHashMap;
 import java.util.ArrayList;
 import java.util.Map;
@@ -13,53 +12,50 @@ import java.util.Map;
 
 public class Inventory implements java.io.Serializable
 {
-    // instance variables - replace the example below with your own
     private int inventoryWeight = 0;
     private int inventoryWeightCapacity = 10;
     private LinkedHashMap<String, MovableObject> playerInventory;
-    
-    /**
-     * Constructor for objects of class inventory
-     */
+
     public Inventory()
     {
         playerInventory = new LinkedHashMap<String, MovableObject>();
     }
-    
-    // We should not be outputting to the console from this class! Return a String instead.
-    public void addItemToInventory(String itemName, MovableObject item)
+
+    public boolean addItemToInventory(MovableObject item)
     {
-        if (inventoryWeight() + item.getWeight() <= inventoryWeightCapacity)
-        {
-            playerInventory.put(itemName, item);
-            //System.out.println(item.getObjectName() + " has been put in your bag.");
-        } else {
-            System.out.println("Your bag's too heavy already. Try dropping something before picking this up.");
+        if (inventoryWeight() + item.getWeight() > inventoryWeightCapacity) {
+            return false;
         }
+        
+        playerInventory.put(item.getName(), item);
+
+        return true;
     }
     
-    public void dropFromInventory(String item)
+    public void dropFromInventory(String objectName)
     {
-        playerInventory.remove(item);
+        inventoryWeight -= getFromInventoryByName(objectName).getWeight();
+        playerInventory.remove(objectName);
     }
     
-    public MovableObject getFromInventoryByName(String item)
+    public MovableObject getFromInventoryByName(String objectName)
     {
-        return playerInventory.get(item);
+        return playerInventory.get(objectName);
     }
     
     public boolean containsObject(String name)
     {
         return playerInventory.containsKey(name);
     }
-    
-    public String currentInventory(){
 
+    public String currentInventory()
+    {
         String returntxt = "You currently have: \n";
+
         for(Map.Entry<String, MovableObject> item: playerInventory.entrySet()) {
-        
             returntxt += "  - " + item.getValue().getObjectDescription() + "\n";
         }
+
         return returntxt;
     }
     
@@ -70,27 +66,20 @@ public class Inventory implements java.io.Serializable
     
     public int inventoryWeight()
     {
-        for(Map.Entry<String, MovableObject> item: playerInventory.entrySet())
-        {
+        for(Map.Entry<String, MovableObject> item: playerInventory.entrySet()) {
             inventoryWeight += item.getValue().getWeight();
         }
+
         return inventoryWeight;
     }
-    public MovableObject getWeapon(String weaponName){
+    
+    public MovableObject getWeapon(String weaponName)
+    {
         return playerInventory.get(weaponName);
     }
-    public MovableObject getWeapon(){
-        return playerInventory.get(1);
-    }
-    /*
-    public void setObjectName(String name, MovableObject object)
-    {
-        movableObjectNames.put(name, object);
-    }
     
-    public MovableObject getObjectByName(String object)
+    public MovableObject getWeapon()
     {
-        return movableObjectNames.get(object);
+        return playerInventory.get(0);
     }
-    */
 }

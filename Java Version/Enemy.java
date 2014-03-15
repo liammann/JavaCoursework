@@ -1,7 +1,5 @@
 public class Enemy extends Character implements java.io.Serializable
 {
-    private MovableObject weapon;
-
     public Enemy(String name)
     {
         super(name);
@@ -22,15 +20,9 @@ public class Enemy extends Character implements java.io.Serializable
         return this;
     }
     
-    public Enemy andHasWeapon(String weaponName, MovableObject weapon)
+    public Enemy andHasWeapon(MovableObject weapon)
     {
-        this.weapon = weapon;
-        getInventory().addItemToInventory(weaponName, weapon);
+        getInventory().addItemToInventory(weapon);
         return this;
-    }
-
-    public MovableObject getWeapon()
-    {
-        return weapon;
     }
 }

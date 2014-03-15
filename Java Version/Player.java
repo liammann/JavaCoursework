@@ -1,13 +1,9 @@
 
 public class Player extends Character implements java.io.Serializable
 {
-    private MovableObject weapon;
-    private String weaponName;
-    
-    public Player (String name)
+    public Player(String name)
     {
         super(name);
-
     }
     
     @Override
@@ -26,12 +22,9 @@ public class Player extends Character implements java.io.Serializable
         return this;
     }
 
-    public Player andHasWeapon(String weaponName, MovableObject weapon)
+    public Player andHasWeapon(MovableObject weapon)
     {
-        this.weapon = weapon;        
-        this.weaponName = weaponName;
-        getInventory().addItemToInventory(weaponName, weapon);
+        getInventory().addItemToInventory(weapon);
         return this;
     }
-
 }
