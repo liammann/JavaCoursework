@@ -141,7 +141,11 @@ public class CommandActions
     private String drop(String objectName)
     {
         // validate object exists in inventory
+<<<<<<< HEAD
         if (gameData.getCurrentLocation().containsObject(objectName))
+=======
+        if (gameData.getPlayer1Object().getInventory().containsObject(item))
+>>>>>>> FETCH_HEAD
         {
             MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(objectName);
             gameData.getPlayer1Object().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
