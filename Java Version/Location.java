@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-//import java.util.Set;
-import java.util.Map;
+import java.util.Map; // is this needed still?
 
 public class Location implements java.io.Serializable
 {
@@ -63,7 +62,8 @@ public class Location implements java.io.Serializable
         return enemies.get(enemyName);
     }    
     
-    public Enemy removeEnemy(String enemyName){
+    public Enemy removeEnemy(String enemyName)
+    {
         return enemies.remove(enemyName);
     }
 
@@ -230,9 +230,4 @@ public class Location implements java.io.Serializable
     {
         return friends.get(name);
     }
-    
-    /*public Object getObject(String objectName)
-    {
-        //
-    }*/
 }

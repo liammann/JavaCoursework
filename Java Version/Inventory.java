@@ -17,16 +17,12 @@ public class Inventory implements java.io.Serializable
     private int inventoryWeight = 0;
     private int inventoryWeightCapacity = 10;
     private LinkedHashMap<String, MovableObject> playerInventory;
-    
-    /**
-     * Constructor for objects of class inventory
-     */
+
     public Inventory()
     {
         playerInventory = new LinkedHashMap<String, MovableObject>();
     }
-    
-    // We should not be outputting to the console from this class! Return a String instead.
+
     public boolean addItemToInventory(MovableObject item)
     {
         if (inventoryWeight() + item.getWeight() <= inventoryWeightCapacity) {
@@ -69,10 +65,10 @@ public class Inventory implements java.io.Serializable
     
     public int inventoryWeight()
     {
-        for(Map.Entry<String, MovableObject> item: playerInventory.entrySet())
-        {
+        for(Map.Entry<String, MovableObject> item: playerInventory.entrySet()) {
             inventoryWeight += item.getValue().getWeight();
         }
+
         return inventoryWeight;
     }
     

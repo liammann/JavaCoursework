@@ -153,19 +153,19 @@ public class CommandActions
             return "You picked up " + objectName;
         }
 
-        return "You don't have enough strength to carry that either!";
+        return "You don't have enough strength to carry that!";
     }
 
     private String drop(String objectName)
     {
-        // validate object exists in inventory
-        if (gameData.getPlayerObject().getInventory().containsObject(objectName)) {
-            MovableObject object = gameData.getCurrentLocation().getObjectByName(objectName);
-            gameData.getCurrentLocation().andHasObject(object);
-            return "You dropped your " + objectName;
+        if (!gameData.getPlayerObject().getInventory().containsObject(objectName)) {
+            return "No such object exists in your inventory.";
         }
         
-        return "No such object exists in your inventory.";
+        gameData.getCurrentLocation().andHasObject(gameData.getPlayerObject().getInventory().getFromInventoryByName(objectName));
+        gameData.getPlayerObject().getInventory().dropFromInventory(objectName);
+
+        return "You dropped your " + objectName;
     }
 
     private String fight(String who)
