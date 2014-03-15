@@ -206,7 +206,6 @@ public class Game
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
-               .andEnemy("tom", tom)
                .andHasObject(chair);
                
         pub.addDescription("In a campus pub")
@@ -221,7 +220,8 @@ public class Game
         
         lab.addDescription("In a computing lab")
            .withExit("north", outside)
-           .withExit("east", office);
+           .withExit("east", office)
+           .andEnemy("tom", tom);
 
         office.addDescription("In a computing Admin office")
               .withExit("west", lab);
@@ -330,19 +330,16 @@ public class Game
             if(player.getHealth() <= 0) {
                 playerWin = false;
 
-                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+" \n, \t unfortunately it was your death. \n GAME OVER");
-                System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", unfortunately it was your death. \n GAME OVER");
+                System.out.println("You fight the evil "+enemy.getName()+ " to death with your "+weapon.getObjectName()+" \n, \t unfortunately it was your death. \n GAME OVER");
+
 
 
                 break;
             }else if(enemy.getHealth() <= 0) {
                 playerWin = true;
 
-                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", \n and kill him only taking "+totalEnemyDealt+" health points.\n");
+                System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n");
 
-
-                System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n"+gameData.getCurrentLocation().getLongDescription());
-                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n");
 
                 gameData.getCurrentLocation().removeEnemy(enemy.getName());
                 break;
