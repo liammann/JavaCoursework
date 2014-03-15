@@ -151,11 +151,7 @@ public class Location implements java.io.Serializable
                 answer += "\t\n" + mObjectName;
             }
         }else{
-<<<<<<< HEAD
             answer += "\tnone";
-=======
-            answer += "none \n";
->>>>>>> FETCH_HEAD
         }
         
         return answer;
