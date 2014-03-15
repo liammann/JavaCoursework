@@ -167,10 +167,7 @@ public class CommandActions
 
     private String updateLocation(String direction)
     {
-<<<<<<< HEAD
 
-=======
->>>>>>> FETCH_HEAD
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
 
         return gameData.getCurrentLocation().getLongDescription()+

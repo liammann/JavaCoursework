@@ -50,15 +50,13 @@ public class Location implements java.io.Serializable
        return this;
     }
 
-<<<<<<< HEAD
-=======
+
     public void andFriend(String friendName, Friend friend)
     {
        friends.put(friendName, friend);
     }
 
     // Maybe segregate the friends from the enemies?
->>>>>>> FETCH_HEAD
     public String getLocationCharacters()
     {
         boolean friendsB = false;

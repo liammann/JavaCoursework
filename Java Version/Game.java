@@ -90,7 +90,7 @@ public class Game
                        break; // GAME OVER
                    }else{
                        System.out.println("You have successfully beaten "+fightCommands.get(1)+"!");
-                       System.out.println("You currently have: \n \t - "+player.getHealth()+ "health points \n \t - "+player.getStrength()+" strength points");                       
+                       System.out.println("You currently have: \n \t - "+player.getHealth()+ " health points \n \t - "+player.getStrength()+" strength points");                       
                        System.out.println(gameData.getCurrentLocation().getLongDescription());
                     }
                 }else {
@@ -329,22 +329,21 @@ public class Game
                 
             if(player.getHealth() <= 0) {
                 playerWin = false;
-<<<<<<< HEAD
+
                 System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+" \n, \t unfortunately it was your death. \n GAME OVER");
-=======
                 System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", unfortunately it was your death. \n GAME OVER");
->>>>>>> FETCH_HEAD
+
 
                 break;
             }else if(enemy.getHealth() <= 0) {
                 playerWin = true;
-<<<<<<< HEAD
+
                 System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", \n and kill him only taking "+totalEnemyDealt+" health points.\n");
-=======
+
 
                 System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n"+gameData.getCurrentLocation().getLongDescription());
                 System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n");
->>>>>>> FETCH_HEAD
+
                 gameData.getCurrentLocation().removeEnemy(enemy.getName());
                 break;
             }
