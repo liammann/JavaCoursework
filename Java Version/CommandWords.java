@@ -44,7 +44,8 @@ public class CommandWords
 
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(2).add("load");
-		validCommands.get(2).add("talk");		
+		validCommands.get(2).add("talk");				
+		validCommands.get(2).add("go");		
 
 		
 		validCommands.add(new ArrayList<String>());

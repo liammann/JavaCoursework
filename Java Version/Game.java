@@ -217,7 +217,8 @@ public class Game
     {
         Location outside, theater, pub, lab, office;
 
-        MovableObject cider = new MovableObject("cider", "Half a bottle of Strongbow cider", 2);        
+        MovableObject cider = new MovableObject("cider", "Half a bottle of Strongbow cider", 2);                
+        MovableObject key = new MovableObject("key", "key for lecture theater", 2, 42);        
         FixedObject chair = new FixedObject("chair", "An old wooden chair");
 
         outside = Location.create();
@@ -240,7 +241,8 @@ public class Game
         theater.addDescription("Inside of a lecture theater")
                .withExit("west", outside)
                .andHasObject(chair)
-               .andIsLocked();
+               .andIsLocked()
+               .andPasscode(42);
         
         lab.addDescription("In a computing lab")
            .withExit("north", outside)

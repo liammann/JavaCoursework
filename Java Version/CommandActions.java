@@ -85,6 +85,9 @@ public class CommandActions
             case "talk":
                 answer = talk(parameters);
                 break;
+            case "go":
+                answer = go(parameters);
+                break;
             case "fight":
                 answer = fight(parameters);
                 break;
@@ -170,6 +173,22 @@ public class CommandActions
             return "Invalid exit!";
         }
 
+        if(gameData.getCurrentLocation().getExit(direction).isLocked()) {
+            return "That room is locked!";
+        }
+
+        return updateLocation(direction);
+    }
+    private String go(ArrayList parameters)
+    {
+        
+        String direction = (String) parameters.get(0);
+        if(!gameData.getCurrentLocation().isValidExit(direction)) {
+            return "Invalid exit!";
+        }
+        System.out.println(gameData.getPlayer1Object().getName());
+            
+        
         if(gameData.getCurrentLocation().getExit(direction).isLocked()) {
             return "That room is locked!";
         }

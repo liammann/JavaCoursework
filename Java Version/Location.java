@@ -12,6 +12,7 @@ public class Location implements java.io.Serializable
     private HashMap<String, MovableObject> movableObjects;
     private HashMap<String, Enemy> enemies;
     private HashMap<String, Friend> friends;
+    private int locationPasscode;
 
     public static Location create()
     {
@@ -184,6 +185,11 @@ public class Location implements java.io.Serializable
     public Location andIsLocked()
     {
         isLocked = true;
+        return this;
+    }
+    public Location andPasscode(int passcode)
+    {
+        locationPasscode = passcode;
         return this;
     }
 
