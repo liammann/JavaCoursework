@@ -26,6 +26,11 @@ public class Location implements java.io.Serializable
         enemies = new HashMap<String, Enemy>();
         friends = new HashMap<String, Friend>();
     }
+    
+    public boolean containsObject(String name)
+    {
+        return movableObjects.containsKey(name);
+    }
 
     public Location addDescription(String description)
     {

@@ -127,19 +127,29 @@ public class CommandActions
     private String pickup(String objectName)
     {
         // validate object exists in location
-        MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(objectName);
-        gameData.getPlayer1Object().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
-        gameData.getCurrentLocation().removeObject(objectName);
-        return "You picked up " + objectName;
+        if (gameData.getCurrentLocation().containsObject(objectName))
+        {
+            MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(objectName);
+            gameData.getPlayer1Object().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
+            gameData.getCurrentLocation().removeObject(objectName);
+            return "You picked up " + objectName;
+        } else {
+            return "No such object exists in this room.";
+        }
     }
 
     private String drop(String item)
     {
         // validate object exists in inventory
-        MovableObject object = gameData.getPlayer1Object().getInventory().getFromInventoryByName(item);
-        gameData.getCurrentLocation().andHasObject(object);
-        gameData.getPlayer1Object().getInventory().dropFromInventory(item);
-        return "you dropped " + item;
+        if (gameData.getPlayer1Object().getInventory())
+        {
+            MovableObject object = gameData.getPlayer1Object().getInventory().getFromInventoryByName(item);
+            gameData.getCurrentLocation().andHasObject(object);
+            gameData.getPlayer1Object().getInventory().dropFromInventory(item);
+            return "you dropped " + item;
+        } else {
+            return "You don't have one to drop.";
+        }
     }
 
     private String fight(String who)

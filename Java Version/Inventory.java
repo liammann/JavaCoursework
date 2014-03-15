@@ -48,6 +48,11 @@ public class Inventory implements java.io.Serializable
         return playerInventory.get(item);
     }
     
+    public boolean containsObject(String name)
+    {
+        return playerInventory.containsKey(name);
+    }
+    
     public String currentInventory(){
 
         String returntxt = "You currently have: \n";
