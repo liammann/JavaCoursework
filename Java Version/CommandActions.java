@@ -129,15 +129,15 @@ public class CommandActions
         MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(item);
         gameData.getPlayer1Object().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
         gameData.getCurrentLocation().removeItem(item);
-        return "You picked up " + item.getObjectName();
+        return "You picked up " + item;
     }
 
     private String drop(String item)
     {
-        MovableObject thisObject = gameData.getPlayer1Object().getInventory().getObjectByName(item);
-        gameData.getCurrentLocation().addMovableObject(item.getObjectName, item);
+        MovableObject thisObject = gameData.getPlayer1Object().getInventory().getFromInventoryByName(item);
+        gameData.getCurrentLocation().addMovableObject(item, thisObject);
         gameData.getPlayer1Object().getInventory().dropFromInventory(item);
-        return "you dropped " + item.getObjectName();
+        return "you dropped " + item;
     }
 
     private String fight(String who)

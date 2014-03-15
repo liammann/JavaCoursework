@@ -106,9 +106,9 @@ public class Location implements java.io.Serializable
         items.remove(item);
     }
     
-    public Object getObjectByName(String itemName)
+    public MovableObject getObjectByName(String itemName)
     {
-        return items.get(itemName);
+        return movableItems.get(itemName);
     }
 
     public String getShortDescription()
