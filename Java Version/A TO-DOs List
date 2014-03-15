@@ -3,5 +3,4 @@ TO DOs
 Implement specialist room --> {}
 Enable characters to move around by themselves --> {}
 Put in a story line, therefore allowing the player to win somehow --> {Everyone}
-Fix "drop" command bug of not adding object back into the room --> {Tom}
 Change command input parsing architecture --> {Tom}
