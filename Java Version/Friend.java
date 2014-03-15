@@ -2,28 +2,17 @@ public class Friend extends Character implements java.io.Serializable
 {
     private String hint = null;
  
-    public Friend(String name)
+    public static Friend create(String name)
+    {
+        return new Friend(name);
+    }
+    
+    private Friend(String name)
     {
         super(name);
     }
-    
-    @Override
-    public Friend hasStrength(int strength)
-    {
-        this.strength = strength;
 
-        return this;
-    }
-    
-    @Override
-    public Friend withHealth(int health)
-    {
-        this.health = health;
-        
-        return this;
-    }
-    
-    public Friend andHasHint(String hint)
+    public Friend withHint(String hint)
     {
         this.hint = hint;
         

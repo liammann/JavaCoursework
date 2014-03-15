@@ -14,10 +14,7 @@ public abstract class Character implements java.io.Serializable
         this.name = name;
         inventory = new Inventory();
     }
-    
-    abstract public Character hasStrength(int strength);
-    abstract public Character withHealth(int health);
-    
+
     public String getName()
     {
         return name;

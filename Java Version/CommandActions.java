@@ -57,9 +57,6 @@ public class CommandActions
             case "drop":
                 answer = drop(parameter);
                 break;
-            case "fight":
-                answer = fight(parameter);
-                break;
             case "inspect":
                 answer = inspect(parameter);
                 break;
@@ -152,13 +149,16 @@ public class CommandActions
         return "You dropped your " + objectName;
     }
 
-    private String fight(String who)
-    {
-        return "fight";
-    }
-    
     private String fight(ArrayList parameters)
     {
+        if(parameters.size() != 3 || !parameters.get(1).equals("with")) {
+            return "Invalid syntax used for the 'fight' command.";
+        }
+            
+        if(!gameData.getCurrentLocation().getEnemies().containsKey(parameters.get(0))) {
+            return "The enemy entered does not exist!";
+        }
+
         return "fight";
     }
     
@@ -180,18 +180,16 @@ public class CommandActions
         String direction = (String) parameters.get(0);
         
         if (!gameData.getCurrentLocation().isValidExit(direction)) {
-            
             return "Invalid exit!";
-            
-        }else if (gameData.getPlayerObject().getInventory().getFromInventoryByName("key") != null){
-            if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode() == gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode()){
-            
+        }
+        
+        if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key") != null) {
+            if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode() == gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode()) {
                 gameData.getCurrentLocation().getLocationNeighour(direction).unlock();
-            
-            } else {
-                return("That key doesn't fit that lock");                
+            }else{
+                return "That key doesn't fit that lock";
             }             
-        } else if (gameData.getCurrentLocation().getExit(direction).isLocked()) {
+        } else if(gameData.getCurrentLocation().getExit(direction).isLocked()) {
             return "That room is locked!";
         }
 
@@ -202,10 +200,10 @@ public class CommandActions
     {
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
 
-        return  gameData.getCurrentLocation().getLongDescription()+
-                gameData.getCurrentLocation().getLocationCharacters()+
-                gameData.getCurrentLocation().getLocationItems()+
-                gameData.getCurrentLocation().getExits();
+        return gameData.getCurrentLocation().getLongDescription()
+               + gameData.getCurrentLocation().getLocationCharacters()
+               + gameData.getCurrentLocation().getLocationItems()
+               + gameData.getCurrentLocation().getExits();
     }
     
     private String newGame(String parameter)

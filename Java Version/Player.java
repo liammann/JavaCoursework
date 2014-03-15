@@ -1,20 +1,22 @@
-
 public class Player extends Character implements java.io.Serializable
 {
-    public Player(String name)
+    public static Player create(String name)
+    {
+        return new Player(name);
+    }
+
+    private Player(String name)
     {
         super(name);
     }
-    
-    @Override
+
     public Player hasStrength(int strength)
     {
         this.strength = strength;
 
         return this;
     }
-    
-    @Override
+
     public Player withHealth(int health)
     {
         this.health = health;

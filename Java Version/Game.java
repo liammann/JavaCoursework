@@ -1,16 +1,7 @@
-/* 
- * IMPORTANT NOTE:
- * 
- * Should we make our system case-insensitive?
- * 
- * NOTE TO SELF: I DON'T LIKE THE EXTRA LINE GIVEN WHEN OUTPUTTING THE STUFF IN A ROOM!
- * 
- */
-
 import java.util.ArrayList;
 import java.lang.Math;
 import java.io.*;
- 
+
 public class Game
 {
     private GameData gameData;
@@ -20,7 +11,7 @@ public class Game
     
     private Enemy jozef, liam, tom, zain;
     
-    private Player player1;//combat
+    private Player player1; // combat
     
     public Game()
     {
@@ -68,40 +59,31 @@ public class Game
 
             String command = commandsParser.getCommand();
             String output = commandsParser.parseCommand(command);
-            boolean playerWin = false;
-                
+
             if(output.equals("quit")) {
                 break;
-            }else if (output.equals("finished")) {
+            }
+
+            if(output.equals("finished")) {
                 System.out.println("Congratulations on completing the game!");
                 break;
             }
-            else if (output.equals("fight")) {
-                ArrayList<String> fightCommands = new ArrayList<String>();
-                
-                for(String fightCommand : command.split(" ")) {
-                    fightCommands.add(fightCommand);
+
+            if(output.equals("fight")) {
+                String[] fightCommands = command.split(" ");
+                Enemy enemy = gameData.getCurrentLocation().getEnemyByName(fightCommands[1]);
+                boolean playerWin = combatStartFight(enemy, player1.getInventory().getWeapon(fightCommands[3]), player1);
+
+                if(playerWin == false) {
+                    System.out.println("You've lost the game!");
+                    break;
                 }
 
-                if(gameData.getCurrentLocation().getEnemies().containsKey(fightCommands.get(1))) {
-                   // Check to see if the command was entered correctly eg. fight NAME with WEAPON
-                   if(fightCommands.size() > 3) {
-
-                       playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player1.getInventory().getWeapon(fightCommands.get(3)), player1);
-                      
-                       if(playerWin == false) {
-                           break; // GAME OVER
-                       }
-                       
-                       System.out.println("You have successfully beaten " + fightCommands.get(1) + "!");
-                       System.out.println("You currently have: \n \t - " + player1.getHealth() + " health points \n \t - " + player1.getStrength() + " strength points");                       
-                       System.out.print(gameData.getCurrentLocation().getLongDescription());                       
-                       System.out.print(gameData.getCurrentLocation().getExits());
-                    }else{
-                        System.out.print("Please put what weapon you would like to use (fight NAME with WEAPON)");
-                    }
-                }
-            } else if(output.equals("save")) {
+                System.out.println("You have successfully beaten " + fightCommands[1] + "!");
+                System.out.println("You currently have:\n\t- " + player1.getHealth() + " health points\n\t- " + player1.getStrength() + " strength points");                       
+                System.out.print(gameData.getCurrentLocation().getLongDescription());                       
+                System.out.print(gameData.getCurrentLocation().getExits());
+            }else if(output.equals("save")) {
                 //if(saveGame()) {
                     saveGame();
                     System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
@@ -144,11 +126,11 @@ public class Game
     {
         ArrayList<String> savedGames = gameData.getSavedGames();
         String gameSaveNames = "";
-        
+
         if(savedGames.size() == 0) {
             return "none";
         }       
-        
+
         for(String gameName : savedGames) {
             gameSaveNames += "'" + gameName + "' ";
         }
@@ -208,16 +190,24 @@ public class Game
     {
         createCharacters();
         buildLocations();
-
     }
 
     private void buildLocations()
     {
         Location outside, theater, pub, lab, office;
+        MovableObject cider, key;
+        FixedObject chair;
 
-        MovableObject cider = new MovableObject("cider", "Half a bottle of Strongbow cider", 2);                
-        MovableObject key = new MovableObject("key", 42);        
-        FixedObject chair = new FixedObject("chair", "An old wooden chair");
+        cider = MovableObject.create("cider")
+                             .withDescription("Half a bottle of Strongbow cider")
+                             .andWeight(2);
+
+        key = MovableObject.create("key")
+                           .withDescription("A key that unlocks some door")
+                           .andHasPasscode(42);
+
+        chair = FixedObject.create("chair")
+                           .withDescription("An old wooden chair");
 
         outside = Location.create();
         theater = Location.create();
@@ -260,13 +250,18 @@ public class Game
 
     private void createCharacters() // segregate this method into friends, enemies, and players
     {
-        MovableObject sword = new MovableObject("sword", "Steal sword", 3, 3.1);
+        Player player1;
+        MovableObject sword;
         
-        player1 = new Player("Player 1");
-        
-        player1.hasStrength(100)
-             .withHealth(100)
-             .andHasWeapon(sword);
+        sword = MovableObject.create("sword")
+                             .withDescription("Steal sword")
+                             .andWeight(3)
+                             .withWeaponModifier(3.1);
+                             
+        player1 = Player.create("Player 1")
+                        .hasStrength(100)
+                        .withHealth(100)
+                        .andHasWeapon(sword);
         
         gameData.addPlayer(player1);
         
@@ -276,13 +271,25 @@ public class Game
         zain = new Enemy("zain");
              
          // Enemies Weapons 
-        MovableObject axe = new MovableObject("axe", "Brutal axe", 2, 2.4);        
-        MovableObject mace = new MovableObject("mace", "Brutal mace", 2, 1.8);
-        MovableObject dagger = new MovableObject("dagger", "Very pointy stick", 1, 1.3);
+        MovableObject axe, mace, dagger;
         
+        axe = MovableObject.create("axe")
+                           .withDescription("Brutal axe")
+                           .andWeight(2)
+                           .withWeaponModifier(2.4);
+        
+        mace = MovableObject.create("mace")
+                            .withDescription("Brutal mace")
+                            .andWeight(2)
+                            .withWeaponModifier(1.8);
+
+        dagger = MovableObject.create("dagger")
+                              .withDescription("Very pointy stick")
+                              .andWeight(1)
+                              .withWeaponModifier(1.3);
+
         // upon enemy death, drop weapon in current room?
-        
-        // Dont use capitals for names 
+
         jozef.hasStrength(100)
              .withHealth(100)
              .andHasWeapon(dagger);
@@ -299,74 +306,60 @@ public class Game
             .withHealth(20)
             .andHasWeapon(dagger);
             
-        
-        // Set up friendly characters
-        Friend jordan, james, jeremy, john; // do friends need health? Given that they are not fighting anyone?
-        
-        jordan = new Friend("jordan");
-        james = new Friend("james");
-        jeremy = new Friend("jeremy");
-        john = new Friend("john");
-        
-        jordan.hasStrength(100)
-              .withHealth(100)
-              .andHasHint("The Key is behind the library");
 
-        james.hasStrength(80)
-             .withHealth(20)
-             .andHasHint("The Sword is very useful which you already have");
-
-        jeremy.hasStrength(70)
-              .withHealth(30)
-              .andHasHint("Try to pickup useful tools");
-
-        john.hasStrength(60)
-              .withHealth(20);
+        Friend jordan, james, jeremy, john;
         
-        
+        jordan = Friend.create("jordan")
+                       .withHint("The Key is behind the library");
+
+        james = Friend.create("james")
+                      .withHint("The Sword is very useful which you already have");
+
+        jeremy = Friend.create("jeremy")
+                       .withHint("Try to pickup useful tools");
+
+        john = Friend.create("john")
+                     .withHint("Shut up, Meg");
     }
-    public boolean combatStartFight(Enemy enemy, String command, MovableObject weapon, Player player)
-    {
 
-        boolean playerWin = false;        
+    public boolean combatStartFight(Enemy enemy, MovableObject weapon, Player player)
+    {
+        boolean playerWin = false;
         boolean enemyDefending = false;
         boolean playerDefending = false;
         int enemyDealt = 0;
-        int playerDealt = 0;        
-
+        int playerDealt = 0;
         int totalEnemyDealt = 0;
         int totalPlayerDealt = 0;
-        
 
-                
-        while(!playerWin){
-           
+        while(!playerWin) {
             playerDealt = (int) Math.floor(15*weapon.getWeaponModifier());                
-            enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier());//getWeapon().getWeaponModifier());
+            enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier()); // getWeapon().getWeaponModifier());
             
             totalEnemyDealt += enemyDealt;
             totalPlayerDealt += playerDealt;
             
-            enemy.updateHealth(enemy.getHealth()-playerDealt);
-            player.updateHealth(player.getHealth()-enemyDealt);
+            enemy.updateHealth(enemy.getHealth() - playerDealt);
+            player.updateHealth(player.getHealth() - enemyDealt);
                 
             if(player.getHealth() <= 0) {
                 playerWin = false;
-
-                System.out.println("You fight the evil "+enemy.getName()+ " to death with your "+weapon.getObjectName()+" \n, \t unfortunately it was your death. \n GAME OVER");
-
+                System.out.println("You fight the evil " + enemy.getName() + " to death with your " + weapon.getObjectName());
+                System.out.println("\nunfortunately it was your death.\nGAME OVER");
                 break;
-            }else if(enemy.getHealth() <= 0) {
+            }
+            
+            if(enemy.getHealth() <= 0) {
                 playerWin = true;
-
-                System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n");
-
-                gameData.getCurrentLocation().removeEnemy(enemy.getName());
+                System.out.println("You fight the evil " + enemy.getName() + " to the death with your " + weapon.getObjectName());
+                System.out.println("\nand kill him only taking " + totalEnemyDealt + " health points.\n");
+                gameData.getCurrentLocation().removeEnemyByName(enemy.getName());
                 break;
             }
         }
+
         return playerWin;
-    }   
+    }
     
     private String welcome()
     {
@@ -374,14 +367,13 @@ public class Game
                +"You wake up at Porsmouth Museum in 2014 not knwing how you got there.\n"
                +"but there is something quite different about the world you have woken up in.\n"
                +"You hear people in distance shouting ‘vikings are here, get to gunwharf for rescue.'\n"
-
                +"You look for weapon to protect yourself. You wonder around in museum for quite sometime\n"
                +"before finding sword and shield and start your journey to gunwharf thinking what is going on here\n"
                +"You find a letter at the front of the museum which gives you hint how to get there\n"
                +"and what object you need to pick up.\n\n"
-               +gameData.getCurrentLocation().getLongDescription()+
-                gameData.getCurrentLocation().getLocationCharacters()+
-                gameData.getCurrentLocation().getLocationItems()+
-                gameData.getCurrentLocation().getExits();
+               +gameData.getCurrentLocation().getLongDescription()
+               +gameData.getCurrentLocation().getLocationCharacters()
+               +gameData.getCurrentLocation().getLocationItems()
+               +gameData.getCurrentLocation().getExits();
     }
 }

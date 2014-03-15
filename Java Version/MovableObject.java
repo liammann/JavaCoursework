@@ -5,30 +5,46 @@ public class MovableObject extends Object implements java.io.Serializable
     protected double weaponModifier;
     protected int passcode;
     
-    public MovableObject(String name, String description, int weight)
+    public static MovableObject create(String name)
+    {
+        return new MovableObject(name);
+    }
+    
+    private MovableObject(String name)
     {
         this.name = name;
+    }
+    
+    @Override
+    public MovableObject withDescription(String description)
+    {
         this.description = description;
+
+        return this;
+    }
+    
+    public MovableObject andWeight(int weight)
+    {
         this.weight = weight;
 
+        return this;
     }
-    
-    public MovableObject(String name, String description, int weight, double weaponModifier)
+
+    public MovableObject withWeaponModifier(double weaponModifier)
     {
-        this.name = name;
-        this.description = description;
-        this.weight = weight;       
-        this.weapon = true;
+        weapon = true;
         this.weaponModifier = weaponModifier;
 
+        return this;
     }
     
-    public MovableObject(String name, int keyPasscode)
+    public MovableObject andHasPasscode(int passcode)
     {
-        this.name = name;
-        this.passcode = keyPasscode;
+        this.passcode = passcode;
+
+        return this;
     }
-    
+
     public int getWeight()
     {
         return weight;

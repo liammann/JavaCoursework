@@ -19,7 +19,16 @@ public class CommandWords
 	private HashMap<String, String> commandWordsDocumentation;
 	private static CommandWords instance = null;
 	
-	public CommandWords()
+	public static CommandWords getInstance()
+	{
+	    if(instance == null) {
+	        instance = new CommandWords();
+	    }
+	    
+	    return instance;
+	}
+	
+	private CommandWords()
 	{
 		validCommands = new ArrayList<ArrayList<String>>();
 		commandWordsDocumentation = new HashMap<String, String>();
@@ -68,15 +77,6 @@ public class CommandWords
 		commandWordsDocumentation.put("talk", "Talk to a player in the game. Usage: 'talk to {player_name}'");
 		commandWordsDocumentation.put("load", "Load a saved game. Usage: 'load game {game_save}'");
 		commandWordsDocumentation.put("save", "Save the current state of the game. Usage: 'save game as {game_name}'");
-	}
-	
-	public static CommandWords getInstance()
-	{
-	    if(instance == null) {
-	        instance = new CommandWords();
-	    }
-	    
-	    return instance;
 	}
 
 	public boolean commandExists(String command)

@@ -14,24 +14,22 @@ public class GameData implements java.io.Serializable
     
     private Player player1; // this could perhaps be moved to the Location class
 
+    public static GameData getInstance()
+    {
+        if(instance == null) {
+            instance = new GameData();
+        }
+        
+        return instance;
+    }
     
-    public GameData()
+    private GameData()
     {
         locationHistory = new ArrayList<Location>();
         savedGames = new ArrayList<String>();
         locations = new ArrayList<Location>(); // why?
         players = new HashMap<String, Player>();
 
-    }
-
-    public static GameData getInstance()
-    {
-        if(instance == null)
-        {
-            instance = new GameData();
-        }
-        
-        return instance;
     }
     
     public void addLocation(Location location)
@@ -52,7 +50,7 @@ public class GameData implements java.io.Serializable
     public void setNewLocation(Location location)
     {
         locationHistory.add(location);
-        //return a description maybe?
+        // return a description maybe?
     }
 
     public String setNewLocation(int backtrack)
