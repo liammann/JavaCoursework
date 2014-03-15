@@ -4,6 +4,7 @@ public class MovableObject extends Object implements java.io.Serializable
     protected boolean weapon;    
     protected double weaponModifier;
     protected int passcode;
+    protected int healthPotion;
     
     public MovableObject(String name, String description, int weight)
     {
@@ -28,10 +29,20 @@ public class MovableObject extends Object implements java.io.Serializable
         this.name = name;
         this.passcode = keyPasscode;
     }
+    public MovableObject(String name, double healthPotion)
+    {
+        this.name = name;
+        this.healthPotion = (int) healthPotion;
+    }
     
     public int getWeight()
     {
         return weight;
+    }
+    
+    public int getHealthPotion()
+    {
+        return healthPotion;
     }
     
     public double getWeaponModifier()

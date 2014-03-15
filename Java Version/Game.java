@@ -217,6 +217,7 @@ public class Game
 
         MovableObject cider = new MovableObject("cider", "Half a bottle of Strongbow cider", 2);                
         MovableObject key = new MovableObject("key", 42);        
+        MovableObject healthPotion = new MovableObject("health", 12.0);        
         FixedObject chair = new FixedObject("chair", "An old wooden chair");
 
         outside = Location.create();
@@ -229,7 +230,8 @@ public class Game
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
-               .andHasObject(chair);
+               .andHasObject(chair)
+               .andHasObject(healthPotion);
                
         pub.addDescription("In a campus pub")
            .withExit("east", outside)
