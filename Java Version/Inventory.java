@@ -1,4 +1,3 @@
-import java.util.Set; // what does this do?
 import java.util.LinkedHashMap;
 import java.util.ArrayList;
 import java.util.Map;
@@ -13,7 +12,6 @@ import java.util.Map;
 
 public class Inventory implements java.io.Serializable
 {
-    // instance variables - replace the example below with your own
     private int inventoryWeight = 0;
     private int inventoryWeightCapacity = 10;
     private LinkedHashMap<String, MovableObject> playerInventory;
@@ -25,36 +23,39 @@ public class Inventory implements java.io.Serializable
 
     public boolean addItemToInventory(MovableObject item)
     {
-        if (inventoryWeight() + item.getWeight() <= inventoryWeightCapacity) {
-            playerInventory.put(item.getName(), item);
-            return true;
+        if (inventoryWeight() + item.getWeight() > inventoryWeightCapacity) {
+            return false;
         }
         
-        return false;
+        playerInventory.put(item.getName(), item);
+
+        return true;
     }
     
-    public void dropFromInventory(String item)
+    public void dropFromInventory(String objectName)
     {
-        playerInventory.remove(item);
+        inventoryWeight -= getFromInventoryByName(objectName).getWeight();
+        playerInventory.remove(objectName);
     }
     
-    public MovableObject getFromInventoryByName(String item)
+    public MovableObject getFromInventoryByName(String objectName)
     {
-        return playerInventory.get(item);
+        return playerInventory.get(objectName);
     }
     
     public boolean containsObject(String name)
     {
         return playerInventory.containsKey(name);
     }
-    
-    public String currentInventory(){
 
+    public String currentInventory()
+    {
         String returntxt = "You currently have: \n";
+
         for(Map.Entry<String, MovableObject> item: playerInventory.entrySet()) {
-        
             returntxt += "  - " + item.getValue().getObjectDescription() + "\n";
         }
+
         return returntxt;
     }
     
@@ -81,15 +82,4 @@ public class Inventory implements java.io.Serializable
     {
         return playerInventory.get(0);
     }
-    /*
-    public void setObjectName(String name, MovableObject object)
-    {
-        movableObjectNames.put(name, object);
-    }
-    
-    public MovableObject getObjectByName(String object)
-    {
-        return movableObjectNames.get(object);
-    }
-    */
 }
