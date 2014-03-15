@@ -7,9 +7,9 @@ public abstract class Character implements java.io.Serializable
     protected String name;
     protected int health; 
     protected int strength;
-    protected Inventory inventory;
+    private Inventory inventory;
 
-    protected Character(String name)
+    public Character(String name)
     {
         this.name = name;
         inventory = new Inventory();

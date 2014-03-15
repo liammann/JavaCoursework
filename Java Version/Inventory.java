@@ -14,11 +14,11 @@ public class Inventory implements java.io.Serializable
 {
     private int inventoryWeight = 0;
     private int inventoryWeightCapacity = 10;
-    private LinkedHashMap<String, MovableObject> playerInventory;
+    private LinkedHashMap<String, MovableObject> inventory;
 
     public Inventory()
     {
-        playerInventory = new LinkedHashMap<String, MovableObject>();
+        inventory = new LinkedHashMap<String, MovableObject>();
     }
 
     public boolean addItemToInventory(MovableObject item)
@@ -27,7 +27,7 @@ public class Inventory implements java.io.Serializable
             return false;
         }
         
-        playerInventory.put(item.getName(), item);
+        inventory.put(item.getName(), item);
 
         return true;
     }
@@ -35,24 +35,24 @@ public class Inventory implements java.io.Serializable
     public void dropFromInventory(String objectName)
     {
         inventoryWeight -= getFromInventoryByName(objectName).getWeight();
-        playerInventory.remove(objectName);
+        inventory.remove(objectName);
     }
     
     public MovableObject getFromInventoryByName(String objectName)
     {
-        return playerInventory.get(objectName);
+        return inventory.get(objectName);
     }
     
     public boolean containsObject(String name)
     {
-        return playerInventory.containsKey(name);
+        return inventory.containsKey(name);
     }
 
     public String currentInventory()
     {
         String returntxt = "You currently have: \n";
 
-        for(Map.Entry<String, MovableObject> item: playerInventory.entrySet()) {
+        for(Map.Entry<String, MovableObject> item: inventory.entrySet()) {
             returntxt += "  - " + item.getValue().getObjectDescription() + "\n";
         }
 
@@ -61,12 +61,12 @@ public class Inventory implements java.io.Serializable
     
     public int inventorySize()
     {
-        return playerInventory.size();
+        return inventory.size();
     }
     
     public int inventoryWeight()
     {
-        for(Map.Entry<String, MovableObject> item: playerInventory.entrySet()) {
+        for(Map.Entry<String, MovableObject> item: inventory.entrySet()) {
             inventoryWeight += item.getValue().getWeight();
         }
 
@@ -75,11 +75,13 @@ public class Inventory implements java.io.Serializable
     
     public MovableObject getWeapon(String weaponName)
     {
-        return playerInventory.get(weaponName);
+        return inventory.get(weaponName);
     }
     
     public MovableObject getWeapon()
     {
-        return playerInventory.get(0);
+        String firstKey = inventory.keySet().iterator().next();
+
+        return getWeapon(firstKey);
     }
 }

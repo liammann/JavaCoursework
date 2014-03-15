@@ -22,7 +22,7 @@ public class Enemy extends Character implements java.io.Serializable
     
     public Enemy andHasWeapon(MovableObject weapon)
     {
-        getInventory().addItemToInventory(weapon);
+        this.getInventory().addItemToInventory(weapon);
         return this;
     }
 }

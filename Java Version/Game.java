@@ -88,9 +88,17 @@ public class Game
 
                 if(gameData.getCurrentLocation().getEnemies().containsKey(fightCommands.get(1))) {
                    // Check to see if the command was entered correctly eg. fight NAME with WEAPON
-                   if(fightCommands.size() > 3) { 
-                       playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player1.getInventory().getWeapon(fightCommands.get(3)), player1);
+                   if(fightCommands.size() > 3) {
                        
+                       System.out.println(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)));
+                       System.out.println(gameData.getCurrentLocation().getEnemy("liam"));
+                       System.out.println(gameData.getCurrentLocation());   
+                       System.out.println(gameData.getCurrentLocation().getEnemies());
+                       System.out.println(fightCommands.get(1));
+                       
+                       //playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player1.getInventory().getWeapon(fightCommands.get(3)), player1);
+
+                      
                        if(playerWin == false) {
                            break; // GAME OVER
                        }
@@ -262,7 +270,7 @@ public class Game
 
     private void createCharacters() // segregate this method into friends, enemies, and players
     {
-        MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 3.1);
+        MovableObject sword = new MovableObject("sword", "Steal sword", 3, 3.1);
         
         player1 = new Player("Player 1");
         
@@ -271,16 +279,16 @@ public class Game
              .andHasWeapon(sword);
         
         gameData.addPlayer(player1);
-
+        
         jozef = new Enemy("jozef");
         liam = new Enemy("liam");
         tom = new Enemy("tom");
         zain = new Enemy("zain");
              
          // Enemies Weapons 
-        MovableObject axe = new MovableObject("Axe", "Brutal axe", 2, 2.4);        
-        MovableObject mace = new MovableObject("Mace", "Brutal mace", 2, 1.8);
-        MovableObject dagger = new MovableObject("Dagger", "Very pointy stick", 1, 1.3);
+        MovableObject axe = new MovableObject("axe", "Brutal axe", 2, 2.4);        
+        MovableObject mace = new MovableObject("mace", "Brutal mace", 2, 1.8);
+        MovableObject dagger = new MovableObject("dagger", "Very pointy stick", 1, 1.3);
         
         // upon enemy death, drop weapon in current room?
         
@@ -338,15 +346,13 @@ public class Game
 
         int totalEnemyDealt = 0;
         int totalPlayerDealt = 0;
-
+        
+        System.out.println("You: "+weapon.getObjectName());
+                
         while(!playerWin){
-            
-            /*if(weapon.getName().equals("sheild")) {
-                playerDealt = (int) Math.floor(10);
-            }else{
-                playerDealt = (int) Math.floor(15*weapon.getWeaponModifier());                
-                enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier());//getWeapon().getWeaponModifier());
-            }*/
+           
+            playerDealt = (int) Math.floor(15*weapon.getWeaponModifier());                
+            //enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier());//getWeapon().getWeaponModifier());
             
             totalEnemyDealt += enemyDealt;
             totalPlayerDealt += playerDealt;
