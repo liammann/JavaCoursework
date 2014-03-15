@@ -67,9 +67,9 @@ public class Location implements java.io.Serializable
         return enemies.remove(enemyName);
     }
 
-    public Location andEnemy(String enemyName, Enemy enemy)
+    public Location andEnemy(Enemy enemy)
     {
-       enemies.put(enemyName, enemy);
+       enemies.put(enemy.getName(), enemy);
 
        return this;
     }

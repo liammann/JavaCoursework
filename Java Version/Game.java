@@ -72,14 +72,11 @@ public class Game
                 
             if(output.equals("quit")) {
                 break;
-            }
-                
-            if(output.equals("finished")) {
+            }else if (output.equals("finished")) {
                 System.out.println("Congratulations on completing the game!");
                 break;
             }
-            
-            if(output.equals("fight")) {
+            else if (output.equals("fight")) {
                 ArrayList<String> fightCommands = new ArrayList<String>();
                 
                 for(String fightCommand : command.split(" ")) {
@@ -89,15 +86,8 @@ public class Game
                 if(gameData.getCurrentLocation().getEnemies().containsKey(fightCommands.get(1))) {
                    // Check to see if the command was entered correctly eg. fight NAME with WEAPON
                    if(fightCommands.size() > 3) {
-                       
-                       System.out.println(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)));
-                       System.out.println(gameData.getCurrentLocation().getEnemy("liam"));
-                       System.out.println(gameData.getCurrentLocation());   
-                       System.out.println(gameData.getCurrentLocation().getEnemies());
-                       System.out.println(fightCommands.get(1));
-                       
-                       //playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player1.getInventory().getWeapon(fightCommands.get(3)), player1);
 
+                       playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player1.getInventory().getWeapon(fightCommands.get(3)), player1);
                       
                        if(playerWin == false) {
                            break; // GAME OVER
@@ -105,14 +95,13 @@ public class Game
                        
                        System.out.println("You have successfully beaten " + fightCommands.get(1) + "!");
                        System.out.println("You currently have: \n \t - " + player1.getHealth() + " health points \n \t - " + player1.getStrength() + " strength points");                       
-                       System.out.println(gameData.getCurrentLocation().getLongDescription());
+                       System.out.print(gameData.getCurrentLocation().getLongDescription());                       
+                       System.out.print(gameData.getCurrentLocation().getExits());
                     }else{
                         System.out.print("Please put what weapon you would like to use (fight NAME with WEAPON)");
                     }
                 }
-            }
-                
-            if(output.equals("save")) {
+            } else if(output.equals("save")) {
                 //if(saveGame()) {
                     saveGame();
                     System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
@@ -217,8 +206,9 @@ public class Game
     
     private void buildGame()
     {
-        buildLocations();
         createCharacters();
+        buildLocations();
+
     }
 
     private void buildLocations()
@@ -243,7 +233,7 @@ public class Game
                
         pub.addDescription("In a campus pub")
            .withExit("east", outside)
-           .andEnemy("liam",liam)
+           .andEnemy(liam)
            .andHasObject(key);
 
         theater.addDescription("Inside of a lecture theater")
@@ -255,7 +245,7 @@ public class Game
         lab.addDescription("In a computing lab")
            .withExit("north", outside)
            .withExit("east", office)
-           .andEnemy("tom", tom);
+           .andEnemy(tom);
 
         office.addDescription("In a computing Admin office")
               .withExit("west", lab);
@@ -347,12 +337,12 @@ public class Game
         int totalEnemyDealt = 0;
         int totalPlayerDealt = 0;
         
-        System.out.println("You: "+weapon.getObjectName());
+
                 
         while(!playerWin){
            
             playerDealt = (int) Math.floor(15*weapon.getWeaponModifier());                
-            //enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier());//getWeapon().getWeaponModifier());
+            enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier());//getWeapon().getWeaponModifier());
             
             totalEnemyDealt += enemyDealt;
             totalPlayerDealt += playerDealt;
