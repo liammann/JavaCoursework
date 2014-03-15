@@ -129,7 +129,7 @@ public class Location implements java.io.Serializable
 
     public String getLongDescription()
     {
-        return "You are " + description + "\n" + showExits() + "\n";
+        return "You are " + description + "\n";
     }
 
     public String getLocationItems()
@@ -151,13 +151,13 @@ public class Location implements java.io.Serializable
                 answer += " - " + mObjectName + "\n";
             }
         }else{
-            answer += "none";
+            answer += "none \n";
         }
         
         return answer;
     }
 
-    public String showExits()
+    public String getExits()
     {
         String exitPoints = "Exits:";
 

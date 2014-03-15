@@ -360,7 +360,8 @@ public class Game
                +"and what object you need to pick up.\n\n"
                +gameData.getCurrentLocation().getLongDescription()+
                 gameData.getCurrentLocation().getLocationCharacters()+
-                gameData.getCurrentLocation().getLocationItems();
+                gameData.getCurrentLocation().getLocationItems()+
+                gameData.getCurrentLocation().getExits();
     }
     
 }
