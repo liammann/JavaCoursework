@@ -73,7 +73,7 @@ public class GameData implements java.io.Serializable
         savedGames.add(gameSave);
     }
     
-    public boolean isValidGameSave(String gameSave)
+    public boolean isGameSave(String gameSave)
     {
         return savedGames.contains(gameSave);
     }
@@ -86,6 +86,11 @@ public class GameData implements java.io.Serializable
     public String getName()
     {
         return gameName;
+    }
+    
+    public ArrayList<String> getSavedGames()
+    {
+        return savedGames;
     }
     
 //     public void addFriend(String name, Friend friend)

@@ -16,6 +16,7 @@ public class Game
     private GameData gameData;
     private CommandsParser commandsParser;
     private String gameSaveLocation = "gamesaves/";
+    private ArrayList<String> gameSaves;
     
     private Enemy jozef, liam, tom, zain;
     
@@ -25,6 +26,7 @@ public class Game
     {
         gameData = GameData.getInstance();
         commandsParser = new CommandsParser();
+        getGameSaves();
         preGame();
     }
     
@@ -110,8 +112,8 @@ public class Game
 
         System.out.println("Thanks for playing!");
     }
-
-    private String getSavedGameNames()
+    
+    private void getGameSaves()
     {
         File files = new File("gamesaves/");
         File[] contents = files.listFiles(new FilenameFilter() {
@@ -120,19 +122,28 @@ public class Game
                 return fileName.matches("[a-zA-Z]+"); // match [a-zA-Z]+\.ser ??
             }
         });
-        
-        String gameSaveNames = "";
        
-        if(contents == null || contents.length == 0) {
+        if(contents != null && contents.length != 0) {
+            for(File name : contents) {
+                String[] fileName = name.getName().split("\\.");
+                gameData.addGameSave(fileName[0]);
+            }
+        }
+    }
+
+    private String getSavedGameNames()
+    {
+        ArrayList<String> savedGames = gameData.getSavedGames();
+        String gameSaveNames = "";
+        
+        if(savedGames.size() != 0){
+            for(String gameName : savedGames) {
+                gameSaveNames += "'" + gameName + "' ";
+            }
+        }else{
             return "none";
         }
 
-        for(File name : contents) {
-            String[] fileName = name.getName().split("\\.");
-            gameSaveNames += "'" + fileName[0] + "' ";
-            gameData.addGameSave(fileName[0]);
-        }
-       
         return gameSaveNames;
     }
     
@@ -155,9 +166,9 @@ public class Game
         }
     }
 
-    private void loadGame()
+    private void loadGame() //return a string for confirmation for overwrite?
     {
-        
+        //        if(gameData.isGameSave(
         try {
             FileInputStream gameSaveFile = new FileInputStream("gamesaves/" + gameData.getName() + ".ser");
             ObjectInputStream gameSaveData = new ObjectInputStream(gameSaveFile);
@@ -197,11 +208,6 @@ public class Game
         pub = Location.create();
         office = Location.create();
         
-        jozef = new Enemy("jozef");
-        liam = new Enemy("liam");
-        tom = new Enemy("tom");
-        zain = new Enemy("zain");
-        
         outside.addDescription("Outside the university entrance")
                .withExit("east", theater)
                .withExit("south", lab)
@@ -231,15 +237,11 @@ public class Game
         gameData.locations.add(pub);
         gameData.locations.add(lab);
         gameData.locations.add(office);
-
-        /* This is a note for myself (Tom) so that I don't forget
-         * Character objects could be placed in an ArrayList field apart of the Location class
-         */
         
         gameData.setNewLocation(outside);
     }
 
-    private void createCharacters()
+    private void createCharacters() // segregate this method into friends, enemies, and players
     {
         MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 3.1);
         
@@ -248,8 +250,12 @@ public class Game
         player.hasStrength(100)
              .withHealth(100)
              .andHasWeapon("sword", sword);
-        
- 
+
+        jozef = new Enemy("jozef");
+        liam = new Enemy("liam");
+        tom = new Enemy("tom");
+        zain = new Enemy("zain");
+             
          // Enemies Weapons 
         MovableObject axe = new MovableObject("Axe", "Brutal axe", 2, 2.4);        
         MovableObject mace = new MovableObject("Mace", "Brutal mace", 2, 1.8);

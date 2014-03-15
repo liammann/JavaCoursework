@@ -202,7 +202,7 @@ public class CommandActions
             return "Invalid syntax used for the 'load' command.";
         }
         
-        if(!gameData.isValidGameSave((String) parameters.get(1))) {
+        if(!gameData.isGameSave((String) parameters.get(1))) {
             return "Invalid game save selected.";
         }
 
