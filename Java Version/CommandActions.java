@@ -178,7 +178,7 @@ public class CommandActions
     private String go(ArrayList parameters)
     {    
         String direction = (String) parameters.get(0);
-<<<<<<< HEAD
+        
         if (!gameData.getCurrentLocation().isValidExit(direction)) {
             
             return "Invalid exit!";
@@ -192,27 +192,6 @@ public class CommandActions
                 return("That key doesn't fit that lock");                
             }             
         } else if (gameData.getCurrentLocation().getExit(direction).isLocked()) {
-=======
-
-        if(!gameData.getCurrentLocation().isValidExit(direction)) {
-            return "Invalid exit!";
-        }
-
-        System.out.println(gameData.getPlayerObject().getName()); //?
-
-        if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key") != null){
-            if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode() == gameData.getCurrentLocation().getPasscode()){
-                System.out.println("pass- "+gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode()+" "+gameData.getCurrentLocation().getPasscode());                
-
-            }else {
-                System.out.println("fail2");                
-            }
-        }else{
-            System.out.println("You havent got the key");                
-        }
-
-        if(gameData.getCurrentLocation().getExit(direction).isLocked()) {
->>>>>>> FETCH_HEAD
             return "That room is locked!";
         }
 
