@@ -31,9 +31,6 @@ public class CommandActions
             case "inventory":
                 // answer = inventory(); ???
                 break;
-            case "defend":
-                 //answer = defend(); //???
-                break;
         }
 
         return answer;
@@ -59,9 +56,6 @@ public class CommandActions
                 break;
             case "drop":
                 answer = drop(parameter);
-                break;
-            case "attack":
-                answer = attack(parameter);
                 break;
             case "fight":
                 answer = fight(parameter);
@@ -126,14 +120,6 @@ public class CommandActions
     {
         return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(retraceSteps);
     }
-    
-    /*
-     * pickup {objectName}
-     * Ensure that it is an object in the room (if not, then return that)
-     * Ensure that it is not a fixed object (if it is, then return that)
-     * Ensure it is a movable object in the room
-     * 
-     */
 
     private String pickup(String objectName)
     {
@@ -145,9 +131,7 @@ public class CommandActions
             return "No such object exists in this room.";
         }
 
-        MovableObject object = gameData.getCurrentLocation().getObjectByName(objectName);
-
-        if(gameData.getPlayerObject().getInventory().addItemToInventory((MovableObject) object)) {
+        if(gameData.getPlayerObject().getInventory().addItemToInventory(gameData.getCurrentLocation().getMovableObjectByName(objectName))) {
             gameData.getCurrentLocation().removeObject(objectName);
 
             return "You picked up " + objectName;
@@ -190,10 +174,11 @@ public class CommandActions
 
         return updateLocation(direction);
     }
+    
     private String go(ArrayList parameters)
-    {
-        
+    {    
         String direction = (String) parameters.get(0);
+<<<<<<< HEAD
         if (!gameData.getCurrentLocation().isValidExit(direction)) {
             
             return "Invalid exit!";
@@ -207,6 +192,27 @@ public class CommandActions
                 return("That key doesn't fit that lock");                
             }             
         } else if (gameData.getCurrentLocation().getExit(direction).isLocked()) {
+=======
+
+        if(!gameData.getCurrentLocation().isValidExit(direction)) {
+            return "Invalid exit!";
+        }
+
+        System.out.println(gameData.getPlayerObject().getName()); //?
+
+        if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key") != null){
+            if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode() == gameData.getCurrentLocation().getPasscode()){
+                System.out.println("pass- "+gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode()+" "+gameData.getCurrentLocation().getPasscode());                
+
+            }else {
+                System.out.println("fail2");                
+            }
+        }else{
+            System.out.println("You havent got the key");                
+        }
+
+        if(gameData.getCurrentLocation().getExit(direction).isLocked()) {
+>>>>>>> FETCH_HEAD
             return "That room is locked!";
         }
 
@@ -215,7 +221,6 @@ public class CommandActions
 
     private String updateLocation(String direction)
     {
-
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
 
         return  gameData.getCurrentLocation().getLongDescription()+
@@ -265,14 +270,6 @@ public class CommandActions
 
         return "save";
     }
-    private String attack(String weapon)
-    {
-        if(weapon.equals("")) {
-            return ""; // maybe redundant?
-        }
-        
-        return weapon;
-    }
     
     private String talk(ArrayList parameters)
     {
@@ -289,9 +286,16 @@ public class CommandActions
         return gameData.getCurrentLocation().getFriend(nameOfPerson).response();
     }
     
-    private String inspect(String parameter)
+    private String inspect(String objectName)
     {
-        // return gameData.getCurrentLocation().
-        return "";
+        if(gameData.getCurrentLocation().containsMovableObject(objectName)) {
+            return gameData.getCurrentLocation().getMovableObjectByName(objectName).getObjectDescription();
+        }
+        
+        if(gameData.getCurrentLocation().containsFixedObject(objectName)) {
+            return gameData.getCurrentLocation().getFixedObjectByName(objectName).getObjectDescription();
+        }
+        
+        return "The object specified does not exist!";
     }
 }
