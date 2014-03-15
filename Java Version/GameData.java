@@ -10,6 +10,7 @@ public class GameData implements java.io.Serializable
     private  ArrayList<Location> locations; // why?
     private static GameData instance = null;
     private HashMap<String, Player> players;
+    //private String currentPlayer;
     
     private Player player1; // this could perhaps be moved to the Location class
 
@@ -38,9 +39,9 @@ public class GameData implements java.io.Serializable
         locations.add(location);
     }
 
-    public Player getPlayer1Object()
+    public Player getPlayerObject()//(String playerName)
     {
-        return player1;
+        return players.get("Player 1");
     }
     
     public Location getCurrentLocation()

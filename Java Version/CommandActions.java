@@ -133,7 +133,7 @@ public class CommandActions
         if (gameData.getCurrentLocation().containsObject(objectName))
         {
             MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(objectName);
-            gameData.getPlayer1Object().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
+            gameData.getPlayerObject().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
             gameData.getCurrentLocation().removeObject(objectName);
             return "You picked up " + objectName;
         } else {
@@ -145,11 +145,11 @@ public class CommandActions
     private String drop(String objectName)
     {
         // validate object exists in inventory
-        if (gameData.getPlayer1Object().getInventory().containsObject(objectName))
+        if (gameData.getPlayerObject().getInventory().containsObject(objectName))
 
         {
             MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(objectName);
-            gameData.getPlayer1Object().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
+            gameData.getPlayerObject().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
             gameData.getCurrentLocation().removeObject(objectName);
             return "You picked up " + objectName;
         } else {
@@ -186,7 +186,7 @@ public class CommandActions
         if(!gameData.getCurrentLocation().isValidExit(direction)) {
             return "Invalid exit!";
         }
-        System.out.println(gameData.getPlayer1Object().getName());
+        System.out.println(gameData.getPlayerObject().getName());
             
         
         if(gameData.getCurrentLocation().getExit(direction).isLocked()) {
