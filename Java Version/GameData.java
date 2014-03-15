@@ -57,13 +57,18 @@ public class GameData implements java.io.Serializable
 
     public String setNewLocation(int backtrack)
     {
-        int backtrackIndex = locationHistory.size() - backtrack - 1;
-        
+        int lastIndex = locationHistory.size() - 1;
+        int backtrackIndex = lastIndex - backtrack;
+
         if(backtrackIndex < 0) {
             return "The location you are attempting to go back to does not exist!";
         }
-        
-        locationHistory.add(locationHistory.get(backtrackIndex));
+
+        while(lastIndex > backtrackIndex) {
+            --lastIndex;
+            locationHistory.add(locationHistory.get(lastIndex));
+        }
+
         return getCurrentLocation().getLongDescription();
     }
     
