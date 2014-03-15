@@ -1,0 +1,8 @@
+TO DOs
+
+Implement specialist room --> {}
+Look into functionality of "back n" command --> {Everyone}
+Enable characters to move around by themselves --> {}
+Put in a story line, therefore allowing the player to win somehow --> {Everyone}
+Fix "drop" command bug of not adding object back into the room --> {Tom}
+Change command input parsing architecture --> {Tom}
