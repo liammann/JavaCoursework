@@ -116,14 +116,14 @@ public class Location implements java.io.Serializable
         return this;
     }
 
-    public Location andHasObject(FixedObject object) // implement a second parameter for quantity?
+    public Location andHasObject(FixedObject object)
     {
         fixedObjects.put(object.getName(), object);
 
         return this;
     }
     
-    public Location andHasObject(MovableObject object) // implement a second parameter for quantity?
+    public Location andHasObject(MovableObject object)
     {
         movableObjects.put(object.getName(), object);
 
@@ -135,9 +135,14 @@ public class Location implements java.io.Serializable
         movableObjects.remove(objectName);
     }
     
-    public MovableObject getObjectByName(String objectName)
+    public MovableObject getMovableObjectByName(String objectName)
     {
         return movableObjects.get(objectName);
+    }
+    
+    public FixedObject getFixedObjectByName(String objectName)
+    {
+        return fixedObjects.get(objectName);
     }
 
     public String getShortDescription()
