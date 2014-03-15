@@ -359,12 +359,10 @@ public class Game
                 break;
             }else if(enemy.getHealth() <= 0) {
                 playerWin = true;
-<<<<<<< HEAD
+
                 System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n"+gameData.getCurrentLocation().getLongDescription());
-=======
                 System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n");
                 gameData.getCurrentLocation().removeEnemy(enemy.getName());
->>>>>>> FETCH_HEAD
                 break;
             }
         }
