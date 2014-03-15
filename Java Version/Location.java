@@ -115,6 +115,11 @@ public class Location implements java.io.Serializable
 
         return this;
     }
+    
+    public Location getLocationNeighour(String direction)
+    {
+        return exits.get(direction);
+    }
 
     public Location andHasObject(FixedObject object) // implement a second parameter for quantity?
     {

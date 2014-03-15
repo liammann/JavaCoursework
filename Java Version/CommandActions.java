@@ -194,23 +194,19 @@ public class CommandActions
     {
         
         String direction = (String) parameters.get(0);
-        if(!gameData.getCurrentLocation().isValidExit(direction)) {
+        if (!gameData.getCurrentLocation().isValidExit(direction)) {
+            
             return "Invalid exit!";
-        }
-
-        if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key") != null){
-            if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode() == gameData.getCurrentLocation().getPasscode()){
-                System.out.println("pass- "+gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode()+" "+gameData.getCurrentLocation().getPasscode());                
-
-            }else {
-                System.out.println("fail2");                
-            }
-        }else{
-            System.out.println("You havent got the key");                
-        }
-
-                
-        if(gameData.getCurrentLocation().getExit(direction).isLocked()) {
+            
+        }else if (gameData.getPlayerObject().getInventory().getFromInventoryByName("key") != null){
+            if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode() == gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode()){
+            
+                gameData.getCurrentLocation().getLocationNeighour(direction).unlock();
+            
+            } else {
+                return("That key doesn't fit that lock");                
+            }             
+        } else if (gameData.getCurrentLocation().getExit(direction).isLocked()) {
             return "That room is locked!";
         }
 

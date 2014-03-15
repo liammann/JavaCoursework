@@ -218,7 +218,7 @@ public class Game
         Location outside, theater, pub, lab, office;
 
         MovableObject cider = new MovableObject("cider", "Half a bottle of Strongbow cider", 2);                
-        MovableObject key = new MovableObject("key", "key for lecture theater", 2, 42);        
+        MovableObject key = new MovableObject("key", 42);        
         FixedObject chair = new FixedObject("chair", "An old wooden chair");
 
         outside = Location.create();
