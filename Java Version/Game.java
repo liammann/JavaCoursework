@@ -81,23 +81,23 @@ public class Game
                 
                 for(String fightCommand : command.split(" ")) {
                     fightCommands.add(fightCommand);
-                
-                }           
-               // Check to see if the command was entered correctly eg. fight NAME with WEAPON
-               if(fightCommands.size() > 3){ 
-                   playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player.getInventory().getWeapon(fightCommands.get(3)), player);
-                   if(playerWin == false){
-                       break; // GAME OVER
-                   }else{
-                       System.out.println("You have successfully beaten "+fightCommands.get(1)+"!");
-                       System.out.println("You currently have: \n \t - "+player.getHealth()+ " health points \n \t - "+player.getStrength()+" strength points");                       
-                       System.out.println(gameData.getCurrentLocation().getLongDescription());
+                }   
+                if(gameData.getCurrentLocation().getEnemies().containsKey(fightCommands.get(1))){
+                   // Check to see if the command was entered correctly eg. fight NAME with WEAPON
+                   if(fightCommands.size() > 3){ 
+                       playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player.getInventory().getWeapon(fightCommands.get(3)), player);
+                       if(playerWin == false){
+                           break; // GAME OVER
+                       }else{
+                           System.out.println("You have successfully beaten "+fightCommands.get(1)+"!");
+                           System.out.println("You currently have: \n \t - "+player.getHealth()+ " health points \n \t - "+player.getStrength()+" strength points");                       
+                           System.out.println(gameData.getCurrentLocation().getLongDescription());
+                        }
+                    }else {
+                        System.out.print("Please put what weapon you would like to use (fight NAME with WEAPON)");
                     }
-                }else {
-                    System.out.print("Please put what weapon you would like to use (fight NAME with WEAPON)");
+
                 }
-
-
             }
                 
             else if(output.equals("save")) {
@@ -332,14 +332,11 @@ public class Game
 
                 System.out.println("You fight the evil "+enemy.getName()+ " to death with your "+weapon.getObjectName()+" \n, \t unfortunately it was your death. \n GAME OVER");
 
-
-
                 break;
             }else if(enemy.getHealth() <= 0) {
                 playerWin = true;
 
                 System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n");
-
 
                 gameData.getCurrentLocation().removeEnemy(enemy.getName());
                 break;

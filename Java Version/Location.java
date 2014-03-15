@@ -38,7 +38,10 @@ public class Location implements java.io.Serializable
 
         return this;
     }
-    
+    public HashMap<String, Enemy> getEnemies()
+    {
+        return enemies;
+    }    
     public Enemy getEnemy(String enemyName)
     {
         return enemies.get(enemyName);
@@ -139,22 +142,22 @@ public class Location implements java.io.Serializable
         answer += "    Fixed objects:";
         if(fixedObjects.size() != 0) {
             for(String fObjectName : fixedObjects.keySet()) {
-                answer += "\n\t" + fObjectName;
+                answer += "\n\t - " + fObjectName;
             }
         }else{
-            answer += "\tnone";
+            answer += "\n\tnone";
         }
         
-        answer += "\n\n    Movable objects:\n";
+        answer += "\n    Movable objects:";
         if(movableObjects.size() != 0) {
             for(String mObjectName : movableObjects.keySet()) {
-                answer += "\t\n" + mObjectName;
+                answer += "\n\t - " + mObjectName;
             }
         }else{
-            answer += "\tnone";
+            answer += "\n\tnone";
         }
         
-        return answer;
+        return answer+"\n";
     }
 
     public String getExits()
