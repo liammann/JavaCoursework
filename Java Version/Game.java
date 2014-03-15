@@ -153,7 +153,7 @@ public class Game
     {
         
         try {
-            FileInputStream gameSaveFile = new FileInputStream("/gamesaves/" + gameData.getName() + ".ser");
+            FileInputStream gameSaveFile = new FileInputStream("gamesaves/" + gameData.getName() + ".ser");
             ObjectInputStream gameSaveData = new ObjectInputStream(gameSaveFile);
 
             gameData = (GameData) gameSaveData.readObject();
@@ -200,18 +200,17 @@ public class Game
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
-               .andItem(chair)
-               .addEnemy("tom",tom);   
+               .andEnemy("tom", tom)
+               .andHasObject(chair);
                
         pub.addDescription("In a campus pub")
            .withExit("east", outside)
-           .andItem(cider)
-           .addEnemy("liam",liam);
-
+           .andEnemy("liam",liam)
+           .andHasObject(cider);
 
         theater.addDescription("Inside of a lecture theater")
                .withExit("west", outside)
-               .andItem(chair)
+               .andHasObject(chair)
                .andIsLocked();
         
         lab.addDescription("In a computing lab")
@@ -335,27 +334,27 @@ public class Game
 
         while(!playerWin){
             
-            if(weapon.getName().equals("sheild")){
+            if(weapon.getName().equals("sheild")) {
                 playerDealt = (int) Math.floor(10);
-            }else {
+            }else{
                 playerDealt = (int) Math.floor(15*weapon.getWeaponModifier());                
                 enemyDealt = (int) Math.floor(14*enemy.getWeapon().getWeaponModifier());
             }
             
-            totalEnemyDealt+=enemyDealt;
-            totalPlayerDealt+=playerDealt;
+            totalEnemyDealt += enemyDealt;
+            totalPlayerDealt += playerDealt;
             
             enemy.updateHealth(enemy.getHealth()-playerDealt);
             player.updateHealth(player.getHealth()-enemyDealt);
                 
-            if(player.getHealth() <= 0){
+            if(player.getHealth() <= 0) {
                 playerWin = false;
-                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", unfortunately it was your death. \n GAME OVER");
+                System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", unfortunately it was your death. \n GAME OVER");
 
                 break;
-            } else if(enemy.getHealth() <= 0){
+            }else if(enemy.getHealth() <= 0) {
                 playerWin = true;
-                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n"+gameData.getCurrentLocation().getLongDescription());
+                System.out.println("You fight the evil " + enemy.getName() + " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n"+gameData.getCurrentLocation().getLongDescription());
                 break;
             }
         }
