@@ -136,22 +136,22 @@ public class Location implements java.io.Serializable
     {
         String answer = "This room has the following objects:\n";
         
-        answer += "Fixed objects:\n";
+        answer += "    Fixed objects:";
         if(fixedObjects.size() != 0) {
             for(String fObjectName : fixedObjects.keySet()) {
-                answer += " - " + fObjectName + "\n";
+                answer += "\n\t" + fObjectName;
             }
         }else{
-            answer += "none";
+            answer += "\tnone";
         }
         
-        answer += "\n\nMovable objects:\n";
+        answer += "\n\n    Movable objects:\n";
         if(movableObjects.size() != 0) {
             for(String mObjectName : movableObjects.keySet()) {
-                answer += " - " + mObjectName + "\n";
+                answer += "\t\n" + mObjectName;
             }
         }else{
-            answer += "none";
+            answer += "\tnone";
         }
         
         return answer;
