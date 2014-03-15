@@ -142,7 +142,7 @@ public class Game
         play();
     }
     
-    private void saveGame()
+    private void saveGame() // don't overwrite a game save!
     {
         try {
             FileOutputStream gameSave = new FileOutputStream(gameSaveLocation + gameData.getName() + ".ser");
