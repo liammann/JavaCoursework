@@ -141,7 +141,7 @@ public class CommandActions
     private String drop(String item)
     {
         // validate object exists in inventory
-        if (gameData.getPlayer1Object().getInventory())
+        if (gameData.getPlayer1Object().getInventory().containsObject(item))
         {
             MovableObject object = gameData.getPlayer1Object().getInventory().getFromInventoryByName(item);
             gameData.getCurrentLocation().andHasObject(object);
