@@ -7,8 +7,9 @@ public class GameData implements java.io.Serializable
     private boolean gameStarted = false;
     private ArrayList<String> savedGames;
     private String gameName;
-    protected  ArrayList<Location> locations;
+    private  ArrayList<Location> locations; // why?
     private static GameData instance = null;
+    private HashMap<String, Player> players;
     
     private Player player1; // this could perhaps be moved to the Location class
 
@@ -17,6 +18,8 @@ public class GameData implements java.io.Serializable
     {
         locationHistory = new ArrayList<Location>();
         savedGames = new ArrayList<String>();
+        locations = new ArrayList<Location>(); // why?
+        players = new HashMap<String, Player>();
 
     }
 
@@ -28,6 +31,11 @@ public class GameData implements java.io.Serializable
         }
         
         return instance;
+    }
+    
+    public void addLocation(Location location)
+    {
+        locations.add(location);
     }
 
     public Player getPlayer1Object()
@@ -91,6 +99,11 @@ public class GameData implements java.io.Serializable
     public ArrayList<String> getSavedGames()
     {
         return savedGames;
+    }
+    
+    public void addPlayer(Player player)
+    {
+        players.put(player.getName(), player);
     }
     
 //     public void addFriend(String name, Friend friend)

@@ -20,7 +20,7 @@ public class Game
     
     private Enemy jozef, liam, tom, zain;
     
-    private Player player;//combat
+    private Player player1;//combat
     
     public Game()
     {
@@ -89,14 +89,14 @@ public class Game
                 if(gameData.getCurrentLocation().getEnemies().containsKey(fightCommands.get(1))) {
                    // Check to see if the command was entered correctly eg. fight NAME with WEAPON
                    if(fightCommands.size() > 3) { 
-                       playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player.getInventory().getWeapon(fightCommands.get(3)), player);
+                       playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player1.getInventory().getWeapon(fightCommands.get(3)), player1);
                        
                        if(playerWin == false) {
                            break; // GAME OVER
                        }
                        
                        System.out.println("You have successfully beaten "+fightCommands.get(1)+"!");
-                       System.out.println("You currently have: \n \t - "+player.getHealth()+ " health points \n \t - "+player.getStrength()+" strength points");                       
+                       System.out.println("You currently have: \n \t - "+player1.getHealth()+ " health points \n \t - "+player1.getStrength()+" strength points");                       
                        System.out.println(gameData.getCurrentLocation().getLongDescription());
                     }else{
                         System.out.print("Please put what weapon you would like to use (fight NAME with WEAPON)");
@@ -250,11 +250,10 @@ public class Game
         office.addDescription("In a computing Admin office")
               .withExit("west", lab);
         
-        gameData.locations = new ArrayList<Location>();
-        gameData.locations.add(theater);
-        gameData.locations.add(pub);
-        gameData.locations.add(lab);
-        gameData.locations.add(office);
+        gameData.addLocation(theater);
+        gameData.addLocation(pub);
+        gameData.addLocation(lab);
+        gameData.addLocation(office);
         
         gameData.setNewLocation(outside);
     }
@@ -263,11 +262,13 @@ public class Game
     {
         MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 3.1);
         
-        player = new Player("Player 1");
+        player1 = new Player("Player 1");
         
-        player.hasStrength(100)
+        player1.hasStrength(100)
              .withHealth(100)
              .andHasWeapon("sword", sword);
+        
+        gameData.addPlayer(player1);
 
         jozef = new Enemy("jozef");
         liam = new Enemy("liam");

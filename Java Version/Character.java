@@ -7,12 +7,12 @@ public abstract class Character implements java.io.Serializable
     protected String name;
     protected int health; 
     protected int strength;
-    private Inventory inventory;
+    protected Inventory inventory;
 
     protected Character(String name)
     {
         this.name = name;
-        this.inventory = new Inventory();
+        inventory = new Inventory();
     }
     
     abstract public Character hasStrength(int strength);
@@ -38,9 +38,6 @@ public abstract class Character implements java.io.Serializable
         health = newHealth;
     }
 
-
-
-    
     public Inventory getInventory()
     {
         return inventory;
