@@ -85,12 +85,13 @@ public class Game
                 }           
 
                if(fightCommands.size() > 3){ 
-                   playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player.getInventory().getWeapon(fightCommands.get(3)));
-
-                }else{
-                    playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command);
+                   playerWin = combatStartFight(gameData.getCurrentLocation().getEnemy(fightCommands.get(1)),command, player.getInventory().getWeapon(fightCommands.get(3)), player);
+                   if(playerWin == false){
+                       break;
+                   }
                 }
-                System.out.print(playerWin);
+
+
             }
                 
             else if(output.equals("save")) {
@@ -235,7 +236,7 @@ public class Game
 
     private void createCharacters()
     {
-        MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 0.1);
+        MovableObject sword = new MovableObject("Sword", "Steal sword", 3, 3.1);
         //gameData.player1 = new Player("Player1", 100, 100, sword);
         
 
@@ -320,142 +321,54 @@ public class Game
         //}
         
     }
-    public boolean combatStartFight(Enemy enemy, String command, MovableObject weapon)
+    public boolean combatStartFight(Enemy enemy, String command, MovableObject weapon, Player player)
     {
 
         boolean playerWin = false;        
         boolean enemyDefending = false;
         boolean playerDefending = false;
         int enemyDealt = 0;
-        int playerDealt = 0;
+        int playerDealt = 0;        
+
+        int totalEnemyDealt = 0;
+        int totalPlayerDealt = 0;
 
         while(!playerWin){
-            ArrayList<String> playerResult = playerTurn(enemyDefending, command, enemy, weapon);
-            ArrayList<String> enemyResult = enemyTurn(playerDefending, enemy);
             
-            playerDefending = Boolean.valueOf(playerResult.get(0));
-            playerDealt += Integer.parseInt(playerResult.get(1));
-            
-            enemyDefending = Boolean.valueOf(enemyResult.get(0));
-            enemyDealt += Integer.parseInt(enemyResult.get(1));
-            
-            if(enemyDealt > playerDealt){
-                player.updateHealth(enemyDealt);
-            }else if (playerDealt > enemyDealt){
-                enemy.updateHealth(playerDealt);
+            if(weapon.getName().equals("sheild")){
+                playerDealt = (int) Math.floor(10);
+            }else {
+                playerDealt = (int) Math.floor(15*weapon.getWeaponModifier());                
+                enemyDealt = (int) Math.floor(14*enemy.getWeapon().getWeaponModifier());
             }
-           
+            
+            totalEnemyDealt+=enemyDealt;
+            totalPlayerDealt+=playerDealt;
+            
+            enemy.updateHealth(enemy.getHealth()-playerDealt);
+            player.updateHealth(player.getHealth()-enemyDealt);
+                
             if(player.getHealth() <= 0){
                 playerWin = false;
-                System.out.print("Player Dealt " + playerDealt + "'");
-                System.out.print("Enemy Dealt " + enemyDealt + "'");
+                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", unfortunately it was your death. \n GAME OVER");
+
                 break;
             } else if(enemy.getHealth() <= 0){
                 playerWin = true;
-                System.out.print("Player Dealt " + playerDealt + "'");
-                System.out.print("Enemy Dealt " + enemyDealt + "'");
+                System.out.println("You fight the evil "+enemy.getName()+ " to the death with your "+weapon.getObjectName()+", and kill him only taking "+totalEnemyDealt+" health points.\n"+gameData.getCurrentLocation().getLongDescription());
                 break;
             }
-
         }
         return playerWin;
     }   
-    public boolean combatStartFight(Enemy enemy, String command)
-    {
-
-        boolean playerWin = false;        
-        boolean enemyDefending = false;
-        boolean playerDefending = false;
-        int enemyDealt = 0;
-        int playerDealt = 0;
-
-        while(!playerWin){
-            ArrayList<String> playerResult = playerTurn(enemyDefending, command, enemy);
-            playerDefending = Boolean.valueOf(playerResult.get(0));
-            playerDealt += Integer.parseInt(playerResult.get(1));
-            
-            System.out.print("Player Dealt " + playerDealt + "'");
-            
-            ArrayList<String> enemyResult = enemyTurn(playerDefending, enemy);
-            enemyDefending = Boolean.valueOf(enemyResult.get(0));
-            enemyDealt += Integer.parseInt(enemyResult.get(1));
-            
-            if(Integer.parseInt(enemyResult.get(1)) > Integer.parseInt(playerResult.get(1))){
-                player.updateHealth(Integer.parseInt(enemyResult.get(1)));
-                break;
-            }else if (Integer.parseInt(playerResult.get(1)) > Integer.parseInt(enemyResult.get(1))){
-                enemy.updateHealth(Integer.parseInt(playerResult.get(1)));
-                break;
-            }
-            if(player.getHealth() <= 0){
-                playerWin = false;
-                System.out.print("Player Dealt " + playerDealt + "'");
-                System.out.print("Enemy Dealt " + enemyDealt + "'");
-                break;
-            } else if(enemy.getHealth() <= 0){
-                playerWin = true;
-                System.out.print("Player Dealt " + playerDealt + "'");
-                System.out.print("Enemy Dealt " + enemyDealt + "'");
-                break;
-            }
-
-        }
-        return playerWin;
-    }   
-    public ArrayList<String> playerTurn(boolean enemyDefending, String command, Enemy enemy, MovableObject weapon)
-    {
-        ArrayList<String> answer = new ArrayList<String>();
-   
-        int hpDealt = 0;
-        if(weapon.getName().equals("sheild")){
-            answer.add("False");
-        }else {
-            hpDealt = (int) Math.floor(15*weapon.getWeaponModifier());
-            answer.add("True");
-        }
-        answer.add(Integer.toString(hpDealt));
-        return answer;
-    }
-    public ArrayList<String> playerTurn(boolean enemyDefending, String command, Enemy enemy)
-    {
-        ArrayList<String> answer = new ArrayList<String>();
-   
-        int hpDealt = 0;
-
-        answer.add("True");
-        hpDealt = (int) Math.floor(10);
-        
-        answer.add(Integer.toString(hpDealt));
-        return answer;
-    }
     
-    public ArrayList<String> enemyTurn(boolean playerDefending, Enemy enemy)
-    {
-        ArrayList<String> answer = new ArrayList<String>();
-        
-        int x = 1 + (int)(Math.random() * ((3 - 1) + 1));
-        int hpDealt = 0;
-         
-        /*if(x >= 2 ){
-            hpDealt = (int) Math.floor(15*enemy.getWeapon().getWeaponModifier());
-            answer.add("True");
-        }else{
-              answer.add("False");
-        }*/
-              
-        answer.add("False");
-        answer.add(Integer.toString(hpDealt));
-        return answer;
-
-
-    }
     private String welcome()
     {
         return "\nWelcome to the Pub Crawl Game!\n "
               +"You wake up at Porsmouth Museum in 2014 not knwing how you got there.\n"
                +"but there is something quite different about the world you have woken up in.\n"
                +"You hear people in distance shouting ‘vikings are here, get to gunwharf for rescue.\n"
-               +"Type 'help' if you are not sure what to do.\n\n"
+
                +"You look for weapon to protect yourself. You wonder around in museum for quite sometime\n"
                +"before finding sword and shield and start your journey to gunwharf thinking what is going on here\n"
                +"You find a letter at the front of the museum which gives you hint how to get there\n"
