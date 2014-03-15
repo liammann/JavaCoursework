@@ -40,6 +40,10 @@ public class Location implements java.io.Serializable
     }
     public Enemy getEnemy(String enemyName){
         return enemies.get(enemyName);
+    }    
+    
+    public Enemy removeEnemy(String enemyName){
+        return enemies.remove(enemyName);
     }
 
     public void addFriend(String friendName, Friend friend)
