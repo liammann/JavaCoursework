@@ -129,32 +129,35 @@ public class CommandActions
 
     private String pickup(String objectName)
     {
-        // validate object exists in location
-        if (gameData.getCurrentLocation().containsObject(objectName))
-        {
-            MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(objectName);
-            gameData.getPlayerObject().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
-            gameData.getCurrentLocation().removeObject(objectName);
-            return "You picked up " + objectName;
-        } else {
-            return "No such object exists in this room.";
+        if (gameData.getCurrentLocation().containsObject(objectName)) {
+            Object object = gameData.getCurrentLocation().getObjectByName(objectName);
+            
+            if(object instanceof FixedObject) {
+                return "You cannot pick up fixed objects!";
+            }
+
+            if(gameData.getPlayerObject().getInventory().addItemToInventory((MovableObject) object)) {
+                gameData.getCurrentLocation().removeObject(objectName);
+
+                return "You picked up " + objectName;
+            }else{
+                return "You don't have enough strength to carry that either!";
+            }
         }
-        // return cannot pickup fixed objects...
+        
+        return "No such object exists in this room.";
     }
 
     private String drop(String objectName)
     {
         // validate object exists in inventory
-        if (gameData.getPlayerObject().getInventory().containsObject(objectName))
-
-        {
-            MovableObject thisObject = gameData.getCurrentLocation().getObjectByName(objectName);
-            gameData.getPlayerObject().getInventory().addItemToInventory(thisObject.getObjectName(), thisObject);
-            gameData.getCurrentLocation().removeObject(objectName);
-            return "You picked up " + objectName;
-        } else {
-            return "No such object exists in this room.";
+        if (gameData.getPlayerObject().getInventory().containsObject(objectName)) {
+            MovableObject object = gameData.getCurrentLocation().getObjectByName(objectName);
+            gameData.getCurrentLocation().andHasObject(object);
+            return "You dropped your " + objectName;
         }
+        
+        return "No such object exists in your inventory.";
     }
 
     private String fight(String who)

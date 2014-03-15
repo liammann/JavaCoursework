@@ -30,7 +30,11 @@ public class Location implements java.io.Serializable
     
     public boolean containsObject(String name)
     {
-        return movableObjects.containsKey(name);
+        if(movableObjects.containsKey(name) || fixedObjects.containsKey(name)) {
+            return true;
+        }
+        
+        return false;
     }
 
     public Location addDescription(String description)

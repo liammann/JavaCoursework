@@ -27,15 +27,14 @@ public class Inventory implements java.io.Serializable
     }
     
     // We should not be outputting to the console from this class! Return a String instead.
-    public void addItemToInventory(String itemName, MovableObject item)
+    public boolean addItemToInventory(MovableObject item)
     {
-        if (inventoryWeight() + item.getWeight() <= inventoryWeightCapacity)
-        {
-            playerInventory.put(itemName, item);
-            //System.out.println(item.getObjectName() + " has been put in your bag.");
-        } else {
-            System.out.println("Your bag's too heavy already. Try dropping something before picking this up.");
+        if (inventoryWeight() + item.getWeight() <= inventoryWeightCapacity) {
+            playerInventory.put(item.getName(), item);
+            return true;
         }
+        
+        return false;
     }
     
     public void dropFromInventory(String item)
@@ -76,11 +75,15 @@ public class Inventory implements java.io.Serializable
         }
         return inventoryWeight;
     }
-    public MovableObject getWeapon(String weaponName){
+    
+    public MovableObject getWeapon(String weaponName)
+    {
         return playerInventory.get(weaponName);
     }
-    public MovableObject getWeapon(){
-        return playerInventory.get(1);
+    
+    public MovableObject getWeapon()
+    {
+        return playerInventory.get(0);
     }
     /*
     public void setObjectName(String name, MovableObject object)
