@@ -353,7 +353,8 @@ public class Game
     
     private String welcome()
     {
-        return "You wake up at Porsmouth Museum in 2014 not knwing how you got there.\n"
+        return "---------------------------------------------------\n"
+               +"You wake up at Porsmouth Museum in 2014 not knwing how you got there.\n"
                +"but there is something quite different about the world you have woken up in.\n"
                +"You hear people in distance shouting ‘vikings are here, get to gunwharf for rescue.'\n"
 
