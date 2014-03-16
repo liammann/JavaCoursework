@@ -203,19 +203,15 @@ public class Game
                              .withDescription("Half a bottle of Strongbow cider")
                              .andWeight(2);
 
-<<<<<<< HEAD
         key = MovableObject.create("key")
                            .withDescription("A key that unlocks some door")
                            .andHasPasscode(42);
 
         chair = FixedObject.create("chair")
                            .withDescription("An old wooden chair");
-=======
-        MovableObject cider = new MovableObject("cider", "Half a bottle of Strongbow cider", 2);                
-        MovableObject key = new MovableObject("key", 42);        
+       
         MovableObject healthPotion = new MovableObject("health", 12.0);        
-        FixedObject chair = new FixedObject("chair", "An old wooden chair");
->>>>>>> health-potions
+
 
         outside = Location.create();
         theater = Location.create();
