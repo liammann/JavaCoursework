@@ -25,9 +25,9 @@ public class LocationTest
     {
         location = new Location();
         enemy = new Enemy("enemy name");
-        friend = new Friend("friend name");
-        fixed = new FixedObject("fixed name");
-        movable = new MovebleObject("movable name");
+        // friend = new Friend("friend name");
+        // fixed = new FixedObject("fixed name");
+        // movable = new MovableObject("movable name");
     }
 
     /**
