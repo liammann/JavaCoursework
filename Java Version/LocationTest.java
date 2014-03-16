@@ -13,11 +13,21 @@ import org.junit.Test;
  */
 public class LocationTest
 {
+    private Location location;
+    private Enemy enemy;
+    private Friend friend;
+    private FixedObject fixed;
+    private MovableObject movable;
     /**
      * Default constructor for test class LocationTest
      */
     public LocationTest()
     {
+        location = new Location();
+        enemy = new Enemy("enemy name");
+        friend = new Friend("friend name");
+        fixed = new FixedObject("fixed name");
+        movable = new MovebleObject("movable name");
     }
 
     /**
@@ -28,6 +38,11 @@ public class LocationTest
     @Before
     public void setUp()
     {
+        location.addDescription("description text");
+        location.andEnemy(enemy);
+        location.andFriend("friend name", friend);
+        location.andHasObject(fixed);
+        location.andHasObject(movable);
     }
 
     /**
