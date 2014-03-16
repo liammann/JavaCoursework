@@ -52,10 +52,10 @@ public class Location implements java.io.Serializable
         return this;
     }
     
-    public HashMap getEnemies()
-    {
-        return enemies;
-    }
+//     public HashMap getEnemies()
+//     {
+//         return enemies;
+//     }
     
     public Enemy getEnemyByName(String enemyName)
     {
