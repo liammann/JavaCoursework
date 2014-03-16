@@ -51,6 +51,9 @@ public class CommandActions
             case "manual":
                 answer = commandWords.manual(parameter);
                 break;
+            case "use":
+                answer = use(parameter);
+                break;
             case "pickup":
                 answer = pickup(parameter);
                 break;
@@ -135,6 +138,16 @@ public class CommandActions
         }
 
         return "You don't have enough strength to carry that!";
+    }   
+    
+    private String use(String name)
+    {
+
+        if(gameData.getPlayerObject().getInventory().containsObject(name)){
+            gameData.getPlayerObject().updateHealth(gameData.getPlayerObject().getHealth() + gameData.getPlayerObject().getInventory().getFromInventoryByName(name).getHealthPotion());
+            return "You added " + gameData.getPlayerObject().getInventory().getFromInventoryByName(name).getHealthPotion() + " health points \nThis gives you " + gameData.getPlayerObject().getHealth() + " health points in total";
+        }
+        return "Use what?";
     }
 
     private String drop(String objectName)

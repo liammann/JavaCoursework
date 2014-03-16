@@ -33,6 +33,7 @@ public class CommandWords
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(1).add("go");
 		validCommands.get(1).add("back");
+		validCommands.get(1).add("use");		
 		validCommands.get(1).add("pickup");
 		validCommands.get(1).add("drop");
 		validCommands.get(1).add("fight");
