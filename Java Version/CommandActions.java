@@ -29,7 +29,7 @@ public class CommandActions
                 answer = back();
                 break;
             case "inventory":
-                // answer = inventory(); ???
+                answer = inventory();
                 break;
         }
 
@@ -292,5 +292,9 @@ public class CommandActions
         }
         
         return "The object specified does not exist!";
+    }
+    private String inventory()
+    {
+        return gameData.getPlayerObject().getInventory().currentInventory();
     }
 }
