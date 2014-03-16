@@ -93,13 +93,11 @@ public class Game
                 System.out.print(gameData.getCurrentLocation().getLongDescription());                       
                 System.out.print(gameData.getCurrentLocation().getExits());
             }else if(output.equals("save")) {
-                String gameSaveName = command.split(" ")[3];
-
-                if(gameData.getSavedGames().contains(gameSaveName)) {
-                    System.out.print("Are you sure you would like to overwrite game save '" + gameSaveName + "'?\n[yes/no] : ");
+                if(gameData.getSavedGames().contains(command.split(" ")[3])) {
+                    System.out.print("Are you sure you would like to overwrite this game save?\n[yes/no] : ");
                     command = commandsParser.getCommand();
 
-                    if(command.equals("yes")) {
+                    if(!command.equals("yes")) {
                         saveGame();
                         System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
                     }else{
@@ -109,13 +107,12 @@ public class Game
                     saveGame();
                     System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
                 }
+            }else if(output.equals("load")) {
+                System.out.print("You cannot load a saved game whilst in game. Please go into pregame mode first.");
             }else{
                 System.out.print(output);
             }
-
-            // put in a load game method?
         }
-
         System.out.println("Thanks for playing!");
     }
 
