@@ -1,24 +1,14 @@
-import java.util.LinkedHashMap;
-import java.util.ArrayList;
-import java.util.Map;
-
-/**
- * Write a description of class inventory here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-
+import java.util.HashMap;
 
 public class Inventory implements java.io.Serializable
 {
     private int inventoryWeight = 0;
     private int inventoryWeightCapacity = 10;
-    private LinkedHashMap<String, MovableObject> inventory;
+    private HashMap<String, MovableObject> inventory;
 
     public Inventory()
     {
-        inventory = new LinkedHashMap<String, MovableObject>();
+        inventory = new HashMap<String, MovableObject>();
     }
 
     public boolean addItemToInventory(MovableObject item)
@@ -28,7 +18,6 @@ public class Inventory implements java.io.Serializable
         }
         
         inventory.put(item.getName(), item);
-
         return true;
     }
     
@@ -50,34 +39,34 @@ public class Inventory implements java.io.Serializable
 
     public String currentInventory()
     {
-        String returntxt = "You currently have: \n";
+        String returntxt = "You currently have:\n";
 
-        for(Map.Entry<String, MovableObject> item: inventory.entrySet()) {
-            returntxt += "  - " + item.getValue().getObjectDescription() + "\n";
+        for(MovableObject item: inventory.values()) {
+            returntxt += " - " + item.getObjectDescription() + "\n";
         }
 
         return returntxt;
     }
-    
+
     public int inventorySize()
     {
         return inventory.size();
     }
-    
+
     public int inventoryWeight()
     {
-        for(Map.Entry<String, MovableObject> item: inventory.entrySet()) {
-            inventoryWeight += item.getValue().getWeight();
+        for(MovableObject item: inventory.values()) {
+            inventoryWeight += item.getWeight();
         }
 
         return inventoryWeight;
     }
-    
+
     public MovableObject getWeapon(String weaponName)
     {
         return inventory.get(weaponName);
     }
-    
+
     public MovableObject getWeapon()
     {
         String firstKey = inventory.keySet().iterator().next();
