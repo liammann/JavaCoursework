@@ -2,6 +2,13 @@ import java.util.ArrayList;
 import java.lang.Math;
 import java.io.*;
 
+/**
+ * A textual based game
+ *
+ * @author Thomas Punt, Liam Mann Jozef Stodulski and Zain Ali
+ * @version 17.3.2014 
+ */
+
 public class Game
 {
     private GameData gameData;
@@ -253,7 +260,13 @@ public class Game
         
         gameData.setNewLocation(outside);
     }
-
+    
+    /**
+     * Create Characters Method 
+     *
+     * Creates the initial player character and all the friends/ enemies 
+     * character form the Player/Enemy/Friend classes
+     */
     private void createCharacters() // segregate this method into friends, enemies, and players
     {
         MovableObject sword;
@@ -326,12 +339,24 @@ public class Game
         john = Friend.create("john")
                      .withHint("Shut up, Meg");
     }
-
+     /**
+     * CombatFight Method 
+     *
+     * Used when the player types in: fight ENEMY-NAME with WEAPON
+     * method will loop until either the player or the enemy runs out of health points
+     * Both the player and enemy have weapons in there inventory and use them every time they attack.
+     * 
+     * Method return whether the player has won, true or false. It also prints messages to the player with health stats
+     *
+     * @param enemy The enemy object you are fighting 
+     * @param weapon The weapon you have selected from your inventory
+     * @param player The player object of player1
+     */
     public boolean combatStartFight(Enemy enemy, MovableObject weapon, Player player)
     {
         boolean playerWin = false;
-        boolean enemyDefending = false;
-        boolean playerDefending = false;
+        boolean enemyDefending = false; // Not used yet
+        boolean playerDefending = false; // Not used yet 
         int enemyDealt = 0;
         int playerDealt = 0;
         int totalEnemyDealt = 0;

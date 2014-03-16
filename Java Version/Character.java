@@ -1,6 +1,3 @@
-/*
- * Why's this not an abstract class?
- */
 
 public abstract class Character implements java.io.Serializable
 {
@@ -34,7 +31,11 @@ public abstract class Character implements java.io.Serializable
     {
         health = newHealth;
     }
-
+    
+    /**
+     * Return inventory object 
+     * Used in fight method for getting enemies inventories 
+     */
     public Inventory getInventory()
     {
         return inventory;

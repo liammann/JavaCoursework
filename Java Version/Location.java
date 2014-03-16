@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map; // is this needed still?
+
 
 public class Location implements java.io.Serializable
 {
@@ -52,11 +52,6 @@ public class Location implements java.io.Serializable
         return this;
     }
     
-//     public HashMap getEnemies()
-//     {
-//         return enemies;
-//     }
-    
     public Enemy getEnemyByName(String enemyName)
     {
         return enemies.get(enemyName);
@@ -78,9 +73,18 @@ public class Location implements java.io.Serializable
     {
        friends.put(friendName, friend);
     }
-
-    // Maybe segregate the friends from the enemies?
-    public String getLocationCharacters()
+    
+     /**
+     * getLocationCharacters Method 
+     *
+     * Get current friends and enemies from location. 
+     * if no player or enemies exist in that room return the string 
+     * "there are no charcters in this room"
+     * 
+     * Called by Game and CommandAction classes
+     * 
+     */
+    public String getLocationCharacters() // Maybe segregate the friends from the enemies?
     {
         boolean friendsB = false;
         boolean enemiesB = false;
@@ -98,7 +102,7 @@ public class Location implements java.io.Serializable
             friendsB = true;
 
             for(String friendName : friends.keySet()) {
-               // answer += " - " + friendName + "\n";
+                answer += " - " + friendName + "\n";
             }
         }
 
@@ -112,7 +116,6 @@ public class Location implements java.io.Serializable
     public Location withExit(String direction, Location neighbour)
     {
         exits.put(direction, neighbour);
-
         return this;
     }
     
@@ -160,6 +163,15 @@ public class Location implements java.io.Serializable
         return "You are " + description + "\n";
     }
 
+     /**
+     * getLocationItems Method 
+     *
+     * Get location items either fixed or movable objects.
+     * return none if none exist 
+     * 
+     * Called by Game and CommandAction classes
+     * 
+     */
     public String getLocationItems()
     {
         String answer = "This room has the following objects:\n";
@@ -184,7 +196,15 @@ public class Location implements java.io.Serializable
         
         return answer+"\n";
     }
-
+     /**
+     * getExits Method 
+     *
+     * Get exits for current location
+     * will always return something because every location has a exit
+     * 
+     * Called by Game and CommandAction classes
+     * 
+     */
     public String getExits()
     {
         String exitPoints = "Exits:";
@@ -211,20 +231,33 @@ public class Location implements java.io.Serializable
         isLocked = true;
         return this;
     }
-    public Location andPasscode(int passcode)
-    {
-        locationPasscode = passcode;
-        return this;
-    }
+   
     public boolean isLocked()
     {
         return isLocked;
     }
+    
     public void unlock()
     {
         isLocked = false;
     }
     
+    /**
+     * andPasscode Method 
+     * 
+     * Add passcode integer to location so it can only be unlock by a key (MovableObject) with the same passcode. 
+     */
+    public Location andPasscode(int passcode)
+    {
+        locationPasscode = passcode;
+        return this;
+    }
+    
+    /**
+     * getPasscode Method 
+     * 
+     * Get passcode integer for current location object. 
+     */
     public int getPasscode(){
         return locationPasscode;
         
