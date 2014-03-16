@@ -72,14 +72,9 @@ public class Game
             if(output.equals("fight")) {
                 String[] fightCommands = command.split(" ");
                 Enemy enemy = gameData.getCurrentLocation().getEnemyByName(fightCommands[1]);
-<<<<<<< HEAD
-                boolean playerWin = combatStartFight(enemy, player1.getInventory().getWeapon(fightCommands[3]), player1);
-                
-=======
                 MovableObject weapon = player1.getInventory().getWeapon(fightCommands[3]);
                 boolean playerWin = combatStartFight(enemy, weapon, player1);
 
->>>>>>> FETCH_HEAD
                 if(playerWin == false) {
                     System.out.println("You've lost the game!");
                     break;
