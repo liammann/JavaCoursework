@@ -155,10 +155,10 @@ public class CommandActions
             return "Invalid syntax used for the 'fight' command.";
         }
             
-        if(!gameData.getCurrentLocation().getEnemies().containsKey(parameters.get(0))) {
+        if(gameData.getCurrentLocation().getEnemyByName((String) parameters.get(0)).getName() ==  null) {
             return "The enemy entered does not exist!";
         }
-
+       
         return "fight";
     }
     

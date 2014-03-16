@@ -67,13 +67,13 @@ public class Game
             if(output.equals("finished")) {
                 System.out.println("Congratulations on completing the game!");
                 break;
-            }
+            } 
 
             if(output.equals("fight")) {
                 String[] fightCommands = command.split(" ");
                 Enemy enemy = gameData.getCurrentLocation().getEnemyByName(fightCommands[1]);
                 boolean playerWin = combatStartFight(enemy, player1.getInventory().getWeapon(fightCommands[3]), player1);
-
+                
                 if(playerWin == false) {
                     System.out.println("You've lost the game!");
                     break;
@@ -250,7 +250,6 @@ public class Game
 
     private void createCharacters() // segregate this method into friends, enemies, and players
     {
-        Player player1;
         MovableObject sword;
         
         sword = MovableObject.create("sword")
@@ -345,14 +344,14 @@ public class Game
             if(player.getHealth() <= 0) {
                 playerWin = false;
                 System.out.println("You fight the evil " + enemy.getName() + " to death with your " + weapon.getObjectName());
-                System.out.println("\nunfortunately it was your death.\nGAME OVER");
+                System.out.println("unfortunately it was your death.\nGAME OVER");
                 break;
             }
             
             if(enemy.getHealth() <= 0) {
                 playerWin = true;
                 System.out.println("You fight the evil " + enemy.getName() + " to the death with your " + weapon.getObjectName());
-                System.out.println("\nand kill him only taking " + totalEnemyDealt + " health points.\n");
+                System.out.println("and kill him only taking " + totalEnemyDealt + " health points.\n");
                 gameData.getCurrentLocation().removeEnemyByName(enemy.getName());
                 break;
             }
