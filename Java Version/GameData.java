@@ -12,7 +12,6 @@ public class GameData implements java.io.Serializable
     private HashMap<String, Player> players;
     //private String currentPlayer;
     
-    private Player player1; // this could perhaps be moved to the Location class
 
     public static GameData getInstance()
     {
