@@ -196,7 +196,7 @@ public class Game
     private void buildLocations()
     {
         Location outside, theater, pub, lab, office;
-        MovableObject cider, key;
+        MovableObject cider, key, health;
         FixedObject chair;
 
         cider = MovableObject.create("cider")
@@ -206,11 +206,12 @@ public class Game
         key = MovableObject.create("key")
                            .withDescription("A key that unlocks some door")
                            .andHasPasscode(42);
-
+        health = MovableObject.create("health")
+                           .withDescription("A key that unlocks some door")
+                           .andHealthPotion(12);
         chair = FixedObject.create("chair")
                            .withDescription("An old wooden chair");
        
-        MovableObject healthPotion = new MovableObject("health", 12.0);        
 
 
         outside = Location.create();
@@ -224,7 +225,7 @@ public class Game
                .withExit("south", lab)
                .withExit("west", pub)
                .andHasObject(chair)
-               .andHasObject(healthPotion);
+               .andHasObject(health);
                
         pub.addDescription("In a campus pub")
            .withExit("east", outside)

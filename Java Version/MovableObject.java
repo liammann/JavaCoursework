@@ -45,11 +45,10 @@ public class MovableObject extends Object implements java.io.Serializable
 
         return this;
     }
-
-    public MovableObject(String name, double healthPotion)
+    public MovableObject andHealthPotion(int healthPotion)
     {
-        this.name = name;
-        this.healthPotion = (int) healthPotion;
+        this.healthPotion = healthPotion;
+        return this;
     }
     
     public int getWeight()
