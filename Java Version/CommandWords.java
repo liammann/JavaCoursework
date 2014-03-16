@@ -33,24 +33,22 @@ public class CommandWords
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(1).add("go");
 		validCommands.get(1).add("back");
-		validCommands.get(1).add("use");		
+		validCommands.get(1).add("use");
 		validCommands.get(1).add("pickup");
 		validCommands.get(1).add("drop");
-		validCommands.get(1).add("fight");
 		validCommands.get(1).add("manual");
 		validCommands.get(1).add("new");
 		validCommands.get(1).add("inspect");
 
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(2).add("load");
-		validCommands.get(2).add("talk");				
-		validCommands.get(2).add("go");		
+		validCommands.get(2).add("talk");
+		validCommands.get(2).add("go");
 
-		
 		validCommands.add(new ArrayList<String>());
 		validCommands.get(3).add("save");
 		validCommands.get(3).add("fight");
-		
+
 		preGameCommands.add("load");
 		preGameCommands.add("new");
 		preGameCommands.add("quit");
@@ -67,6 +65,7 @@ public class CommandWords
 		commandWordsDocumentation.put("talk", "Talk to a player in the game. Usage: 'talk to {player_name}'");
 		commandWordsDocumentation.put("load", "Load a saved game. Usage: 'load game {game_save}'");
 		commandWordsDocumentation.put("save", "Save the current state of the game. Usage: 'save game as {game_name}'");
+		commandWordsDocumentation.put("fight", "Fight an enemy in the current room. Usage: 'fight {enemy_name} with {weapon_name}'");
 	}
 
 	public boolean commandExists(String command)
@@ -90,7 +89,7 @@ public class CommandWords
 
 		return false;
 	}
-	
+
 	public boolean isPreGameCommand(String command)
 	{
 	    if(preGameCommands.contains(command)) {

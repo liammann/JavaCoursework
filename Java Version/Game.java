@@ -15,11 +15,11 @@ public class Game
     private CommandsParser commandsParser;
     private String gameSaveLocation = "gamesaves/";
     private ArrayList<String> gameSaves;
-    
+
     private Enemy jozef, liam, tom, zain;
-    
+
     private Player player1; // combat
-    
+
     public Game()
     {
         gameData = GameData.getInstance();
@@ -27,7 +27,7 @@ public class Game
         getGameSaves();
         preGame();
     }
-    
+
     public void preGame()
     {
         System.out.println("=============================");
@@ -36,7 +36,7 @@ public class Game
         System.out.println("Current game saves: " + getSavedGameNames());
         System.out.println("or load a new game with 'new game'");
         System.out.println("=============================");
-        
+
         quitGame: while(true) {
             String command = commandsParser.getCommand();
             String output = commandsParser.parseCommand(command);
@@ -88,40 +88,50 @@ public class Game
                 }
 
                 System.out.println("You have successfully beaten " + fightCommands[1] + "!");
-                System.out.println("You currently have:\n\t- " + player1.getHealth() + " health points\n\t- " + player1.getStrength() + " strength points");                       
+                System.out.print("You currently have:\n\t- " + player1.getHealth() + " health points\n\t- ");
+                System.out.println(player1.getStrength() + " strength points");
                 System.out.print(gameData.getCurrentLocation().getLongDescription());                       
                 System.out.print(gameData.getCurrentLocation().getExits());
             }else if(output.equals("save")) {
-                //if(saveGame()) {
+                String gameSaveName = command.split(" ")[3];
+
+                if(gameData.getSavedGames().contains(gameSaveName)) {
+                    System.out.print("Are you sure you would like to overwrite game save '" + gameSaveName + "'?\n[yes/no] : ");
+                    command = commandsParser.getCommand();
+
+                    if(command.equals("yes")) {
+                        saveGame();
+                        System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
+                    }else{
+                        System.out.print("Saving game aborted.");
+                    }
+                }else{
                     saveGame();
                     System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
-                //}else{
-                //    System.out.print("There is already a game save with that name!");
-                //}
+                }
             }else{
                 System.out.print(output);
             }
-            
+
             // put in a load game method?
         }
 
         System.out.println("Thanks for playing!");
     }
-    
+
     private void getGameSaves()
     {
         File files = new File("gamesaves/");
         File[] contents = files.listFiles(new FilenameFilter() {
             public boolean accept(File directory, String file) {
                 if(file.matches("[a-zA-Z]+\\.ser")) {
-                    String fileName = file.split("\\.")[0];
-                    return fileName.matches("[a-zA-Z]+");
+                    return true;
                 }
 
                 return false;
             }
         });
-       
+
         if(contents != null && contents.length != 0) {
             for(File name : contents) {
                 String[] fileName = name.getName().split("\\.");
@@ -190,7 +200,7 @@ public class Game
             classe.printStackTrace();
             return;
         }
-        
+
         play();
     }
     
@@ -209,7 +219,6 @@ public class Game
         cider = MovableObject.create("cider")
                              .withDescription("Half a bottle of Strongbow cider")
                              .andWeight(2);
-
         key = MovableObject.create("key")
                            .withDescription("A key that unlocks some door")
                            .andHasPasscode(42);
@@ -218,22 +227,20 @@ public class Game
                            .andHealthPotion(12);
         chair = FixedObject.create("chair")
                            .withDescription("An old wooden chair");
-       
-
 
         outside = Location.create();
         theater = Location.create();
         lab = Location.create();
         pub = Location.create();
         office = Location.create();
-        
+
         outside.addDescription("Outside the university entrance")
                .withExit("east", theater)
                .withExit("south", lab)
                .withExit("west", pub)
                .andHasObject(chair)
                .andHasObject(health);
-               
+
         pub.addDescription("In a campus pub")
            .withExit("east", outside)
            .andEnemy(liam)
@@ -244,7 +251,7 @@ public class Game
                .andHasObject(chair)
                .andIsLocked()
                .andPasscode(42);
-        
+
         lab.addDescription("In a computing lab")
            .withExit("north", outside)
            .withExit("east", office)
@@ -252,12 +259,12 @@ public class Game
 
         office.addDescription("In a computing Admin office")
               .withExit("west", lab);
-        
+
         gameData.addLocation(theater);
         gameData.addLocation(pub);
         gameData.addLocation(lab);
         gameData.addLocation(office);
-        
+
         gameData.setNewLocation(outside);
     }
     
@@ -270,32 +277,32 @@ public class Game
     private void createCharacters() // segregate this method into friends, enemies, and players
     {
         MovableObject sword;
-        
+
         sword = MovableObject.create("sword")
                              .withDescription("Steal sword")
                              .andWeight(3)
                              .withWeaponModifier(3.1);
-                             
+
         player1 = Player.create("Player 1")
                         .hasStrength(100)
                         .withHealth(100)
                         .andHasWeapon(sword);
-        
+
         gameData.addPlayer(player1);
-        
+
         jozef = new Enemy("jozef");
         liam = new Enemy("liam");
         tom = new Enemy("tom");
         zain = new Enemy("zain");
-             
+
          // Enemies Weapons 
         MovableObject axe, mace, dagger;
-        
+
         axe = MovableObject.create("axe")
                            .withDescription("Brutal axe")
                            .andWeight(2)
                            .withWeaponModifier(2.4);
-        
+
         mace = MovableObject.create("mace")
                             .withDescription("Brutal mace")
                             .andWeight(2)
@@ -323,10 +330,10 @@ public class Game
         zain.hasStrength(60)
             .withHealth(20)
             .andHasWeapon(dagger);
-            
+
 
         Friend jordan, james, jeremy, john;
-        
+
         jordan = Friend.create("jordan")
                        .withHint("The Key is behind the library");
 
@@ -363,22 +370,23 @@ public class Game
         int totalPlayerDealt = 0;
 
         while(!playerWin) {
+            // validate the movable object weapon before using it (do this in the 'fight' method in CommandActions
             playerDealt = (int) Math.floor(15*weapon.getWeaponModifier());                
-            enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier()); // getWeapon().getWeaponModifier());
-            
+            enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier());
+
             totalEnemyDealt += enemyDealt;
             totalPlayerDealt += playerDealt;
-            
+
             enemy.updateHealth(enemy.getHealth() - playerDealt);
             player.updateHealth(player.getHealth() - enemyDealt);
-                
+
             if(player.getHealth() <= 0) {
                 playerWin = false;
                 System.out.println("You fight the evil " + enemy.getName() + " to death with your " + weapon.getObjectName());
                 System.out.println("unfortunately it was your death.\nGAME OVER");
                 break;
             }
-            
+
             if(enemy.getHealth() <= 0) {
                 playerWin = true;
                 System.out.println("You fight the evil " + enemy.getName() + " to the death with your " + weapon.getObjectName());
@@ -390,12 +398,12 @@ public class Game
 
         return playerWin;
     }
-    
+
     private String welcome()
     {
         return "---------------------------------------------------\n"
-               +"You wake up at Porsmouth Museum in 2014 not knwing how you got there.\n"
-               +"but there is something quite different about the world you have woken up in.\n"
+               +"You wake up at Porsmouth Museum in 2014 not knowing how you got there.\n"
+               +"But there is something quite different about the world you have woken up in.\n"
                +"You hear people in distance shouting ‘vikings are here, get to gunwharf for rescue.'\n"
                +"You look for weapon to protect yourself. You wonder around in museum for quite sometime\n"
                +"before finding sword and shield and start your journey to gunwharf thinking what is going on here\n"

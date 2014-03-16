@@ -26,23 +26,23 @@ public class CommandsParser
         if(inputCommand.equals("")) {
             return "No command entered!";
         }
-        
+
         ArrayList<String> commands = new ArrayList<String>();
 
         for(String command : inputCommand.split(" ")) {
             commands.add(command);
         }
-        
+
         if(commands.size() == 0) {
             return "Empty commands are invalid!";
         }
-        
+
         String keyword = commands.get(0);
 
         if(!commandWords.commandExists(keyword)) {
             return "The command entered does not exist!";
         }
-        
+
         if(gameData.hasGameStarted() == false && !commandWords.isPreGameCommand(keyword)) {
             return "Invalid pre-game command!";
         }

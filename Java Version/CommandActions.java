@@ -142,11 +142,16 @@ public class CommandActions
     
     private String use(String name)
     {
+        if(gameData.getPlayerObject().getInventory().containsObject(name)) {
+            int playerHealth = gameData.getPlayerObject().getHealth();
+            int healthPotion = gameData.getPlayerObject().getInventory().getFromInventoryByName(name).getHealthPotion();
+            
+            gameData.getPlayerObject().updateHealth(playerHealth + healthPotion);
 
-        if(gameData.getPlayerObject().getInventory().containsObject(name)){
-            gameData.getPlayerObject().updateHealth(gameData.getPlayerObject().getHealth() + gameData.getPlayerObject().getInventory().getFromInventoryByName(name).getHealthPotion());
-            return "You added " + gameData.getPlayerObject().getInventory().getFromInventoryByName(name).getHealthPotion() + " health points \nThis gives you " + gameData.getPlayerObject().getHealth() + " health points in total";
+            return "You added " + gameData.getPlayerObject().getInventory().getFromInventoryByName(name).getHealthPotion()
+                   + " health points \nThis gives you " + gameData.getPlayerObject().getHealth() + " health points in total";
         }
+
         return "Use what?";
     }
 
@@ -197,7 +202,8 @@ public class CommandActions
         }
         
         if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key") != null) {
-            if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode() == gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode()) {
+            if(gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode() 
+                    == gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode()) {
                 gameData.getCurrentLocation().getLocationNeighour(direction).unlock();
             }else{
                 return "That key doesn't fit that lock";
@@ -242,8 +248,7 @@ public class CommandActions
         
         return "load";
     }
-    
-    
+
     private String saveGame(ArrayList parameters)
     {
         if(!parameters.get(0).equals("game") || !parameters.get(1).equals("as")) {
@@ -275,7 +280,7 @@ public class CommandActions
         
         return gameData.getCurrentLocation().getFriend(nameOfPerson).response();
     }
-    
+
     private String inspect(String objectName)
     {
         if(gameData.getCurrentLocation().containsMovableObject(objectName)) {
