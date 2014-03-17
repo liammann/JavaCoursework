@@ -346,7 +346,8 @@ public class Game
         lobby2.addDescription("Cinema Lobby for screens 3 and 4")
             .withExit("north", cinema)
             .withExit("east", screen4)            
-            .withExit("south", screen3);
+            .withExit("south", screen3)
+            .andFriend(sam);
             
         screen1.addDescription("Cinema Screen 1")
             .withExit("north", lobby1)
@@ -361,8 +362,7 @@ public class Game
             .withExit("north", lobby2)
             .withExit("west", screen2)   
             .withExit("east", screen4)
-            .andEnemy(enemy2)
-            .andEnemy(enemy1);
+            .andFriend(john);
             
         screen4.addDescription("Cinema Screen 4")
             .withExit("north", lobby2)
@@ -461,7 +461,6 @@ public class Game
 
         enemy2.hasStrength(80)
             .withHealth(110)
-            .andHasObject(keyBoat)           
             .andHasObject(mace); // Needs key for another door
 
         enemy3.hasStrength(100)
@@ -477,13 +476,14 @@ public class Game
                        .andHasObject(health);
 
         james = Friend.create("james")
-                      .withHint("The Sword is very useful which you already have");
+                      .withHint("Find John he watching a movie!!");
 
         jeremy = Friend.create("jeremy")
-                       .withHint("Try to pickup useful tools");
+                       .withHint("Find john he has the key for the rescue boat");
 
         john = Friend.create("john")
-                     .withHint("Shut up, Meg");
+                     .withHint("Here the key for the rescue boat, please take it")
+                     .andHasObject(keyBoat);
     }
      /**
      * CombatFight Method 
