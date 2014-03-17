@@ -20,8 +20,8 @@ public class Inventory implements java.io.Serializable
     /**
      * This method adds an object with its name to the inventory hashmap
      * 
-     * @param  MovableObject  the object to be added
-     * @return  Boolean boolean of whether movableobject was added or not
+     * @param   item    object to be added
+     * @return  boolean of whether movableobject was added or not
      */
     public boolean addItemToInventory(MovableObject item)
     { // ADD ITEMS TO ENEMIES SUCH AS KEYS 
@@ -37,7 +37,7 @@ public class Inventory implements java.io.Serializable
     /**
      * This method removes an object from the inventory
      * 
-     * @param  String  the name of the object and name to be removed
+     * @param  objectName   the name of the object and name to be removed
      */
     public void dropFromInventory(String objectName)
     {
@@ -48,7 +48,7 @@ public class Inventory implements java.io.Serializable
     /**
      * This method removes an object from the inventory
      * 
-     * @param  MovableObject  the object to be removed with its name
+     * @param  object   the object to be removed with its name
      */ 
     public void dropFromInventoryByObject(MovableObject object) // liam - why do we need this?
 
@@ -60,8 +60,8 @@ public class Inventory implements java.io.Serializable
     /**
      * This method returns the object connected to its given name
      * 
-     * @param   String  the name of the needed object
-     * @return  MovableObject   the needed object
+     * @param   objectName  the name of the needed object
+     * @return  the needed object
      */
     public MovableObject getFromInventoryByName(String objectName)
     {
@@ -69,9 +69,9 @@ public class Inventory implements java.io.Serializable
     }
     
     /**
-     * This method searches the inventory for a movable object key with a particular keycode
+     * This method searches the inventory for a key with a given keycode
      * 
-     * @param   int  the keycode of the needed object
+     * @param   passcode    the keycode of the needed object
      * @return  MovableObject   the needed object
      * @return  null
      */
@@ -89,8 +89,8 @@ public class Inventory implements java.io.Serializable
     /**
      * This method checks the avaiability of an object in the inventory
      * 
-     * @param   String  the name of the queried object
-     * @return  Boolean   boolean of whether the object is in the inventory
+     * @param   name    the name of the queried object
+     * @return  boolean of whether the object is in the inventory
      */
     public boolean containsObject(String name)
     {
@@ -100,7 +100,7 @@ public class Inventory implements java.io.Serializable
     /**
      * This method compiles a list of the names of all objects in the inventory
      * 
-     * @return  String   a list of everything in the inventory
+     * @return  a list of everything in the inventory
      */
     public String currentInventory()
     {
@@ -116,7 +116,7 @@ public class Inventory implements java.io.Serializable
     /**
      * This method counts the number of objects in the inventory
      * 
-     * @return  int the number of objects in the inventory
+     * @return  the number of objects in the inventory
      */
     public int inventorySize()
     {
@@ -124,10 +124,9 @@ public class Inventory implements java.io.Serializable
     }
     
     /**
-     * This method returns the object connected to its given name
+     * This method sums the weights of all objects in the inventory
      * 
-     * @param   String  the name of the needed object
-     * @return  MovableObject   the needed object
+     * @return  the weight of the 
      */
     public int inventoryWeight()
     {
@@ -139,10 +138,10 @@ public class Inventory implements java.io.Serializable
     }
     
     /**
-     * This method returns the object connected to its given name
+     * This method finds the object with a particular name
      * 
-     * @param   String  the name of the needed object
-     * @return  MovableObject   the needed object
+     * @param   weaponName  the name of the needed object
+     * @return  the needed object
      */
     public MovableObject getWeapon(String weaponName)
     {
