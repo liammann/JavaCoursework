@@ -45,5 +45,11 @@ public class CommandActionsTest
     {
         Game game1 = new Game();
     }
+
+    @Test
+    public void dfghjk()
+    {
+    }
 }
+
 

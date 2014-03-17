@@ -7,7 +7,7 @@ public class GameData implements java.io.Serializable
     private boolean gameStarted = false;
     private ArrayList<String> savedGames;
     private String gameName;
-    private  ArrayList<Location> locations; // why? Liam - it used by addLocation but dont know why 
+    private  ArrayList<Location> locations; // why? Liam - it used by addLocation but dont know why
     private static GameData instance = null;
     private HashMap<String, Player> players;
 
@@ -24,7 +24,7 @@ public class GameData implements java.io.Serializable
     {
         locationHistory = new ArrayList<Location>();
         savedGames = new ArrayList<String>();
-        locations = new ArrayList<Location>(); // why? Liam - it used by addLocation but dont know why 
+        locations = new ArrayList<Location>(); // why? Liam - it used by addLocation but dont know why
         players = new HashMap<String, Player>();
 
     }
@@ -68,14 +68,14 @@ public class GameData implements java.io.Serializable
             locationHistory.add(locationHistory.get(lastIndex));
         }
 
-        return getCurrentLocation().getLongDescription();
+        return "Going back " + backtrack + " location(s): ";
     }
-    
+
     public void startGame()
     {
         gameStarted = true;
     }
-    
+
     public boolean hasGameStarted()
     {
         return gameStarted;

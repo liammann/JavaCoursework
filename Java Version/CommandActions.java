@@ -160,11 +160,12 @@ public class CommandActions
     /**
      * This method is used to update the game location by going back one location
      * 
-     * @return     a message of the number of locations going back and the new location description
+     * @return     a message of either an invalid location specified or the new location description
      */
     private String back()
     {
-        return "Going back 1 location: " + gameData.setNewLocation(1);
+        return gameData.setNewLocation(1)
+               + locationDetails();
     }
 
     /**
@@ -177,7 +178,8 @@ public class CommandActions
     {
         int steps = Integer.parseInt(retraceSteps);
 
-        return "Going back " + retraceSteps + " location(s): " + gameData.setNewLocation(steps);
+        return gameData.setNewLocation(steps)
+               + locationDetails();
     }
 
     /**
@@ -296,7 +298,7 @@ public class CommandActions
      * @param   arguments    the arguments specified for the go keyword
      * @return               a message that is determined upon the validity of the input command
      */
-    private String go(ArrayList arguments) // note to self: validate the input!
+    private String go(ArrayList arguments)
     {
         if(arguments.size() != 2 || !arguments.get(1).equals("unlock")) {
             return "Invalid syntax used for the 'go' command.";
@@ -332,6 +334,11 @@ public class CommandActions
     {
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
 
+        return locationDetails();
+    }
+    
+    private String locationDetails()
+    {
         return gameData.getCurrentLocation().getLongDescription()
                + gameData.getCurrentLocation().getLocationCharacters()
                + gameData.getCurrentLocation().getLocationItems()

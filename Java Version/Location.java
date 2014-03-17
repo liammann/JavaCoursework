@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 public class Location implements java.io.Serializable
 {
     private String description;
@@ -26,7 +25,7 @@ public class Location implements java.io.Serializable
         enemies = new HashMap<String, Enemy>();
         friends = new HashMap<String, Friend>();
     }
-    
+
     public boolean containsMovableObject(String name)
     {
         if(movableObjects.containsKey(name)) {
@@ -35,7 +34,7 @@ public class Location implements java.io.Serializable
         
         return false;
     }
-    
+
     public boolean containsFixedObject(String name)
     {
         if(fixedObjects.containsKey(name)) {
@@ -73,49 +72,38 @@ public class Location implements java.io.Serializable
     {
        friends.put(friendName, friend);
     }
-    
-     /**
-     * getLocationCharacters Method 
-     *
-     * Get current friends and enemies from location. 
-     * if no player or enemies exist in that room return the string 
-     * "there are no charcters in this room"
-     * 
-     * Called by Game and CommandAction classes
-     * 
-     */
-    public String getLocationCharacters() // Maybe segregate the friends from the enemies?
+
+    public String getLocationCharacters()
     {
         boolean friendsB = false;
         boolean enemiesB = false;
-        String answer = "This room has the following characters ('fight'/'talk'):\n";
+        String answer = "\nThis room has the following characters:\n";
 
-        if(enemies.size() != 0) {
-            enemiesB = true;
-            
-            for(String enemyName : enemies.keySet()) {
-                answer += " - " + enemyName + "\n";
-            }
-        }
-
+        answer += "    Friends:";
         if(friends.size() != 0) {
-            friendsB = true;
-
             for(String friendName : friends.keySet()) {
-                answer += " - " + friendName + "\n";
+                answer += "\n\t - " + friendName;
             }
+        }else{
+            answer += "\n\tnone";
         }
 
-        if(enemiesB || friendsB) {
-            return answer;
+        answer += "\n    Enemies:";
+        if(enemies.size() != 0) {
+            for(String enemyName : enemies.keySet()) {
+                answer += "\n\t - " + enemyName;
+            }
         }else{
-            return "There are no characters in this room \n";
+            answer += "\n\tnone";
         }
+
+        return answer + "\n";
     }
 
     public Location withExit(String direction, Location neighbour)
     {
         exits.put(direction, neighbour);
+
         return this;
     }
     
@@ -160,7 +148,7 @@ public class Location implements java.io.Serializable
 
     public String getLongDescription()
     {
-        return "You are " + description + "\n";
+        return "You are " + description;
     }
 
      /**
@@ -194,7 +182,7 @@ public class Location implements java.io.Serializable
             answer += "\n\tnone";
         }
         
-        return answer+"\n";
+        return answer + "\n";
     }
      /**
      * getExits Method 

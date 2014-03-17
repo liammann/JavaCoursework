@@ -152,16 +152,15 @@ public class Game
 
         return gameSaveNames;
     }
-    
+
     private void newGame()
     {
         buildGame();
         play();
     }
-    
+
     private void saveGame()
     {
-        //if(gameData.getGameSaves().contains()) PREVENTS OVERWRITING PREVIOUS GAME SAVES
         try {
             gameData.addGameSave(gameData.getName());
 
