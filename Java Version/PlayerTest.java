@@ -53,4 +53,10 @@ public class PlayerTest
         System.out.println(player.getStrength());
         System.out.println(player.getInventory().currentInventory());
     }
+
+    @Test
+    public void invokeAction()
+    {
+    }
 }
+
