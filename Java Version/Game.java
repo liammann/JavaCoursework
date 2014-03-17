@@ -62,6 +62,7 @@ public class Game
         System.out.print(welcome());
 
         while(true) {
+            System.out.print("\n__________________________________________");
             System.out.print("\n> ");
 
             String command = commandsParser.getCommand();
@@ -152,16 +153,15 @@ public class Game
 
         return gameSaveNames;
     }
-    
+
     private void newGame()
     {
         buildGame();
         play();
     }
-    
+
     private void saveGame()
     {
-        //if(gameData.getGameSaves().contains()) PREVENTS OVERWRITING PREVIOUS GAME SAVES
         try {
             gameData.addGameSave(gameData.getName());
 
@@ -374,7 +374,7 @@ public class Game
         MovableObject sword;
 
         sword = MovableObject.create("sword")
-                             .withDescription("Steal sword")
+                             .withDescription("Steel sword")
                              .andWeight(3)
                              .withWeaponModifier(3.1);
 

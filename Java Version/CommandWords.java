@@ -7,16 +7,16 @@ public class CommandWords
 	private ArrayList<String> preGameCommands;
 	private HashMap<String, String> commandWordsDocumentation;
 	private static CommandWords instance = null;
-	
+
 	public static CommandWords getInstance()
 	{
 	    if(instance == null) {
 	        instance = new CommandWords();
 	    }
-	    
+
 	    return instance;
 	}
-	
+
 	private CommandWords()
 	{
 		validCommands = new ArrayList<ArrayList<String>>();
@@ -58,7 +58,7 @@ public class CommandWords
 		commandWordsDocumentation.put("inventory", "See your inventory (no parameters)");
 		commandWordsDocumentation.put("back", "Back track your location. Usage: 'back {n}', where 'n' is optional (defaults to 1)");
 		commandWordsDocumentation.put("manual", "View all commands or a specific command. Usage: 'manual {command}', where 'command' is optional (defaults to view all)");
-		commandWordsDocumentation.put("go", "Go to another location by passing the exit direction as a paramter. Usage: 'go {direction}'");
+		commandWordsDocumentation.put("go", "Go to another location and optionally unlock that location. Usage: 'go {direction}' or 'go {direction} unlock' (must have the key in your inventory)");
 		commandWordsDocumentation.put("pickup", "Pickup an object by passing the object name as a parameter. Usage: 'pickup {object}'");
 		commandWordsDocumentation.put("inspect", "Insepct an object by passing the object name as a parameter. Usage: 'inspect {object_name}'");
 		commandWordsDocumentation.put("new", "Start a new game. Usage: 'new game'");
@@ -95,7 +95,7 @@ public class CommandWords
 	    if(preGameCommands.contains(command)) {
 	        return true;
 	    }
-	    
+
 	    return false;
 	}
 
@@ -123,7 +123,7 @@ public class CommandWords
 		if(!commandWordsDocumentation.containsKey(command)) {
 			return "Specified command word is invalid";
 		}
-		
+
 		return (String) commandWordsDocumentation.get(command);
 	}
 }
