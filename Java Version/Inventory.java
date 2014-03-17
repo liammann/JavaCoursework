@@ -18,7 +18,8 @@ public class Inventory implements java.io.Serializable
     }
 
     public boolean addItemToInventory(MovableObject item)
-    {
+    { // ADD ITEMS TO ENEMIES SUCH AS KEYS 
+        
         if (inventoryWeight() + item.getWeight() > inventoryWeightCapacity) {
             return false;
         }

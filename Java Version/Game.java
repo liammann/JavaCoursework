@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * A textual based game
  *
- * @author Thomas Punt, Liam Mann Jozef Stodulski and Zain Ali
+ * @author Thomas Punt, Liam Mann, Jozef Stodulski and Zain Ali
  * @version 17.3.2014 
  */
 
@@ -210,12 +210,9 @@ public class Game
     private void buildLocations()
     {
         Location exhibit, reception, cafe, guardOffice, museumEntrance, museumCarPark, car, gunWharf, cinema, lobby1, lobby2, screen1, screen2, screen3, screen4, fireExit, rescuePoint;
-        MovableObject keyEntrance, keyOffice,keyBoat, health;
+        MovableObject keyEntrance,keyBoat, health;
         FixedObject chair;
 
-        keyOffice = MovableObject.create("key")
-                           .withDescription("A key that unlocks security office door")
-                           .andHasPasscode(500);
         keyEntrance = MovableObject.create("key")
                            .withDescription("A key that unlocks museum entrance door")
                            .andHasPasscode(900);        
@@ -265,7 +262,6 @@ public class Game
                .withExit("south", museumEntrance)
                .withExit("west", guardOffice)
                .withExit("north", exhibit)
-               .andHasObject(keyOffice)
                .andEnemy(enemy1);
 
         guardOffice.addDescription("Security Guard Office")
@@ -391,7 +387,7 @@ public class Game
         enemy3 = new Enemy("enemy4");
 
          // Enemies Weapons 
-        MovableObject axe, mace, dagger;
+        MovableObject axe, mace, dagger, keyOffice;
 
         axe = MovableObject.create("axe")
                            .withDescription("Brutal axe")
@@ -404,23 +400,24 @@ public class Game
                             .withWeaponModifier(1.8);
 
         dagger = MovableObject.create("dagger")
-                              .withDescription("Very pointy stick")
-                              .andWeight(1)
-                              .withWeaponModifier(1.3);
-
+                            .withDescription("Very pointy stick")
+                            .andWeight(1)
+                            .withWeaponModifier(1.3);
+        keyOffice = MovableObject.create("key")
+                           .withDescription("A key that unlocks security office door")
+                           .andHasPasscode(500);
         // upon enemy death, drop weapon in current room?
+        enemy1.hasStrength(50)
+             .withHealth(90)
+             .andHasObject(keyOffice);
 
-        enemy1.hasStrength(100)
-             .withHealth(100)
-             .andHasWeapon(dagger);
+        enemy2.hasStrength(80)
+            .withHealth(110)
+            .andHasWeapon(mace);
 
-        enemy2.hasStrength(40)
-            .withHealth(5)
-            .andHasWeapon(axe);
-
-        enemy3.hasStrength(70)
-           .withHealth(30)
-           .andHasWeapon(mace);
+        enemy3.hasStrength(100)
+           .withHealth(130)
+           .andHasWeapon(axe);
 
 
 
@@ -466,7 +463,7 @@ public class Game
         while(!playerWin) {
             // validate the movable object weapon before using it (do this in the 'fight' method in CommandActions
             playerDealt = (int) Math.floor(15*weapon.getWeaponModifier());                
-            enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier());
+            enemyDealt = (int) Math.floor(14*enemy.getInventory().getWeapon().getWeaponModifier()+2);
 
             totalEnemyDealt += enemyDealt;
             totalPlayerDealt += playerDealt;
