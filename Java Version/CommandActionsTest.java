@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 import org.junit.After;
@@ -52,59 +52,27 @@ public class CommandActionsTest
     }
 
     @Test
-    public void invokeAction()
+    public void save()
     {
-    }
+        CommandActions commandActions = new CommandActions();
+        String keyword, response;
+        ArrayList<String> arguments;
+        
+        keyword = "save";
+        arguments = new ArrayList<String>();
+        arguments.add("game");
+        arguments.add("as");
+        arguments.add("gameName");
+        response = commandActions.invokeAction(keyword, arguments);
+        assertEquals("save", response);
 
-    @Test
-    public void quit()
-    {
-    }
-
-    @Test
-    public void help()
-    {
-    }
-
-    @Test
-    public void getTask()
-    {
-    }
-
-    @Test
-    public void back()
-    {
-    }
-
-    @Test
-    public void pickup()
-    {
-    }
-
-    @Test
-    public void drop()
-    {
-    }
-
-    @Test
-    public void fight()
-    {
-    }
-
-    @Test
-    public void go()
-    {
+        keyword = "save";
+        arguments = new ArrayList<String>();
+        arguments.add("games");
+        arguments.add("as");
+        arguments.add("gameName");
+        response = commandActions.invokeAction(keyword, arguments);
+        assertEquals("save", response);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 

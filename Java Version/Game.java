@@ -98,7 +98,7 @@ public class Game
                     System.out.print("Are you sure you would like to overwrite this game save?\n[yes/no] : ");
                     command = commandsParser.getCommand();
 
-                    if(!command.equals("yes")) {
+                    if(command.equals("yes")) {
                         saveGame();
                         System.out.print("The game has successfully been saved as '" + gameData.getName() + "'");
                     }else{

@@ -126,7 +126,7 @@ public class Location implements java.io.Serializable
         return this;
     }
 
-    public void removeObject(String objectName)
+    public void removeObject(String objectName) //ByName
     {
         movableObjects.remove(objectName);
     }

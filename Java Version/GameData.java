@@ -28,7 +28,12 @@ public class GameData implements java.io.Serializable
         players = new HashMap<String, Player>();
 
     }
-    
+
+    /**
+     * This method is used to add a location to the locations field ArrayList
+     * 
+     * @param   location    the location object to be added
+     */
     public void addLocation(Location location)
     {
         locations.add(location);
