@@ -100,7 +100,7 @@ public class Game
                 System.out.println("You have successfully beaten " + fightCommands[1] + "!");
                 System.out.print("You currently have:\n\t- " + player1.getHealth() + " health points\n\t- ");
                 System.out.println(player1.getStrength() + " strength points");
-                System.out.print(gameData.getCurrentLocation().getLongDescription());                       
+                System.out.println(gameData.getCurrentLocation().getLongDescription());                       
                 System.out.print(gameData.getCurrentLocation().getExits());
             }else if(output.equals("save")) {
                 if(gameData.getSavedGames().contains(command.split(" ")[3])) {
