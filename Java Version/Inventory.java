@@ -21,7 +21,7 @@ public class Inventory implements java.io.Serializable
      * This method adds an object with its name to the inventory hashmap
      * 
      * @param   item    object to be added
-     * @return  boolean of whether movableobject was added or not
+     * @return          boolean of whether movableobject was added or not
      */
     public boolean addItemToInventory(MovableObject item)
     { // ADD ITEMS TO ENEMIES SUCH AS KEYS 
@@ -61,7 +61,7 @@ public class Inventory implements java.io.Serializable
      * This method returns the object connected to its given name
      * 
      * @param   objectName  the name of the needed object
-     * @return  the needed object
+     * @return              the needed object
      */
     public MovableObject getFromInventoryByName(String objectName)
     {
@@ -72,7 +72,7 @@ public class Inventory implements java.io.Serializable
      * This method searches the inventory for a key with a given keycode
      * 
      * @param   passcode    the keycode of the needed object
-     * @return  MovableObject   the needed object
+     * @return              the needed object
      * @return  null
      */
     public MovableObject getFromInventoryByNamePass(int passcode)
@@ -90,7 +90,7 @@ public class Inventory implements java.io.Serializable
      * This method checks the avaiability of an object in the inventory
      * 
      * @param   name    the name of the queried object
-     * @return  boolean of whether the object is in the inventory
+     * @return          boolean of whether the object is in the inventory
      */
     public boolean containsObject(String name)
     {
@@ -141,7 +141,7 @@ public class Inventory implements java.io.Serializable
      * This method finds the object with a particular name
      * 
      * @param   weaponName  the name of the needed object
-     * @return  the needed object
+     * @return              the needed object
      */
     public MovableObject getWeapon(String weaponName)
     {

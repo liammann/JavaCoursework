@@ -9,10 +9,9 @@
 public class Enemy extends Character implements java.io.Serializable
 {
     /**
-    * This is a method which takes command from the user and invokes the function
-    * Super is a special type of keyword and it is used to access the class
+    * This constructor creates a new instance of an enemy character
     * 
-    * @param            name  the command name entered
+    * @param    name    the command name entered
     */
     public Enemy(String name)
     {
@@ -21,10 +20,10 @@ public class Enemy extends Character implements java.io.Serializable
     
     
     /**
-    * This is a method which gives stregth to the enemy.
+    * This is a method which sets stregth to the enemy.
     * 
-    * @param         strength command uses int data type
-    * @return        it refers to the constructor of the same class where I am writing this code. It also means that it returns the enemy's strength
+    * @param    strength    the enemy's intended strength
+    * @return               the enemy object
     *
     */
     public Enemy hasStrength(int strength)
@@ -35,10 +34,10 @@ public class Enemy extends Character implements java.io.Serializable
     }
 
     /**
-    * This is a method which gives health to the enemy.
+    * This is a method which sets the health of the enemy.
     * 
-    * @param         health command uses int data type to provide health to the enemy
-    * @return        it refers to the constructor of the same class where I am writing this code. It also means that it returns the enemy's health
+    * @param    health  the enemy's intended level of health
+    * @return           the enemy object
     */
     public Enemy withHealth(int health)
     {
@@ -47,10 +46,10 @@ public class Enemy extends Character implements java.io.Serializable
     }
     
     /**
-    * This method puts new weapons into the enemy's inventry class
+    * This method puts a new weapon into the enemy's inventry
     * 
-    * @param         Its the moveable object
-    * @return        it refers to the constructor of the same class where I am writing this code. It also means that it returns the enemy's weapons.
+    * @param    weapon  the weapon object the enemy is to have
+    * @return           the enemy object
     */
     public Enemy andHasWeapon(MovableObject weapon)
     {
@@ -59,9 +58,9 @@ public class Enemy extends Character implements java.io.Serializable
     }
     
     /**
-    * This method puts new object into the enemy's inventry class
-    * @param         Its the moveable object
-    * @return        it refers to the constructor of the same class where I am writing this code. It also means that it returns the enemy's weapons.
+    * This method puts new object into the enemy's inventry
+    * @param    object  the object to be put into the enemy's inventory
+    * @return           the enemy object
     */
     public Enemy andHasObject(MovableObject object)
     {

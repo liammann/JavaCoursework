@@ -46,7 +46,7 @@ public abstract class Character implements java.io.Serializable
      * This method sets the health of the character
      * 
      * @param   newHealth   the new amount of health
-     * @return  void
+     * @return  null
      */
     public void updateHealth(int newHealth)
     {
