@@ -16,7 +16,7 @@ public class Game
     private String gameSaveLocation = "gamesaves/";
     private ArrayList<String> gameSaves;
 
-    private Enemy jozef, liam, tom, zain;
+    private Enemy enemy1, enemy2, enemy3;
 
     private Player player1; // combat
 
@@ -209,60 +209,159 @@ public class Game
 
     private void buildLocations()
     {
-        Location outside, theater, pub, lab, office;
-        MovableObject cider, key, health;
+        Location exhibit, reception, cafe, guardOffice, museumEntrance, museumCarPark, car, gunWharf, cinema, lobby1, lobby2, screen1, screen2, screen3, screen4, fireExit, rescuePoint;
+        MovableObject keyEntrance, keyOffice,keyBoat, health;
         FixedObject chair;
 
-        cider = MovableObject.create("cider")
-                             .withDescription("Half a bottle of Strongbow cider")
-                             .andWeight(2);
-        key = MovableObject.create("key")
-                           .withDescription("A key that unlocks some door")
-                           .andHasPasscode(42);
+        keyOffice = MovableObject.create("key")
+                           .withDescription("A key that unlocks security office door")
+                           .andHasPasscode(500);
+        keyEntrance = MovableObject.create("key")
+                           .withDescription("A key that unlocks museum entrance door")
+                           .andHasPasscode(900);        
+        keyBoat = MovableObject.create("key")
+                           .withDescription("A key starts the rescue boat")
+                           .andHasPasscode(900);
+                           
+       
         health = MovableObject.create("health")
                            .withDescription("A key that unlocks some door")
                            .andHealthPotion(12);
         chair = FixedObject.create("chair")
                            .withDescription("An old wooden chair");
+       
+        
+        exhibit = Location.create(); // Start Location
+        reception = Location.create();
+        cafe = Location.create();
+        guardOffice = Location.create();
+        museumEntrance = Location.create();
+        museumCarPark = Location.create();
+        car = Location.create();
+        
+        gunWharf = Location.create();
+        
+        cinema = Location.create();
+        lobby1 = Location.create();        
+        lobby2 = Location.create();
+        screen1 = Location.create();
+        screen2 = Location.create();
+        screen3 = Location.create();
+        screen4 = Location.create();
+        
+        fireExit = Location.create();        
+        rescuePoint = Location.create();
+        
+        
+        //               .andHasObject(chair)
+         
+        exhibit.addDescription("Medieval Exhibit")
+                .withExit("south", reception)
+                .andHasObject(chair)
+                .andHasObject(health);
+               
+        reception.addDescription("Museum Reception")
+               .withExit("east", cafe)
+               .withExit("south", museumEntrance)
+               .withExit("west", guardOffice)
+               .withExit("north", exhibit)
+               .andHasObject(keyOffice)
+               .andEnemy(enemy1);
 
-        outside = Location.create();
-        theater = Location.create();
-        lab = Location.create();
-        pub = Location.create();
-        office = Location.create();
+        guardOffice.addDescription("Security Guard Office")
+           .withExit("east", reception)
+           .andPasscode(500) // Unlocked by keyOffice
+           .andHasObject(keyEntrance);
+        
+        cafe.addDescription("Museum Cafe")
+           .withExit("west", reception)
+           .andHasObject(health);
 
-        outside.addDescription("Outside the university entrance")
-               .withExit("east", theater)
-               .withExit("south", lab)
-               .withExit("west", pub)
-               .andHasObject(chair)
-               .andHasObject(health);
+        museumEntrance.addDescription("Museum Entrance")
+            .withExit("north", reception)
+            .withExit("south", museumCarPark)
+            .andPasscode(900); // Unlocked by keyOffice 
+            
+        museumCarPark.addDescription("Museum Car Park")
+            .withExit("north", museumEntrance)
+            .withExit("south", car);
+            
+            
+        car.addDescription("Car")
+            .withExit("north", museumCarPark)
+            .withExit("south", gunWharf);
+        
+        gunWharf.addDescription("Gun Wharf Shoping Floor 1")
+            .withExit("north", car)
+            .withExit("south", cinema);
+            
+        cinema.addDescription("Cinema Entrance")
+            .withExit("north", gunWharf)
+            .withExit("west", lobby1)
+            .withExit("south", lobby2)
+            .withExit("east", fireExit);
+            
+        lobby1.addDescription("Cinema Lobby for screens 1 and 2")
+            .withExit("east", cinema)
+            .withExit("west", screen1)            
+            .withExit("south", screen2);        
+            
+        lobby2.addDescription("Cinema Lobby for screens 3 and 4")
+            .withExit("west", cinema)
+            .withExit("east", screen4)            
+            .withExit("south", screen3);
+            
+        screen1.addDescription("Cinema Screen 1")
+            .withExit("north", lobby1)
+            .withExit("east", screen2);
+            
+        screen2.addDescription("Cinema Screen 2")
+            .withExit("north", lobby1)
+            .withExit("west", screen1)   
+            .withExit("east", screen3);
+            
+        screen3.addDescription("Cinema Screen 3")
+            .withExit("north", lobby2)
+            .withExit("west", screen2)   
+            .withExit("east", screen4);
+            
+        screen4.addDescription("Cinema Screen 4")
+            .withExit("north", lobby2)
+            .withExit("west", screen3);
+            
+            
+        fireExit.addDescription("Cinema Fire Exit")
+            .withExit("east", rescuePoint)
+            .withExit("west", cinema)            
+            .andPasscode(200); // Unlocked by keyBoat 
+            
+        rescuePoint.addDescription("RESCUE POINT")
+            .withExit("west", fireExit);
+            
 
-        pub.addDescription("In a campus pub")
-           .withExit("east", outside)
-           .andEnemy(liam)
-           .andHasObject(key);
-
-        theater.addDescription("Inside of a lecture theater")
-               .withExit("west", outside)
-               .andHasObject(chair)
-               .andIsLocked()
-               .andPasscode(42);
-
-        lab.addDescription("In a computing lab")
-           .withExit("north", outside)
-           .withExit("east", office)
-           .andEnemy(tom);
-
-        office.addDescription("In a computing Admin office")
-              .withExit("west", lab);
-
-        gameData.addLocation(theater);
-        gameData.addLocation(pub);
-        gameData.addLocation(lab);
-        gameData.addLocation(office);
-
-        gameData.setNewLocation(outside);
+        
+        
+        gameData.addLocation(exhibit);
+        gameData.addLocation(reception);
+        gameData.addLocation(cafe);
+        gameData.addLocation(guardOffice);
+        gameData.addLocation(museumEntrance);
+        gameData.addLocation(museumCarPark);
+        gameData.addLocation(car);
+        gameData.addLocation(gunWharf);
+        gameData.addLocation(cinema);
+        gameData.addLocation(lobby1);
+        gameData.addLocation(lobby2);
+        gameData.addLocation(screen1);
+        gameData.addLocation(screen2);
+        gameData.addLocation(screen3);
+        gameData.addLocation(screen4);
+        
+        gameData.addLocation(fireExit);
+        gameData.addLocation(rescuePoint);
+        
+        
+        gameData.setNewLocation(exhibit);
     }
     
     /**
@@ -287,10 +386,9 @@ public class Game
 
         gameData.addPlayer(player1);
 
-        jozef = new Enemy("jozef");
-        liam = new Enemy("liam");
-        tom = new Enemy("tom");
-        zain = new Enemy("zain");
+        enemy1 = new Enemy("enemy1");
+        enemy2 = new Enemy("enemy2");
+        enemy3 = new Enemy("enemy4");
 
          // Enemies Weapons 
         MovableObject axe, mace, dagger;
@@ -312,21 +410,18 @@ public class Game
 
         // upon enemy death, drop weapon in current room?
 
-        jozef.hasStrength(100)
+        enemy1.hasStrength(100)
              .withHealth(100)
              .andHasWeapon(dagger);
 
-        liam.hasStrength(40)
+        enemy2.hasStrength(40)
             .withHealth(5)
             .andHasWeapon(axe);
 
-        tom.hasStrength(70)
+        enemy3.hasStrength(70)
            .withHealth(30)
            .andHasWeapon(mace);
 
-        zain.hasStrength(60)
-            .withHealth(20)
-            .andHasWeapon(dagger);
 
 
         Friend jordan, james, jeremy, john;
@@ -355,6 +450,8 @@ public class Game
      * @param enemy The enemy object you are fighting 
      * @param weapon The weapon you have selected from your inventory
      * @param player The player object of player1
+     * 
+     * @return true if player win the fight
      */
     public boolean combatStartFight(Enemy enemy, MovableObject weapon, Player player)
     {
@@ -395,7 +492,12 @@ public class Game
 
         return playerWin;
     }
-
+    
+     /**
+     * Used when you first start the game.
+     * 
+     * @return welcome text
+     */
     private String welcome()
     {
         return "---------------------------------------------------\n"
