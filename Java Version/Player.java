@@ -3,7 +3,6 @@
 * The is a  Player class. It allow you to add name, get strength and health for the player
 * as well as select weapon which is inherited from inventory class.
 *
-* @author  (Zain Ali)
 * @version (1.1)
 */
 public class Player extends Character implements java.io.Serializable

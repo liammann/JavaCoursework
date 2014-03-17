@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.*;
+
 import java.io.*;
 
 /**
@@ -259,7 +258,7 @@ public class Game
     private void buildLocations()
     {
         Location exhibit, reception, cafe, guardOffice, museumEntrance, museumCarPark, car, gunWharf, cinema, lobby1, lobby2, screen1, screen2, screen3, screen4, fireExit, rescuePoint;
-        MovableObject keyEntrance, health;
+        MovableObject keyEntrance, health, food;
         FixedObject chair;
 
         keyEntrance = MovableObject.create("key")
@@ -269,6 +268,10 @@ public class Game
         health = MovableObject.create("health")
                            .withDescription("A health Potion that recovers 12")
                            .andHealthPotion(12);
+        food = MovableObject.create("food")
+                           .withDescription("Food")
+                           .andWeight(22);
+
         chair = FixedObject.create("chair")
                            .withDescription("An old wooden chair");
        
@@ -295,8 +298,6 @@ public class Game
         rescuePoint = Location.create();
         
         
-        //               .andHasObject(chair)
-         
         exhibit.addDescription("Medieval Exhibit")
                 .withExit("south", reception)
                 .andHasObject(chair)
@@ -316,7 +317,8 @@ public class Game
         
         cafe.addDescription("Museum Cafe")
            .withExit("west", reception)
-           .andHasObject(health)               
+           .andHasObject(health)                          
+           .andHasObject(food)               
            .andFriend(sam);
 
         museumEntrance.addDescription("Museum Entrance")
@@ -347,6 +349,7 @@ public class Game
             .withExit("north", cinema)
             .withExit("east", screen4)            
             .withExit("south", screen3)
+            .andHasObject(food)               
             .andFriend(sam);
             
         screen1.addDescription("Cinema Screen 1")
@@ -430,7 +433,7 @@ public class Game
         enemy3 = new Enemy("enemy4");
 
          // Enemies Weapons 
-        MovableObject axe, mace, dagger, keyOffice, keyBoat;
+        MovableObject axe, mace, dagger, food, keyOffice, keyBoat;
 
         axe = MovableObject.create("axe")
                            .withDescription("Brutal axe")
@@ -479,7 +482,7 @@ public class Game
                       .withHint("Find John he watching a movie!!");
 
         jeremy = Friend.create("jeremy")
-                       .withHint("Find john he has the key for the rescue boat");
+                       .withHint("John has the rescue boat key");
 
         john = Friend.create("john")
                      .withHint("Here the key for the rescue boat, please take it")

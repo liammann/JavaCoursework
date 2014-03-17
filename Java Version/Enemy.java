@@ -3,7 +3,6 @@
 * as well as select weapon which is inherited from inventory class. Enemy can also use move
 * able objects from selections.
 *
-* @author  (Zain Ali)
 * @version (1.1)
 */
 public class Enemy extends Character implements java.io.Serializable

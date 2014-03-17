@@ -2,7 +2,6 @@
 * The is a  Friend class. It helps the player in game by giving hints and also helping him get objects and fighting enemies.
 * as well as select weapon which is inherited from inventory class.
 *
-* @author  (Zain Ali)
 * @version (1.1)
 */
 public class Friend extends Character implements java.io.Serializable
