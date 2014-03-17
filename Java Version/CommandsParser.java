@@ -1,6 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * CommandsParser is a class that reads the input line, tokenises the sequence
+ * of command inputs, validates these command inputs, and then passes on these
+ * values to the invokeAction() method in the CommandActions class.
+ * 
+ * @author (Thomas Punt) 
+ * @version (1.01)
+ */
 public class CommandsParser
 {
     private static CommandWords commandWords;
@@ -8,6 +16,9 @@ public class CommandsParser
     private static Scanner reader;
     private GameData gameData;
 
+    /**
+     * Constructor for CommandActions class to initialise the class fields
+     */
     public CommandsParser()
     {
         commandWords = CommandWords.getInstance();
@@ -16,11 +27,24 @@ public class CommandsParser
         gameData = GameData.getInstance();
     }
 
+    /**
+     * This method uses the Scanner class to read the entered input line and return it
+     * 
+     * @return     the input line
+     */
     public String getCommand()
     {
         return reader.nextLine().toLowerCase();
     }
 
+    /**
+     * This method inspects the integrity of the input command by validating it
+     * with a number of tests. Provided the input passes the integrity checks, it
+     * passes on the input to the invokeActions() method in CommandActions
+     * 
+     * @param  inputCommand   the input line entered
+     * @return                either an error string if a check fails or the return value of invokeAction
+     */
     public String parseCommand(String inputCommand)
     {
         if(inputCommand.equals("")) {
