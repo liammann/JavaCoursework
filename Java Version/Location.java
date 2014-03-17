@@ -104,7 +104,13 @@ public class Location implements java.io.Serializable
 
         return answer + "\n";
     }
-
+    /**
+     * This method is used to set the exists for each locations 
+     * 
+     * @param       direction        what direction the exit is     
+       * @param     neighbour      what direction the exit is
+     * @return           location object
+     */
     public Location withExit(String direction, Location neighbour)
     {
         exits.put(direction, neighbour);
