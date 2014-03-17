@@ -46,7 +46,11 @@ public class GameData implements java.io.Serializable
     {
         return players.get("Player 1");
     }
-
+    /**
+     * This gets the current location from the locationHistory Array 
+     * 
+     * @return             the return location of the last item in the array
+     */
     public Location getCurrentLocation()
     {
         return locationHistory.get(locationHistory.size()-1);
@@ -55,7 +59,6 @@ public class GameData implements java.io.Serializable
     public void setNewLocation(Location location)
     {
         locationHistory.add(location);
-        // return a description maybe?
     }
 
     public String setNewLocation(int backtrack)
