@@ -21,6 +21,9 @@ public class Game
     private Friend sam, james, jeremy, john;
     private Player player1; // combat
 
+    /**
+     * The constructor for the Game to initialise the class fields
+     */
     public Game()
     {
         gameData = GameData.getInstance();
@@ -29,9 +32,13 @@ public class Game
         preGame();
     }
 
+    /**
+     * The preGame method puts the player into pre-game mode, where they can load up
+     * a new game or start a game from afresh
+     */
     public void preGame()
     {
-        System.out.println("=============================");
+        System.out.println("================================================================================");
         System.out.println("...................,.......,...........,,,,.............,.........,,,....,......");
         System.out.println(".......,...,,.,.,.,,,,,,,,,,,,,,,,,,,,,,,I,,,,.,,,,,,,,,,,,,,,,,,,,,,,,,,.,,,,,,");
         System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Z==$$Z,,,,,,,,,,.............,,,,,,,,,,,,");
@@ -93,6 +100,9 @@ public class Game
         }
     }
 
+    /**
+     * This method is used to keep the game running until the player either: dies, quits, or wins the game
+     */
     private void play()
     {
         System.out.print(welcome());
@@ -106,10 +116,14 @@ public class Game
 
             if(output.equals("quit")) {
                 break;
-            }else if(output.equals("finished")) {
+            }
+            
+            if(output.equals("finished")) {
                 System.out.println("Congratulations on completing the game!");
                 break;
-            }else if(output.equals("take")) {
+            }
+
+            if(output.equals("take")) {
                 String[] takeCommands = command.split(" ");
                 Friend friend = gameData.getCurrentLocation().getFriendByName(takeCommands[3]);
                 MovableObject item = friend.getInventory().getFromInventoryByName(takeCommands[1]);
@@ -165,6 +179,9 @@ public class Game
         System.out.println("Thanks for playing!");
     }
 
+    /**
+     * This method is used to collate the saved games into an ArrayList held in GameData
+     */
     private void getGameSaves()
     {
         File files = new File("gamesaves/");
@@ -186,6 +203,11 @@ public class Game
         }
     }
 
+    /**
+     * This method returns a list of the saved games that can be loaded when in the pregame
+     * 
+     * @return      a list of game saves
+     */
     private String getSavedGameNames()
     {
         ArrayList<String> savedGames = gameData.getSavedGames();
@@ -202,12 +224,19 @@ public class Game
         return gameSaveNames;
     }
 
+    /**
+     * This method is used to build the game (including locations, characters, and objects)
+     * and then to begin playing the game by invoking the play method
+     */
     private void newGame()
     {
         buildGame();
         play();
     }
 
+    /**
+     * This method is invoked to save the current state of the game
+     */
     private void saveGame()
     {
         try {
@@ -227,7 +256,11 @@ public class Game
         }
     }
 
-    private void loadGame() //return a string for confirmation for overwrite?
+    /**
+     * This method is used to load the game from the saved game file, returning the state
+     * of the objects to how they were when the game save was made
+     */
+    private void loadGame()
     {
         try {
             FileInputStream gameSaveFile = new FileInputStream("gamesaves/" + gameData.getName() + ".ser");
@@ -248,13 +281,21 @@ public class Game
 
         play();
     }
-    
+
+    /**
+     * This method builds the game by creating the characters and building the locations
+     * on the map
+     */
     private void buildGame()
     {
         createCharacters();
         buildLocations();
     }
 
+    /**
+     * This method builds all locations on the map and creates and adds all necessary objects
+     * (both movable and fixed) to each of those locations
+     */
     private void buildLocations()
     {
         Location exhibit, reception, cafe, guardOffice, museumEntrance, museumCarPark, car, gunWharf, cinema, lobby1, lobby2, screen1, screen2, screen3, screen4, fireExit, rescuePoint;
@@ -412,10 +453,8 @@ public class Game
     }
     
     /**
-     * Create Characters Method 
-     *
-     * Creates the initial player character and all the friends/ enemies 
-     * character form the Player/Enemy/Friend classes
+     * This method creates all characters in the game, and creates the movable objects that
+     * are associated with those characters
      */
     private void createCharacters() // segregate this method into friends, enemies, and players
     {
@@ -494,25 +533,20 @@ public class Game
                      .andHasObject(keyBoat);
     }
      /**
-     * CombatFight Method 
-     *
      * Used when the player types in: fight ENEMY-NAME with WEAPON
      * method will loop until either the player or the enemy runs out of health points
      * Both the player and enemy have weapons in there inventory and use them every time they attack.
-     * 
-     * Method return whether the player has won, true or false. It also prints messages to the player with health stats
+     * <p>
+     * The method returns whether the player has won, true or false. It also prints messages to the player with health stats
      *
-     * @param enemy The enemy object you are fighting 
-     * @param weapon The weapon you have selected from your inventory
-     * @param player The player object of player1
-     * 
-     * @return true if player win the fight
+     * @param enemy     The enemy object you are fighting 
+     * @param weapon    The weapon you have selected from your inventory
+     * @param player    The player object of player1
+     * @return          true if player wins the fight, or false upon losing
      */
     private boolean combatStartFight(Enemy enemy, MovableObject weapon, Player player)
     {
         boolean playerWin = false;
-        boolean enemyDefending = false; // Not used yet
-        boolean playerDefending = false; // Not used yet 
         int enemyDealt = 0;
         int playerDealt = 0;
         int totalEnemyDealt = 0;
