@@ -24,10 +24,10 @@ public class LocationTest
     public LocationTest()
     {
         location = new Location();
-        enemy = new Enemy("enemy name");
-        // friend = new Friend("friend name");
-        // fixed = new FixedObject("fixed name");
-        // movable = new MovableObject("movable name");
+        enemy = new Enemy("enemyname");
+        // friend = new Friend("friendname");
+        // fixed = new FixedObject("fixedname");
+        // movable = new MovableObject("movablename");
     }
 
     /**
@@ -38,9 +38,9 @@ public class LocationTest
     @Before
     public void setUp()
     {
-        location.addDescription("description text");
+        location.addDescription("descriptiontext");
         location.andEnemy(enemy);
-        location.andFriend("friend name", friend);
+        location.andFriend("friendname", friend);
         location.andHasObject(fixed);
         location.andHasObject(movable);
     }
