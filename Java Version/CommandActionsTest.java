@@ -13,11 +13,13 @@ import org.junit.Test;
  */
 public class CommandActionsTest
 {
-    /**
-     * Default constructor for test class CommandActionsTest
-     */
+    CommandActions commandActions;
+    String keyword, arg;
+    ArrayList<String> args;
+        
     public CommandActionsTest()
     {
+        commandActions = new CommandActions();
     }
 
     /**
@@ -41,38 +43,73 @@ public class CommandActionsTest
     }
 
     @Test
-    public void commands()
+    public void saveGame()
     {
-        Game game1 = new Game();
+        keyword = "save";
+        args = new ArrayList<String>();
+
+        args.add("game");
+        args.add("as");
+        args.add("gameName");
+        assertEquals("save", commandActions.invokeAction(keyword, args));
+
+        args.clear();
+        args.add("games");
+        args.add("as");
+        args.add("gameName");
+        assertEquals("Invalid syntax used for the 'save' command.", commandActions.invokeAction(keyword, args));
+
+        args.clear();
+        args.add("game");
+        args.add("a");
+        args.add("gameName");
+        assertEquals("Invalid syntax used for the 'save' command.", commandActions.invokeAction(keyword, args));
+
+        args.clear();
+        args.add("games");
+        args.add("a");
+        args.add("gameName");
+        assertEquals("Invalid syntax used for the 'save' command.", commandActions.invokeAction(keyword, args));
+
+        args.clear();
+        args.add("game");
+        args.add("as");
+        args.add("game Name");
+        assertEquals("Only alphanumerical characters are allowed in the game save name.", commandActions.invokeAction(keyword, args));
     }
 
     @Test
-    public void CommandActions()
+    public void loadGame()
     {
-    }
-
-    @Test
-    public void save()
-    {
-        CommandActions commandActions = new CommandActions();
-        String keyword, response;
-        ArrayList<String> arguments;
+        keyword = "load";
+        args = new ArrayList<String>();
         
-        keyword = "save";
-        arguments = new ArrayList<String>();
-        arguments.add("game");
-        arguments.add("as");
-        arguments.add("gameName");
-        response = commandActions.invokeAction(keyword, arguments);
-        assertEquals("save", response);
+        args.add("games");
+        args.add("gameName");
+        assertEquals("Invalid syntax used for the 'load' command.", commandActions.invokeAction(keyword, args));
 
-        keyword = "save";
-        arguments = new ArrayList<String>();
-        arguments.add("games");
-        arguments.add("as");
-        arguments.add("gameName");
-        response = commandActions.invokeAction(keyword, arguments);
-        assertEquals("save", response);
+        args.clear();
+        args.add("game");
+        args.add("game Name");
+        assertEquals("Invalid game save selected.", commandActions.invokeAction(keyword, args));
+        
+        args.clear();
+        args.add("game");
+        args.add("test");
+        assertEquals("load", commandActions.invokeAction(keyword, args));
+    }
+
+    @Test
+    public void newGame()
+    {
+        keyword = "new";
+        args = new ArrayList<String>();
+        
+        args.add("game");
+        assertEquals("new", commandActions.invokeAction(keyword, args));
+
+        args.clear();
+        args.add("games");
+        assertEquals("Invalid syntax used for the 'new' command.", commandActions.invokeAction(keyword, args));
     }
 }
-

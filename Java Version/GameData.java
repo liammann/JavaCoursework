@@ -19,14 +19,13 @@ public class GameData implements java.io.Serializable
         
         return instance;
     }
-    
+
     private GameData()
     {
         locationHistory = new ArrayList<Location>();
         savedGames = new ArrayList<String>();
         locations = new ArrayList<Location>(); // why? Liam - it used by addLocation but dont know why
         players = new HashMap<String, Player>();
-
     }
 
     /**
@@ -38,7 +37,7 @@ public class GameData implements java.io.Serializable
     {
         locations.add(location);
     }
-    
+
     /**
      * getPlayerObject 
      * Used for fight method in Game class
@@ -47,7 +46,7 @@ public class GameData implements java.io.Serializable
     {
         return players.get("Player 1");
     }
-    
+
     public Location getCurrentLocation()
     {
         return locationHistory.get(locationHistory.size()-1);
