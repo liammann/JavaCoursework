@@ -10,10 +10,10 @@ public class Friend extends Character implements java.io.Serializable
     private String hint = null;
  
     /**
-    * This is a method which takes command from the user and invokes the function
+    * This constructor calls for the creationg of a friend
     * 
-    * @param       name  the command name entered
-    * @return      the return value of the invoked function which is name of friend
+    * @param    name    the name for the friend
+    * @return           a new friend object
     */
     public static Friend create(String name)
     {
@@ -21,9 +21,9 @@ public class Friend extends Character implements java.io.Serializable
     }
     
      /**
-    * This is a constructor. Super is a special type of keyword and it is used to access the class
+    * this constructor creates a new instance of the friend class setting the name
     * 
-    * @param         name  the command name entered
+    * @param    name    the value for the name attribute
     */
     private Friend(String name)
     {
@@ -31,22 +31,22 @@ public class Friend extends Character implements java.io.Serializable
     }
 
     /**
-    * This is a method which gives hint to the player.
+    * This is a method which gives hint to the friend to give to the player
     * 
-    * @param         health command uses int data type to provide health to the enemy
-    * @return        it refers to the constructor of the same class where I am writing this code. It also means that it retunrs hint
+    * @param    hint    the string to be provided to the player by the friend
+    * @return           the friend
     */
     public Friend withHint(String hint)
     {
         this.hint = hint;
-        
         return this;
     }
     
     
     /**
-     * This method puts new weapons into the friend's inventry class
-     * @param         Its the moveable object
+     * This method puts new weapons into the friend's inventry
+     * 
+     * @param   object  the moveable object
      * @return        it refers to the constructor of the same class where I am writing this code. It also means that it returns the friend's weapons.
      */
     public Friend andHasObject(MovableObject object)
