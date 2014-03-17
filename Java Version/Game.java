@@ -116,6 +116,7 @@ public class Game
 
             if(output.equals("quit")) {
                 break;
+<<<<<<< HEAD
             }
             
             if(output.equals("finished")) {
@@ -123,6 +124,13 @@ public class Game
                 break;
             }
 
+=======
+            }else if(gameData.getCurrentLocation().getShortDescription().equals("RESCUE")) {
+                System.out.println("Congratulations on completing the game!");
+                break;
+            }
+            
+>>>>>>> FETCH_HEAD
             if(output.equals("take")) {
                 String[] takeCommands = command.split(" ");
                 Friend friend = gameData.getCurrentLocation().getFriendByName(takeCommands[3]);
@@ -420,12 +428,14 @@ public class Game
             
         fireExit.addDescription("Cinema Fire Exit")
             .withExit("east", rescuePoint)
-            .withExit("west", cinema)
-            .andEnemy(enemy3)
-            .andPasscode(200); // Unlocked by keyBoat 
+            .withExit("west", cinema)            
+            .andPasscode(200) // Unlocked by keyBoat ;
+            .andEnemy(enemy3);
+
             
-        rescuePoint.addDescription("RESCUE POINT")
+        rescuePoint.addDescription("RESCUE")
             .withExit("west", fireExit);
+
             
         
         
@@ -499,7 +509,7 @@ public class Game
                            
         keyBoat = MovableObject.create("key")
                            .withDescription("A key that starts the engine of rescue boat")
-                           .andHasPasscode(500);
+                           .andHasPasscode(200);
         // upon enemy death, drop weapon in current room?
         enemy1.hasStrength(50)
              .withHealth(90)
