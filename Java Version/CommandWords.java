@@ -83,7 +83,8 @@ public class CommandWords
         commandWordsDocumentation.put("pickup", "Pickup an object by passing the object name as a parameter. Usage: 'pickup {object}'");
         commandWordsDocumentation.put("inspect", "Insepct an object by passing the object name as a parameter. Usage: 'inspect {object_name}'");
         commandWordsDocumentation.put("new", "Start a new game. Usage: 'new game'");
-        commandWordsDocumentation.put("talk", "Talk to a player in the game. Usage: 'talk to {player_name}'");
+        commandWordsDocumentation.put("talk", "Talk to a player in the game. Usage: 'talk to {player_name}'");        
+        commandWordsDocumentation.put("take", "Take object from a character. Usage: 'take {object} from {character_name}'");
         commandWordsDocumentation.put("load", "Load a saved game. Usage: 'load game {game_save}'");
         commandWordsDocumentation.put("save", "Save the current state of the game.   Usage: 'save game as {game_name}'");
         commandWordsDocumentation.put("fight", "Fight an enemy in the current room. Usage: 'fight {enemy_name} with {weapon_name}'");
