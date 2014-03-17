@@ -258,7 +258,7 @@ public class Game
     private void buildLocations()
     {
         Location exhibit, reception, cafe, guardOffice, museumEntrance, museumCarPark, car, gunWharf, cinema, lobby1, lobby2, screen1, screen2, screen3, screen4, fireExit, rescuePoint;
-        MovableObject keyEntrance, health, food;
+        MovableObject keyEntrance, health, food, brick;
         FixedObject chair;
 
         keyEntrance = MovableObject.create("key")
@@ -270,6 +270,9 @@ public class Game
                            .andHealthPotion(12);
         food = MovableObject.create("food")
                            .withDescription("Food")
+                           .andWeight(22);
+        brick = MovableObject.create("brick")
+                           .withDescription("a heavy brick")
                            .andWeight(22);
 
         chair = FixedObject.create("chair")
@@ -332,13 +335,15 @@ public class Game
             
         gunWharf.addDescription("Gun Wharf Shoping Floor 1")
             .withExit("north", car)
-            .withExit("south", cinema);
+            .withExit("south", cinema)
+            .andHasObject(brick);              
             
         cinema.addDescription("Cinema Entrance")
             .withExit("north", gunWharf)
             .withExit("west", lobby1)
             .withExit("south", lobby2)
-            .withExit("east", fireExit);
+            .withExit("east", fireExit)            
+            .andHasObject(brick);
             
         lobby1.addDescription("Cinema Lobby for screens 1 and 2")
             .withExit("east", cinema)
