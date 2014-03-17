@@ -55,6 +55,11 @@ public class Location implements java.io.Serializable
     {
         return enemies.get(enemyName);
     }    
+       
+    public Friend getFriendByName(String friendName)
+    {
+        return friends.get(friendName);
+    }    
     
     public Enemy removeEnemyByName(String enemyName)
     {
@@ -68,9 +73,9 @@ public class Location implements java.io.Serializable
        return this;
     }
 
-    public void andFriend(String friendName, Friend friend)
+    public void andFriend(Friend friend)
     {
-       friends.put(friendName, friend);
+       friends.put(friend.getName(), friend);
     }
 
     public String getLocationCharacters()
@@ -126,7 +131,7 @@ public class Location implements java.io.Serializable
         return this;
     }
 
-    public void removeObject(String objectName)
+    public void removeObject(String objectName) //ByName
     {
         movableObjects.remove(objectName);
     }

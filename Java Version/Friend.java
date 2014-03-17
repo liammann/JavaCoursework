@@ -18,6 +18,12 @@ public class Friend extends Character implements java.io.Serializable
         
         return this;
     }
+    
+    public Friend andHasObject(MovableObject object)
+    {
+        this.getInventory().addItemToInventory(object);
+        return this;
+    }
   
     public String getHint()
     {

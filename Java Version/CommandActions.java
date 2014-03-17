@@ -122,6 +122,10 @@ public class CommandActions
             case "save":
                 answer = saveGame(arguments);
                 break;
+            case "take":
+                answer = take(arguments);
+                break;
+             
         }
 
         return answer;
@@ -269,6 +273,28 @@ public class CommandActions
         }
        
         return "fight";
+    }
+    
+    /**
+     * This method is used to validate the 'take' command, and then to return the keyword 'take'
+     * if the syntax used is correct
+     * 
+     * @param   arguments    the list of arguments supplied with the fight keyword
+     * @return               a message that is determined upon the validity of the input command
+     */
+    private String take(ArrayList arguments)
+    {
+
+               
+        if(!arguments.get(1).equals("from")) {
+            return "Invalid syntax used for the 'take' command.";
+        }
+            
+        if(gameData.getCurrentLocation().getFriendByName((String) arguments.get(2)).getName() ==  null) {
+            return "The friend entered does not exist!";
+        }
+        
+        return "take";
     }
 
     /**

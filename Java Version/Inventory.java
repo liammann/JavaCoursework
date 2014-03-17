@@ -44,6 +44,7 @@ public class Inventory implements java.io.Serializable
         inventoryWeight -= getFromInventoryByName(objectName).getWeight();
         inventory.remove(objectName);
     }
+<<<<<<< HEAD
     
     /**
      * This method removes an object from the inventory
@@ -51,6 +52,11 @@ public class Inventory implements java.io.Serializable
      * @param  MovableObject  the object to be removed with its name
      */
     public void dropFromInventoryByObject(MovableObject object)
+=======
+   
+        
+    public void dropFromInventoryByObject(MovableObject object) // liam - why do we need this?
+>>>>>>> FETCH_HEAD
     {
         inventoryWeight -= object.getWeight();
         inventory.remove(object.getObjectName());

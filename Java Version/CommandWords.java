@@ -66,7 +66,8 @@ public class CommandWords
         validCommands.get(2).add("go");
 
         validCommands.add(new ArrayList<String>());
-        validCommands.get(3).add("save");
+        validCommands.get(3).add("save");        
+        validCommands.get(3).add("take");
         validCommands.get(3).add("fight");
 
         preGameCommands.add("load");

@@ -6,17 +6,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * The test class CommandsParserTest.
+ * The test class GameTest.
  *
  * @author  (your name)
  * @version (a version number or a date)
  */
-public class CommandsParserTest
+public class GameTest
 {
     /**
-     * Default constructor for test class CommandsParserTest
+     * Default constructor for test class GameTest
      */
-    public CommandsParserTest()
+    public GameTest()
     {
     }
 
@@ -41,26 +41,9 @@ public class CommandsParserTest
     }
 
     @Test
-    public void getCommand()
+    public void game()
     {
-    }
-
-    @Test
-    public void getHelp()
-    {
-    }
-
-    @Test
-    public void parseCommand()
-    {
-    }
-
-    @Test
-    public void CommandsParser()
-    {
+        Game game1 = new Game();
     }
 }
-
-
-
 
