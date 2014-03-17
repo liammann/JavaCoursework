@@ -35,6 +35,12 @@ public class Location implements java.io.Serializable
         return false;
     }
 
+    /**
+     * questions if the location contains a specific immovable object
+     * 
+     * @param   name    the name of the object to look for
+     * @return          whether the object
+     */
     public boolean containsFixedObject(String name)
     {
         if(fixedObjects.containsKey(name)) {
@@ -44,6 +50,12 @@ public class Location implements java.io.Serializable
         return false;
     }
 
+    /**
+     * sets the descriptive attribute of the location
+     * 
+     * @param   description     the string that describes the location
+     * @return  the location
+     */
     public Location addDescription(String description)
     {
         this.description = description;
