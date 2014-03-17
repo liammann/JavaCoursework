@@ -14,12 +14,17 @@ import org.junit.Test;
 public class PlayerTest
 {
     private Player player;
+    private MovableObject axe;
     /**
      * Default constructor for test class PlayerTest
      */
     public PlayerTest()
     {
-        player = new Player("playername");
+        player = Player.create("playername");
+        axe = MovableObject.create("axe")
+                           .withDescription("Brutal axe")
+                           .andWeight(2)
+                           .withWeaponModifier(2.4);
     }
 
     /**
@@ -32,7 +37,7 @@ public class PlayerTest
     {
         System.out.println(player.hasStrength(5));
         System.out.println(player.withHealth(5));
-        System.out.println(player.andHasWeapon(sword));
+        System.out.println(player.andHasWeapon(axe));
     }
 
     /**
@@ -45,7 +50,7 @@ public class PlayerTest
     {
         System.out.println(player.getName());
         System.out.println(player.getHealth());
-        System.out.println(player.getStreangth());
+        System.out.println(player.getStrength());
         System.out.println(player.getInventory().currentInventory());
     }
 }
