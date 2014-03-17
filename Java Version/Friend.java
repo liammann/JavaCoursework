@@ -55,9 +55,9 @@ public class Friend extends Character implements java.io.Serializable
     }
   
     /**
-    * This is hint method
+    * This method fetches the friends hint string
     * 
-    * @return       It returns the hint
+    * @return   the friend's hint
     */
     public String getHint()
     {
@@ -68,8 +68,8 @@ public class Friend extends Character implements java.io.Serializable
     * This is a response method which gives hint to the player, when player type "help" command, this is where the friend response back to the player.
     * if there is a hint for the player then it returns hint. Otherwise, it doesn't return hint. 
     * 
-    * @param         health command uses int data type to provide health to the enemy
-    * @return        it refers to the constructor of the same class where I am writing this code. It also means that it returns hint with a message.
+    * @param    health  command uses int data type to provide health to the enemy
+    * @return           it refers to the constructor of the same class where I am writing this code. It also means that it returns hint with a message.
     */
     public String response()
     {
