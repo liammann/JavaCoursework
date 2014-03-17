@@ -46,11 +46,6 @@ public class Enemy extends Character implements java.io.Serializable
     }
     
     /**
-<<<<<<< HEAD
-    * This method puts new object into the enemy's inventry class
-    * @param         Its the moveable object
-    * @return        it refers to the constructor of the same class where I am writing this code. It also means that it returns the enemy's weapons.
-=======
     * This method puts a new weapon into the enemy's inventry
     * 
     * @param    weapon  the weapon object the enemy is to have
@@ -66,7 +61,6 @@ public class Enemy extends Character implements java.io.Serializable
     * This method puts new object into the enemy's inventry
     * @param    object  the object to be put into the enemy's inventory
     * @return           the enemy object
->>>>>>> FETCH_HEAD
     */
     public Enemy andHasObject(MovableObject object)
     {
