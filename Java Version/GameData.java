@@ -99,7 +99,7 @@ public class GameData implements java.io.Serializable
     {
         this.gameName = gameName;
     }
-    
+
     public String getName()
     {
         return gameName;

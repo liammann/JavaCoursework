@@ -108,7 +108,7 @@ public class CommandWords
 
     /**
      * This predicate method is used to validate whether the command passed to it has a
-     * valid syntax (according to parameter word count of the keyword)
+     * valid syntax (according to argument word count of the keyword)
      * 
      * @param  commands  the individual words in the entered commmand
      * @return           a boolean depending upon whether the command is valid

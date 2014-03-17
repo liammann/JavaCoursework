@@ -221,18 +221,18 @@ public class CommandActions
      */
     private String use(String potionName)
     {
-        if(gameData.getPlayerObject().getInventory().containsObject(potionName)) {
-            int playerHealth = gameData.getPlayerObject().getHealth();
-            int healthPoints = gameData.getPlayerObject().getInventory().getFromInventoryByName(potionName).getHealthPotion();
-            
-            gameData.getPlayerObject().updateHealth(playerHealth + healthPoints);
-            gameData.getPlayerObject().getInventory().dropFromInventory(potionName);
-
-            return "You added " + healthPoints + " health points\nThis gives you "
-                   + gameData.getPlayerObject().getHealth() + " health points in total";
+        if(!gameData.getPlayerObject().getInventory().containsObject(potionName)) {
+            return "Use what?";
         }
 
-        return "Use what?";
+        int playerHealth = gameData.getPlayerObject().getHealth();
+        int healthPoints = gameData.getPlayerObject().getInventory().getFromInventoryByName(potionName).getHealthPotion();
+        
+        gameData.getPlayerObject().updateHealth(playerHealth + healthPoints);
+        gameData.getPlayerObject().getInventory().dropFromInventory(potionName);
+
+        return "You added " + healthPoints + " health points\nThis gives you "
+               + gameData.getPlayerObject().getHealth() + " health points in total";        
     }
 
     /**
@@ -284,8 +284,6 @@ public class CommandActions
      */
     private String take(ArrayList arguments)
     {
-
-               
         if(!arguments.get(1).equals("from")) {
             return "Invalid syntax used for the 'take' command.";
         }
