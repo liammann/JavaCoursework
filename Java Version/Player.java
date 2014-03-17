@@ -9,31 +9,32 @@
 public class Player extends Character implements java.io.Serializable
 {
     /**
-     * This is a method which takes command from the user and invokes the function
+     * This constructor calls for the creation of a new instance of player
      * 
-     * @param       name  the command name entered
-     * @return      the return value of the invoked function
+     * @param   name    the intended name of the player
+     * @return          a new player object
      */
     public static Player create(String name)
     {
         return new Player(name);
     }
-
+    
     /**
-    * This is a constructor. Super is a special type of keyword and it is used to access the class
-    * 
-    * @param         name  the command name entered
-    */
+     * This constructor creates a new instance of player
+     * 
+     * @param   name    the intended name of the player
+     * @return  null
+     */
     private Player(String name)
     {
         super(name);
     }
 
     /**
-    * This is a method which gives strength to player.
+    * This is a method which sets the strength of the player.
     * 
-    * @param        strength command uses int data type
-    * @return       it refers to the constructor of the same class where I am writing this code.
+    * @param    strength    the amount of strength
+    * @return               the player object
     */
     public Player hasStrength(int strength)
     {
@@ -43,10 +44,10 @@ public class Player extends Character implements java.io.Serializable
     }
 
     /**
-    * This is a method which shows that the player uses health
+    * This is a method which sets the amount of health the user has
     * 
-    * @param         health command uses int data type
-    * @ return       it refers to the constructor of the same class where I am writing this code.
+    * @param    health  the quantity of health the player should have
+    * @return           the player object
     */
     public Player withHealth(int health)
     {
@@ -56,10 +57,10 @@ public class Player extends Character implements java.io.Serializable
     }
 
         /**
-    * This is method is inherit from Inventory class where it allow the player to get the weapons.
+    * This method puts a weapon in the players inventory
     * 
-    * @param         it uses MovableObject weapons
-    * @ return       it refers to the constructor of the same class where I am writing this code.
+    * @param    weapon  the weapon the player should have
+    * @return           the player object
     */
     public Player andHasWeapon(MovableObject weapon)
     {
