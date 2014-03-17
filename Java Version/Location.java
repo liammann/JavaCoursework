@@ -216,7 +216,7 @@ public class Location implements java.io.Serializable
 
     public Location andIsLocked()
     {
-        isLocked = true;
+        isLocked = true; // no need for this? set in passcode
         return this;
     }
    
@@ -237,6 +237,7 @@ public class Location implements java.io.Serializable
      */
     public Location andPasscode(int passcode)
     {
+        isLocked = true;
         locationPasscode = passcode;
         return this;
     }
