@@ -245,7 +245,7 @@ public class CommandActions
         if (!gameData.getPlayerObject().getInventory().containsObject(objectName)) {
             return "No such object exists in your inventory.";
         }
-        
+
         gameData.getCurrentLocation().andHasObject(gameData.getPlayerObject().getInventory().getFromInventoryByName(objectName));
         gameData.getPlayerObject().getInventory().dropFromInventory(objectName);
 
@@ -293,9 +293,13 @@ public class CommandActions
     }
 
     /**
-     * ...
+     * This method is used to validate the specified location direction the player would
+     * like to travel in and ensures that the location to be unlocked is actually locked.
+     * It then checks for a key in the player's inventory, and then checks to see if the
+     * key's passcode matches the location lock's passcode - if so, then unlock the location
+     * and update player's current location
      * 
-     * @param   arguments    the arguments specified for the go keyword
+     * @param   arguments    the arguments specified for the go keyword (the direction and "unlock")
      * @return               a message that is determined upon the validity of the input command
      */
     private String go(ArrayList arguments)
@@ -303,20 +307,30 @@ public class CommandActions
         if(arguments.size() != 2 || !arguments.get(1).equals("unlock")) {
             return "Invalid syntax used for the 'go' command.";
         }
-        
+
         String direction = (String) arguments.get(0);
-        
+
         if (!gameData.getCurrentLocation().isValidExit(direction)) {
             return "Invalid exit!";
         }
-        
+
         if(!gameData.getCurrentLocation().getExit(direction).isLocked()) {
             return "That exit is not locked!";
         }
+<<<<<<< HEAD
         
         if(!gameData.getPlayerObject().getInventory().containsObject("key")) {  
             return "You have no key in your inventory!";
         }
+=======
+
+        if(!gameData.getPlayerObject().getInventory().containsObject("key")) {
+            return "You have no key in your inventory!";
+        }
+
+        int keyPasscode = gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode();
+        int locationPasscode = gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode();
+>>>>>>> FETCH_HEAD
 
         
         int locationPasscode = gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode();   
@@ -330,13 +344,25 @@ public class CommandActions
         return updateLocation(direction);
     }
 
+    /**
+     * This method is invoked when the direction to travel in has been validated, and
+     * so all that is left is to set the current location of the player to the new location
+     * 
+     * @param   direction   the direction the player would like to travel in
+     * @return              the location details (characters and objects in the location, and location exits)
+     */
     private String updateLocation(String direction)
     {
         gameData.setNewLocation(gameData.getCurrentLocation().getExit(direction));
 
         return locationDetails();
     }
-    
+
+    /**
+     * This method is used to return all of the location details for the current location
+     * 
+     * @return      the location details (characters and objects in the location, and location exits)
+     */
     private String locationDetails()
     {
         return gameData.getCurrentLocation().getLongDescription()
@@ -344,55 +370,85 @@ public class CommandActions
                + gameData.getCurrentLocation().getLocationItems()
                + gameData.getCurrentLocation().getExits();
     }
-    
-    private String newGame(String parameter)
+
+    /**
+     * This method is used to validate the 'new' command, and then to returns the keyword 'new'
+     * if the syntax used is correct
+     * 
+     * @param   direction   the argument passed with the keyword 'new' (it should be 'game')
+     * @return              either 'new' on success or an error string on validation failure
+     */
+    private String newGame(String argument)
     {
-        if(!parameter.equals("game")) {
+        if(!argument.equals("game")) {
             return "Invalid syntax used for the 'new' command.";
         }
         
         return "new";
     }
-    
-    private String loadGame(ArrayList parameters)
+
+    /**
+     * This method is used to validate the 'load' command, and then to returns the keyword 'load'
+     * if the syntax used is correct
+     * 
+     * @param   arguments   the arguments passed with the keyword 'load'
+     * @return              either 'load' on success or an error string on validation failure
+     */
+    private String loadGame(ArrayList arguments)
     {
-        if(!parameters.get(0).equals("game")) {
+        if(!arguments.get(0).equals("game")) {
             return "Invalid syntax used for the 'load' command.";
         }
-        
-        if(!gameData.isGameSave((String) parameters.get(1))) {
+
+        String gameSaveName = (String) arguments.get(1);
+
+        if(!gameData.isGameSave(gameSaveName)) {
             return "Invalid game save selected.";
         }
 
-        gameData.setName((String) parameters.get(1));
-        
+        gameData.setName(gameSaveName);
+
         return "load";
     }
 
-    private String saveGame(ArrayList parameters)
+    /**
+     * This method is used to validate the 'save' command, and then to returns the keyword 'save'
+     * if the syntax used is correct
+     * 
+     * @param   arguments   the arguments passed with the keyword 'save'
+     * @return              either 'save' on success or an error string on validation failure
+     */
+    private String saveGame(ArrayList arguments)
     {
-        if(!parameters.get(0).equals("game") || !parameters.get(1).equals("as")) {
+        if(!arguments.get(0).equals("game") || !arguments.get(1).equals("as")) {
             return "Invalid syntax used for the 'save' command.";
         }
-        
-        String gameSaveName = (String) parameters.get(2);
-        
+
+        String gameSaveName = (String) arguments.get(2);
+
         if(!gameSaveName.matches("[a-zA-Z]+")) {
             return "Only alphanumerical characters are allowed in the game save name.";
         }
-        
+
         gameData.setName(gameSaveName);
 
         return "save";
     }
-    
-    private String talk(ArrayList parameters)
+
+    /**
+     * This method is used to validate the 'talk' command, and then to returns the friend's response
+     * if the syntax used is correct
+     * 
+     * @param   arguments   the arguments passed with the keyword 'talk'
+     * @return              either the friend's response on success or an error string on validation failure
+     */
+    private String talk(ArrayList arguments)
     {
-        if(!parameters.get(0).equals("to")) {
+        if(!arguments.get(0).equals("to")) {
             return "Invalid syntax used for the 'talk' command.";
         }
         
-        String nameOfPerson = (String) parameters.get(1);
+        String nameOfPerson = (String) arguments.get(1);
         
         if(!gameData.getCurrentLocation().isValidFriend(nameOfPerson)) {
             return "The friend specified is invalid!";
@@ -401,6 +457,13 @@ public class CommandActions
         return gameData.getCurrentLocation().getFriend(nameOfPerson).response();
     }
 
+    /**
+     * This method is used to validate the 'inspect' command, and then to return the object's description
+     * if the syntax used is correct
+     * 
+     * @param   arguments   the arguments passed with the keyword 'talk'
+     * @return              either the object's description on success or an error string on validation failure
+     */
     private String inspect(String objectName)
     {
         if(gameData.getCurrentLocation().containsMovableObject(objectName)) {
@@ -414,6 +477,11 @@ public class CommandActions
         return "The object specified does not exist!";
     }
 
+    /**
+     * This method is used to get the contents of the player's inventory
+     * 
+     * @return       the player's inventory contents
+     */
     private String inventory()
     {
         return gameData.getPlayerObject().getInventory().currentInventory();
