@@ -137,7 +137,13 @@ public class Inventory implements java.io.Serializable
 
         return inventoryWeight;
     }
-
+    
+    /**
+     * This method returns the object connected to its given name
+     * 
+     * @param   String  the name of the needed object
+     * @return  MovableObject   the needed object
+     */
     public MovableObject getWeapon(String weaponName)
     {
         return inventory.get(weaponName);
