@@ -31,7 +31,7 @@ public class Friend extends Character implements java.io.Serializable
     }
 
     /**
-    * This is a method which gives hint to the friend to give to the player
+    * This is a method which creates a hint for the friend to give to the player
     * 
     * @param    hint    the string to be provided to the player by the friend
     * @return           the friend
