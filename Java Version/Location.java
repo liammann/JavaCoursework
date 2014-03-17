@@ -26,6 +26,12 @@ public class Location implements java.io.Serializable
         friends = new HashMap<String, Friend>();
     }
 
+    /**
+     * questions if the location contains a specific movable object
+     * 
+     * @param   name    the name of the object to look for
+     * @return          whether the object is in the location
+     */
     public boolean containsMovableObject(String name)
     {
         if(movableObjects.containsKey(name)) {
@@ -39,7 +45,7 @@ public class Location implements java.io.Serializable
      * questions if the location contains a specific immovable object
      * 
      * @param   name    the name of the object to look for
-     * @return          whether the object
+     * @return          whether the object is in the location
      */
     public boolean containsFixedObject(String name)
     {
@@ -96,6 +102,12 @@ public class Location implements java.io.Serializable
         enemies.remove(enemyName);
     }
 
+    /**
+     * adds an enemy to the location
+     * 
+     * @param   enemy   the enemy to add
+     * @return          the location
+     */
     public Location andEnemy(Enemy enemy)
     {
        enemies.put(enemy.getName(), enemy);
@@ -103,11 +115,21 @@ public class Location implements java.io.Serializable
        return this;
     }
 
+    /**
+     * adds a friend to the location
+     * 
+     * @param   friend  the friend to add
+     */
     public void andFriend(Friend friend)
     {
        friends.put(friend.getName(), friend);
     }
 
+    /**
+     * outputs a string listing the names of all characters in the location
+     * 
+     * @return          a list of characters
+     */
     public String getLocationCharacters()
     {
         boolean friendsB = false;
