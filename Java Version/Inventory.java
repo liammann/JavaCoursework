@@ -35,7 +35,7 @@ public class Inventory implements java.io.Serializable
     }
    
         
-    public void dropFromInventoryByObject(MovableObject object)
+    public void dropFromInventoryByObject(MovableObject object) // liam - why do we need this?
     {
         inventoryWeight -= object.getWeight();
         inventory.remove(object.getObjectName());
