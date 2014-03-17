@@ -51,19 +51,37 @@ public class Location implements java.io.Serializable
         return this;
     }
     
+    /**
+     * This method fetches an enemy with their name as reference
+     * 
+     * @param   enemyName   the name of the enemy
+     * @return              the enemy
+     */
     public Enemy getEnemyByName(String enemyName)
     {
         return enemies.get(enemyName);
     }    
-       
+    
+    /**
+     * This method fetches a friend with their name as reference
+     * 
+     * @param   friendName  the name of the friend character
+     * @return              the friend
+     */
     public Friend getFriendByName(String friendName)
     {
         return friends.get(friendName);
     }    
     
-    public Enemy removeEnemyByName(String enemyName)
+    /**
+     * This method deletes an enemy from the location with their name as reference
+     * 
+     * @param   enemyName   the name of the enemy
+     * @return              the enemy
+     */
+    public void removeEnemyByName(String enemyName)
     {
-        return enemies.remove(enemyName);
+        enemies.remove(enemyName);
     }
 
     public Location andEnemy(Enemy enemy)
