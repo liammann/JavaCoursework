@@ -317,21 +317,10 @@ public class CommandActions
         if(!gameData.getCurrentLocation().getExit(direction).isLocked()) {
             return "That exit is not locked!";
         }
-<<<<<<< HEAD
         
         if(!gameData.getPlayerObject().getInventory().containsObject("key")) {  
             return "You have no key in your inventory!";
         }
-=======
-
-        if(!gameData.getPlayerObject().getInventory().containsObject("key")) {
-            return "You have no key in your inventory!";
-        }
-
-        int keyPasscode = gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode();
-        int locationPasscode = gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode();
->>>>>>> FETCH_HEAD
-
         
         int locationPasscode = gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode();   
         if(gameData.getPlayerObject().getInventory().getFromInventoryByNamePass(locationPasscode) != null ){
