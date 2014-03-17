@@ -14,6 +14,7 @@ public class MovableObject extends Object implements java.io.Serializable
     private MovableObject(String name)
     {
         this.name = name;
+        this.weight = 0;
     }
     
     @Override
