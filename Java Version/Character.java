@@ -41,15 +41,22 @@ public abstract class Character implements java.io.Serializable
     {
         return strength;
     }
-
+    
+    /**
+     * This method sets the health of the character
+     * 
+     * @param   newHealth   the new amount of health
+     * @return  null
+     */
     public void updateHealth(int newHealth)
     {
         health = newHealth;
     }
     
     /**
-     * Return inventory object 
-     * Used in fight method for getting enemies inventories 
+     * This method returns the character's inventory
+     * 
+     * @return  the list of objects in their inventory
      */
     public Inventory getInventory()
     {

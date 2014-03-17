@@ -1,5 +1,6 @@
 import java.util.ArrayList;
-import java.lang.Math;
+import java.util.HashMap;
+
 import java.io.*;
 
 /**
@@ -31,6 +32,41 @@ public class Game
     public void preGame()
     {
         System.out.println("=============================");
+        System.out.println("...................,.......,...........,,,,.............,.........,,,....,......");
+        System.out.println(".......,...,,.,.,.,,,,,,,,,,,,,,,,,,,,,,,I,,,,.,,,,,,,,,,,,,,,,,,,,,,,,,,.,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Z==$$Z,,,,,,,,,,.............,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,I+:~=+O,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,~~ZZ?$$,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,~ZI,,,OD,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,~:=::I+D,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,7I~=:::O=O,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,$$?$:~?~:D7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,=7Z$:DZOON7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,+~+,:,Z+~I8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,I,=:ZZ:::$Z,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,:,+~NZ=::Z8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,!,::D8:::ZZ$,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println("///////////////////////////////////~,I~:~==+=$=?////////////////////////////////");
+        System.out.println("IIIIIII?????????????????????????~+?ZZOOO$OOZZI~:~??????????????????????????????O");
+        System.out.println("II????????????????????????????7=+I7?:,.~$=:,,7~I~~?????????????????????????????O");
+        System.out.println("??????????????????????????????7$?7??::~?$,:::$,::IZ????????????????????????????O");
+        System.out.println("??????????????????????????????I,:8D?::I:7,::::+N=:???????????????~I:=,~????????M");
+        System.out.println("??????????????????????????????:NOZO?OZO~$:,?+::+~~???????????+++?:+++==????????N");
+        System.out.println("???????????????:Z+:=ZI?????+?$:D?ZO87+:7,Z8??=+7~~?+++++++??==8O8Z~=+~~+??7?????");
+        System.out.println("???????????????~~=+=ZZ+++++?+:?O$:~+=7=:+:IO$Z:877O:ZO$DZ::Z$:~,~~~Z==+++?I?++??");
+        System.out.println("???????????I+Z$77,7I:==I,Z?OI==:,.?8OZZ$Z=OZ?8888DD+====~?D8Z87+I?8888+D$88D++++");
+        System.out.println("???????+++?+=?I7ZOZ77$ZZ7++~=++~~:::=:~~~====?7???NDZO+::~~~==:~~=:::::==?:78O++");
+        System.out.println("????++++++?~~=+?+~::::~+=::77$$?~8D$~8DI7DDD7DND8+OO=~~++::?Z$=DDO,DDD=O+~OO:+++");
+        System.out.println("$+++++++++=Z$+?D=?88788Z+D8?7N88$DNN~DND=DND,NND:~NNN88NNO=DDO?NNN:DNN:=::~:?7$$");
+        System.out.println("8OZ?+=$+Z?:~::ZZD:ZD:ODZ$DD::ZOZ~O88~8DD,NDD,O88~:DNZ~~$I~:O$7:7$O~~7I:::::::DD8");
+        System.out.println("DND$7$O8N8::::$$7~~+:Z?:ZZ=::$?+~Z8O~88D,MD8:O+==:8NZI:Z$$:$$I~~NI~=ZO:::::::888");
+        System.out.println("MMO?OON8N8::::$Z7==$:I?:ZO=::$=~:Z8O:ODO:ODO:O+++:8DZO:ZOZ:~ZZ~=ZZ==ZZ7:,~=~~7DO");
+        System.out.println("D8D8ND8NN8:=~:$OZ+IZ~=O:ZOZ~~$Z?:Z8Z:ZD8:88Z:Z==~~$888:+8D~~DD=~NN==DO7:$?:~+:N8");
+        System.out.println("MONM8NN$NO::::Z8:?OO~~8:ODO=:$~~:ZO$:$DN,NO$:$~Z+~$~8D::DD~~NN=:NN+=N8:~=~~~=~NN");
+        System.out.println("8MMMNNNN88::::Z8:7Z8~=87O8O~~$:::$$::~OZ,OZ:~7::~~Z~7D~~ND~~Z~=+ND+=8O:~~~:~=:ND");
+        System.out.println("MDDDNMN$8II$I?O$+$$~7I?I7DZ+~Z:::ZZ:::OZ:$O::?,:::ZI=$=+$???$+88OZI7$DID7IIIIINN");
+        System.out.println("8DMDM88NODZI+:D7+DM=~N8Z$$ZO==+~~I?:~??:~?I?~~I?~I??7?88O$?IOD?=NN~::NZ::::~~INN");
+        System.out.println("MM8MMNNNNOI,,.=NOOO+.8=~~=++=?+++++++???===++++?+?++?=I~N$~~DO~~DN~~~O88?$ZZIDNZ");
         System.out.println("No game loaded yet!");
         System.out.println("Either load a saved game state with 'load game {game_save}'");
         System.out.println("Current game saves: " + getSavedGameNames());
@@ -100,8 +136,11 @@ public class Game
                 System.out.println("You have successfully beaten " + fightCommands[1] + "!");
                 System.out.print("You currently have:\n\t- " + player1.getHealth() + " health points\n\t- ");
                 System.out.println(player1.getStrength() + " strength points");
-                System.out.println(gameData.getCurrentLocation().getLongDescription());                       
+                System.out.println(gameData.getCurrentLocation().getLongDescription());    
+                System.out.println(gameData.getCurrentLocation().getLocationCharacters());
+                System.out.println(gameData.getCurrentLocation().getLocationItems());
                 System.out.print(gameData.getCurrentLocation().getExits());
+                
             }else if(output.equals("save")) {
                 if(gameData.getSavedGames().contains(command.split(" ")[3])) {
                     System.out.print("Are you sure you would like to overwrite this game save?\n[yes/no] : ");
@@ -219,20 +258,23 @@ public class Game
     private void buildLocations()
     {
         Location exhibit, reception, cafe, guardOffice, museumEntrance, museumCarPark, car, gunWharf, cinema, lobby1, lobby2, screen1, screen2, screen3, screen4, fireExit, rescuePoint;
-        MovableObject keyEntrance,keyBoat, health;
+        MovableObject keyEntrance, health, food, brick;
         FixedObject chair;
 
         keyEntrance = MovableObject.create("key")
                            .withDescription("A key that unlocks museum entrance door")
-                           .andHasPasscode(900);        
-        keyBoat = MovableObject.create("key")
-                           .withDescription("A key starts the rescue boat")
-                           .andHasPasscode(900);
-                           
+                           .andHasPasscode(900);       
        
         health = MovableObject.create("health")
-                           .withDescription("A key that unlocks some door")
+                           .withDescription("A health Potion that recovers 12")
                            .andHealthPotion(12);
+        food = MovableObject.create("food")
+                           .withDescription("Food")
+                           .andWeight(1);
+        brick = MovableObject.create("brick")
+                           .withDescription("a heavy brick")
+                           .andWeight(5);
+
         chair = FixedObject.create("chair")
                            .withDescription("An old wooden chair");
        
@@ -259,8 +301,6 @@ public class Game
         rescuePoint = Location.create();
         
         
-        //               .andHasObject(chair)
-         
         exhibit.addDescription("Medieval Exhibit")
                 .withExit("south", reception)
                 .andHasObject(chair)
@@ -280,7 +320,8 @@ public class Game
         
         cafe.addDescription("Museum Cafe")
            .withExit("west", reception)
-           .andHasObject(health)               
+           .andHasObject(health)                          
+           .andHasObject(food)               
            .andFriend(sam);
 
         museumEntrance.addDescription("Museum Entrance")
@@ -290,22 +331,19 @@ public class Game
             
         museumCarPark.addDescription("Museum Car Park")
             .withExit("north", museumEntrance)
-            .withExit("south", car);
-            
-            
-        car.addDescription("Car")
-            .withExit("north", museumCarPark)
             .withExit("south", gunWharf);
-        
+            
         gunWharf.addDescription("Gun Wharf Shoping Floor 1")
             .withExit("north", car)
-            .withExit("south", cinema);
+            .withExit("south", cinema)
+            .andHasObject(brick);              
             
         cinema.addDescription("Cinema Entrance")
             .withExit("north", gunWharf)
             .withExit("west", lobby1)
             .withExit("south", lobby2)
-            .withExit("east", fireExit);
+            .withExit("east", fireExit)            
+            .andHasObject(brick);
             
         lobby1.addDescription("Cinema Lobby for screens 1 and 2")
             .withExit("east", cinema)
@@ -313,9 +351,11 @@ public class Game
             .withExit("south", screen2);        
             
         lobby2.addDescription("Cinema Lobby for screens 3 and 4")
-            .withExit("west", cinema)
+            .withExit("north", cinema)
             .withExit("east", screen4)            
-            .withExit("south", screen3);
+            .withExit("south", screen3)
+            .andHasObject(food)               
+            .andFriend(sam);
             
         screen1.addDescription("Cinema Screen 1")
             .withExit("north", lobby1)
@@ -329,7 +369,8 @@ public class Game
         screen3.addDescription("Cinema Screen 3")
             .withExit("north", lobby2)
             .withExit("west", screen2)   
-            .withExit("east", screen4);
+            .withExit("east", screen4)
+            .andFriend(john);
             
         screen4.addDescription("Cinema Screen 4")
             .withExit("north", lobby2)
@@ -338,13 +379,13 @@ public class Game
             
         fireExit.addDescription("Cinema Fire Exit")
             .withExit("east", rescuePoint)
-            .withExit("west", cinema)            
+            .withExit("west", cinema)
+            .andEnemy(enemy3)
             .andPasscode(200); // Unlocked by keyBoat 
             
         rescuePoint.addDescription("RESCUE POINT")
             .withExit("west", fireExit);
             
-
         
         
         gameData.addLocation(exhibit);
@@ -382,7 +423,7 @@ public class Game
 
         sword = MovableObject.create("sword")
                              .withDescription("Steel sword")
-                             .andWeight(3)
+                             .andWeight(2)
                              .withWeaponModifier(3.1);
 
         player1 = Player.create("Player 1")
@@ -397,7 +438,7 @@ public class Game
         enemy3 = new Enemy("enemy4");
 
          // Enemies Weapons 
-        MovableObject axe, mace, dagger, keyOffice;
+        MovableObject axe, mace, dagger, food, keyOffice, keyBoat;
 
         axe = MovableObject.create("axe")
                            .withDescription("Brutal axe")
@@ -416,18 +457,23 @@ public class Game
         keyOffice = MovableObject.create("key")
                            .withDescription("A key that unlocks security office door")
                            .andHasPasscode(500);
+                           
+        keyBoat = MovableObject.create("key")
+                           .withDescription("A key that starts the engine of rescue boat")
+                           .andHasPasscode(500);
         // upon enemy death, drop weapon in current room?
         enemy1.hasStrength(50)
              .withHealth(90)
+             .andHasObject(dagger)           
              .andHasObject(keyOffice);
 
         enemy2.hasStrength(80)
             .withHealth(110)
-            .andHasWeapon(mace);
+            .andHasObject(mace); // Needs key for another door
 
         enemy3.hasStrength(100)
            .withHealth(130)
-           .andHasWeapon(axe);
+           .andHasObject(axe);
        
         MovableObject health = MovableObject.create("health")
                                            .withDescription("a Health Potion")
@@ -438,13 +484,14 @@ public class Game
                        .andHasObject(health);
 
         james = Friend.create("james")
-                      .withHint("The Sword is very useful which you already have");
+                      .withHint("Find John he watching a movie!!");
 
         jeremy = Friend.create("jeremy")
-                       .withHint("Try to pickup useful tools");
+                       .withHint("John has the rescue boat key");
 
         john = Friend.create("john")
-                     .withHint("Shut up, Meg");
+                     .withHint("Here the key for the rescue boat, please take it")
+                     .andHasObject(keyBoat);
     }
      /**
      * CombatFight Method 
@@ -461,7 +508,7 @@ public class Game
      * 
      * @return true if player win the fight
      */
-    public boolean combatStartFight(Enemy enemy, MovableObject weapon, Player player)
+    private boolean combatStartFight(Enemy enemy, MovableObject weapon, Player player)
     {
         boolean playerWin = false;
         boolean enemyDefending = false; // Not used yet
@@ -495,7 +542,10 @@ public class Game
                 System.out.println("and kill him only taking " + totalEnemyDealt + " health points.\n");
                 gameData.getCurrentLocation().removeEnemyByName(enemy.getName());
                 
-                for (MovableObject item : enemy.getInventory().getArrayInventory().values()){
+                HashMap<String, MovableObject> enemyHash = enemy.getInventory().getArrayInventory(); // Convert Hash Map to arrayList
+                ArrayList<MovableObject> enemyArray = new ArrayList<MovableObject>(enemyHash.values());
+
+                for (MovableObject item : enemyArray){
                     enemy.getInventory().dropFromInventory(item.getObjectName());
                     gameData.getCurrentLocation().andHasObject(item);
                 }

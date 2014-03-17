@@ -14,7 +14,7 @@ public class Location implements java.io.Serializable
 
     public static Location create()
     {
-        return new Location(); // do I need? Keep consistent with creating new characters
+        return new Location();
     }
 
     public Location()
