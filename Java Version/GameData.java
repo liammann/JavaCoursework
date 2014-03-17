@@ -117,4 +117,9 @@ public class GameData implements java.io.Serializable
     {
         players.put(player.getName(), player);
     }
+    
+    public Player getPlayerByName(String name)
+    {
+        return players.get(name);
+    }
 }

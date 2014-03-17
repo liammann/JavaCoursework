@@ -116,21 +116,16 @@ public class Game
 
             if(output.equals("quit")) {
                 break;
-<<<<<<< HEAD
             }
             
             if(output.equals("finished")) {
                 System.out.println("Congratulations on completing the game!");
                 break;
-            }
-
-=======
             }else if(gameData.getCurrentLocation().getShortDescription().equals("RESCUE")) {
                 System.out.println("Congratulations on completing the game!");
                 break;
             }
-            
->>>>>>> FETCH_HEAD
+
             if(output.equals("take")) {
                 String[] takeCommands = command.split(" ");
                 Friend friend = gameData.getCurrentLocation().getFriendByName(takeCommands[3]);
