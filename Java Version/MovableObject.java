@@ -78,6 +78,9 @@ public class MovableObject extends Object implements java.io.Serializable
 
     public int getPasscode()
     {
-        return passcode;
+        if(passcode > 0 ){
+            return passcode;
+        }   
+        return 0;
     }
 }

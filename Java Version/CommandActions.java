@@ -314,18 +314,18 @@ public class CommandActions
             return "That exit is not locked!";
         }
         
-        if(!gameData.getPlayerObject().getInventory().containsObject("key")) {
+        if(!gameData.getPlayerObject().getInventory().containsObject("key")) {  
             return "You have no key in your inventory!";
         }
+
         
-        int keyPasscode = gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode();
-        int locationPasscode = gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode();
-
-        if(keyPasscode != locationPasscode) {
-            return "Your key doesn't fit that lock";
+        int locationPasscode = gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode();   
+        if(gameData.getPlayerObject().getInventory().getFromInventoryByNamePass(locationPasscode) != null ){
+             gameData.getCurrentLocation().getLocationNeighour(direction).unlock();
+             gameData.getPlayerObject().getInventory().dropFromInventoryByObject(gameData.getPlayerObject().getInventory().getFromInventoryByNamePass(locationPasscode));
+        }else {
+             return "Your key doesn't fit that lock";
         }
-
-        gameData.getCurrentLocation().getLocationNeighour(direction).unlock();
 
         return updateLocation(direction);
     }
