@@ -128,9 +128,9 @@ public class CommandActions
     }
 
     /**
-     * This method is used to quit the game or pregame
+     * This method is used return 'quit' so that the Game class can handle the action
      * 
-     * @return     the word "quit"
+     * @return     the word 'quit'
      */
     private String quit()
     {
@@ -210,8 +210,7 @@ public class CommandActions
 
     /**
      * This method is used to consume the specified potion (provided it is in their inventory)
-     * which will update the current player's health
-     * and drop the potion from the player's inventory
+     * which will update the current player's health and drop the potion from the player's inventory
      * 
      * @param   potionName    the potion to be consumed
      * @return                a message of the number of locations going back and the new location description
@@ -225,7 +224,7 @@ public class CommandActions
             gameData.getPlayerObject().updateHealth(playerHealth + healthPoints);
             gameData.getPlayerObject().getInventory().dropFromInventory(potionName);
 
-            return "You added " + healthPoints + " health points \nThis gives you "
+            return "You added " + healthPoints + " health points\nThis gives you "
                    + gameData.getPlayerObject().getHealth() + " health points in total";
         }
 
@@ -233,11 +232,11 @@ public class CommandActions
     }
 
     /**
-     * This method is used to drop a specified MovableObject from the player's inventory
+     * This method is used to drop a specified object from the player's inventory
      * (provided it is in there). It will first update the location with the dropped object,
      * and will then remove the object from the player's inventory
      * 
-     * @param   potionName    the name of the object to be dropped
+     * @param   objectName    the name of the object to be dropped
      * @return                a message of whether the object was dropped or not
      */
     private String drop(String objectName)
@@ -253,7 +252,8 @@ public class CommandActions
     }
 
     /**
-     * This method is used to check the validity of the entered fight command
+     * This method is used to validate the 'fight' command, and then to return the keyword 'fight'
+     * if the syntax used is correct
      * 
      * @param   arguments    the list of arguments supplied with the fight keyword
      * @return               a message that is determined upon the validity of the input command
@@ -317,19 +317,18 @@ public class CommandActions
         if(!gameData.getCurrentLocation().getExit(direction).isLocked()) {
             return "That exit is not locked!";
         }
-
-        if(!gameData.getPlayerObject().getInventory().containsObject("key")) {
+        
+        if(!gameData.getPlayerObject().getInventory().containsObject("key")) {  
             return "You have no key in your inventory!";
         }
-
-        int keyPasscode = gameData.getPlayerObject().getInventory().getFromInventoryByName("key").getPasscode();
-        int locationPasscode = gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode();
-
-        if(keyPasscode != locationPasscode) {
-            return "Your key doesn't fit that lock";
+        
+        int locationPasscode = gameData.getCurrentLocation().getLocationNeighour(direction).getPasscode();   
+        if(gameData.getPlayerObject().getInventory().getFromInventoryByNamePass(locationPasscode) != null ){
+             gameData.getCurrentLocation().getLocationNeighour(direction).unlock();
+             gameData.getPlayerObject().getInventory().dropFromInventoryByObject(gameData.getPlayerObject().getInventory().getFromInventoryByNamePass(locationPasscode));
+        }else {
+             return "Your key doesn't fit that lock";
         }
-
-        gameData.getCurrentLocation().getLocationNeighour(direction).unlock();
 
         return updateLocation(direction);
     }
@@ -362,7 +361,7 @@ public class CommandActions
     }
 
     /**
-     * This method is used to validate the 'new' command, and then to returns the keyword 'new'
+     * This method is used to validate the 'new' command, and then to return the keyword 'new'
      * if the syntax used is correct
      * 
      * @param   direction   the argument passed with the keyword 'new' (it should be 'game')
@@ -378,7 +377,7 @@ public class CommandActions
     }
 
     /**
-     * This method is used to validate the 'load' command, and then to returns the keyword 'load'
+     * This method is used to validate the 'load' command, and then to return the keyword 'load'
      * if the syntax used is correct
      * 
      * @param   arguments   the arguments passed with the keyword 'load'
@@ -402,7 +401,7 @@ public class CommandActions
     }
 
     /**
-     * This method is used to validate the 'save' command, and then to returns the keyword 'save'
+     * This method is used to validate the 'save' command, and then to return the keyword 'save'
      * if the syntax used is correct
      * 
      * @param   arguments   the arguments passed with the keyword 'save'
@@ -426,7 +425,7 @@ public class CommandActions
     }
 
     /**
-     * This method is used to validate the 'talk' command, and then to returns the friend's response
+     * This method is used to validate the 'talk' command, and then to return the friend's response
      * if the syntax used is correct
      * 
      * @param   arguments   the arguments passed with the keyword 'talk'

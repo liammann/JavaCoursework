@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Inventory implements java.io.Serializable
 {
@@ -26,10 +28,27 @@ public class Inventory implements java.io.Serializable
         inventoryWeight -= getFromInventoryByName(objectName).getWeight();
         inventory.remove(objectName);
     }
+        
+    public void dropFromInventoryByObject(MovableObject object)
+    {
+        inventoryWeight -= object.getWeight();
+        inventory.remove(object.getObjectName());
+    }
     
     public MovableObject getFromInventoryByName(String objectName)
     {
         return inventory.get(objectName);
+    }
+    
+    public MovableObject getFromInventoryByNamePass(int passcode)
+    {
+
+       for(MovableObject item : inventory.values()) {
+           if(item.getPasscode() == passcode){
+               return item;
+            }
+       }
+       return null;
     }
     
     public boolean containsObject(String name)
