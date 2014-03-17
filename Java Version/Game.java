@@ -100,8 +100,11 @@ public class Game
                 System.out.println("You have successfully beaten " + fightCommands[1] + "!");
                 System.out.print("You currently have:\n\t- " + player1.getHealth() + " health points\n\t- ");
                 System.out.println(player1.getStrength() + " strength points");
-                System.out.println(gameData.getCurrentLocation().getLongDescription());                       
+                System.out.println(gameData.getCurrentLocation().getLongDescription());    
+                System.out.println(gameData.getCurrentLocation().getLocationCharacters());
+                System.out.println(gameData.getCurrentLocation().getLocationItems());
                 System.out.print(gameData.getCurrentLocation().getExits());
+                
             }else if(output.equals("save")) {
                 if(gameData.getSavedGames().contains(command.split(" ")[3])) {
                     System.out.print("Are you sure you would like to overwrite this game save?\n[yes/no] : ");
@@ -224,14 +227,10 @@ public class Game
 
         keyEntrance = MovableObject.create("key")
                            .withDescription("A key that unlocks museum entrance door")
-                           .andHasPasscode(900);        
-        keyBoat = MovableObject.create("key")
-                           .withDescription("A key starts the rescue boat")
-                           .andHasPasscode(900);
-                           
+                           .andHasPasscode(900);       
        
         health = MovableObject.create("health")
-                           .withDescription("A key that unlocks some door")
+                           .withDescription("A health Potion that recovers 12")
                            .andHealthPotion(12);
         chair = FixedObject.create("chair")
                            .withDescription("An old wooden chair");
@@ -329,7 +328,8 @@ public class Game
         screen3.addDescription("Cinema Screen 3")
             .withExit("north", lobby2)
             .withExit("west", screen2)   
-            .withExit("east", screen4);
+            .withExit("east", screen4)
+            .andEnemy(enemy2);
             
         screen4.addDescription("Cinema Screen 4")
             .withExit("north", lobby2)
@@ -423,7 +423,7 @@ public class Game
 
         enemy2.hasStrength(80)
             .withHealth(110)
-            .andHasWeapon(mace);
+            .andHasWeapon(mace); // Needs key for another door
 
         enemy3.hasStrength(100)
            .withHealth(130)
@@ -461,7 +461,7 @@ public class Game
      * 
      * @return true if player win the fight
      */
-    public boolean combatStartFight(Enemy enemy, MovableObject weapon, Player player)
+    private boolean combatStartFight(Enemy enemy, MovableObject weapon, Player player)
     {
         boolean playerWin = false;
         boolean enemyDefending = false; // Not used yet
