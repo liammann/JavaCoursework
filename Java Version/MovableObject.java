@@ -112,21 +112,41 @@ public class MovableObject extends Object implements java.io.Serializable
         return healthPotion;
     }
     
+    /**
+     * This weapon gets the damaging effect of the weapon
+     * 
+     * @return  the effect of the weapon on the victims health
+     */
     public double getWeaponModifier()
     {
         return weaponModifier;
     }
     
+    /**
+     * This weapon checks is the object is a weapon
+     * 
+     * @return  the boolean value of whether the obect is a weapon or not
+     */
     public boolean checkWeapon()
     {
         return weapon;
     }
     
+    /**
+     * This method gets the name attribute of the object
+     * 
+     * @return the name of this object
+     */
     public String getObjectName()
     {
         return this.name;
     }
 
+    /**
+     * This method fetches the code attribute assigned if the object is a key
+     * 
+     * @return the object's passcode
+     */
     public int getPasscode()
     {
         if(passcode > 0 ){
