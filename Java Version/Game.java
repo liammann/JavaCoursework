@@ -17,7 +17,7 @@ public class Game
     private ArrayList<String> gameSaves;
 
     private Enemy enemy1, enemy2, enemy3;
-
+    private Friend sam, james, jeremy, john;
     private Player player1; // combat
 
     public Game()
@@ -70,14 +70,23 @@ public class Game
 
             if(output.equals("quit")) {
                 break;
-            }
-
-            if(output.equals("finished")) {
+            }else if(output.equals("finished")) {
                 System.out.println("Congratulations on completing the game!");
                 break;
-            } 
+            }else if(output.equals("take")) {
+                String[] takeCommands = command.split(" ");
+                Friend friend = gameData.getCurrentLocation().getFriendByName(takeCommands[3]);
+                MovableObject item = friend.getInventory().getFromInventoryByName(takeCommands[1]);
 
-            if(output.equals("fight")) {
+                if(player1.getInventory().addItemToInventory(item)){
+                    friend.getInventory().dropFromInventory(item.getObjectName());
+                    System.out.print(friend.getName()+" has given you "+ item.getObjectDescription());
+                }else {
+                    System.out.print("What item?");
+                }
+                
+                
+            }else if(output.equals("fight")) {
                 String[] fightCommands = command.split(" ");
                 Enemy enemy = gameData.getCurrentLocation().getEnemyByName(fightCommands[1]);
                 MovableObject weapon = player1.getInventory().getWeapon(fightCommands[3]);
@@ -271,7 +280,8 @@ public class Game
         
         cafe.addDescription("Museum Cafe")
            .withExit("west", reception)
-           .andHasObject(health);
+           .andHasObject(health)               
+           .andFriend(sam);
 
         museumEntrance.addDescription("Museum Entrance")
             .withExit("north", reception)
@@ -418,13 +428,14 @@ public class Game
         enemy3.hasStrength(100)
            .withHealth(130)
            .andHasWeapon(axe);
+       
+        MovableObject health = MovableObject.create("health")
+                                           .withDescription("a Health Potion")
+                                           .andHealthPotion(15);
 
-
-
-        Friend jordan, james, jeremy, john;
-
-        jordan = Friend.create("jordan")
-                       .withHint("The Key is behind the library");
+        sam = Friend.create("sam")
+                       .withHint("Would you like a health potion? {take health from sam}")
+                       .andHasObject(health);
 
         james = Friend.create("james")
                       .withHint("The Sword is very useful which you already have");
