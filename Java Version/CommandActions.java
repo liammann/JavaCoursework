@@ -260,7 +260,7 @@ public class CommandActions
      */
     private String fight(ArrayList arguments)
     {
-        if(arguments.size() != 3 || !arguments.get(1).equals("with")) {
+        if(!arguments.get(1).equals("with")) {
             return "Invalid syntax used for the 'fight' command.";
         }
             
@@ -304,7 +304,7 @@ public class CommandActions
      */
     private String go(ArrayList arguments)
     {
-        if(arguments.size() != 2 || !arguments.get(1).equals("unlock")) {
+        if(!arguments.get(1).equals("unlock")) {
             return "Invalid syntax used for the 'go' command.";
         }
 
