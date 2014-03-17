@@ -486,6 +486,11 @@ public class Game
                 System.out.println("You fight the evil " + enemy.getName() + " to the death with your " + weapon.getObjectName());
                 System.out.println("and kill him only taking " + totalEnemyDealt + " health points.\n");
                 gameData.getCurrentLocation().removeEnemyByName(enemy.getName());
+                
+                for (MovableObject item : enemy.getInventory().getArrayInventory().values()){
+                    enemy.getInventory().dropFromInventory(item.getObjectName());
+                    gameData.getCurrentLocation().andHasObject(item);
+                }
                 break;
             }
         }

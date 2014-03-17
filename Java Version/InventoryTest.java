@@ -6,17 +6,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * The test class CommandsParserTest.
+ * The test class InventoryTest.
  *
  * @author  (your name)
  * @version (a version number or a date)
  */
-public class CommandsParserTest
+public class InventoryTest
 {
     /**
-     * Default constructor for test class CommandsParserTest
+     * Default constructor for test class InventoryTest
      */
-    public CommandsParserTest()
+    public InventoryTest()
     {
     }
 
@@ -41,26 +41,8 @@ public class CommandsParserTest
     }
 
     @Test
-    public void getCommand()
-    {
-    }
-
-    @Test
-    public void getHelp()
-    {
-    }
-
-    @Test
-    public void parseCommand()
-    {
-    }
-
-    @Test
-    public void CommandsParser()
+    public void inventoryWeight()
     {
     }
 }
-
-
-
 

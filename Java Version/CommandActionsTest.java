@@ -47,9 +47,64 @@ public class CommandActionsTest
     }
 
     @Test
-    public void dfghjk()
+    public void CommandActions()
+    {
+    }
+
+    @Test
+    public void invokeAction()
+    {
+    }
+
+    @Test
+    public void quit()
+    {
+    }
+
+    @Test
+    public void help()
+    {
+    }
+
+    @Test
+    public void getTask()
+    {
+    }
+
+    @Test
+    public void back()
+    {
+    }
+
+    @Test
+    public void pickup()
+    {
+    }
+
+    @Test
+    public void drop()
+    {
+    }
+
+    @Test
+    public void fight()
+    {
+    }
+
+    @Test
+    public void go()
     {
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
