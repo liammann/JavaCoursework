@@ -270,10 +270,10 @@ public class Game
                            .andHealthPotion(12);
         food = MovableObject.create("food")
                            .withDescription("Food")
-                           .andWeight(22);
+                           .andWeight(1);
         brick = MovableObject.create("brick")
                            .withDescription("a heavy brick")
-                           .andWeight(22);
+                           .andWeight(5);
 
         chair = FixedObject.create("chair")
                            .withDescription("An old wooden chair");
@@ -423,7 +423,7 @@ public class Game
 
         sword = MovableObject.create("sword")
                              .withDescription("Steel sword")
-                             .andWeight(3)
+                             .andWeight(2)
                              .withWeaponModifier(3.1);
 
         player1 = Player.create("Player 1")
