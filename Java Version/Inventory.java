@@ -12,6 +12,10 @@ public class Inventory implements java.io.Serializable
     {
         inventory = new HashMap<String, MovableObject>();
     }
+    
+    public HashMap<String, MovableObject> getArrayInventory(){
+        return inventory;
+    }
 
     public boolean addItemToInventory(MovableObject item)
     {
@@ -28,6 +32,7 @@ public class Inventory implements java.io.Serializable
         inventoryWeight -= getFromInventoryByName(objectName).getWeight();
         inventory.remove(objectName);
     }
+   
         
     public void dropFromInventoryByObject(MovableObject object)
     {
