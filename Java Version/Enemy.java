@@ -47,18 +47,6 @@ public class Enemy extends Character implements java.io.Serializable
     }
     
     /**
-    * This method puts new weapons into the enemy's inventry class
-    * 
-    * @param         Its the moveable object
-    * @return        it refers to the constructor of the same class where I am writing this code. It also means that it returns the enemy's weapons.
-    */
-    public Enemy andHasWeapon(MovableObject weapon)
-    {
-        this.getInventory().addItemToInventory(weapon);
-        return this;
-    }
-    
-    /**
     * This method puts new object into the enemy's inventry class
     * @param         Its the moveable object
     * @return        it refers to the constructor of the same class where I am writing this code. It also means that it returns the enemy's weapons.

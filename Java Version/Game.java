@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-import java.lang.Math;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.*;
 import java.io.*;
 
 /**
@@ -222,7 +224,7 @@ public class Game
     private void buildLocations()
     {
         Location exhibit, reception, cafe, guardOffice, museumEntrance, museumCarPark, car, gunWharf, cinema, lobby1, lobby2, screen1, screen2, screen3, screen4, fireExit, rescuePoint;
-        MovableObject keyEntrance,keyBoat, health;
+        MovableObject keyEntrance, health;
         FixedObject chair;
 
         keyEntrance = MovableObject.create("key")
@@ -289,13 +291,8 @@ public class Game
             
         museumCarPark.addDescription("Museum Car Park")
             .withExit("north", museumEntrance)
-            .withExit("south", car);
-            
-            
-        car.addDescription("Car")
-            .withExit("north", museumCarPark)
             .withExit("south", gunWharf);
-        
+            
         gunWharf.addDescription("Gun Wharf Shoping Floor 1")
             .withExit("north", car)
             .withExit("south", cinema);
@@ -312,7 +309,7 @@ public class Game
             .withExit("south", screen2);        
             
         lobby2.addDescription("Cinema Lobby for screens 3 and 4")
-            .withExit("west", cinema)
+            .withExit("north", cinema)
             .withExit("east", screen4)            
             .withExit("south", screen3);
             
@@ -329,7 +326,8 @@ public class Game
             .withExit("north", lobby2)
             .withExit("west", screen2)   
             .withExit("east", screen4)
-            .andEnemy(enemy2);
+            .andEnemy(enemy2)
+            .andEnemy(enemy1);
             
         screen4.addDescription("Cinema Screen 4")
             .withExit("north", lobby2)
@@ -338,13 +336,13 @@ public class Game
             
         fireExit.addDescription("Cinema Fire Exit")
             .withExit("east", rescuePoint)
-            .withExit("west", cinema)            
+            .withExit("west", cinema)
+            .andEnemy(enemy3)
             .andPasscode(200); // Unlocked by keyBoat 
             
         rescuePoint.addDescription("RESCUE POINT")
             .withExit("west", fireExit);
             
-
         
         
         gameData.addLocation(exhibit);
@@ -397,7 +395,7 @@ public class Game
         enemy3 = new Enemy("enemy4");
 
          // Enemies Weapons 
-        MovableObject axe, mace, dagger, keyOffice;
+        MovableObject axe, mace, dagger, keyOffice, keyBoat;
 
         axe = MovableObject.create("axe")
                            .withDescription("Brutal axe")
@@ -416,18 +414,24 @@ public class Game
         keyOffice = MovableObject.create("key")
                            .withDescription("A key that unlocks security office door")
                            .andHasPasscode(500);
+                           
+        keyBoat = MovableObject.create("key")
+                           .withDescription("A key that starts the engine of rescue boat")
+                           .andHasPasscode(500);
         // upon enemy death, drop weapon in current room?
         enemy1.hasStrength(50)
              .withHealth(90)
+             .andHasObject(dagger)           
              .andHasObject(keyOffice);
 
         enemy2.hasStrength(80)
             .withHealth(110)
-            .andHasWeapon(mace); // Needs key for another door
+            .andHasObject(keyBoat)           
+            .andHasObject(mace); // Needs key for another door
 
         enemy3.hasStrength(100)
            .withHealth(130)
-           .andHasWeapon(axe);
+           .andHasObject(axe);
        
         MovableObject health = MovableObject.create("health")
                                            .withDescription("a Health Potion")
@@ -495,7 +499,10 @@ public class Game
                 System.out.println("and kill him only taking " + totalEnemyDealt + " health points.\n");
                 gameData.getCurrentLocation().removeEnemyByName(enemy.getName());
                 
-                for (MovableObject item : enemy.getInventory().getArrayInventory().values()){
+                HashMap<String, MovableObject> enemyHash = enemy.getInventory().getArrayInventory(); // Convert Hash Map to arrayList
+                ArrayList<MovableObject> enemyArray = new ArrayList<MovableObject>(enemyHash.values());
+
+                for (MovableObject item : enemyArray){
                     enemy.getInventory().dropFromInventory(item.getObjectName());
                     gameData.getCurrentLocation().andHasObject(item);
                 }
