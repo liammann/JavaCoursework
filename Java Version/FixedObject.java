@@ -1,5 +1,4 @@
 
-
 public class FixedObject extends Object implements java.io.Serializable
 {	
 	public static FixedObject create(String name)
